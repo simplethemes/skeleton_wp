@@ -287,14 +287,12 @@ function of_recognized_font_sizes() {
  */
 function of_recognized_font_faces() {
 	$default = array(
-		'arial'     => 'Arial',
-		'verdana'   => 'Verdana, Geneva',
-		'trebuchet' => 'Trebuchet',
-		'georgia'   => 'Georgia',
-		'times'     => 'Times New Roman',
-		'tahoma'    => 'Tahoma, Geneva',
-		'palatino'  => 'Palatino',
-		'helvetica' => 'Helvetica*'
+		'helvetica' => 'Helvetica Neue, Helvetica*',
+		'arial'     => 'Arial, Helvetica',
+		'tahoma'    => 'Tahoma, Verdana',
+		'georgia'   => 'Georgia, Constantia',
+		'cambria'     => 'Cambria, Times New Roman',
+		'palatino'  => 'Palatino Linotype, Garamond'
 		);
 	return apply_filters( 'of_recognized_font_faces', $default );
 }

@@ -124,10 +124,9 @@ function st_registerstyles() {
 	$version = $theme['Version'];
     wp_enqueue_style('base', get_bloginfo('stylesheet_directory').'/base.css', false, $version, 'screen, projection');
     wp_enqueue_style('skeleton', get_bloginfo('stylesheet_directory').'/skeleton.css', 'base', $version, 'screen, projection');
-    wp_enqueue_style('layout', get_bloginfo('stylesheet_directory').'/layout.css', 'skeleton', $version, 'screen, projection');
-    wp_enqueue_style('formalize', get_bloginfo('stylesheet_directory').'/formalize.css', 'layout', $version, 'screen, projection');
-    wp_enqueue_style('superfish', get_bloginfo('stylesheet_directory').'/superfish.css', 'layout', $version, 'screen, projection');
-    wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'superfish', $version, 'screen, projection');
+    wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
+    wp_enqueue_style('formalize', get_bloginfo('stylesheet_directory').'/formalize.css', 'theme', $version, 'screen, projection');
+    wp_enqueue_style('superfish', get_bloginfo('stylesheet_directory').'/superfish.css', 'theme', $version, 'screen, projection');
 }
 
 // Build Query vars for dynamic theme option CSS from Options Framework

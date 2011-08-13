@@ -10,10 +10,6 @@
 /* #Site Styles
 ================================================== */
 
-#header {
-	clear: both;
-	padding-top: 37px;
-}
 
 /* @group Navigation */
 
@@ -106,10 +102,11 @@
 	#navigation ul li a {float: none;background: transparent;border: none;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;}
 	
 	#navigation ul li a,
-	#navigation ul li a:hover {border: none;padding: 2px 0;line-height: 150%;background-color: transparent;}
+	#navigation ul li.active a,
+	#navigation ul li a:hover {border: none;padding: 2px 0;line-height: 150%;background: transparent;}
 	
 	#navigation ul.sub-menu,
-	#navigation ul.sub-menu li {display: none;visibility: hidden;border: none;}
+	#navigation ul.sub-menu li {position: absolute;display: none;visibility: hidden;border: none;margin: 0;border: none;}
 
 	#sidebar .widget-container {margin-left: 0px;}
 	.full-width,

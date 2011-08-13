@@ -46,12 +46,12 @@ function optionsframework_options() {
 	
 	// Background Defaults
 	
-	$background_defaults = array(
-	'color' => '',
-	'image' => '',
-	'repeat' => 'repeat',
+	$body_background_defaults = array(
+	'color' => '#fcfcfc',
+	'image' => 'wp-content/themes/skeleton/images/border_top.png',
+	'repeat' => 'repeat-x',
 	'position' => 'top center',
-	'attachment'=>'scroll');
+	'attachment'=>'fixed');
 	
 	
 	// Pull all the categories into an array
@@ -175,7 +175,7 @@ function optionsframework_options() {
 						"id" => "example_uploader",
 						"type" => "upload");
 						
-	$options[] = array( "name" => "Example Image Selector",
+	$options[] = array( "name" => "Layout Style",
 						"desc" => "Select a sidebar layout (left or right). You can also select a wide page layout on a per-page basis.",
 						"id" => "page_layout",
 						"std" => "right",
@@ -185,10 +185,10 @@ function optionsframework_options() {
 							'right' => $imagepath . '2cr.png')
 						);
 						
-	$options[] = array( "name" =>  "Example Background",
+	$options[] = array( "name" =>  "Body Background",
 						"desc" => "Change the background CSS.",
-						"id" => "example_background",
-						"std" => $background_defaults, 
+						"id" => "body_background",
+						"std" => $body_background_defaults, 
 						"type" => "background");
 								
 	$options[] = array( "name" => "Multicheck",
@@ -198,12 +198,6 @@ function optionsframework_options() {
 						"type" => "multicheck",
 						"options" => $multicheck_array);
 							
-	$options[] = array( "name" => "Text Color",
-						"desc" => "No color selected by default.",
-						"id" => "example_colorpicker",
-						"std" => "",
-						"type" => "color");
-
 
 	$options[] = array( "name" => "Link Color",
 						"desc" => "Default hyperlink colors.",
@@ -211,11 +205,44 @@ function optionsframework_options() {
 						"std" => "#3568A9",
 						"type" => "color");
 
+  $options[] = array( "name" => "Main Typography",
+					"desc" => "Body Typography.",
+					"id" => "body_typography",
+					"std" => array('size' => '12px','face' => 'helvetica','style' => 'normal','color' => '#444444'),
+					"type" => "typography");			
+
 						
-	$options[] = array( "name" => "Typography",
-						"desc" => "Example typography.",
-						"id" => "example_typography",
-						"std" => array('size' => '12px','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-						"type" => "typography");			
+	$options[] = array( "name" => "Heading Typography (H1)",
+						"desc" => "Heading typography.",
+						"id" => "h1_typography",
+						"std" => array('size' => '40px','face' => 'helvetica','style' => 'normal','color' => '#181818'),
+						"type" => "typography");
+  
+  $options[] = array( "name" => "Heading Typography (H2)",
+					"desc" => "Heading Two typography.",
+					"id" => "h2_typography",
+					"std" => array('size' => '35px','face' => 'helvetica','style' => 'normal','color' => '#181818'),
+					"type" => "typography");			
+				  
+
+  $options[] = array( "name" => "Heading Typography (H3)",
+					"desc" => "Heading Three typography.",
+					"id" => "h3_typography",
+					"std" => array('size' => '28px','face' => 'helvetica','style' => 'normal','color' => '#181818'),
+					"type" => "typography");
+	
+	$options[] = array( "name" => "Heading Typography (H4)",
+					"desc" => "Heading Four typography.",
+					"id" => "h4_typography",
+					"std" => array('size' => '21px','face' => 'helvetica','style' => 'bold','color' => '#181818'),
+					"type" => "typography");			
+	
+ $options[] = array( "name" => "Heading Typography (H5)",
+ 				"desc" => "Heading Five typography.",
+ 				"id" => "h5_typography",
+ 				"std" => array('size' => '17px','face' => 'helvetica','style' => 'bold','color' => '#181818'),
+ 				"type" => "typography");			
+ 
+
 	return $options;
 }

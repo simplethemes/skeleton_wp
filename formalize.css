@@ -54,7 +54,6 @@ input,
 button,
 select,
 textarea {
-  margin: 0;
   vertical-align: middle;
 }
 

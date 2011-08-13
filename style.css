@@ -1,0 +1,29 @@
+/*
+Theme Name: Skeleton
+Theme URI: http://www.simplethemes.com
+Description: A simple WordPress theme based on the Skeleton RWD framework
+Version: 1.0.alpha
+Author: Simple Themes
+Author URI: http://www.simplethemes.com
+Tags: skeleton, minimalist, clean
+
+CSS, XHTML and design is released under GPL:
+http://www.opensource.org/licenses/gpl-license.php
+*/
+
+
+
+/*Utility Styles************************/
+.alignright {
+	float: right;
+	margin: 0px 0px 0px 15px;
+}
+
+.alignleft {
+	float: left;
+	margin: 0px 15px 0px 0px;
+}
+.aligncenter {
+	display:block;
+	margin:0 auto;
+}

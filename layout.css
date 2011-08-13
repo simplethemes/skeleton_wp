@@ -1,0 +1,163 @@
+/* @override http://demos.simplethemes.com/skeleton/wp-content/themes/skeleton/layout.css?ver=1.0.alpha */
+
+/* Table of Contents
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+	
+/* #Site Styles
+================================================== */
+
+#header {
+	clear: both;
+	padding-top: 37px;
+}
+
+/* @group Navigation */
+
+#navigation {
+	margin-bottom: 20px;
+	clear: both;
+}
+
+#navigation ul,
+#navigation ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+/* @end */
+
+#footer {
+	clear: both;
+	padding: 10px 0 10px 0;
+}
+
+#credits {
+	text-align: center;
+}
+
+/* #Page Styles
+================================================== */
+
+/* Layout Shortcodes */
+.full-width {width:960px; height:auto; overflow:hidden}
+
+.one_half { width: 48%; }
+.one_third { width: 30.66%; }
+.two_thirds { width: 65.33%; }
+.one_fourth { width: 22%; }
+.three_fourths { width: 74%; }
+.one_fifth { width: 16.8%; }
+.two_fifth { width: 37.6%; }
+.three_fifth { width: 58.4%; }
+.four_fifth { width: 67.2%; }
+.one_sixth { width: 13.33%; }
+.five_sixth { width: 82.67%; }
+
+.one_half,
+.one_third,
+.two_thirds,
+.three_fourths,
+.one_fourth,
+.one_fifth,
+.two_fifth,
+.three_fifth,
+.four_fifth,
+.one_sixth,
+.five_sixth {
+	position: relative;
+	margin-right: 4%;
+	margin-bottom: 20px;
+	float: left;
+}
+
+
+.last {margin-right:0 !important;}
+
+
+/* #Media Queries
+================================================== */
+	
+	/* iPad Portrait/Browser */
+	@media only screen and (min-width: 768px) and (max-width: 991px) {
+	
+	#navigation ul {border-radius:0px;}
+	#navigation ul li a {font-size: .9em;padding: 10px 15px;}
+	#navigation ul {min-width: 700px;}
+	#sidebar .widget-container {margin-left: 0px;}
+	.resize {display: none;}
+	
+	
+	}
+	
+	
+	/* Mobile/Browser */
+	@media only screen and (max-width: 767px) {
+	
+	#wrap {}
+	#navigation {margin: 10px 0px;}
+	
+	#navigation ul,
+	#navigation ul li,
+	#navigation ul li a {float: none;background: transparent;border: none;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;}
+	
+	#navigation ul li a,
+	#navigation ul li a:hover {border: none;padding: 2px 0;line-height: 150%;background-color: transparent;}
+	
+	#navigation ul.sub-menu,
+	#navigation ul.sub-menu li {display: none;visibility: hidden;border: none;}
+
+	#sidebar .widget-container {margin-left: 0px;}
+	.full-width,
+	.one_half,
+	.one_third,
+	.two_thirds,
+	.three_fourths,
+	.one_fourth,
+	.one_fifth,
+	.two_fifth,
+	.three_fifth,
+	.four_fifth,
+	.one_sixth,
+	.five_sixth {width: 100%;}
+	.resize {display: none;}
+
+	}
+	
+	/* Mobile Landscape/Browser */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {}
+	
+	/* Anything smaller than standard 960 */
+	@media only screen and (max-width: 959px) {}
+	
+	/* iPad Portrait Only */
+	@media only screen and (min-width: 768px) and (max-width: 991px) and (max-device-width: 1000px) {}
+	
+	/* Mobile Only */
+	@media only screen and (max-width: 767px) and (max-device-width: 1000px) {}
+	
+	/* Mobile Landscape Only */
+	@media only screen and (min-width: 480px) and (max-width: 767px) and (max-device-width: 1000px) {}
+	
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file 
+		Just create a "fonts" folder at the root, 
+		copy your FontName into code below and remove
+		comment brackets */
+		
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/

@@ -77,6 +77,7 @@ require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
 
 }
 
+
 /* 
  * This is an example of how to add custom scripts to the options panel.
  * This one shows/hides the an option when a checkbox is clicked.
@@ -153,7 +154,8 @@ function st_header_scripts() {
 	wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
 	wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
 }
- 
+
+
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
 add_action( 'after_setup_theme', 'skeleton_setup' );

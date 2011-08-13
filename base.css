@@ -65,8 +65,7 @@ p code {
 ================================================== */
 	body { 
 		background: #fff url(images/border_top.png) repeat-x center top;
-		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: #444; 
+		line-height: 21px;
 		-webkit-text-size-adjust: 100%;
  }
 
@@ -163,6 +162,7 @@ a.themeauthor {
 	width: 100%;
  	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
  	background: -webkit-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+	-pie-background: linear-gradient(#FCFCFC, #ECECEC);
     border-color: #EAEAEA #F5F5F5 #F5F5F5 #F5F5F5;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -170,13 +170,17 @@ a.themeauthor {
     border-style: solid;
     border-width: 1px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    -pie-box-shadow: 0 1px 1px #ccc;
     position: relative;
+    behavior: url("./wp-content/themes/skeleton/PIE.php");
 }
 	
 
 #navigation ul li a {
  	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
  	background: -webkit-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+	-pie-background: linear-gradient(#FCFCFC, #ECECEC);
+	background-image: none;
 	padding: 15px 25px;
 	text-decoration: none;
 	display: block;
@@ -658,7 +662,7 @@ a.button.white {
   box-shadow: inset 0 1px 0 0 white;
   color: #333333;
   text-shadow: 0 1px 0 white;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.white:hover {
@@ -706,7 +710,7 @@ a.button.gray {
   box-shadow: inset 0 1px 0 0 white;
   color: #333333;
   text-shadow: 0 1px 0 #f1eeee;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.gray:hover {
@@ -754,7 +758,7 @@ a.button.black {
   box-shadow: inset 0 1px 0 0 #595959;
   color: white;
   text-shadow: 0 1px 0 #150f0f;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.black:hover {
@@ -802,7 +806,7 @@ a.button.lightblue {
   box-shadow: inset 0 1px 0 0 #85b9e0;
   color: white;
   text-shadow: 0 1px 0 #1976be;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.lightblue:hover {
@@ -850,7 +854,7 @@ a.button.blue {
   box-shadow: inset 0 1px 0 0 #7d99bf;
   color: white;
   text-shadow: 0 1px 0 #2a4f83;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.blue:hover {
@@ -898,7 +902,7 @@ a.button.darkblue {
   box-shadow: inset 0 1px 0 0 #416ac3;
   color: white;
   text-shadow: 0 1px 0 #122c63;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.darkblue:hover {
@@ -946,7 +950,7 @@ a.button.lightgreen {
   box-shadow: inset 0 1px 0 0 #9bcb76;
   color: white;
   text-shadow: 0 1px 0 #529122;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.lightgreen:hover {
@@ -994,7 +998,7 @@ a.button.green {
   box-shadow: inset 0 1px 0 0 #7fa95b;
   color: white;
   text-shadow: 0 1px 0 #39571e;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.green:hover {
@@ -1042,7 +1046,7 @@ a.button.darkgreen {
   box-shadow: inset 0 1px 0 0 #61a22f;
   color: white;
   text-shadow: 0 1px 0 #1e3909;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.darkgreen:hover {
@@ -1090,7 +1094,7 @@ a.button.lightred {
   box-shadow: inset 0 1px 0 0 #e28383;
   color: white;
   text-shadow: 0 1px 0 #c01616;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.lightred:hover {
@@ -1138,7 +1142,7 @@ a.button.red {
   box-shadow: inset 0 1px 0 0 #e73c3c;
   color: white;
   text-shadow: 0 1px 0 #900404;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.red:hover {
@@ -1186,7 +1190,7 @@ a.button.darkred {
   box-shadow: inset 0 1px 0 0 #c41717;
   color: white;
   text-shadow: 0 1px 0 #4b0202;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.darkred:hover {
@@ -1234,7 +1238,7 @@ a.button.yellow {
   box-shadow: inset 0 1px 0 0 #e4dc3a;
   color: white;
   text-shadow: 0 1px 0 #8a8305;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.yellow:hover {
@@ -1282,7 +1286,7 @@ a.button.orange {
   box-shadow: inset 0 1px 0 0 #e4a83a;
   color: white;
   text-shadow: 0 1px 0 #8a5b05;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.orange:hover {
@@ -1330,7 +1334,7 @@ a.button.brown {
   box-shadow: inset 0 1px 0 0 #9b7b36;
   color: white;
   text-shadow: 0 1px 0 #37290c;
-  behavior: url("../wp-content/themes/skeleton/PIE.php");
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
   position: relative;
 }
 a.button.brown:hover {

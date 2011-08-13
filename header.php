@@ -68,8 +68,6 @@
 
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo(url).'/index.php?get_styles=css';?>" type="text/css" media="all" />
-
 <?php
 	/* 
 	 * enqueue threaded comments support.
@@ -79,6 +77,7 @@
 	// Load head elements
 	wp_head();
 ?>
+<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo(url).'/?get_styles=css';?>" type="text/css" media="all" />
 
 </head>
 <body <?php body_class(); ?>>

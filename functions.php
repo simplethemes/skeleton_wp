@@ -418,9 +418,9 @@ function remove_more_jump_link($link) {
 function st_widgets_init() {
 		// Area 1, located at the top of the sidebar.
 		register_sidebar( array(
-		'name' => __( 'Primary Widget Area', 'skeleton' ),
+		'name' => __( 'Posts Widget Area', 'skeleton' ),
 		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area', 'skeleton' ),
+		'description' => __( 'Shown only in Blog Posts, Archives, Categiories, etc.', 'skeleton' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -430,9 +430,9 @@ function st_widgets_init() {
 
 	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Secondary Widget Area', 'skeleton' ),
+		'name' => __( 'Pages Widget Area', 'skeleton' ),
 		'id' => 'secondary-widget-area',
-		'description' => __( 'The secondary widget area', 'skeleton' ),
+		'description' => __( 'Shown only in Pages', 'skeleton' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Sidebar containing the primary and secondary widget areas.
+ * The Sidebar containing the primary blog sidebar
  *
  * @package WordPress
  * @subpackage skeleton
@@ -14,14 +14,8 @@
 	<ul>
 		<?php dynamic_sidebar( 'primary-widget-area' ); ?>
 	</ul>
-	<?php endif; // end primary widget area ?>
+<?php endif; // end primary widget area ?>
 
-<?php // secondary widget area
-	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
-	<ul>
-		<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
-	</ul>
-	<?php endif; // end secondary widget area ?>
 
 <?php do_action('st_after_sidebar');?>
 

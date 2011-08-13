@@ -340,7 +340,9 @@ table td {
 	font-weight: bold;
 	font-size: 1.5em;
 }
-
+input#searchsubmit {
+	margin-bottom: 0;
+}
 .widget-container a:link,
 .widget-container a:visited {
 	text-decoration: none;

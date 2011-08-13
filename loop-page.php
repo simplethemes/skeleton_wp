@@ -18,14 +18,21 @@
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				
+								
 				<?php if (!is_page_template('onecolumn-page.php')) { ?>
-					<?php if ( is_front_page() ) { ?>
+					<?php if (is_front_page() && !get_post_meta($post->ID, 'hidetitle', true)) { ?>
+						
 						<h2 class="entry-title"><?php the_title(); ?></h2>
-					<?php } else { ?>
+						
+					<?php } elseif (!get_post_meta($post->ID, 'hidetitle', true)) { ?>
+						
 						<h1 class="entry-title"><?php the_title(); ?></h1>
-					<?php } ?>
+						
+					<?php } else {
+						echo '<br />';
+					} ?>
 				<?php } ?>
+				
 					<div class="entry-content">
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'skeleton' ), 'after' => '</div>' ) ); ?>

@@ -15,6 +15,6 @@ get_header();
 do_action('st_before_content');
 get_template_part( 'loop', 'page' );
 do_action('st_after_content');
-get_sidebar();
+get_sidebar('page');
 get_footer();
 ?>

@@ -9,7 +9,7 @@
  * Layout Functions:
  * 
  * st_header  // Opening header tag and logo/header text
- * st_header_extras* // Additional content may be added to the header
+ * st_header_extras // Additional content may be added to the header
  * st_navbar // Opening navigation element and WP3 menus
  * st_before_content // Opening content wrapper 
  * st_after_content // Closing content wrapper 
@@ -90,20 +90,12 @@ function optionsframework_custom_scripts() { ?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
 
-	jQuery('#example_showhidden').click(function() {
-  		jQuery('#section-example_text_hidden').fadeToggle(400);
+	jQuery('#use_logo_image').click(function() {
+		jQuery('#section-header_logo,#section-logo_width,#section-logo_height').fadeToggle(400);
 	});
 	
-	if (jQuery('#example_showhidden:checked').val() !== undefined) {
-		jQuery('#section-example_text_hidden').show();
-	}
-	
-	jQuery('#example_showhidden2').click(function() {
-  		jQuery('#section-example_text_hidden2').fadeToggle(400);
-	});
-	
-	if (jQuery('#example_showhidden2:checked').val() !== undefined) {
-		jQuery('#section-example_text_hidden2').show();
+	if (jQuery('#use_logo_image:checked').val() !== undefined) {
+		jQuery('#section-header_logo,#section-logo_width,#section-logo_height').show();
 	}
 	
 });
@@ -122,9 +114,9 @@ add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
 	$theme  = get_theme( get_current_theme());
 	$version = $theme['Version'];
-    wp_enqueue_style('base', get_bloginfo('stylesheet_directory').'/base.css', false, $version, 'screen, projection');
-    wp_enqueue_style('skeleton', get_bloginfo('stylesheet_directory').'/skeleton.css', 'base', $version, 'screen, projection');
+  	wp_enqueue_style('skeleton', get_bloginfo('stylesheet_directory').'/skeleton.css', false, $version, 'screen, projection');
     wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
+  	wp_enqueue_style('layout', get_bloginfo('stylesheet_directory').'/layout.css', 'theme', $version, 'screen, projection');
     wp_enqueue_style('formalize', get_bloginfo('stylesheet_directory').'/formalize.css', 'theme', $version, 'screen, projection');
     wp_enqueue_style('superfish', get_bloginfo('stylesheet_directory').'/superfish.css', 'theme', $version, 'screen, projection');
 }
@@ -148,8 +140,8 @@ function theme_css(){
 
 add_action('init', 'st_header_scripts');
 function st_header_scripts() {
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
+  wp_enqueue_script('jquery');
+  wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
 	wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
 	wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
 }
@@ -187,9 +179,11 @@ function skeleton_setup() {
 	}
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
+	
+	if ( ! isset( $content_width ) ) $content_width = 900;
 
 	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
-	add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+	// add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
 
 	// This theme uses post thumbnails
 	add_theme_support( 'post-thumbnails' );
@@ -421,7 +415,7 @@ function st_widgets_init() {
 		register_sidebar( array(
 		'name' => __( 'Posts Widget Area', 'skeleton' ),
 		'id' => 'primary-widget-area',
-		'description' => __( 'Shown only in Blog Posts, Archives, Categiories, etc.', 'skeleton' ),
+		'description' => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'skeleton' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -572,89 +566,169 @@ function skeleton_posted_in() {
 }
 endif;
 
-// You can change the global layout based on the actions below
-// If you want to apply conditional layouts based on page/post/category,
-// see the commented code at the bottom of this section.
 
+// Header Functions
 
-// Header
+// Hook to add content before header
+
+function st_above_header() {
+    do_action('st_above_header');
+}
+
+// Primary Header Function
+
 function st_header() {
-    do_action('st_header');
-	$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
-  echo '<div id="header" class="row sixteen columns">'. "\n";
-	echo '<'.$heading_tag.' id="site-title"><a href="'.get_home_url( '/' ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
-	echo '<span class="site-desc">'.get_bloginfo('description').'</span>'. "\n";
-	echo '</div><!--/#header-->';
+  do_action('st_header');
 }
 
 
+// Opening #header div with flexible grid
+
+function st_header_open() {
+  echo "<div id=\"header\" class=\"sixteen columns\">\n<div class=\"inner\">\n";
+}
+add_action('st_header','st_header_open', 1);
+
+
+// Hookable theme option field to add add'l content to header
+// Child Theme Override: child_header_extras();
+
+function st_header_extras() {
+	if (of_get_option('header_extra')) {
+	echo '<div class="header_extras">';
+	$extras .= of_get_option('header_extra');
+	echo '</div>';
+	}
+	echo apply_filters ('child_header_extras',$extras);
+}
+add_action('st_header','st_header_extras', 2);
+
+// Build the logo
+// Child Theme Override: child_logo();
+
+function st_logo() {
+	// Displays H1 or DIV based on whether we are on the home page or not (SEO)
+	$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+	if (of_get_option('use_logo_image')) {
+		$class="graphic";
+	} else {
+		$class="text"; 		
+	}
+	// echo of_get_option('header_logo')
+	$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.get_home_url( '/' ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
+	$st_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
+	echo apply_filters ( 'child_logo' , $st_logo);
+}
+add_action('st_header','st_logo', 3);
+
+
+function logostyle() {
+	if (of_get_option('use_logo_image')) {
+	echo '<style type="text/css">
+	#header #site-title.graphic a {background-image: url('.of_get_option('header_logo').');width: '.of_get_option('logo_width').'px;height: '.of_get_option('logo_height').'px;}</style>';
+	}
+}
+add_action('wp_head', 'logostyle');
+
+
+
+// function my_child_logo($st_logo) {
+// 	echo '<a id="logo" href="#"><img src="http://simplethemes.s3.amazonaws.com/demo/1312368015_tiger.png" alt="" width="200" height="100" /></a>';
+// 	
+// }
+// add_filter('child_logo','my_child_logo');
+
+
+function st_header_close() {
+	echo "</div></div><!--/#header-->";
+}
+add_action('st_header','st_header_close', 4);
+
+// Hook to add content after header
+
+function st_below_header() {
+    do_action('st_below_header');
+}
+
+// End Header Functions
+
+
 // Navigation (menu)
+
+
 function st_navbar() {
 	echo '<div id="navigation" class="row sixteen columns">';
 	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary'));
 	echo '</div><!--/#navigation-->';
 }
 
+// Before Content - st_before_content($columns);
+// Child Theme Override: child_before_content();
 
-
-// Before Content - do_action('st_before_content')
-
-if (!function_exists('st_before_content')) {
-	// create our hook
-	add_action( 'st_before_content', 'before_content');  
-	// call up the action
-	function before_content($columns) {
-	// You can specify the number of columns in conditional statements
+if (function_exists('child_before_content'))  {
+	    function st_before_content($columns) {
+	    	child_before_content();
+	    }
+	} else {
+	function st_before_content($columns) {
+	// 
+	// Specify the number of columns in conditional statements
 	// See http://codex.wordpress.org/Conditional_Tags for a full list
 	//
-	// If necessary, you can also pass $columns as a variable in your template files:
-	// do_action('st_before_sidebar','six');
+	// If necessary, you can pass $columns as a variable in your template files:
+	// st_before_content('six');
 	//
-	if (empty($columns)) {
 	// Set the default
+	
+	if (empty($columns)) {
 	$columns = 'eleven';
 	} else {
 	// Check the function for a returned variable
 	$columns = $columns;
 	}
+	
 	// Example of further conditionals:
 	// (be sure to add the excess of 16 to st_before_sidebar as well)
+	
 	if (is_page_template('onecolumn-page.php')) {
 	$columns = 'sixteen';
 	}
+	
 	// check to see if bbpress is installed
+	
 	if ( class_exists( 'bbPress' ) ) {
 	// force wide on bbPress pages
 	if (is_bbpress()) {
 	$columns = 'sixteen';
 	}
+	
 	// unless it's the member profile
 	if (bbp_is_user_home()) {
 	$columns = 'eleven';
-	}
-	}
+	} } // bbPress
+
 	// Apply the markup
-	echo '<a name="top" id="top"></a>';
-	echo '<div id="content" class="'.$columns.' columns">';
-	}	
+	echo "<a name=\"top\" id=\"top\"></a>";
+	echo "<div id=\"content\" class=\"$columns columns\">";
+	}
 }
 
 
 // After Content
 
-if (!function_exists('st_after_content')) {
-	add_action( 'st_after_content', 'after_content');  
-	function after_content() {
-	// Additional Content could be added here
-  echo '</div><!-- /.columns (#content) -->';
-	}
+if (function_exists('child_after_content'))  {
+    function st_after_content() {
+    	child_after_content();
+    }
+} else {
+    function st_after_content() {
+    	echo "\t\t</div><!-- /.columns (#content) -->\n";
+    }
 }
-
 
 
 // Before Sidebar - do_action('st_before_sidebar')
 
-if (!function_exists('st_before_sidebar')) {
 	// create our hook
 	add_action( 'st_before_sidebar', 'before_sidebar');  
 	// call up the action
@@ -682,33 +756,34 @@ if (!function_exists('st_before_sidebar')) {
 	// Apply the markup
 	echo '<div id="sidebar" class="'.$columns.' columns" role="complementary">';
 	}	
-}
 
 
 
 // After Sidebar
-if (!function_exists('st_after_sidebar')) {
 	add_action( 'st_after_sidebar', 'after_sidebar');  
 	function after_sidebar() {
 	// Additional Content could be added here
 	   echo '</div><!-- #sidebar -->';
 	}
-}
+
 
 // Before Footer
-if (!function_exists('st_before_footer')) {
-	do_action('st_before_footer');
-	function st_before_footer() {
-		$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
-		$class = ($footerwidgets == '0' ? 'noborder' : 'normal');
-		echo '<div id="footer" class="'.$class.' sixteen columns">';
-	}
+
+if (function_exists('child_before_footer'))  {
+    function st_before_footer() {
+    	child_before_footer();
+    }
+} else {
+    function st_before_footer() {
+			$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
+			$class = ($footerwidgets == '0' ? 'noborder' : 'normal');
+			echo '<div id="footer" class="'.$class.' sixteen columns">';
+    }
 }
 
 
 // The Footer
 add_action('wp_footer', 'st_footer');
-if (!function_exists('st_footer')) {
 	do_action('st_footer');
 	function st_footer() {
 		//loads sidebar-footer.php
@@ -718,32 +793,21 @@ if (!function_exists('st_footer')) {
 		// if (of_get_option('remove_attrib')) {
 		echo '<br /><a class="themeauthor" href="http://www.simplethemes.com" title="WordPress Themes">Theme by Simple Themes</a></div>';
 		// }
-	}
 }
 
 
 // After Footer
-if (!function_exists('st_after_footer')) {
-	do_action('st_after_footer');
-	function st_after_footer() {
-	   echo '</div><!--/#footer-->';
-	}
+
+if (function_exists('child_after_footer'))  {
+    function st_after_footer() {
+    	child_after_footer();
+    }
+} else {
+    function st_after_footer() {
+			echo '</div><!--/#footer-->';
+    }
 }
 
-// Conditional Examples
-
-// function st_before_content()  
-// {
-// 	if (is_page()) {
-//    echo '<div id="content" class="twelve columns">';
-// 	}
-// 	if (is_single()) {
-//    echo '<div id="content" class="ten columns alpha offset-by-one">';
-// 	}
-// }
-// add_action('loop_start', 'st_before_content');
-
-// Begin Shortcodes
 
 
 // Columns
@@ -871,6 +935,26 @@ function st_five_sixth_last( $atts, $content = null ) {
    return '<div class="five_sixth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
 add_shortcode('five_sixth_last', 'st_five_sixth_last');
+
+
+// Callouts
+
+function st_callout( $atts, $content = null ) {
+	extract(shortcode_atts(array(
+		'width' => '',
+		'align' => ''
+    ), $atts));
+	$style;
+	if ($width || $align) {
+	 $style .= 'style="';
+	 if ($width) $style .= 'width:'.$width.'px;';
+	 if ($align == 'left' || 'right') $style .= 'float:'.$align.';';
+	 if ($align == 'center') $style .= 'margin:0px auto;';
+	 $style .= '"';
+	}
+   return '<div class="cta" '.$style.'>' . do_shortcode($content) . '</div><div class="clear"></div>';
+}
+add_shortcode('callout', 'st_callout');
 
 
 

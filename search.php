@@ -8,7 +8,8 @@
  */
 
 get_header();
-do_action('st_before_content');
+st_before_content($columns);
+
 if ( have_posts() ) : ?>
 				<h1><?php printf( __( 'Search Results for: %s', 'skeleton' ), '' . get_search_query() . '' ); ?></h1>
 				<?php
@@ -27,7 +28,7 @@ if ( have_posts() ) : ?>
 					
 				</div><!-- #post-0 -->
 <?php endif;
-do_action('st_after_content');
+st_after_content();
 get_sidebar();
 get_footer();
 ?>

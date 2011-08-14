@@ -8,7 +8,8 @@
  */
 
 get_header();
-do_action('st_before_content');
+st_before_content($columns);
+
 ?>
 	
 <h1><?php
@@ -24,7 +25,7 @@ do_action('st_before_content');
 	 * called loop-category.php and that will be used instead.
 	 */
 	get_template_part( 'loop', 'category' );
-	do_action('st_after_content');
+	st_after_content();
 	get_sidebar();
 	get_footer();
 ?>

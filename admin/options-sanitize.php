@@ -17,7 +17,7 @@ add_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
 /* Info */
 
 function of_sanitize_allowedtags($input) {
-	global $allowedtags;
+	$allowedtags = array('a' => array('href' => array(),'title' => array()),'br' => array(),'em' => array(),'strong' => array(),'img' => array()); 
 	$output = wpautop(wp_kses( $input, $allowedtags));
 	return $output;
 }

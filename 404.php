@@ -8,7 +8,7 @@
  */
 
 get_header();
-do_action('st_before_content');
+st_before_content($columns);
 ?>
 	<h1><?php _e( 'Not Found', 'skeleton' ); ?></h1>
 	<p><?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', 'skeleton' ); ?></p>
@@ -20,7 +20,7 @@ do_action('st_before_content');
 	</script>
 
 <?php
-do_action('st_after_content');
+st_after_content();
 get_sidebar();
 get_footer();
 ?>

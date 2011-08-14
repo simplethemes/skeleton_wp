@@ -204,6 +204,10 @@ a,a:link,a:visited,a:active,#content .gist .gist-file .gist-meta a:visited {colo
 #wrap #content {float:<?php echo $content_position; ?>;}
 #wrap #sidebar {float:<?php echo $sidebar_position; ?>;}
 #wrap #sidebar .widget-container {margin-<?php echo $sidebar_margin; ?>: 20px;margin-<?php echo $sidebar_position; ?>: 0px;}
+#site-title a {
+	color: <?php echo of_get_option('header_color');?>;
+}
+
 <?php
 if(extension_loaded('zlib')){ob_end_flush();}
 ?>

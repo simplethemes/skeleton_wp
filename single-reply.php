@@ -7,7 +7,7 @@
  * @subpackage Theme
  */
 get_header();
-do_action('st_before_content');
+st_before_content($columns);
 do_action( 'bbp_template_notices' );
 ?>
 <?php while ( have_posts() ) : the_post(); ?>
@@ -68,7 +68,7 @@ do_action( 'bbp_template_notices' );
 
 <?php endwhile; ?>
 <?php
-do_action('st_after_content');
+st_after_content();
 // get_sidebar('bbpress');
 get_footer();
 ?>

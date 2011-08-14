@@ -83,7 +83,11 @@
 <body <?php body_class(); ?>>
 	<div id="wrap" class="container">
 	<div class="resize"></div>
-	<?php st_header(); ?>
+	<?php
+	st_above_header();
+	st_header();
+	st_below_header();
+	?>
 	<?php st_navbar(); ?>
 	<?php
 	// Check if this is a post or page, if it has a thumbnail, and if it exceeds defined HEADER_IMAGE_WIDTH

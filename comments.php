@@ -66,17 +66,17 @@
 
 <p>
 <label for="author"><small><?php _e('Name','smpl');?> <?php if ($req) _e('required','smpl'); ?></small></label>
-<input type="text" name="author" id="author" value="<?php /*echo esc_attr($comment_author); */ echo attribute_escape($comment_author);?>" size="22" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
+<input type="text" name="author" id="author" value="<?php /*echo esc_attr($comment_author); */ echo esc_attr($comment_author);?>" size="22" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
 </p>
 
 <p>
 <label for="email"><small><?php _e('Email','smpl'); _e('(will not be published)','smpl'); if ($req) _e('(required)','smpl'); ?></small></label>
-<input type="text" name="email" id="email" value="<?php echo attribute_escape($comment_author_email); ?>" size="22" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
+<input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" size="22" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
 </p>
 
 <p>
 <label for="url"><small><?php _e('Website','smpl');?></small></label>
-<input type="text" name="url" id="url" value="<?php echo attribute_escape($comment_author_url); ?>" size="22" tabindex="3" />
+<input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" size="22" tabindex="3" />
 </p>
 
 <?php endif; ?>
@@ -88,7 +88,8 @@
 <p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php _e('Submit comment','smpl');?>" />
 <?php comment_id_fields(); ?>
 </p>
-<?php do_action('comment_form', $post->ID); ?>
+<?php // do_action('comment_form', $post->ID); ?>
+<?php comment_form(); ?>
 
 </form>
 

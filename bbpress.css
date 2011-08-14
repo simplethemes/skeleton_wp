@@ -1,4 +1,3 @@
-/* @override http://demos.simplethemes.com/skeleton/wp-content/themes/skeleton/bbpress.css?ver=20110807b */
 
 /**
  * bbPress specific CSS
@@ -32,14 +31,13 @@ table.bbp-topics td {
 
 table.bbp-forums th,
 table.bbp-topics th,
+table.bbp-replies th,
 table.bbp-forums td,
-table.bbp-topics td {
+table.bbp-topics td,
+table.bbp-replies td {
 	border-right: none;
 	border-left: none;
 }
-
-
-
 
 #content table.bbp-topics,
 #content table.bbp-forums,

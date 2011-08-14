@@ -9,7 +9,7 @@
 
 get_header();
 
-do_action('st_before_content');
+st_before_content($columns);
 
 do_action( 'bbp_template_notices' );
 ?>
@@ -38,7 +38,7 @@ do_action( 'bbp_template_notices' );
 	<?php endif; ?>
 
 <?php
-do_action('st_after_content');
+st_after_content();
 
 // get_sidebar('bbpress');
 get_footer();

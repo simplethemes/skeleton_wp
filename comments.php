@@ -88,8 +88,7 @@
 <p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php _e('Submit comment','smpl');?>" />
 <?php comment_id_fields(); ?>
 </p>
-<?php // do_action('comment_form', $post->ID); ?>
-<?php comment_form(); ?>
+<?php do_action('comment_form', $post->ID); ?>
 
 </form>
 

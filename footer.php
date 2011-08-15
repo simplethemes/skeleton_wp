@@ -4,7 +4,5 @@
 
 <?php st_after_footer();?>
 
-</div><!--/#wrap.container-->
-
 </body>
 </html>

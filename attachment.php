@@ -8,7 +8,7 @@
  */
 
 get_header();
-st_before_content($columns);
+st_before_content('sixteen');
 
 /* Run the loop to output the attachment.
  * If you want to overload this in a child theme then include a file
@@ -16,6 +16,6 @@ st_before_content($columns);
  */
 get_template_part( 'loop', 'attachment' );
 st_after_content();
-get_sidebar();
+// get_sidebar();
 get_footer();
 ?>

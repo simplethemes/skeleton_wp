@@ -77,16 +77,13 @@ function optionsframework_options() {
 						"std" => "80",
 						"class" => "mini hidden",
 						"type" => "text");
-  
-	
-	
+  	
 	$options[] = array( "name" =>  "Body Background",
 						"desc" => "Change the background CSS.",
 						"id" => "body_background",
 						"std" => $body_background_defaults, 
 						"type" => "background");
 						
-	
 	$options[] = array( "name" => "Sidebar Position",
 						"desc" => "Select a sidebar layout position (left or right). You can also select a wide page layout on a per-page basis.",
 						"id" => "page_layout",
@@ -112,7 +109,7 @@ function optionsframework_options() {
   $options[] = array( "name" => "Main Body Typography",
 					"desc" => "Body Typography.",
 					"id" => "body_typography",
-					"std" => array('size' => '12px','face' => 'helvetica','style' => 'normal','color' => '#444444'),
+					"std" => array('size' => '14px','face' => 'helvetica','style' => 'normal','color' => '#444444'),
 					"type" => "typography");			
 
 						
@@ -148,8 +145,8 @@ function optionsframework_options() {
  				"type" => "typography");			
 
   
-  $options[] = array( "name" => "Header Extra",
-						"desc" => "HTML or text to be inserted into the header.",
+  $options[] = array( "name" => "Extra Header Text",
+						"desc" => "HTML or text can be inserted into the header. You might add twitter icons, badges, or a site announcement here.",
 						"id" => "header_extra",
 						"std" => "",
 						"type" => "textarea"); 
@@ -159,6 +156,12 @@ function optionsframework_options() {
 						"id" => "footer_text",
 						"std" => "",
 						"type" => "textarea"); 
-  
+						
+	$options[] = array( "name" => "Footer Scripts",
+						"desc" => "Add custom footer scripts such as Google Analytics. Do not include the &lt;script&gt; tag. This is already done for you.",
+						"id" => "footer_scripts",
+						"std" => "",
+						"type" => "textarea"); 
+						
 	return $options;
 }

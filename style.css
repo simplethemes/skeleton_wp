@@ -2,34 +2,37 @@
 Theme Name: Skeleton
 Theme URI: http://www.simplethemes.com
 Description: A simple WordPress theme based on the Skeleton RWD framework
-Version: 0.2
+Version: 1.0
 Author: Simple Themes
 Author URI: http://www.simplethemes.com
 License: GPL
 License URI: http://www.opensource.org/licenses/gpl-license.php
-CSS, XHTML and design is released under GPL:
-http://www.opensource.org/licenses/gpl-license.php
 */
 
 
 /* Table of Contents
 ==================================================
 	#Global Reset
-	#Basic Styles
-	#Site Styles
+	#Structural Customization
+	#Header
+	#Navigation Bar
 	#Typography
-	#Links
-	#Lists
-	#Images
-	#Buttons
+	#Tables
+	#Widgets
+	#WP Blog
+	#Form Buttons
+	#Styled Buttons
 	#Tabs
-	#Forms
-	#Misc */
+	#Toggles
+	#Callouts
+	#Comments
+	#WP Gallery
+	#Misc
+*/
 
+/* @group Global Reset */
 
-/* #Global Reset
-================================================== */
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -67,15 +70,16 @@ http://www.opensource.org/licenses/gpl-license.php
 p code {display: inline;}
 
 
-/* #Basic Styles
-================================================== */
-	body {
-		line-height: 150%;
-		-webkit-text-size-adjust: 100%;
-	}
+body {
+	line-height: 150%;
+	-webkit-text-size-adjust: 100%;
+}
 
-/* #Structural Customization
-================================================== */
+/* @end */
+
+
+
+/* @group Structural Customization */
 
 
 #header {
@@ -90,8 +94,6 @@ p code {display: inline;}
 
 #header .header_extras {
 	float: right;
-	padding-top: 15px;
-	padding-bottom: 20px;
 }
 
 /* Give the main wrapper a separate background color */
@@ -126,8 +128,9 @@ a.themeauthor {
 }
 
 
-/* #Header
-================================================== */
+/* @end */
+
+/* @group Header */
 
 #site-title {
 	margin: 0;
@@ -176,9 +179,9 @@ a.themeauthor {
 	display: none;
 }
 
+/* @end */
 
-/* #Navigation
-================================================== */
+/* @group Navigation Bar */
 
 #navigation ul {
 	width: 100%;
@@ -277,8 +280,12 @@ a.themeauthor {
 }
 
 
-/* #Typography
-================================================== */
+/* @end */
+
+
+
+/* @group Typography */
+
 	h1, h2, h3, h4, h5 { 
 		letter-spacing: -1px;
 	}
@@ -354,8 +361,68 @@ a.themeauthor {
 	ul.large li { line-height: 21px; }
 	li p { line-height: 21px; }
 	
-/* #Tables
-================================================== */
+/* # Image Alignment Classes
+============================================================== */
+
+.alignright {
+	float: right;
+	margin: 0px 0px 10px 15px;
+}
+
+.alignleft {
+	float: left;
+	margin: 0px 15px 10px 0px;
+}
+.aligncenter {
+	display:block;
+	margin:0 auto;
+}
+
+/* WP Captions */
+
+.wp-caption {
+	text-align: center;
+	padding: 5px;
+	margin: 10px auto;
+}
+
+
+.wp-caption {
+	border: 1px solid #fff;
+	background-color: #f6f6f6;
+	color: #666;
+	text-shadow: 1px 1px 0px #fff;
+	-webkit-box-shadow:1px 1px 6px #ddd;
+	-moz-box-shadow:1px 1px 6px #ddd;
+	box-shadow:1px 1px 6px #ddd;
+	position: relative;
+	behavior: url('../wp-content/themes/presstige/css/PIE.php');
+}
+
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+
+.wp-caption p.wp-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	padding: 5px 0 0px 0;
+	margin: 0;
+}
+
+.wp-caption.alignleft {
+	margin: 0px 10px 0px 0px;
+}
+.wp-caption.alignright {
+	margin: 0px 0px 0px 10px;
+}
+
+
+/* @end */
+
+/* @group Tables */
 
 table {
 	margin: .5em 0 1em;
@@ -375,8 +442,10 @@ table td {
 	padding: 10px;
 }
 
-/* #Widgets
-================================================== */
+/* @end */
+
+/* @group Widgets */
+
 
 .widget-container ul {
 	list-style: none;
@@ -540,23 +609,10 @@ li.menu-item a:hover {
 	color: #333;
 }
 
-/* Apply CSS class of "guest" to menu items hidden from logged-in users */
+/* @end */
 
-body.logged-in li.guest,
-body.logged-in li.guest {
-	display: none;
-}
-	
-/* #Images
-================================================== */
+/* @group WP Blog Styles */
 
-img.scale-with-grid { 
-	max-width: 100%;
-	height: auto; }
-
-
-/* #WP Blog Styles
-================================================== */
 .entry-meta {
 	font-size: 11px;
 	color: #666;
@@ -595,6 +651,11 @@ a.more-link {
 
 .st_relatedposts ul li {
 }
+
+
+/* @end */
+
+/* @group Form Buttons */
 
 /* #Form Buttons
 ================================================== */
@@ -667,7 +728,10 @@ a.more-link {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 		text-align: center; }
-		
+
+
+/* @end */
+
 /* @group Styled Buttons */
 
 .button,.button.small,.button.large,.button.medium {
@@ -1437,10 +1501,12 @@ a.button.brown span.btn_caption {
 /* @end */
 
 /* @end */
+
+/* End Button Styles */
+
 	
-	
-/* #Tabs
-================================================== */
+/* @group Tabs */
+
 	ul.tabs { 
 		display: block;
 		margin: 0 0 20px 0;
@@ -1509,7 +1575,9 @@ a.button.brown span.btn_caption {
 	  zoom: 1; }
 
 
-/* Toggles */
+/* @end */
+
+/* @group Toggles */
 
 .toggle_container {
 	padding: 10px;
@@ -1565,19 +1633,11 @@ p.trigger.active a {
 	text-shadow: #fff 1px 1px 0;
 }
 
+/* @end */
 
-			
-/* #Forms (see formalize.css)
-================================================== */
-
-	label,legend { font-weight: bold;font-size: 13px; }
-	input[type="checkbox"] {display: inline; }
-
-/* @group Extras */
-
+/* @group Callouts */
 
 /* Callout Box */
-
 
 .cta {
 	margin: 10px auto 0px auto;
@@ -1670,7 +1730,102 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 
 
 /* @end */
-		
+
+/* @group WP Gallery */
+
+.gallery {
+	display: block;
+	clear: both;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.gallery .gallery-row {
+	display:block;
+	clear: both;
+	overflow: hidden;
+	margin: 0;
+}
+
+.gallery .gallery-item {
+	overflow: hidden;
+	float: left;
+	margin: 0;
+	text-align: center;
+	list-style: none;
+	padding: 0;
+}
+.gallery .gallery-item img,
+.gallery .gallery-item img.thumbnail {
+	max-width: 79%;
+	height: auto;
+	padding: 0;
+	margin: 5px auto;
+	border: 1px solid #fff;
+	background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    -pie-box-shadow: 0px 0px 5px #ccc;
+    position: relative;
+    behavior: url("./wp-content/themes/skeleton/PIE.php");
+}
+.gallery-caption {
+	color: #666;
+	font-size: 11px;
+	line-height: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+
+/* Attachment Page */
+
+#nav-below {
+	width: 100%;
+}
+
+#nav-below .nav-previous a {
+	float: left;
+	
+}
+#nav-below .nav-next a {
+	float: right;
+}
+.entry-caption {
+	text-align: center;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+/* @end */
+
+/* @group Misc */
+
+
+
+
+
+/* Apply CSS class of "guest" to menu items hidden from logged-in users */
+
+body.logged-in li.guest,
+body.logged-in li.guest {
+	display: none;
+}
+	
+/* #Images
+================================================== */
+
+img.scale-with-grid { 
+	max-width: 100%;
+	height: auto; }
+
+			
+/* #Forms (see formalize.css)
+================================================== */
+
+	label,legend { font-weight: bold;font-size: 13px; }
+	input[type="checkbox"] {display: inline; }
+
 
 /* # Misc Typography Balancing to Maintain Vertical Rhythm
 ============================================================== */
@@ -1678,71 +1833,6 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 	.half-bottom { margin-bottom: 10px !important; }
 	.add-bottom { margin-bottom: 20px !important; }
 	.add-top { margin-top: 20px !important; }
-
-
-/* # Image Alignment Classes
-============================================================== */
-
-
-.alignright {
-	float: right;
-	margin: 0px 0px 10px 15px;
-}
-
-.alignleft {
-	float: left;
-	margin: 0px 15px 10px 0px;
-}
-.aligncenter {
-	display:block;
-	margin:0 auto;
-}
-
-/* WP Captions */
-
-.wp-caption {
-	text-align: center;
-	padding: 5px;
-	margin: 10px auto;
-}
-
-body.dark .wp-caption {
-	border: 1px solid #282828;
-	background-color: #131313;
-	color: #979797;
-	text-shadow: 1px 1px 0px #000;
-}
-
-body.light .wp-caption {
-	border: 1px solid #fff;
-	background-color: #f6f6f6;
-	color: #666;
-	text-shadow: 1px 1px 0px #fff;
-	-webkit-box-shadow:1px 1px 6px #ddd;
-	-moz-box-shadow:1px 1px 6px #ddd;
-	box-shadow:1px 1px 6px #ddd;
-	behavior: url('../wp-content/themes/presstige/css/PIE.php');
-}
-
-.wp-caption img {
-	margin: 0;
-	padding: 0;
-	border: 0 none;
-}
-
-.wp-caption p.wp-caption-text {
-	font-size: 11px;
-	line-height: 17px;
-	padding: 5px 0 0px 0;
-	margin: 0;
-}
-
-.wp-caption.alignleft {
-	margin: 0px 10px 0px 0px;
-}
-.wp-caption.alignright {
-	margin: 0px 0px 0px 10px;
-}
 
 
 .resize {
@@ -1754,6 +1844,8 @@ body.light .wp-caption {
     width: 80px;
 }
 .bypostauthor,.gallery-caption {}
+
+/* @end */
 
 
 	

@@ -358,7 +358,7 @@ function skeleton_custom_excerpt_more( $output ) {
 add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
 
 /**
- * Remove inline styles printed when the gallery shortcode is used.
+ * Removes inline styles printed when the gallery shortcode is used.
  *
  * Galleries are styled by the theme in Skeleton's style.css. This is just
  * a simple filter call that tells WordPress to not use the default styles.
@@ -366,24 +366,6 @@ add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
  * @since Skeleton 1.2
  */
 add_filter( 'use_default_gallery_style', '__return_false' );
-
-/**
- * Deprecated way to remove inline styles printed when the gallery shortcode is used.
- *
- * This function is no longer needed or used. Use the use_default_gallery_style
- * filter instead, as seen above.
- *
- * @since Skeleton 1.0
- * @deprecated Deprecated in Skeleton 1.2 for WordPress 3.1
- *
- * @return string The gallery style filter, with the styles themselves removed.
- */
-function skeleton_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-}
-// Backwards compatibility with WordPress 3.0.
-if ( version_compare( $GLOBALS['wp_version'], '3.1', '<' ) )
-	add_filter( 'gallery_style', 'skeleton_remove_gallery_css' );
 
 
 /**
@@ -595,13 +577,14 @@ add_action('st_header','st_header_open', 1);
 
 function st_header_extras() {
 	if (of_get_option('header_extra')) {
-	echo '<div class="header_extras">';
+	$extras  = "<div class=\"header_extras\">";
 	$extras .= of_get_option('header_extra');
-	echo '</div>';
+	$extras .= "</div>";
 	}
 	echo apply_filters ('child_header_extras',$extras);
 }
 add_action('st_header','st_header_extras', 2);
+
 
 // Build the logo
 // Child Theme Override: child_logo();
@@ -621,6 +604,12 @@ function st_logo() {
 }
 add_action('st_header','st_logo', 3);
 
+// Example Child Theme Override
+
+// function my_custom_logo($st_logo) {
+// 	echo '<a id="logo" href="#"><img src="http://simplethemes.s3.amazonaws.com/demo/1312368015_tiger.png" alt="" width="200" height="100" /></a>';
+// }
+// add_filter('child_logo','my_custom_logo');
 
 function logostyle() {
 	if (of_get_option('use_logo_image')) {
@@ -629,14 +618,6 @@ function logostyle() {
 	}
 }
 add_action('wp_head', 'logostyle');
-
-
-
-// function my_child_logo($st_logo) {
-// 	echo '<a id="logo" href="#"><img src="http://simplethemes.s3.amazonaws.com/demo/1312368015_tiger.png" alt="" width="200" height="100" /></a>';
-// 	
-// }
-// add_filter('child_logo','my_child_logo');
 
 
 function st_header_close() {
@@ -654,7 +635,6 @@ function st_below_header() {
 
 
 // Navigation (menu)
-
 
 function st_navbar() {
 	echo '<div id="navigation" class="row sixteen columns">';
@@ -788,11 +768,10 @@ add_action('wp_footer', 'st_footer');
 	function st_footer() {
 		//loads sidebar-footer.php
 		get_sidebar( 'footer' );
+		// prints site credits
 		echo '<div id="credits">';
 		echo of_get_option('footer_text');
-		// if (of_get_option('remove_attrib')) {
 		echo '<br /><a class="themeauthor" href="http://www.simplethemes.com" title="WordPress Themes">Theme by Simple Themes</a></div>';
-		// }
 }
 
 
@@ -804,7 +783,12 @@ if (function_exists('child_after_footer'))  {
     }
 } else {
     function st_after_footer() {
-			echo '</div><!--/#footer-->';
+			echo "</div><!--/#footer-->"."\n";
+			echo "</div><!--/#wrap.container-->"."\n";
+			// Google Analytics
+			if (of_get_option('footer_scripts') <> "" ) {
+				echo '<script type="text/javascript">'.stripslashes(of_get_option('footer_scripts')).'</script>';
+			}
     }
 }
 

@@ -103,8 +103,42 @@
 	#navigation ul li.active a,
 	#navigation ul li a:hover {border: none;padding: 2px 0;line-height: 150%;background: transparent;}
 	
+	/* Initial reset and hide sublevels in mobile view */
+	
 	#navigation ul.sub-menu,
-	#navigation ul.sub-menu li {position: absolute;display: none;visibility: hidden;border: none;margin: 0;border: none;}
+	#navigation ul.sub-menu li,
+	#navigation ul.sub-menu li:hover,
+	#navigation ul.sub-menu li a,
+	#navigation ul.sub-menu li a:hover
+	 {
+		display: none;
+		position: relative;
+		left: 0px;
+		line-height: 100%;
+		background: none;
+		border: none;
+		border-style: none;
+		box-shadow:none;
+		padding: 0;
+		margin: 0;
+		height: auto;
+	}
+	
+	/* Declare new padding for submenu items */
+
+	#navigation ul.sub-menu li a,
+	#navigation ul.sub-menu li a:hover {
+		padding: 4px 0px 4px 10px;
+	}
+	
+	/* Show on hover */
+	
+	#navigation li:hover ul.sub-menu,
+	#navigation li:hover ul.sub-menu li,
+	#navigation li:hover ul.sub-menu li a {
+		display: inline-block;
+	}
+
 
 	#sidebar .widget-container {margin-left: 0px;}
 	.full-width,

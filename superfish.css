@@ -20,16 +20,6 @@
 
 #navigation ul li.hover, #navigation ul li:hover {position: relative;z-index: 9999;cursor: default;}
 
-#navigation li span {
-	font-weight: normal;
-	display: block;
-	padding: 0px;
-	line-height: 24px;
-	position: relative;
-	top: -16px;
-	font-family: helvetica,arial,san-serif;
-}
-
 #navigation ul, #navigation ul li, #navigation ul ul {
 	list-style: none;
 	margin: 0;

@@ -17,9 +17,8 @@ jQuery(document).ready(function($) {
 		.find('li.current_page_item,li.current_page_parent,li.current_page_ancestor,li.current-cat,li.current-cat-parent,li.current-menu-item')
 			.addClass('active')
 			.end()
-			.superfish({});
+			.superfish({autoArrows	: true});
 	});
-	
 	
 	// Forum Login
 	

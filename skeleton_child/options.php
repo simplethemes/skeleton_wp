@@ -31,7 +31,7 @@ function optionsframework_options() {
 	// Background Defaults
 	
 	$body_background_defaults = array(
-	'color' => '#fcfcfc',
+	'color' => '#c4c4c4',
 	'image' => 'wp-content/themes/skeleton/images/border_top.png',
 	'repeat' => 'repeat-x',
 	'position' => 'top center',

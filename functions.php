@@ -63,15 +63,8 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-/* Set the file path based on whether the Options Framework Theme is a parent theme or child theme */
-
-if ( STYLESHEETPATH == TEMPLATEPATH ) {
-	define('OPTIONS_FRAMEWORK_URL', TEMPLATEPATH . '/admin/');
-	define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
-} else {
-	define('OPTIONS_FRAMEWORK_URL', STYLESHEETPATH . '/admin/');
-	define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('stylesheet_directory') . '/admin/');
-}
+define('OPTIONS_FRAMEWORK_URL', TEMPLATEPATH . '/admin/');
+define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
 
 require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
 
@@ -82,8 +75,9 @@ require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
  * This is an example of how to add custom scripts to the options panel.
  * This one shows/hides the an option when a checkbox is clicked.
  */
-
 add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
+
+if (!function_exists('optionsframework_custom_scripts')) {
 
 function optionsframework_custom_scripts() { ?>
 
@@ -103,6 +97,7 @@ jQuery(document).ready(function() {
 
 <?php
 }
+}
 
 
 // Register Core Stylesheets
@@ -114,11 +109,12 @@ add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
 	$theme  = get_theme( get_current_theme());
 	$version = $theme['Version'];
-  	wp_enqueue_style('skeleton', get_bloginfo('stylesheet_directory').'/skeleton.css', false, $version, 'screen, projection');
-    wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
-  	wp_enqueue_style('layout', get_bloginfo('stylesheet_directory').'/layout.css', 'theme', $version, 'screen, projection');
-    wp_enqueue_style('formalize', get_bloginfo('stylesheet_directory').'/formalize.css', 'theme', $version, 'screen, projection');
-    wp_enqueue_style('superfish', get_bloginfo('stylesheet_directory').'/superfish.css', 'theme', $version, 'screen, projection');
+  	$stylesheets = wp_enqueue_style('skeleton', get_bloginfo('template_directory').'/skeleton.css', false, $version, 'screen, projection');
+    $stylesheets .= wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
+  	$stylesheets .= wp_enqueue_style('layout', get_bloginfo('template_directory').'/layout.css', 'theme', $version, 'screen, projection');
+    $stylesheets .= wp_enqueue_style('formalize', get_bloginfo('template_directory').'/formalize.css', 'theme', $version, 'screen, projection');
+    $stylesheets .= wp_enqueue_style('superfish', get_bloginfo('template_directory').'/superfish.css', 'theme', $version, 'screen, projection');
+		echo apply_filters ('child_add_stylesheets',$stylesheets);
 }
 
 // Build Query vars for dynamic theme option CSS from Options Framework
@@ -140,10 +136,11 @@ function theme_css(){
 
 add_action('init', 'st_header_scripts');
 function st_header_scripts() {
-  wp_enqueue_script('jquery');
-  wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
-	wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
-	wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
+  $javascripts  = wp_enqueue_script('jquery');
+  $javascripts .= wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
+	$javascripts .= wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
+	$javascripts .= wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
+	echo apply_filters ('child_add_javascripts',$javascripts);
 }
 
 
@@ -519,6 +516,7 @@ function skeleton_posted_on() {
 		)
 	);
 }
+
 endif;
 
 if ( ! function_exists( 'skeleton_posted_in' ) ) :
@@ -546,6 +544,7 @@ function skeleton_posted_in() {
 		the_title_attribute( 'echo=0' )
 	);
 }
+
 endif;
 
 
@@ -553,9 +552,13 @@ endif;
 
 // Hook to add content before header
 
+if ( !function_exists( 'st_above_header' ) ) {
+
 function st_above_header() {
     do_action('st_above_header');
 }
+
+} // endif
 
 // Primary Header Function
 
@@ -566,14 +569,20 @@ function st_header() {
 
 // Opening #header div with flexible grid
 
+if ( !function_exists( 'st_header_open' ) ) {
+
 function st_header_open() {
   echo "<div id=\"header\" class=\"sixteen columns\">\n<div class=\"inner\">\n";
 }
+} // endif
+
 add_action('st_header','st_header_open', 1);
 
 
 // Hookable theme option field to add add'l content to header
 // Child Theme Override: child_header_extras();
+
+if ( !function_exists( 'st_header_extras' ) ) {
 
 function st_header_extras() {
 	if (of_get_option('header_extra')) {
@@ -583,11 +592,14 @@ function st_header_extras() {
 	}
 	echo apply_filters ('child_header_extras',$extras);
 }
+} // endif
+
 add_action('st_header','st_header_extras', 2);
 
 
 // Build the logo
 // Child Theme Override: child_logo();
+if ( !function_exists( 'st_logo' ) ) {
 
 function st_logo() {
 	// Displays H1 or DIV based on whether we are on the home page or not (SEO)
@@ -602,14 +614,13 @@ function st_logo() {
 	$st_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
 	echo apply_filters ( 'child_logo' , $st_logo);
 }
+} // endif
+
 add_action('st_header','st_logo', 3);
 
-// Example Child Theme Override
 
-// function my_custom_logo($st_logo) {
-// 	echo '<a id="logo" href="#"><img src="http://simplethemes.s3.amazonaws.com/demo/1312368015_tiger.png" alt="" width="200" height="100" /></a>';
-// }
-// add_filter('child_logo','my_custom_logo');
+
+if ( !function_exists( 'logostyle' ) ) {
 
 function logostyle() {
 	if (of_get_option('use_logo_image')) {
@@ -617,30 +628,48 @@ function logostyle() {
 	#header #site-title.graphic a {background-image: url('.of_get_option('header_logo').');width: '.of_get_option('logo_width').'px;height: '.of_get_option('logo_height').'px;}</style>';
 	}
 }
+
+} //endif
+
 add_action('wp_head', 'logostyle');
 
+
+
+if ( !function_exists( 'st_header_close' ) ) {
 
 function st_header_close() {
 	echo "</div></div><!--/#header-->";
 }
+} //endif
+
 add_action('st_header','st_header_close', 4);
 
+
+
 // Hook to add content after header
+
+if ( !function_exists( 'st_below_header' ) ) {
 
 function st_below_header() {
     do_action('st_below_header');
 }
 
+} //endif
+
+
 // End Header Functions
 
 
 // Navigation (menu)
+if ( !function_exists( 'st_navbar' ) ) {
 
 function st_navbar() {
 	echo '<div id="navigation" class="row sixteen columns">';
 	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary'));
 	echo '</div><!--/#navigation-->';
 }
+
+} //endif
 
 // Before Content - st_before_content($columns);
 // Child Theme Override: child_before_content();
@@ -709,9 +738,9 @@ if (function_exists('child_after_content'))  {
 
 // Before Sidebar - do_action('st_before_sidebar')
 
-	// create our hook
-	add_action( 'st_before_sidebar', 'before_sidebar');  
-	// call up the action
+// call up the action
+if ( !function_exists( 'before_sidebar' ) ) {
+	
 	function before_sidebar($columns) {
 	// You can specify the number of columns in conditional statements
 	// See http://codex.wordpress.org/Conditional_Tags for a full list
@@ -735,16 +764,21 @@ if (function_exists('child_after_content'))  {
 	// }
 	// Apply the markup
 	echo '<div id="sidebar" class="'.$columns.' columns" role="complementary">';
-	}	
+	}
+} //endif
+// create our hook
+add_action( 'st_before_sidebar', 'before_sidebar');  
 
 
 
 // After Sidebar
-	add_action( 'st_after_sidebar', 'after_sidebar');  
+if ( !function_exists( 'after_sidebar' ) ) {
 	function after_sidebar() {
 	// Additional Content could be added here
 	   echo '</div><!-- #sidebar -->';
 	}
+} //endif
+add_action( 'st_after_sidebar', 'after_sidebar');  
 
 
 // Before Footer
@@ -1183,7 +1217,7 @@ function bbp_skeleton_enqueue_styles () {
 
 	$version = '20110807b';
 		// bbPress specific styles
-		wp_enqueue_style( 'bbp-skeleton-bbpress', get_stylesheet_directory_uri() . '/bbpress.css', 'skeleton', $version, 'screen' );
+		wp_enqueue_style( 'bbp-skeleton-bbpress', get_template_directory_uri() . '/bbpress.css', 'skeleton', $version, 'screen' );
 }
 add_action( 'bbp_enqueue_scripts', 'bbp_skeleton_enqueue_styles' );
 
@@ -1198,7 +1232,7 @@ if ( !function_exists( 'bbp_skeleton_enqueue_scripts' ) ) :
  * @since bbPress (r2652)
  *
  * @uses bbp_is_single_topic() To check if it's the topic page
- * @uses get_stylesheet_directory_uri() To get the stylesheet directory uri
+ * @uses get_template_directory_uri() To get the stylesheet directory uri
  * @uses bbp_is_single_user_edit() To check if it's the profile edit page
  * @uses wp_enqueue_script() To enqueue the scripts
  */
@@ -1207,7 +1241,7 @@ function bbp_skeleton_enqueue_scripts () {
 	$version = '20110807b';
 
 	if ( bbp_is_single_topic() )
-		wp_enqueue_script( 'bbp_topic', get_stylesheet_directory_uri() . '/js/topic.js', array( 'wp-lists' ), $version );
+		wp_enqueue_script( 'bbp_topic', get_template_directory_uri() . '/js/topic.js', array( 'wp-lists' ), $version );
 
 	if ( bbp_is_single_user_edit() )
 		wp_enqueue_script( 'user-profile' );

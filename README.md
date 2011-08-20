@@ -1,5 +1,5 @@
 Skeleton WordPress Theme
 ========
-This is a work in progress. It is not yet stable.  
+[A live demo of this theme can be seen here](http:demos.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
-[A live demo can be seen here](http:demos.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
+For child theme usage, please see the example "skeleton_child" folder for reference.

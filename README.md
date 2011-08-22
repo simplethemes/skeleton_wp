@@ -1,8 +1,22 @@
 #Skeleton WordPress Theme
 
+##About
+
 **Live Demo**: [http:demos.simplethemes.com/skeleton](http:demos.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
 **bbPress Demo**: [http://demos.simplethemes.com/skeleton/forums](http://demos.simplethemes.com/skeleton/forums "bbPress Theme Demo")
+
+Skeleton, created by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
+It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 buttons, and layout columns.
+It also includes a bbPress skin/stylesheet and sample child theme.
+
+Special thanks to the following people/sites for code and inspiration:
+ 
+* [Skeleton Responsive Boilerplate](http://www.getskeleton.com/) // Responsive Layout Framework by Dave Gamache
+* [Theme Options Framework](http://wptheming.com/options-framework-plugin/) // Powerful Customizeable Theme Options by Devin Price
+* [Thematic Framework](http://themeshaper.com/thematic/) // Code Inspiration and learning - Ian Stewart
+* TwentyTen Theme // Default WordPress Loops
+
 
 ## Installation & Basic Setup
 This repository contains multiple items. To install this theme, download and **extract first**. Upload the folder and contents of the 'skeleton' folder to your wp-content/themes/ directory, then activate from Appearance &rarr; Themes. It's important to keep the parent theme folder named 'skeleton' as the [CSS PIE](http://css3pie.com/) script relies on this path.

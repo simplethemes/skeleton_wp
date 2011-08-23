@@ -2,7 +2,7 @@
 Theme Name: Skeleton
 Theme URI: http://www.simplethemes.com
 Description: A simple WordPress theme based on the Skeleton RWD framework
-Version: 1.1
+Version: 1.2
 Author: Simple Themes
 Author URI: http://www.simplethemes.com
 License: GPL
@@ -201,21 +201,26 @@ a.themeauthor {
 }
 	
 
-#navigation ul li a {
+#navigation ul li {
  	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
  	background: -webkit-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
 	-pie-background: linear-gradient(#FCFCFC, #ECECEC);
+	background-image: none;
+	border-right: 1px solid #e3e3e3;
+    position: relative;
+    behavior: url("./wp-content/themes/skeleton/PIE.php");
+}
+
+#navigation ul li a {
 	background-image: none;
 	padding: 15px 25px;
 	text-decoration: none;
 	display: block;
 	font-weight: bold;
 	text-shadow: 1px 1px 0px #fff;
-	border-right: 1px solid #e3e3e3;
-    position: relative;
-    behavior: url("./wp-content/themes/skeleton/PIE.php");
-
 }
+
+
 
 
 /* Navbar Hover Links */
@@ -270,6 +275,8 @@ a.themeauthor {
 	border-radius: 0;
 	min-width: 210px;
 	border-bottom: none;
+	position: static;
+    behavior: none;
 }
 
 /* Nav Sublevel Hover */

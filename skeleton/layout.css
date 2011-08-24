@@ -97,7 +97,7 @@
 	
 	#navigation ul,
 	#navigation ul li,
-	#navigation ul li a {float: none;background: transparent;border: none;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;}
+	#navigation ul li a {float: none;background: transparent;border: none;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;behavior:none;}
 	
 	#navigation ul li a,
 	#navigation ul li.active a,

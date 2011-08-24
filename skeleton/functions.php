@@ -791,7 +791,7 @@ if (function_exists('child_before_footer'))  {
     function st_before_footer() {
 			$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
 			$class = ($footerwidgets == '0' ? 'noborder' : 'normal');
-			echo '<div id="footer" class="'.$class.' sixteen columns">';
+			echo '<div class="clear"></div><div id="footer" class="'.$class.' sixteen columns">';
     }
 }
 

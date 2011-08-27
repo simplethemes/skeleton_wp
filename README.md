@@ -16,6 +16,7 @@ Special thanks to the following people/sites for code and inspiration:
 * [Skeleton Responsive Boilerplate](http://www.getskeleton.com/) // Responsive Layout Framework by Dave Gamache
 * [Theme Options Framework](http://wptheming.com/options-framework-plugin/) // Powerful Customizeable Theme Options by Devin Price
 * [Thematic Framework](http://themeshaper.com/thematic/) // Code Inspiration and learning - Ian Stewart
+* [Formalize](https://github.com/nathansmith/formalize) // Better forms styling - Nathan Smith
 * TwentyTen Theme // Default WordPress Loops
 
 

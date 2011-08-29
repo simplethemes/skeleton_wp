@@ -1,3 +1,5 @@
+/* @override http://slate.com/wp-content/themes/skeleton/formalize.css?ver=1.3 */
+
 /* `Widths
 ----------------------------------------------------------------------------------------------------*/
 
@@ -110,9 +112,8 @@ input[type="button"] {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #ddd));
   background: -moz-linear-gradient(top center, #fff 0%, #ddd 100%);
   border: 1px solid;
-  border-color: #ddd #bbb #999;
   cursor: pointer;
-  color: #333;
+  color: #5c5c5c;
   /*
     Helvetica Neue present, because it works better
     for line-height on buttons than Arial, on OS X.
@@ -121,12 +122,16 @@ input[type="button"] {
   outline: 0;
   overflow: visible;
   padding: 3px 10px;
-  text-shadow: #fff 0 1px 1px;
+  text-shadow: #fff 1px 1px 0;
   width: auto;
 
   /* IE7 */
   *padding-top: 2px;
   *padding-bottom: 0px;
+	border-bottom-color: #cbcbcb;
+	border-right-color: #c9c9c9;
+	border-left-color: #c9c9c9;
+	border-top-color: #d4d4d4;
 }
 
 button {
@@ -147,6 +152,7 @@ input[type="password"],
 input[type="search"],
 input[type="tel"],
 input[type="text"],
+input[type="input"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
@@ -172,7 +178,7 @@ input[type="week"] {
     on inputs. Arial is more reliable, on Windows and OS X.
   */
   font-family: Arial, 'Liberation Sans', FreeSans, sans-serif;
-  height: 1.8em;
+  height: 2.3em;
 
   /* IE7 */
   *padding-top: 2px;

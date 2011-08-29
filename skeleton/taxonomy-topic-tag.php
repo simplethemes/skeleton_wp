@@ -46,6 +46,6 @@ do_action( 'bbp_template_notices' );
 <?php
 st_after_content();
 
-// get_sidebar('bbpress');
+get_sidebar('shop');
 get_footer();
 ?>

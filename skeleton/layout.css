@@ -1,5 +1,3 @@
-/* @override http://slate.com/wp-content/themes/skeleton/skeleton/layout.css?ver=1.3 */
-
 /* Table of Contents
 ==================================================
 	#Site Styles
@@ -87,6 +85,10 @@
 	#sidebar .widget-container {margin-left: 0px;}
 	.resize {display: none;}
 	#respond textarea {width:auto;}	
+	
+	/* jigoshop styles */
+	#header .site-desc.text {font-size: 1.25em;}
+	
 	}
 	
 	
@@ -94,15 +96,31 @@
 	@media only screen and (max-width: 767px) {
 	
 	#wrap {}
+	#header .site-desc.text {font-size: 1.25em;}
 	#navigation {margin: 10px 0px;}
 	
 	#navigation ul,
 	#navigation ul li,
-	#navigation ul li a {float: none;background: transparent;border: none;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;behavior:none;}
+	#navigation ul li a {
+	float: none;
+	background: transparent;
+	border: none;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	behavior:none;
+	}
 	
 	#navigation ul li a,
 	#navigation ul li.active a,
-	#navigation ul li a:hover {border: none;padding: 2px 0;line-height: 150%;background: transparent;}
+	#navigation ul li a:hover,
+	#navigation ul li:hover a {
+	border: none;
+	padding: 2px 0;
+	line-height: 150%;
+	background: transparent;
+	background-image: none;
+	}
 	
 	/* Initial reset and hide sublevels in mobile view */
 	
@@ -123,6 +141,7 @@
 		padding: 0;
 		margin: 0;
 		height: auto;
+		background-image: none;
 	}
 	
 	/* Declare new padding for submenu items */

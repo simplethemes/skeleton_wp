@@ -61,6 +61,9 @@
 /* http://wptheming.com/options-framework-theme/
 /*-----------------------------------------------------------------------------------*/
 
+
+
+
 if ( !function_exists( 'optionsframework_init' ) ) {
 
 define('OPTIONS_FRAMEWORK_URL', TEMPLATEPATH . '/admin/');
@@ -68,6 +71,10 @@ define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/adm
 
 require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
 
+}
+
+if ( class_exists( 'jigoshop' ) ) {
+require_once (STYLESHEETPATH . '/jigoshop_functions.php');
 }
 
 
@@ -98,8 +105,6 @@ jQuery(document).ready(function() {
 <?php
 }
 }
-
-
 // Register Core Stylesheets
 // These are necessary for the theme to function as intended
 // Supports the 'Better WordPress Minify' plugin to properly minimize styleshsets into one.
@@ -114,6 +119,9 @@ function st_registerstyles() {
   	$stylesheets .= wp_enqueue_style('layout', get_bloginfo('template_directory').'/layout.css', 'theme', $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('formalize', get_bloginfo('template_directory').'/formalize.css', 'theme', $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('superfish', get_bloginfo('template_directory').'/superfish.css', 'theme', $version, 'screen, projection');
+		if ( class_exists( 'jigoshop' ) ) {
+	  $stylesheets .= wp_enqueue_style('jigoshop', get_bloginfo('template_directory').'/jigoshop.css', 'theme', $version, 'screen, projection');
+		}
 		echo apply_filters ('child_add_stylesheets',$stylesheets);
 }
 
@@ -469,6 +477,20 @@ function st_widgets_init() {
 		'after_title' => '</h3>',
 	) );
 	}
+	
+	// Register Jigoshop Cart sidebar if plugin is installed
+	if ( class_exists( 'jigoshop' ) ) {
+	register_sidebar( array(
+		'name' => __( 'Jigoshop Sidebar', 'skeleton' ),
+		'id' => 'shop-widget-area',
+		'description' => __( 'Sidebar displayed in Jigoshop pages', 'skeleton' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	}
+	
 }
 /** Register sidebars by running skeleton_widgets_init() on the widgets_init hook. */
 add_action( 'widgets_init', 'st_widgets_init' );

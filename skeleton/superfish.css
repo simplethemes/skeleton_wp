@@ -1,3 +1,7 @@
+/* @override 
+	http://slate.com/wp-content/themes/skeleton/superfish.css?ver=1.3
+*/
+
 /* @group Main Menu */
 
 /* Main Menu */
@@ -8,7 +12,7 @@
 #navigation ul li,
 #navigation ul ul {list-style: none;margin: 0;padding: 0;}
 
-#navigation ul {position: relative;z-index: 9997;}
+#navigation ul {position: relative;z-index: 1000;}
 
 #navigation ul li {zoom: 1}
 

@@ -208,31 +208,47 @@ function of_admin_head() {
 
 if ( !function_exists( 'optionsframework_page' ) ) {
 function optionsframework_page() {
+// Get the theme name so we can display it up top
+	$themename = get_theme_data(STYLESHEETPATH . '/style.css');
+	$themename = $themename['Name'];
 	$return = optionsframework_fields();
 	settings_errors();
 	?>
     
 	<div class="wrap">
     <?php screen_icon( 'themes' ); ?>
-    <h2 class="nav-tab-wrapper">
-        <?php echo $return[1]; ?>
-    </h2>
+    <h2><?php esc_html_e( 'Theme Options' ); ?></h2>
     
-    <div class="metabox-holder">
-    <div id="optionsframework" class="postbox">
+    <div id="of_container">
 		<form action="options.php" method="post">
 		<?php settings_fields('optionsframework'); ?>
-
-		<?php echo $return[0]; /* Settings */ ?>
-        
-        <div id="optionsframework-submit">
-			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options' ); ?>" />
-            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' ) ); ?>' );" />
-            <div class="clear"></div>
-		</div>
-	</form>
-</div> <!-- / #container -->
-</div>
+		
+		<div id="header">
+			<div class="logo">
+				<h2><?php esc_html_e( $themename ); ?> Theme Options</h2>
+			</div> <!--/logo-->
+		  <div class="clear"></div>
+		</div> <!--/header-->
+		
+		<div id="main">
+			<?php $return = optionsframework_fields(); ?>
+			<div id="of-nav">
+				<ul>
+					<?php echo $return[1]; ?>
+				</ul>
+			</div> <!--/of-nav-->
+			<div id="content">			
+			<?php echo $return[0]; /* Settings */ ?>
+			</div>	<!--/content-->
+			<div class="clear"></div>
+			</div> <!--/main-->
+			<div id="of_admin_bar">
+				<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options' ); ?>" />
+				<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' ) ); ?>' );" />
+			</div><!--/of_admin_bar-->
+			<div class="clear"></div>
+		</form>
+</div> <!-- / of_container -->
 </div> <!-- / .wrap -->
 
 <?php

@@ -1,179 +1,270 @@
+/* @override http://slate.com/wp-content/themes/skeleton/admin/css/admin-style.css?ver=3.3-aortic-dissection */
 /*-------------------------------------------------------------------------------------------*/
 /* OptionsFramework Admin Styles */
 /*-------------------------------------------------------------------------------------------*/
 
 .updated {
-	max-width:764px;
-	margin-bottom:0px !important;
+	width:770px;
 }
-#optionsframework {
+#of_container {
+	margin: 10px 0;
+	width: 785px;
 	position:relative;
 	z-index: 0;
-	max-width:780px;
-	background:#fff;
 }
-#optionsframework p {
-	margin-bottom:0;
-	padding-bottom:10px;
+#of_container #header {
+	height: 60px;
+	background:#dfdfdf url("../../../../wp-admin/images/gray-grad.png") repeat-x left top;
+	border: 1px solid #ccc;
+	border-top-left-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	border-top-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
 }
-#optionsframework .section {
-	padding:10px 10px 0;
-}
-#optionsframework .group .section:last-of-type {
-	padding-bottom:40px;
-}
-#optionsframework .section .heading {
-	padding:10px 0px;
-	margin:0 0 15px;
-	border-bottom: 1px solid #dfdfdf;
-}
-#optionsframework .section .controls {
+#of_container #header .logo {
 	float: left;
-	min-width:350px;
-	width: 54%;
-	padding-right:2%;
+	margin:5px 20px;
 }
-#optionsframework .section .explain {
-	max-width:38%;
+#of_container #header .logo h2 {
+	font-style:normal;
+	font-size: 22px;
+	line-height: 26px;
+}
+#of_container #main {
+	background-color: #f1f1f1;
+	border-left: 1px solid #d8d8d8;
+	border-right: 1px solid #d8d8d8;
+	border-bottom: 1px solid #d8d8d8;
+	margin-bottom: 20px;
+}
+#of_container #of-nav {
 	float: left;
-	font-size: 12px;
-	line-height:16px;
-	color: #777;
+	position: relative;
+	z-index: 9999;
+	width: 160px;
 }
-#optionsframework .section-checkbox .controls {
-	min-width:25px;
+#of_container #of-nav li {
+	margin-bottom:0
+}
+#of_container #of-nav ul li a:link, #of-nav ul li a:visited {
+	display: block;
+	padding: 10px 10px 10px 15px;
+	font-family: Georgia, Serif;
+	font-size: 13px;
+	text-decoration: none;
+	color: #797979;
+	border-bottom: 1px solid #d8d8d8;
+}
+#of_container #of-nav ul li.current a, #of-nav ul li a:hover {
+	color: #21759b;
+	background-color: #fff;
+}
+#of_container #content {
+	float: left;
+	min-height: 560px;
+	width: 595px;
+	margin-left: -1px;
+	padding: 0 14px;
+	background-color: #fff;
+	border-left: 1px solid #d8d8d8;
+}
+#of_container #content .section {
+	margin-bottom: 10px;
+}
+#of_container #content .section h3.heading {
+	margin: 10px 0 10px 0;
+	padding: 7px 0px;
+	border-bottom: 1px solid #e7e7e7;
+}
+#of_container #content .section .controls {
+	float: left;
+	width: 345px;
+	margin: 0 15px 0 0;
+}
+#of_container #content .section .explain {
+	float: left;
+	width: 225px;
+	padding: 0 10px 0 0;
+	font-size: 11px;
+	color: #999999;
+}
+#of_container #content .section-checkbox .controls {
 	width:25px
 }
-#optionsframework .section-checkbox .explain {
-	max-width:93%;
+#of_container #content .section-checkbox .explain {
+	width:540px
 }
-#optionsframework .section-color .controls {
-	min-width:125px;
+#of_container #content .section-color .controls {
 	width:125px
 }
-#optionsframework .controls input, #optionsframework .controls select, #optionsframework .controls textarea {
+#of_container #content .section-color .explain {
+	width:440px
+}
+#of_container textarea, #of_container input, #of_container select {
+	-moz-border-radius-bottomleft:4px;
+	-moz-border-radius-bottomright:4px;
+	-moz-border-radius-topleft:4px;
+	-moz-border-radius-topright:4px;
+	border-style:solid;
+	border-width:1px;
+}
+#of_container .controls input, #of_container .controls select, #of_container .controls textarea {
 	margin-bottom: 10px;
-	width:100%;
+	background-color: #f1f1f1;
+	border: 1px solid;
+	border-color: #ccc #e6e6e6 #e6e6e6 #ccc;
+	width: 340px;
+	padding: 4px;
+	font-size: 12px;
 }
-#optionsframework .section-radio label, #optionsframework .section-multicheck label {
-	float:left;
+#of_container .controls select {
+	padding: 0 0 0 4px;
+	width: 340px
 }
-#optionsframework input.checkbox, #optionsframework input.of-radio {
+#of_container .controls textarea {
+	width: 345px;
+}
+#of_container input[type=text] {
+	width: 340px;
+}
+#of_container input.checkbox {
 	width: 30px;
-	float:left;
-	clear:both;
 }
-#optionsframework .controls .of-color {
+#of_container input.of-radio {
+	width: 30px;
+}
+#of_container .controls .of-color {
 	float:left;
 	width: 80px;
 	margin-left:5px;
-	margin-right:5px;
 }
-#optionsframework .controls .of-typography-size {
+#of_container #content .section-typography .controls {
+	width:425px
+}
+#of_container #content .section-typography .explain {
+	width:140px
+}
+#of_container .controls .of-typography-size {
 	width:80px;
-	margin-left:5px;
 	float:left
 }
-#optionsframework .controls .of-typography-unit {
+#of_container .controls .of-typography-unit {
 	width:50px;
-	margin-left:5px;
 	float:left
 }
-#optionsframework .controls .of-typography-face {
+#of_container .controls .of-typography-face {
 	width:100px;
-	margin-left:5px;
 	float:left
 }
-#optionsframework .controls .of-typography-style {
+#of_container .controls .of-typography-style {
 	width:80px;
-	margin-left:5px;
-	margin-right:5px;
 	float:left
 }
-#optionsframework .of-background-properties {
-	clear:both;
+#of_container #content .section-background .controls {
+	width:425px
+}
+#of_container #content .section-background .explain {
+	width:140px
+}
+#of_container .of-background-properties {
 	margin-top: 18px;	
 }
-#optionsframework .controls .of-background-repeat {
-	width:125px;
-	margin-right:5px;
+#of_container .controls .of-background-repeat {
+	width:160px;
 	float:left
 }
-#optionsframework .controls .of-background-position {
+#of_container .controls .of-background-position {
 	width:125px;
-	margin-right:5px;
 	float:left
 }
-#optionsframework .controls .of-background-attachment {
+#of_container .controls .of-background-attachment {
 	width:125px;
-	margin-right:5px;
 	float:left
 }
-#optionsframework div.section-background .controls input.upload {
-	width:47%;
+#of_container div.section-background .controls input.upload {
+    width: 240px;
 }
-#optionsframework .controls .of-radio-img-img {
-	border:3px solid #f9f9f9;
+#of_container .controls .of-radio-img-img {
+	border:3px solid #fff;
 	margin:0 5px 10px 0;
 	display:none;
 	cursor:pointer;
 	float:left;
 }
-#optionsframework .controls .of-radio-img-selected {
+#of_container .controls .of-radio-img-selected {
 	border:3px solid #ccc
 }
-#optionsframework .controls .of-radio-img-img:hover {
+#of_container .controls .of-radio-img-img:hover {
 	opacity:.8;
 }
-#optionsframework .controls .of-border-width {
+#of_container .controls .of-border-width {
 	width:80px;
 	float:left
 }
-#optionsframework .controls .of-border-style {
+#of_container .controls .of-border-style {
 	width:120px;
 	float:left
 }
-#optionsframework .hide {
+#of_container .group {
+	padding-bottom:20px
+}
+#of_container .group h2 {
+	display:none;
+	border-bottom:3px solid #e7e7e7
+}
+#of_container .controls input:focus, #of_container select:focus, #of_container textarea:focus {
+	background:#fff;
+}
+#of_container .hide {
 	display:none;
 }
-#optionsframework .of-option-image {
+#of_container .of-option-image {
 	max-width:340px;
 	margin:3px 0 18px 0;
 }
-#optionsframework .mini .controls select, #optionsframework .section .mini .controls {
-	width: 140px;
+#of_container .mini .controls select, #of_container #content .section .mini .controls {
+	width: 70px;
 }
-#optionsframework .mini .controls input, #optionsframework .mini .controls {
-	min-width:140px;
-	width: 140px;
+#of_container .mini .controls input, #of_container #content .mini .controls {
+	width: 70px;
 }
-#optionsframework .mini .explain {
-	max-width:74%;
+#of_container #content .mini .explain {
+	width:500px;
 }
+
 /* Image Uploader */
 
-#optionsframework .controls input.upload {
-	width:80%;
+#of_container .controls input.upload {
+	width:280px;
+	padding-bottom:6px;
 }
-#optionsframework .controls input.upload_button {
+#of_container .controls input.upload_button {
 	float:right;
 	width:45px;
 	border-color:#BBBBBB;
 	cursor:pointer;
 	height:16px;
 }
-#optionsframework .controls input.upload_button:hover {
+#of_container .controls input.upload_button:hover {
 	border-color:#666666;
 	color:#000;
 }
-#optionsframework .screenshot {
+#of_container .screenshot {
 	float:left;
 	margin-left:1px;
 	position:relative;
 	width:344px;
 	margin-top:3px;
 }
-#optionsframework .screenshot img {
+#of_container .section-background .screenshot {
+	margin-bottom:18px;	
+}
+#of_container .screenshot img {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	-border-radius:4px;
 	background:#FAFAFA;
 	border-color:#ccc #eee #eee #ccc;
 	border-style:solid;
@@ -181,12 +272,11 @@
 	float:left;
 	max-width:334px;
 	padding:4px;
-	margin-bottom:10px;
 }
-#optionsframework .screenshot .mlu_remove {
+#of_container .screenshot .mlu_remove {
 	background:url("../images/ico-delete.png") no-repeat;
 	border:medium none;
-	bottom:4px;
+	bottom:-4px;
 	display:block;
 	float:left;
 	height:16px;
@@ -196,25 +286,33 @@
 	text-indent:-9999px;
 	width:16px;
 }
-#optionsframework .screenshot .no_image .file_link {
+#of_container .screenshot .no_image .file_link {
 	margin-left: 20px;
 }
-#optionsframework .screenshot .no_image .mlu_remove {
+#of_container .screenshot .no_image .mlu_remove {
 	bottom: 0px;
 }
-#optionsframework .reset-button {
+#of_container .reset-button {
 	float:left;
 	cursor:pointer;
 }
 
 /* Bottom Section */
 
-#optionsframework-submit {
-	padding: 7px 10px;
-	border-top: 1px solid #ECECEC;
-	background-color: #F1F1F1;
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
-}
-#optionsframework .button-primary {
+#of_container .button-primary {
 	float:right;
+}
+#of_container .of_admin_bar {
+	background: #f3f3f3;
+	border:solid #ccc;
+	border-width:0px 1px 1px 1px;
+	padding: 10px 20px 0px 20px;
+	height: 35px;
+	text-align: right;
+	-moz-border-radius-bottomright: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
 }

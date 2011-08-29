@@ -1,3 +1,4 @@
+
 /* Table of Contents
 ==================================================
 	#Site Styles
@@ -160,6 +161,15 @@
 	}
 	#respond textarea {width:300px;}	
 
+
+	
+	#wrap .products li,.products li.first,.products li.last {
+ 	float: left;
+ 	clear: both;
+	margin: 20px 0px 20px 0px;
+	width: 100%;
+	}
+	#breadcrumb {display: none;}
 
 	#sidebar .widget-container {margin-left: 0px;}
 	.full-width,

@@ -3,8 +3,8 @@
 	
 	if (!defined('ABSPATH')) :
 		define('DOING_AJAX', true);
-		// $root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-		$root = "../../../../../Sites/slate";
+		$root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+		// $root = "../../../../../Sites/slate";
 		
 		require_once( $root.'/wp-load.php' );
 	endif;

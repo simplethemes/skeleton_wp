@@ -31,6 +31,14 @@ If you want to use as Skeleton as a child theme, a base starting point with a fe
 * functions.php
 * options.php
 
+### Third Party Info
+* __bbPress Styles__
+	* Installing and activating bbPress will also activate an additional sidebar/widget location named 'Forum Sidebar'.
+* __Jigoshop Styles__
+	* Installing and activating Jigoshop will also activate an additional sidebar/widget location named 'Shop Sidebar'.
+	* Be sure to disable default Jigoshop styles from __Jigoshop &rarr; Settings &rarr; Disable Jigoshop frontend.css = YES__
+
+
 ##Shortcodes
 
 Skeleton has several built in shortcodes. You can see them in action on the [shortcodes demo page](http://demos.simplethemes.com/skeleton/documentation).

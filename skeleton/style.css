@@ -1832,7 +1832,8 @@ img.scale-with-grid {
 /* #Forms (see formalize.css)
 ================================================== */
 
-	label,legend { font-weight: bold;font-size: 13px; }
+	label,legend { font-weight: bold;font-size: 13px;font-weight: bold;font-size: 13px;
+	display: block;}
 	input[type="checkbox"] {display: inline; }
 
 

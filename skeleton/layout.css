@@ -1,3 +1,5 @@
+/* @override http://slate.com/wp-content/themes/skeleton/skeleton/layout.css?ver=1.3 */
+
 /* Table of Contents
 ==================================================
 	#Site Styles
@@ -84,8 +86,7 @@
 	#navigation ul {min-width: 700px;}
 	#sidebar .widget-container {margin-left: 0px;}
 	.resize {display: none;}
-	
-	
+	#respond textarea {width:auto;}	
 	}
 	
 	
@@ -138,6 +139,7 @@
 	#navigation li:hover ul.sub-menu li a {
 		display: inline-block;
 	}
+	#respond textarea {width:300px;}	
 
 
 	#sidebar .widget-container {margin-left: 0px;}

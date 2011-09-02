@@ -12,7 +12,7 @@ get_header();
 st_before_content($columns);
 ?>
 
-	<?php while ( have_posts() ) the_post(); ?>
+	<?php while ( have_posts() ) : the_post(); ?>
 
 		<div id="bbp-edit-page" class="bbp-edit-page">
 			<h1 class="entry-title"><?php the_title(); ?></h1>

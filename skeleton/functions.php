@@ -78,6 +78,8 @@ require_once (STYLESHEETPATH . '/jigoshop_functions.php');
 }
 
 
+require_once (TEMPLATEPATH . '/shortcodes.php');
+
 /* 
  * This is an example of how to add custom scripts to the options panel.
  * This one shows/hides the an option when a checkbox is clicked.
@@ -110,6 +112,8 @@ jQuery(document).ready(function() {
 // Supports the 'Better WordPress Minify' plugin to properly minimize styleshsets into one.
 // http://wordpress.org/extend/plugins/bwp-minify/
 
+if ( !function_exists( 'st_registerstyles' ) ) {
+
 add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
 	$theme  = get_theme( get_current_theme());
@@ -125,13 +129,20 @@ function st_registerstyles() {
 		echo apply_filters ('child_add_stylesheets',$stylesheets);
 }
 
+}
+
 // Build Query vars for dynamic theme option CSS from Options Framework
+
+if ( !function_exists( 'production_stylesheet' )) {
 
 function production_stylesheet($public_query_vars) {
     $public_query_vars[] = 'get_styles';
     return $public_query_vars;
 }
 add_filter('query_vars', 'production_stylesheet');
+}
+
+if ( !function_exists( 'theme_css' ) ) {
 
 add_action('template_redirect', 'theme_css');
 function theme_css(){
@@ -142,6 +153,10 @@ function theme_css(){
     }
 }
 
+}
+
+if ( !function_exists( 'st_header_scripts' ) ) {
+
 add_action('init', 'st_header_scripts');
 function st_header_scripts() {
   $javascripts  = wp_enqueue_script('jquery');
@@ -149,6 +164,8 @@ function st_header_scripts() {
 	$javascripts .= wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
 	$javascripts .= wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
 	echo apply_filters ('child_add_javascripts',$javascripts);
+}
+
 }
 
 
@@ -184,8 +201,6 @@ function skeleton_setup() {
 	}
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
-	
-	if ( ! isset( $content_width ) ) $content_width = 900;
 
 	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
 	// add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
@@ -282,7 +297,6 @@ function skeleton_setup() {
 	}
 	endif;
 
-	if ( ! function_exists( 'skeleton_admin_header_style' ) ) :
 	/**
 	 * Styles the header image displayed on the Appearance > Header admin panel.
 	 *
@@ -290,6 +304,8 @@ function skeleton_setup() {
 	 *
 	 * @since Skeleton 1.0
 	 */
+	if ( !function_exists( 'skeleton_admin_header_style' ) ) :
+
 	function skeleton_admin_header_style() {
 	?>
 	<style type="text/css">
@@ -316,21 +332,27 @@ function skeleton_setup() {
  * @since Skeleton 1.0
  * @return int
  */
+if ( !function_exists( 'skeleton_excerpt_length' ) ) {
+
 function skeleton_excerpt_length( $length ) {
 	return 40;
 }
 add_filter( 'excerpt_length', 'skeleton_excerpt_length' );
 
+}
 /**
  * Returns a "Continue Reading" link for excerpts
  *
  * @since Skeleton 1.0
  * @return string "Continue Reading" link
  */
+
+if ( !function_exists( 'skeleton_continue_reading_link' ) ) {
+
 function skeleton_continue_reading_link() {
 	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'skeleton' ) . '</a>';
 }
-
+}
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and skeleton_continue_reading_link().
  *
@@ -340,11 +362,15 @@ function skeleton_continue_reading_link() {
  * @since Skeleton 1.0
  * @return string An ellipsis
  */
+
+if ( !function_exists( 'skeleton_auto_excerpt_more' ) ) {
+
 function skeleton_auto_excerpt_more( $more ) {
 	return ' &hellip;' . skeleton_continue_reading_link();
 }
 add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
 
+}
 /**
  * Adds a pretty "Continue Reading" link to custom post excerpts.
  *
@@ -354,6 +380,8 @@ add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
  * @since Skeleton 1.0
  * @return string Excerpt with a pretty "Continue Reading" link
  */
+if ( !function_exists( 'skeleton_custom_excerpt_more' ) ) {
+
 function skeleton_custom_excerpt_more( $output ) {
 	if ( has_excerpt() && ! is_attachment() ) {
 		$output .= skeleton_continue_reading_link();
@@ -362,6 +390,7 @@ function skeleton_custom_excerpt_more( $output ) {
 }
 add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
 
+}
 /**
  * Removes inline styles printed when the gallery shortcode is used.
  *
@@ -372,7 +401,6 @@ add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
  */
 add_filter( 'use_default_gallery_style', '__return_false' );
 
-
 /**
  * Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
  *
@@ -382,6 +410,8 @@ add_filter( 'use_default_gallery_style', '__return_false' );
  * @uses register_sidebar
  */
 //
+
+if ( !function_exists( 'remove_more_jump_link' ) ) {
 
 function remove_more_jump_link($link) { 
 	$offset = strpos($link, '#more-');
@@ -395,7 +425,9 @@ function remove_more_jump_link($link) {
 	}
 	add_filter('the_content_more_link', 'remove_more_jump_link');
 
+}
 
+if ( !function_exists( 'st_widgets_init' ) ) {
 
 function st_widgets_init() {
 		// Area 1, located at the top of the sidebar.
@@ -495,6 +527,8 @@ function st_widgets_init() {
 /** Register sidebars by running skeleton_widgets_init() on the widgets_init hook. */
 add_action( 'widgets_init', 'st_widgets_init' );
 
+}
+
 /** Comment Styles */
 
 if ( ! function_exists( 'st_comments' ) ) :
@@ -584,8 +618,12 @@ function st_above_header() {
 
 // Primary Header Function
 
+if ( !function_exists( 'st_header' ) ) {
+
 function st_header() {
   do_action('st_header');
+}
+
 }
 
 
@@ -696,11 +734,8 @@ function st_navbar() {
 // Before Content - st_before_content($columns);
 // Child Theme Override: child_before_content();
 
-if (function_exists('child_before_content'))  {
-	    function st_before_content($columns) {
-	    	child_before_content();
-	    }
-	} else {
+if ( !function_exists( 'st_before_content' ) ) {
+
 	function st_before_content($columns) {
 	// 
 	// Specify the number of columns in conditional statements
@@ -747,11 +782,7 @@ if (function_exists('child_before_content'))  {
 
 // After Content
 
-if (function_exists('child_after_content'))  {
-    function st_after_content() {
-    	child_after_content();
-    }
-} else {
+if (! function_exists('st_after_content'))  {
     function st_after_content() {
     	echo "\t\t</div><!-- /.columns (#content) -->\n";
     }
@@ -805,11 +836,7 @@ add_action( 'st_after_sidebar', 'after_sidebar');
 
 // Before Footer
 
-if (function_exists('child_before_footer'))  {
-    function st_before_footer() {
-    	child_before_footer();
-    }
-} else {
+if (!function_exists('st_before_footer'))  {
     function st_before_footer() {
 			$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
 			$class = ($footerwidgets == '0' ? 'noborder' : 'normal');
@@ -817,6 +844,7 @@ if (function_exists('child_before_footer'))  {
     }
 }
 
+if ( !function_exists( 'st_above_header' ) ) {
 
 // The Footer
 add_action('wp_footer', 'st_footer');
@@ -830,14 +858,13 @@ add_action('wp_footer', 'st_footer');
 		echo '<br /><a class="themeauthor" href="http://www.simplethemes.com" title="WordPress Themes">Theme by Simple Themes</a></div>';
 }
 
+}
+
 
 // After Footer
 
-if (function_exists('child_after_footer'))  {
-    function st_after_footer() {
-    	child_after_footer();
-    }
-} else {
+if (!function_exists('st_after_footer'))  {
+	
     function st_after_footer() {
 			echo "</div><!--/#footer-->"."\n";
 			echo "</div><!--/#wrap.container-->"."\n";
@@ -849,327 +876,7 @@ if (function_exists('child_after_footer'))  {
 }
 
 
-
-// Columns
-
-// 1-3 col 
-function st_one_third( $atts, $content = null ) {
-   return '<div class="one_third">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('one_third', 'st_one_third');
-
-function st_one_third_last( $atts, $content = null ) {
-   return '<div class="one_third last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('one_third_last', 'st_one_third_last');
-
-function st_two_thirds( $atts, $content = null ) {
-   return '<div class="two_thirds">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('two_thirds', 'st_two_thirds');
-
-function st_two_thirds_last( $atts, $content = null ) {
-   return '<div class="two_thirds last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('two_thirds_last', 'st_two_thirds_last');
-
-// 1-4 col 
-
-function st_one_half( $atts, $content = null ) {
-   return '<div class="one_half">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('one_half', 'st_one_half');
-
-
-function st_one_half_last( $atts, $content = null ) {
-   return '<div class="one_half last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('one_half_last', 'st_one_half_last');
-
-
-function st_one_fourth( $atts, $content = null ) {
-   return '<div class="one_fourth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('one_fourth', 'st_one_fourth');
-
-
-function st_one_fourth_last( $atts, $content = null ) {
-   return '<div class="one_fourth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('one_fourth_last', 'st_one_fourth_last');
-
-function st_three_fourths( $atts, $content = null ) {
-   return '<div class="three_fourths">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('three_fourths', 'st_three_fourths');
-
-
-function st_three_fourths_last( $atts, $content = null ) {
-   return '<div class="three_fourths last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('three_fourths_last', 'st_three_fourths_last');
-
-
-function st_one_fifth( $atts, $content = null ) {
-   return '<div class="one_fifth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('one_fifth', 'st_one_fifth');
-
-function st_two_fifth( $atts, $content = null ) {
-   return '<div class="two_fifth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('two_fifth', 'st_two_fifth');
-
-function st_three_fifth( $atts, $content = null ) {
-   return '<div class="three_fifth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('three_fifth', 'st_three_fifth');
-
-function st_four_fifth( $atts, $content = null ) {
-   return '<div class="four_fifth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('four_fifth', 'st_four_fifth');
-
-//
-
-function st_one_fifth_last( $atts, $content = null ) {
-   return '<div class="one_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('one_fifth_last', 'st_one_fifth_last');
-
-function st_two_fifth_last( $atts, $content = null ) {
-   return '<div class="two_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('two_fifth_last', 'st_two_fifth_last');
-
-function st_three_fifth_last( $atts, $content = null ) {
-   return '<div class="three_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('three_fifth_last', 'st_three_fifth_last');
-
-function st_four_fifth_last( $atts, $content = null ) {
-   return '<div class="four_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('four_fifth_last', 'st_four_fifth_last');
-
-// 1-6 col 
-
-// one_sixth
-function st_one_sixth( $atts, $content = null ) {
-   return '<div class="one_sixth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('one_sixth', 'st_one_sixth');
-
-function st_one_sixth_last( $atts, $content = null ) {
-   return '<div class="one_sixth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('one_sixth_last', 'st_one_sixth_last');
-
-// five_sixth
-function st_five_sixth( $atts, $content = null ) {
-   return '<div class="five_sixth">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('five_sixth', 'st_five_sixth');
-
-function st_five_sixth_last( $atts, $content = null ) {
-   return '<div class="five_sixth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('five_sixth_last', 'st_five_sixth_last');
-
-
-// Callouts
-
-function st_callout( $atts, $content = null ) {
-	extract(shortcode_atts(array(
-		'width' => '',
-		'align' => ''
-    ), $atts));
-	$style;
-	if ($width || $align) {
-	 $style .= 'style="';
-	 if ($width) $style .= 'width:'.$width.'px;';
-	 if ($align == 'left' || 'right') $style .= 'float:'.$align.';';
-	 if ($align == 'center') $style .= 'margin:0px auto;';
-	 $style .= '"';
-	}
-   return '<div class="cta" '.$style.'>' . do_shortcode($content) . '</div><div class="clear"></div>';
-}
-add_shortcode('callout', 'st_callout');
-
-
-
-// Buttons
-function st_button( $atts, $content = null ) {
-	extract(shortcode_atts(array(
-		'link' => '',
-		'size' => 'medium',
-		'color' => '',
-		'target' => '_self',
-		'caption' => '',
-		'align' => 'right'
-    ), $atts));	
-	$button;
-	$button .= '<div class="button '.$size.' '. $align.'">';
-	$button .= '<a target="'.$target.'" class="button '.$color.'" href="'.$link.'">';
-	$button .= $content;
-	if ($caption != '') {
-	$button .= '<br /><span class="btn_caption">'.$caption.'</span>';
-	};
-	$button .= '</a></div>';
-	return $button;
-}
-add_shortcode('button', 'st_button');
-
-
-// Tabs
-add_shortcode( 'tabgroup', 'st_tabgroup' );
-
-function st_tabgroup( $atts, $content ){
-	
-$GLOBALS['tab_count'] = 0;
-do_shortcode( $content );
-
-if( is_array( $GLOBALS['tabs'] ) ){
-	
-foreach( $GLOBALS['tabs'] as $tab ){
-$tabs[] = '<li><a href="#'.$tab['id'].'">'.$tab['title'].'</a></li>';
-$panes[] = '<li id="'.$tab['id'].'Tab">'.$tab['content'].'</li>';
-}
-$return = "\n".'<!-- the tabs --><ul class="tabs">'.implode( "\n", $tabs ).'</ul>'."\n".'<!-- tab "panes" --><ul class="tabs-content">'.implode( "\n", $panes ).'</ul>'."\n";
-}
-return $return;
-
-}
-
-add_shortcode( 'tab', 'st_tab' );
-function st_tab( $atts, $content ){
-extract(shortcode_atts(array(
-	'title' => '%d',
-	'id' => '%d'
-), $atts));
-
-$x = $GLOBALS['tab_count'];
-$GLOBALS['tabs'][$x] = array(
-	'title' => sprintf( $title, $GLOBALS['tab_count'] ),
-	'content' =>  $content,
-	'id' =>  $id );
-
-$GLOBALS['tab_count']++;
-}
-
-
-// Toggle
-function st_toggle( $atts, $content = null ) {
-	extract(shortcode_atts(array(
-		 'title' => '',
-		 'style' => 'list'
-    ), $atts));
-	output;
-	$output .= '<div class="'.$style.'"><p class="trigger"><a href="#">' .$title. '</a></p>';
-	$output .= '<div class="toggle_container"><div class="block">';
-	$output .= do_shortcode($content);
-	$output .= '</div></div></div>';
-
-	return $output;
-	}
-add_shortcode('toggle', 'st_toggle');
-
-
-// Latest Posts
-
-function st_latest($atts, $content = null) {
-	extract(shortcode_atts(array(
-	"num" => '5',
-	"thumbs" => 'false',
-	"excerpt" => 'false',
-	"width" => '100',
-	"height" => '100',
-	"cat" => ''
-	), $atts));
-	global $post;
-	
-	$myposts = new WP_Query('cat='.$cat.'&posts_per_page='.$num.'&orderby=post_date&order=DESC');
-
-	$result='<ul class="captionlist">';
-
-	while($myposts->have_posts()) : $myposts->the_post();
-		$result.='<li class="clearfix">';
-			if (has_post_thumbnail() && $thumbs == 'true') {
-				$result.= '<img alt="'.get_the_title().'" class="alignleft" src="'.get_bloginfo('stylesheet_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
-			}
-		$result.='<a href="'.get_permalink().'">'.the_title("","",false).'</a>';
-		if ($excerpt == 'true') {
-			$result.= '<ul><li>'.get_the_excerpt().'</li></ul>';
-		}
-		$result.='</li>';
-  endwhile;
-	wp_reset_postdata();
-	$result.='</ul> ';
-	return $result;
-}
-add_shortcode("latest", "st_latest");
-// Example Use: [latest excerpt="true" thumbs="true" width="50" height="50" num="5" cat="8,10,11"]
-
-
-// Related Posts - [related_posts]
-add_shortcode('related_posts', 'st_related_posts');
-function st_related_posts( $atts ) {
-	extract(shortcode_atts(array(
-	    'limit' => '5',
-	), $atts));
-
-	global $wpdb, $post, $table_prefix;
-
-	if ($post->ID) {
-		$retval = '<div class="st_relatedposts">';
-		$retval .= '<h4>Related Posts</h4>';
-		$retval .= '<ul>';
- 		// Get tags
-		$tags = wp_get_post_tags($post->ID);
-		$tagsarray = array();
-		foreach ($tags as $tag) {
-			$tagsarray[] = $tag->term_id;
-		}
-		$tagslist = implode(',', $tagsarray);
-
-		// Do the query
-		$q = "SELECT p.*, count(tr.object_id) as count
-			FROM $wpdb->term_taxonomy AS tt, $wpdb->term_relationships AS tr, $wpdb->posts AS p WHERE tt.taxonomy ='post_tag' AND tt.term_taxonomy_id = tr.term_taxonomy_id AND tr.object_id  = p.ID AND tt.term_id IN ($tagslist) AND p.ID != $post->ID
-				AND p.post_status = 'publish'
-				AND p.post_date_gmt < NOW()
- 			GROUP BY tr.object_id
-			ORDER BY count DESC, p.post_date_gmt DESC
-			LIMIT $limit;";
-
-		$related = $wpdb->get_results($q);
- 		if ( $related ) {
-			foreach($related as $r) {
-				$retval .= '<li><a title="'.wptexturize($r->post_title).'" href="'.get_permalink($r->ID).'">'.wptexturize($r->post_title).'</a></li>';
-			}
-		} else {
-			$retval .= '
-	<li>No related posts found</li>';
-		}
-		$retval .= '</ul>';
-		$retval .= '</div>';
-		return $retval;
-	}
-	return;
-}
-
-// Break
-function st_break( $atts, $content = null ) {
-	return '<div class="clear"></div>';
-}
-add_shortcode('clear', 'st_break');
-
-
-// Line Break
-function st_linebreak( $atts, $content = null ) {
-	return '<hr /><div class="clear"></div>';
-}
-add_shortcode('clearline', 'st_linebreak');
-
+if (!function_exists('st_formatter'))  {
 
 // Editor Typography Improvements
 function st_formatter($content) {
@@ -1188,7 +895,7 @@ function st_formatter($content) {
 
 	return $new_content;
 }
-
+}
 
 remove_filter('the_content', 'wpautop');
 remove_filter('the_content', 'wptexturize');

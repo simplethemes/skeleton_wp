@@ -31,7 +31,7 @@ function optionsframework_options() {
 	// Background Defaults
 	
 	$body_background_defaults = array(
-	'color' => '#c4c4c4',
+	'color' => '#fcfcfc',
 	'image' => 'wp-content/themes/skeleton/images/border_top.png',
 	'repeat' => 'repeat-x',
 	'position' => 'top center',
@@ -43,7 +43,7 @@ function optionsframework_options() {
 	$imagepath =  get_bloginfo('template_directory') . '/images/';
 		
 	$options = array();
-		
+						
 	$options[] = array( "name" => "Style Options",
 						"type" => "heading");
 						
@@ -150,6 +150,15 @@ function optionsframework_options() {
 						"id" => "header_extra",
 						"std" => "",
 						"type" => "textarea"); 
+
+
+	if ( class_exists( 'jigoshop' ) ) {
+		$options[] = array( "name" => "Display Cart",
+							"desc" => "Jigoshop is installed. Would you like to show a mini cart here instead?",
+							"id" => "show_mini_cart",
+							"type" => "checkbox");
+	}
+
   
 	$options[] = array( "name" => "Footer Fine Print",
 						"desc" => "HTML or text to be inserted into the very bottom after the widgets.",
@@ -161,7 +170,7 @@ function optionsframework_options() {
 						"desc" => "Add custom footer scripts such as Google Analytics. Do not include the &lt;script&gt; tag. This is already done for you.",
 						"id" => "footer_scripts",
 						"std" => "",
-						"type" => "textarea"); 
-						
+						"type" => "textarea");
+		
 	return $options;
 }

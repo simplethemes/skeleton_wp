@@ -844,7 +844,7 @@ if (!function_exists('st_before_footer'))  {
     }
 }
 
-if ( !function_exists( 'st_above_header' ) ) {
+if ( !function_exists( 'st_footer' ) ) {
 
 // The Footer
 add_action('wp_footer', 'st_footer');

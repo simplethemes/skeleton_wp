@@ -897,9 +897,9 @@ function st_formatter($content) {
 }
 }
 
-remove_filter('the_content', 'wpautop');
+// remove_filter('the_content', 'wpautop');
 remove_filter('the_content', 'wptexturize');
-add_filter('the_content', 'st_formatter', 99);
+// add_filter('the_content', 'st_formatter', 99);
 add_filter('widget_text', 'st_formatter', 99);
 add_filter('the_excerpt', 'st_formatter', 99);
 add_filter('get_the_excerpt', 'st_formatter', 99);

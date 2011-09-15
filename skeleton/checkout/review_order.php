@@ -3,10 +3,16 @@
 	
 	if (!defined('ABSPATH')) :
 		define('DOING_AJAX', true);
-		$root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-		// $root = "../../../../../Sites/slate";
 		
-		require_once( $root.'/wp-load.php' );
+		
+		$wp_include = "../wp-load.php";
+		$i = 0;
+		while (!file_exists($wp_include) && $i++ < 10) {
+		  $wp_include = "../$wp_include";
+		}
+		// let's load WordPress
+		require($wp_include);
+		
 	endif;
 	
 	if (sizeof(jigoshop_cart::$cart_contents)==0) :

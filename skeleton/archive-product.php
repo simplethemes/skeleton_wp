@@ -7,8 +7,6 @@ st_before_content($columns);?>
 
 		<?php if (is_search()) : ?>		
 			<h1 class="page-title"><?php _e('Search Results:', 'jigoshop'); ?> &ldquo;<?php the_search_query(); ?>&rdquo; <?php if (get_query_var('paged')) echo ' &mdash; Page '.get_query_var('paged'); ?></h1>
-		<?php else : ?>
-			<h1 class="shop_title"><?php _e('Welcome to JigoShop!', 'jigoshop'); ?></h1>
 		<?php endif; ?>
 
 		<?php get_template_part( 'loop', 'shop' ); ?>

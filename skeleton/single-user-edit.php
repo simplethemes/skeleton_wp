@@ -7,7 +7,7 @@
  * @subpackage Theme
  */
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 do_action( 'bbp_template_notices' );
 ?>
 <div id="bbp-user-<?php bbp_current_user_id(); ?>" class="bbp-single-user">

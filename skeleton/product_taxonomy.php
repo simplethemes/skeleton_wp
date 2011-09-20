@@ -1,7 +1,7 @@
 <?php
 //php get_header('shop');
 get_header();
-st_before_content($columns);?>
+st_before_content($columns='');?>
 		
 		<?php do_action('jigoshop_before_main_content'); // <div id="container"><div id="content" role="main"> ?>
 

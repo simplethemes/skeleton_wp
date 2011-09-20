@@ -8,7 +8,7 @@
  */
 
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 ?>
 	<h1><?php _e( 'Not Found', 'skeleton' ); ?></h1>
 	<p><?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', 'skeleton' ); ?></p>

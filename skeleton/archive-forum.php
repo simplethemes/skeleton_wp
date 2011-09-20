@@ -12,7 +12,7 @@
  * @since skeleton 0.1
  */
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 do_action( 'bbp_template_notices' );
 ?>
 <a id="toggle">

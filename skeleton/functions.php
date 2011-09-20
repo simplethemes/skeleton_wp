@@ -646,11 +646,11 @@ if ( !function_exists( 'st_header_extras' ) ) {
 
 function st_header_extras() {
 	if (of_get_option('header_extra')) {
-	$extras  = "<div class=\"header_extras\">";
-	$extras .= of_get_option('header_extra');
-	$extras .= "</div>";
+		$extras  = "<div class=\"header_extras\">";
+		$extras .= of_get_option('header_extra');
+		$extras .= "</div>";
+		echo apply_filters ('child_header_extras',$extras);
 	}
-	echo apply_filters ('child_header_extras',$extras);
 }
 } // endif
 
@@ -670,7 +670,7 @@ function st_logo() {
 		$class="text"; 		
 	}
 	// echo of_get_option('header_logo')
-	$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.get_home_url( '/' ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
+	$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
 	$st_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
 	echo apply_filters ( 'child_logo' , $st_logo);
 }

@@ -8,7 +8,7 @@
  */
 
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 
 if ( have_posts() ) : ?>
 				<h1><?php printf( __( 'Search Results for: %s', 'skeleton' ), '' . get_search_query() . '' ); ?></h1>

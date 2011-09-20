@@ -7,7 +7,7 @@
  * @subpackage Theme
  */
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 do_action( 'bbp_template_notices' );
 ?>
 <?php while ( have_posts() ) : the_post(); ?>

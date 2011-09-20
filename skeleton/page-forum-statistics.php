@@ -11,7 +11,7 @@
 // @todo - remove variable references
 extract( bbp_get_statistics(), EXTR_SKIP );
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 
 do_action( 'bbp_template_notices' );
 ?>

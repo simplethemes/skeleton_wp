@@ -9,7 +9,7 @@
 
 get_header();
 
-st_before_content($columns);
+st_before_content($columns='');
 ?>
 
 	<?php while ( have_posts() ) : the_post(); ?>

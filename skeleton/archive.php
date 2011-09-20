@@ -21,7 +21,7 @@
 	 */
 	if ( have_posts() )
 		the_post();
-		st_before_content($columns);
+		st_before_content($columns='');
 ?>
 
 			<h1>

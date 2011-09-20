@@ -10,7 +10,7 @@
 // No logged in users
 bbp_logged_in_redirect();
 get_header();
-st_before_content($columns);
+st_before_content($columns='');
 
 do_action( 'bbp_template_notices' );
 // Begin Template

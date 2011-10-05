@@ -932,7 +932,40 @@ function get_image_path() {
 }
 }
 
+/*
+ * override default filter for 'textarea' sanitization.
+ */
+ 
+add_action('admin_init','optionscheck_change_santiziation', 100);
+ 
+function optionscheck_change_santiziation() {
+    remove_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
+    add_filter( 'of_sanitize_textarea', 'st_custom_sanitize_textarea' );
+}
 
+function st_custom_sanitize_textarea($input) {
+    global $allowedposttags;
+    $custom_allowedtags["embed"] = array(
+      "src" => array(),
+      "type" => array(),
+      "allowfullscreen" => array(),
+      "allowscriptaccess" => array(),
+      "height" => array(),
+          "width" => array()
+      );
+    	$custom_allowedtags["script"] = array();
+    	$custom_allowedtags["a"] = array('href' => array(),'title' => array());
+    	$custom_allowedtags["img"] = array('src' => array(),'title' => array(),'alt' => array());
+    	$custom_allowedtags["br"] = array();
+    	$custom_allowedtags["em"] = array();
+    	$custom_allowedtags["strong"] = array();
+      $custom_allowedtags = array_merge($custom_allowedtags, $allowedposttags);
+      $output = wp_kses( $input, $custom_allowedtags);
+    return $output;
+        $of_custom_allowedtags = array_merge($of_custom_allowedtags, $allowedtags);
+        $output = wp_kses( $input, $of_custom_allowedtags);
+    return $output;
+}
 
 // bbPress
 

@@ -911,6 +911,29 @@ add_filter( 'the_excerpt', 'do_shortcode');
 add_filter('get_the_excerpt', 'do_shortcode');
 
 
+if (!function_exists('get_image_path'))  {
+function get_image_path() {
+	global $post;
+	$id = get_post_thumbnail_id();
+	// check to see if NextGen Gallery is present
+	if(stripos($id,'ngg-') !== false && class_exists('nggdb')){
+	$nggImage = nggdb::find_image(str_replace('ngg-','',$id));
+	$thumbnail = array(
+	$nggImage->imageURL,
+	$nggImage->width,
+	$nggImage->height
+	);
+	// otherwise, just get the wp thumbnail
+	} else {
+	$thumbnail = wp_get_attachment_image_src($id,'full', true);
+	}
+	$theimage = $thumbnail[0];
+	return $theimage;
+}
+}
+
+
+
 // bbPress
 
 

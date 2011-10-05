@@ -246,7 +246,7 @@ function st_latest($atts, $content = null) {
 	while($myposts->have_posts()) : $myposts->the_post();
 		$result.='<li class="clearfix">';
 			if (has_post_thumbnail() && $thumbs == 'true') {
-				$result.= '<img alt="'.get_the_title().'" class="alignleft" src="'.get_bloginfo('stylesheet_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
+				$result.= '<img alt="'.get_the_title().'" class="alignleft" src="'.get_bloginfo('template_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
 			}
 		$result.='<a href="'.get_permalink().'">'.the_title("","",false).'</a>';
 		if ($excerpt == 'true') {

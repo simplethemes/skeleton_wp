@@ -89,6 +89,7 @@
 	st_below_header();
 	?>
 	<?php st_navbar(); ?>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<?php
 	// Check if this is a post or page, if it has a thumbnail, and if it exceeds defined HEADER_IMAGE_WIDTH
 	if ( is_singular() && current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) 

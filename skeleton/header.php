@@ -67,7 +67,7 @@
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon-114x114.png" />
 
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo(url).'/?get_styles=css';?>" type="text/css" media="all" />
+<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo('url') .'/?get_styles=css';?>" type="text/css" media="all" />
 
 <?php
 	/* 

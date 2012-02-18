@@ -202,7 +202,7 @@ extract(shortcode_atts(array(
 $x = $GLOBALS['tab_count'];
 $GLOBALS['tabs'][$x] = array(
 	'title' => sprintf( $title, $GLOBALS['tab_count'] ),
-	'content' =>  $content,
+	'content' =>  do_shortcode($content),
 	'id' =>  $id );
 
 $GLOBALS['tab_count']++;
@@ -226,40 +226,110 @@ function st_toggle( $atts, $content = null ) {
 add_shortcode('toggle', 'st_toggle');
 
 
+/*-----------------------------------------------------------------------------------*/
 // Latest Posts
+// Example Use: [latest excerpt="true" thumbs="true" width="50" height="50" num="5" cat="8,10,11"]
+/*-----------------------------------------------------------------------------------*/
+
 
 function st_latest($atts, $content = null) {
 	extract(shortcode_atts(array(
+	"offset" => '',
 	"num" => '5',
 	"thumbs" => 'false',
 	"excerpt" => 'false',
+	"length" => '50',
+	"morelink" => '',
 	"width" => '100',
 	"height" => '100',
-	"cat" => ''
+	"type" => 'post',
+	"parent" => '',
+	"cat" => '',
+	"orderby" => 'date',
+	"order" => 'ASC'
 	), $atts));
 	global $post;
 	
-	$myposts = new WP_Query('cat='.$cat.'&posts_per_page='.$num.'&orderby=post_date&order=DESC');
-
-	$result='<ul class="captionlist">';
+	$do_not_duplicate[] = $post->ID;
+	$args = array(
+	  'post__not_in' => $do_not_duplicate,
+		'cat' => $cat,
+		'post_type' => $type,
+		'post_parent'	=> $parent,
+		'showposts' => $num,
+		'orderby' => $orderby,
+		'offset' => $offset,
+		'order' => $order
+		);
+	// query
+	$myposts = new WP_Query($args);
+	
+	// container
+	$result='<div id="category-'.$cat.'" class="latestposts">';
 
 	while($myposts->have_posts()) : $myposts->the_post();
-		$result.='<li class="clearfix">';
-			if (has_post_thumbnail() && $thumbs == 'true') {
-				$result.= '<img alt="'.get_the_title().'" class="alignleft" src="'.get_bloginfo('template_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
-			}
-		$result.='<a href="'.get_permalink().'">'.the_title("","",false).'</a>';
+		// item
+		$result.='<div class="latest-item clearfix">';
+		// title
 		if ($excerpt == 'true') {
-			$result.= '<ul><li>'.get_the_excerpt().'</li></ul>';
+			$result.='<h4><a href="'.get_permalink().'">'.the_title("","",false).'</a></h4>';
+		} else {
+			$result.='<div class="latest-title"><a href="'.get_permalink().'">'.the_title("","",false).'</a></div>';			
 		}
-		$result.='</li>';
-  endwhile;
-	wp_reset_postdata();
-	$result.='</ul> ';
+		
+		
+		// thumbnail
+		if (has_post_thumbnail() && $thumbs == 'true') {
+			$result.= '<img alt="'.get_the_title().'" class="alignleft latest-img" src="'.get_bloginfo('template_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
+		}
+
+		// excerpt		
+		if ($excerpt == 'true') {
+			// allowed tags in excerpts
+			$allowed_tags = '<a>,<i>,<em>,<b>,<strong>,<ul>,<ol>,<li>,<blockquote>,<img>,<span>,<p>';
+		 	// filter the content
+			$text = preg_replace('/\[.*\]/', '', strip_tags(get_the_excerpt(), $allowed_tags));
+			// remove the more-link
+			$pattern = '/(<a.*?class="more-link"[^>]*>)(.*?)(<\/a>)/';
+			// display the new excerpt
+			$content = preg_replace($pattern,"", $text);
+			$result.= '<div class="latest-excerpt">'.st_limit_words($content,$length).'</div>';
+		}
+		
+		// excerpt		
+		if ($morelink) {
+			$result.= '<a class="more-link" href="'.get_permalink().'">'.$morelink.'</a>';
+		}
+		
+		// item close
+		$result.='</div>';
+  
+	endwhile;
+		wp_reset_postdata();
+	
+	// container close
+	$result.='</div>';
 	return $result;
 }
 add_shortcode("latest", "st_latest");
+
 // Example Use: [latest excerpt="true" thumbs="true" width="50" height="50" num="5" cat="8,10,11"]
+
+/*-----------------------------------------------------------------------------------*/
+// Creates an additional hook to limit the excerpt
+/*-----------------------------------------------------------------------------------*/
+
+function st_limit_words($string, $word_limit) {
+	// creates an array of words from $string (this will be our excerpt)
+	// explode divides the excerpt up by using a space character
+	$words = explode(' ', $string);
+	// this next bit chops the $words array and sticks it back together
+	// starting at the first word '0' and ending at the $word_limit
+	// the $word_limit which is passed in the function will be the number
+	// of words we want to use
+	// implode glues the chopped up array back together using a space character
+	return implode(' ', array_slice($words, 0, $word_limit));
+}
 
 
 // Related Posts - [related_posts]

@@ -7,9 +7,9 @@
  * and that other 'pages' on your wordpress site will use a
  * different template.
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 // You can override via functions.php conditionals or define:
 // $columns = 'four';

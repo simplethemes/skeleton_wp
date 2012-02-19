@@ -2,9 +2,9 @@
 /**
  * The template for displaying attachments.
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 
 get_header();

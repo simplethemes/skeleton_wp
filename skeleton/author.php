@@ -2,9 +2,9 @@
 /**
  * The template for displaying Author Archive pages.
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 
 get_header();

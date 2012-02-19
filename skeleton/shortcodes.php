@@ -1,8 +1,9 @@
 <?php
-// Columns
-
-// 1-3 col
-
+/**
+* @package Skeleton WordPress Theme Framework
+* @subpackage skeleton
+* @author Simple Themes - www.simplethemes.com
+**/
 
 function st_one_third( $atts, $content = null ) {
    return '<div class="one_third">' . do_shortcode($content) . '</div>';

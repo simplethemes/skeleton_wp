@@ -9,9 +9,9 @@
  *
  * This can be overridden in child themes with loop-single.php.
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 ?>
 

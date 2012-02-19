@@ -1,11 +1,9 @@
 <?php
 /**
- * Skeleton theme functions and definitions
+ * @package Skeleton WordPress Theme Framework
+ * @subpackage skeleton
+ * @author Simple Themes - www.simplethemes.com
  *
- * This theme is largely based on skeleton with some significant modifications
- * mainly to template files, but adds additional helper functions to the layout in general.
- * Other functions are attached to action and filter hooks in WordPress to change core functionality.
- * 
  * Layout Functions:
  * 
  * st_header  // Opening header tag and logo/header text

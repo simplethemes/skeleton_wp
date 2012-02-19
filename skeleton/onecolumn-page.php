@@ -1,6 +1,9 @@
 <?php
 /**
  * Template Name: Designer Page - No Sidebar or Page Title
+ * @package Skeleton WordPress Theme Framework
+ * @subpackage skeleton
+ * @author Simple Themes - www.simplethemes.com
 */
 
 get_header();

@@ -24,6 +24,8 @@ st_before_content($columns='');
 		</div><!-- #bbp-edit-page -->
 
 <?php
+endwhile;
+
 st_after_content();
 
 // get_sidebar('bbpress');

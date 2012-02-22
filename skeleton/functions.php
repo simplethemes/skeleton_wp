@@ -1073,7 +1073,10 @@ add_action( 'get_header', 'ajaxurl_fix');
 
 endif;
 
+
+
 if ( !function_exists( 'bbp_skeleton_topic_script_localization' ) ) :
+
 
 /**
  * Load localizations for topic script.

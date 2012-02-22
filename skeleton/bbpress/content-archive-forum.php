@@ -9,7 +9,7 @@
 
 ?>
 
-	<?php // bbp_breadcrumb(); ?>
+	<?php bbp_breadcrumb(); ?>
 
 	<?php do_action( 'bbp_template_before_forums_index' ); ?>
 

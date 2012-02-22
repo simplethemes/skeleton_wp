@@ -33,7 +33,7 @@
 
 			<div class="bbp-submit-wrapper">
 
-				<button type="submit" name="user-submit" tabindex="<?php bbp_tab_index(); ?>" class="user-submit"><?php _e( 'Register', 'bbpress' ); ?></button>
+				<button type="submit" name="user-submit" tabindex="<?php bbp_tab_index(); ?>" class="button submit user-submit"><?php _e( 'Register', 'bbpress' ); ?></button>
 
 				<?php bbp_user_register_fields(); ?>
 

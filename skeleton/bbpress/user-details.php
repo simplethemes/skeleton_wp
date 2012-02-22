@@ -24,7 +24,7 @@
 	<div id="entry-author-info">
 		<div id="author-avatar">
 
-			<?php echo get_avatar( bbp_get_displayed_user_field( 'user_email' ), apply_filters( 'skeleton_author_bio_avatar_size', 60 ) ); ?>
+			<?php echo get_avatar( bbp_get_displayed_user_field( 'user_email' ), apply_filters( 'twentyten_author_bio_avatar_size', 60 ) ); ?>
 
 		</div><!-- #author-avatar -->
 		<div id="author-description">

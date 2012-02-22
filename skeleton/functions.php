@@ -1063,6 +1063,14 @@ function bbp_skeleton_scripts () {
 	endif;
 	}
 add_filter( 'bbp_head', 'bbp_skeleton_scripts', -1 );
+
+function ajaxurl_fix () {
+?>
+<script> var ajaxurl = '<?php echo site_url('wp-load.php'); ?>';</script>
+<?php
+}
+add_action( 'get_header', 'ajaxurl_fix');
+
 endif;
 
 if ( !function_exists( 'bbp_skeleton_topic_script_localization' ) ) :

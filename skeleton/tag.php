@@ -8,7 +8,7 @@
  */
 
 get_header();
-do_action('st_before_content');
+st_before_content($columns='');
 
 ?>
 <h1><?php printf( __( 'Tag Archives: %s', 'skeleton' ), '<span class="bolder">' . single_tag_title( '', false ) . '</span>' );?></h1>

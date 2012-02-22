@@ -166,6 +166,24 @@ function st_header_scripts() {
 
 }
 
+// Instead of remove_filter('the_content', 'wpautop');
+// The function below removes wp_autop from specified pages with a custom field:
+// Name: wpautop Value: false
+
+function st_remove_wpautop($content) {
+    global $post;
+    // Get the keys and values of the custom fields:
+    $rmwpautop = get_post_meta($post->ID, 'wpautop', true);
+    // Remove the filter
+    remove_filter('the_content', 'wpautop');
+    if ('false' === $rmwpautop) {
+    } else {
+    add_filter('the_content', 'wpautop');
+    }
+    return $content;
+}
+// Hook into the Plugin API
+add_filter('the_content', 'st_remove_wpautop', 9);
 
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
@@ -873,34 +891,6 @@ if (!function_exists('st_after_footer'))  {
     }
 }
 
-
-if (!function_exists('st_formatter'))  {
-
-// Editor Typography Improvements
-function st_formatter($content) {
-	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
-	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
-	$pieces = preg_split($pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-	foreach ($pieces as $piece) {
-		if (preg_match($pattern_contents, $piece, $matches)) {
-			$new_content .= $matches[1];
-		} else {
-			$new_content .= wptexturize(wpautop($piece));
-		}
-	}
-
-	return $new_content;
-}
-}
-
-// remove_filter('the_content', 'wpautop');
-remove_filter('the_content', 'wptexturize');
-// add_filter('the_content', 'st_formatter', 99);
-add_filter('widget_text', 'st_formatter', 99);
-add_filter('the_excerpt', 'st_formatter', 99);
-add_filter('get_the_excerpt', 'st_formatter', 99);
 
 
 // Enable Shortcodes in excerpts and widgets

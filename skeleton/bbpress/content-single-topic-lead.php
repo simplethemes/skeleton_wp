@@ -51,7 +51,7 @@
 
 				<td class="bbp-topic-author">
 
-					<?php bbp_topic_author_link(); ?>
+					<?php bbp_topic_author_link( array( 'sep' => '<br />' ) ); ?>
 
 					<?php if ( is_super_admin() ) : ?>
 

@@ -28,6 +28,9 @@
 		<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
 
 			<form id="new-post" name="new-post" method="post" action="">
+
+				<?php do_action( 'bbp_theme_before_topic_form' ); ?>
+
 				<fieldset class="bbp-form">
 					<legend>
 
@@ -39,6 +42,8 @@
 						?>
 
 					</legend>
+
+					<?php do_action( 'bbp_theme_before_topic_form_notices' ); ?>
 
 					<?php if ( !bbp_is_topic_edit() && bbp_is_forum_closed() ) : ?>
 
@@ -59,21 +64,26 @@
 					<?php do_action( 'bbp_template_notices' ); ?>
 
 					<div>
-						<div class="author-avatar">
-							<?php bbp_is_topic_edit() ? bbp_reply_author_avatar( bbp_get_reply_id(), 64 ) : bbp_current_user_avatar( 64 ); ?>
-						</div>
 
 						<?php bbp_get_template_part( 'bbpress/form', 'anonymous' ); ?>
+
+						<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 
 						<p>
 							<label for="bbp_topic_title"><?php printf( __( 'Topic Title (Maximum Length: %d):', 'bbpress' ), bbp_get_title_max_length() ); ?></label><br />
 							<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 						</p>
 
+						<?php do_action( 'bbp_theme_after_topic_form_title' ); ?>
+
+						<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
+
 						<p>
 							<label for="bbp_topic_content"><?php _e( 'Topic Description:', 'bbpress' ); ?></label><br />
-							<textarea id="bbp_topic_content" tabindex="<?php bbp_tab_index(); ?>" name="bbp_topic_content" cols="51" rows="6"><?php bbp_form_topic_content(); ?></textarea>
+							<textarea id="bbp_topic_content" tabindex="<?php bbp_tab_index(); ?>" name="bbp_topic_content" cols="60" rows="6"><?php bbp_form_topic_content(); ?></textarea>
 						</p>
+
+						<?php do_action( 'bbp_theme_after_topic_form_content' ); ?>
 
 						<?php if ( !current_user_can( 'unfiltered_html' ) ) : ?>
 
@@ -84,21 +94,31 @@
 
 						<?php endif; ?>
 
+						<?php do_action( 'bbp_theme_before_topic_form_tags' ); ?>
+
 						<p>
 							<label for="bbp_topic_tags"><?php _e( 'Topic Tags:', 'bbpress' ); ?></label><br />
-							<input type="text" value="<?php bbp_form_topic_tags(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" />
+							<input type="text" value="<?php bbp_form_topic_tags(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" <?php disabled( bbp_is_topic_spam() ); ?> />
 						</p>
 
+						<?php do_action( 'bbp_theme_after_topic_form_tags' ); ?>
+
 						<?php if ( !bbp_is_single_forum() ) : ?>
+
+							<?php do_action( 'bbp_theme_before_topic_form_forum' ); ?>
 
 							<p>
 								<label for="bbp_forum_id"><?php _e( 'Forum:', 'bbpress' ); ?></label><br />
 								<?php bbp_dropdown( array( 'selected' => bbp_get_form_topic_forum() ) ); ?>
 							</p>
 
+							<?php do_action( 'bbp_theme_after_topic_form_forum' ); ?>
+
 						<?php endif; ?>
 
 						<?php if ( current_user_can( 'moderate' ) ) : ?>
+
+							<?php do_action( 'bbp_theme_before_topic_form_type' ); ?>
 
 							<p>
 
@@ -108,9 +128,13 @@
 
 							</p>
 
+							<?php do_action( 'bbp_theme_after_topic_form_type' ); ?>
+
 						<?php endif; ?>
 
 						<?php if ( bbp_is_subscriptions_active() && !bbp_is_anonymous() && ( !bbp_is_topic_edit() || ( bbp_is_topic_edit() && !bbp_is_topic_anonymous() ) ) ) : ?>
+
+							<?php do_action( 'bbp_theme_before_topic_form_subscriptions' ); ?>
 
 							<p>
 								<input name="bbp_topic_subscription" id="bbp_topic_subscription" type="checkbox" value="bbp_subscribe" <?php bbp_form_topic_subscribed(); ?> tabindex="<?php bbp_tab_index(); ?>" />
@@ -126,9 +150,13 @@
 								<?php endif; ?>
 							</p>
 
+							<?php do_action( 'bbp_theme_after_topic_form_subscriptions' ); ?>
+
 						<?php endif; ?>
 
-						<?php if ( bbp_is_topic_edit() ) : ?>
+						<?php if ( bbp_allow_revisions() && bbp_is_topic_edit() ) : ?>
+
+							<?php do_action( 'bbp_theme_before_topic_form_revisions' ); ?>
 
 							<fieldset class="bbp-form">
 								<legend><?php _e( 'Revision', 'bbpress' ); ?></legend>
@@ -143,16 +171,32 @@
 								</div>
 							</fieldset>
 
+							<?php do_action( 'bbp_theme_after_topic_form_revisions' ); ?>
+
 						<?php endif; ?>
 
+						<?php do_action( 'bbp_theme_before_topic_form_submit_wrapper' ); ?>
+
 						<div class="bbp-submit-wrapper">
-							<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
+
+							<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
+
+							<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
+
+							<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
+
 						</div>
+
+						<?php do_action( 'bbp_theme_after_topic_form_submit_wrapper' ); ?>
+
 					</div>
 
 					<?php bbp_topic_form_fields(); ?>
 
 				</fieldset>
+
+				<?php do_action( 'bbp_theme_after_topic_form' ); ?>
+
 			</form>
 		</div>
 

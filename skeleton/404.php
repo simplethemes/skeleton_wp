@@ -1,10 +1,13 @@
 <?php
 /**
+* Skeleton WordPress Theme Framework
+* Author: Simple Themes
+* URL: www.simplethemes.com
  * The template for displaying 404 pages (Not Found).
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 
 get_header();

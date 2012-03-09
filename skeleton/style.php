@@ -1,6 +1,13 @@
 <?php
 if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
 
+/**
+* @package Skeleton WordPress Theme Framework
+* @subpackage skeleton
+* @author Simple Themes - www.simplethemes.com
+**/
+
+
 header("Content-type: text/css; charset: UTF-8");
 header("Cache-Control: must-revalidate");
 $offset = 60 * 60 ;

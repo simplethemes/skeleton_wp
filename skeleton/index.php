@@ -8,9 +8,9 @@
  * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 get_header();
 st_before_content($columns='');

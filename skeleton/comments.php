@@ -1,8 +1,9 @@
 <?php
 /**
- * @package WordPress
- * @subpackage Default_Theme
- */
+* @package Skeleton WordPress Theme Framework
+* @subpackage skeleton
+* @author Simple Themes - www.simplethemes.com
+*/
 
 // Do not delete these lines
 	if (!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME']))

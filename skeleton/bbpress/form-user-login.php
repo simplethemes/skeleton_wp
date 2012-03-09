@@ -13,15 +13,15 @@
 		<fieldset class="bbp-form">
 			<legend><?php _e( 'Log In', 'bbpress' ); ?></legend>
 
-			<p class="bbp-username">
+			<div class="bbp-username">
 				<label for="user_login"><?php _e( 'Username', 'bbpress' ); ?>: </label>
 				<input type="text" name="log" value="<?php bbp_sanitize_val( 'user_login', 'text' ); ?>" size="20" id="user_login" tabindex="<?php bbp_tab_index(); ?>" />
-			</p>
+			</div>
 
-			<p class="bbp-password">
+			<div class="bbp-password">
 				<label for="user_pass"><?php _e( 'Password', 'bbpress' ); ?>: </label>
 				<input type="password" name="pwd" value="<?php bbp_sanitize_val( 'user_pass', 'password' ); ?>" size="20" id="user_pass" tabindex="<?php bbp_tab_index(); ?>" />
-			</p>
+			</div>
 
 			<div class="bbp-remember-me">
 				<input type="checkbox" name="rememberme" value="forever" <?php checked( bbp_get_sanitize_val( 'rememberme', 'checkbox' ) ); ?> id="rememberme" tabindex="<?php bbp_tab_index(); ?>" />

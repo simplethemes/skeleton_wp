@@ -4,9 +4,9 @@
  *
  * Displays all of the <head> section and everything up till <div id="main">
  *
- * @package WordPress
+ * @package Skeleton WordPress Theme Framework
  * @subpackage skeleton
- * @since skeleton 0.1
+ * @author Simple Themes - www.simplethemes.com
  */
 ?>
 <!doctype html>
@@ -58,16 +58,16 @@
 <!-- Favicons
 ================================================== -->
 
-<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico">
+<link rel="shortcut icon" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/favicon.ico">
 
-<link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon.png">
 
-<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon-72x72.png" />
 
-<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon-114x114.png" />
 
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="stylesheet" id="custom" href="<?php echo home_url() .'/?get_styles=css';?>" type="text/css" media="all" />
+<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo('url').'/?get_styles=css';?>" type="text/css" media="all" />
 
 <?php
 	/* 
@@ -89,7 +89,6 @@
 	st_below_header();
 	?>
 	<?php st_navbar(); ?>
-	<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<?php
 	// Check if this is a post or page, if it has a thumbnail, and if it exceeds defined HEADER_IMAGE_WIDTH
 	if ( is_singular() && current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) 

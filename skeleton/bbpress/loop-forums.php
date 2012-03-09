@@ -30,32 +30,7 @@
 
 			<?php while ( bbp_forums() ) : bbp_the_forum(); ?>
 
-				<tr id="bbp-forum-<?php bbp_forum_id(); ?>" <?php bbp_forum_class(); ?>>
-
-					<td class="bbp-forum-info">
-						<a class="bbp-forum-title" href="<?php bbp_forum_permalink(); ?>" title="<?php bbp_forum_title(); ?>"><?php bbp_forum_title(); ?></a>
-
-						<?php bbp_list_forums(); ?>
-
-						<div class="bbp-forum-description"><?php the_content(); ?></div>
-					</td>
-
-					<td class="bbp-forum-topic-count"><?php bbp_forum_topic_count(); ?></td>
-
-					<td class="bbp-forum-reply-count"><?php bbp_show_lead_topic() ? bbp_forum_reply_count() : bbp_forum_post_count(); ?></td>
-
-					<td class="bbp-forum-freshness">
-
-						<?php bbp_forum_freshness_link(); ?>
-
-						<p class="bbp-topic-meta">
-
-							<span class="bbp-topic-freshness-author"><?php bbp_author_link( array( 'post_id' => bbp_get_forum_last_active_id(), 'size' => 14 ) ); ?></span>
-
-						</p>
-					</td>
-
-				</tr><!-- bbp-forum-<?php bbp_forum_id(); ?> -->
+				<?php bbp_get_template_part( 'bbpress/loop', 'single-forum' ); ?>
 
 			<?php endwhile; ?>
 

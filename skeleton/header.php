@@ -58,16 +58,16 @@
 <!-- Favicons
 ================================================== -->
 
-<link rel="shortcut icon" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/favicon.ico">
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico">
 
-<link rel="apple-touch-icon" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon.png">
 
-<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon-72x72.png" />
 
-<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_bloginfo('stylesheet_directory');?>/images/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon-114x114.png" />
 
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="stylesheet" id="custom" href="<?php echo get_bloginfo('url').'/?get_styles=css';?>" type="text/css" media="all" />
+<link rel="pingback" href="<?php echo get_option('siteurl') .'/xmlrpc.php';?>" />
+<link rel="stylesheet" id="custom" href="<?php echo home_url() .'/?get_styles=css';?>" type="text/css" media="all" />
 
 <?php
 	/* 

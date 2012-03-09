@@ -405,7 +405,7 @@ a.themeauthor {
 	-moz-box-shadow:1px 1px 6px #ddd;
 	box-shadow:1px 1px 6px #ddd;
 	position: relative;
-	behavior: url('../wp-content/themes/presstige/css/PIE.php');
+	behavior: url('../wp-content/themes/skeleton/css/PIE.php');
 }
 
 .wp-caption img {
@@ -1842,12 +1842,10 @@ img.scale-with-grid {
 /* #Forms (see formalize.css)
 ================================================== */
 
-	label,legend { font-weight: bold;font-size: 13px;font-weight: bold;font-size: 13px;
-	display: block;}
 
 	label,legend {
 	font-weight: bold;font-size: 13px;
-	display: block;
+	display: inline-block;
 	}
 	
 	input[type="checkbox"] {display: inline; }

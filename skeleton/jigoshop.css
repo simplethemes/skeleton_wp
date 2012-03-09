@@ -444,15 +444,6 @@ p.buttons a.button:hover {
 }
 
 .button-alt {
-  color: #fff !important;
-  padding: 4px 16px;
-  width: auto !important;
-  text-decoration: none;
-  cursor: pointer;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  line-height: 1.6em;
   position: relative;
   top: -1px;
 }
@@ -552,7 +543,6 @@ p.buttons a.button:hover {
 
 }
 #review_form label {
-	display: inline;
 }
 
 #review_form #respond p {
@@ -802,7 +792,7 @@ td.quantity {
 }
 .cart-collaterals .cart_totals {
   float: right;
-  width: 225px;
+  width: 100%;
   text-align: right;
   
 }
@@ -943,6 +933,7 @@ form.login {
 #payment #place_order {
   float: right;
   margin: 0;
+  font-size: 18px;
 }
 #payment .terms {
   padding: 0 1em 0 !important;

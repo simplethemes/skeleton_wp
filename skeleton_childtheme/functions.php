@@ -66,19 +66,26 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-define('OPTIONS_FRAMEWORK_URL', TEMPLATEPATH . '/admin/');
-define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
+define( 'PARENT_DIR', get_template_directory() );
+define( 'CHILD_DIR', get_stylesheet_directory() );
+
+define( 'PARENT_URL', get_template_directory_uri() );
+define( 'CHILD_URL', get_stylesheet_directory_uri() );
+
+define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
+define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_URL . '/admin/');
+
 
 require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
 
 }
 
 if ( class_exists( 'jigoshop' ) ) {
-require_once (STYLESHEETPATH . '/jigoshop_functions.php');
+require_once (PARENT_URL . '/jigoshop_functions.php');
 }
 
 
-require_once (TEMPLATEPATH . '/shortcodes.php');
+require_once (PARENT_DIR . '/shortcodes.php');
 
 /* 
  * This is an example of how to add custom scripts to the options panel.
@@ -148,7 +155,7 @@ add_action('template_redirect', 'theme_css');
 function theme_css(){
     $css = get_query_var('get_styles');
     if ($css == 'css'){
-        include_once (TEMPLATEPATH . '/style.php');
+        include_once (PARENT_DIR . '/style.php');
         exit;  //This stops WP from loading any further
     }
 }
@@ -218,10 +225,10 @@ function skeleton_setup() {
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'skeleton', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'skeleton', PARENT_DIR . '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = PARENT_DIR . "/languages/$locale.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 

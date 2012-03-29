@@ -62,7 +62,7 @@ if ($typography) {
 // Custom Background
 		if ($body_background) {
 				if ($body_background['image']) {
-				echo 'background:'.$body_background[color].' url('.$body_background['image'].') '.$body_background['repeat'].' '.$body_background['position'].' '.$body_background['scroll'].'';
+				echo 'background:'.$body_background['color'].' url('.$body_background['image'].') '.$body_background['repeat'].' '.$body_background['position'].' '.$body_background['scroll'].'';
 				} elseif ($body_background['color']) {
 				echo 'background-color:'.$body_background['color'].';';
 				}

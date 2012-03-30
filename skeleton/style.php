@@ -39,32 +39,32 @@ $typography = of_get_option('body_typography');
 // Main Body Styles
 echo 'body {';
 if ($typography) {
-	if ($typography[face] == "helvetica") {
+	if ($typography['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($typography[face] == "arial") {
+	} elseif ($typography['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($typography[face] == "georgia") {
+	} elseif ($typography['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($typography[face] == "cambria") {
+	} elseif ($typography['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($typography[face] == "tahoma") {
+	} elseif ($typography['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($typography[face] == "palatino") {
+	} elseif ($typography['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$typography[color].';';
-		echo 'font-size:'.$typography[size].';';
+		echo 'color:'.$typography['color'].';';
+		echo 'font-size:'.$typography['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$typography[style].';';
-		echo 'font-style:'.$typography[style].';';
+		echo 'font-weight:'.$typography['style'].';';
+		echo 'font-style:'.$typography['style'].';';
 	}
 	
 // Custom Background
 		if ($body_background) {
 				if ($body_background['image']) {
-				echo 'background:'.$body_background[color].' url('.$body_background[image].') '.$body_background[repeat].' '.$body_background[position].' '.$body_background[scroll].'';
+				echo 'background:'.$body_background['color'].' url('.$body_background['image'].') '.$body_background['repeat'].' '.$body_background['position'].' '.$body_background['attachment'].'';
 				} elseif ($body_background['color']) {
-				echo 'background-color:'.$body_background[color].';';
+				echo 'background-color:'.$body_background['color'].';';
 				}
 			}
 // End Body Styles
@@ -75,24 +75,24 @@ $h1 = of_get_option('h1_typography');
 
 echo 'h1 {';
 if ($h1) {
-	if ($h1[face] == "helvetica") {
+	if ($h1['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($h1[face] == "arial") {
+	} elseif ($h1['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($h1[face] == "georgia") {
+	} elseif ($h1['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($h1[face] == "cambria") {
+	} elseif ($h1['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($h1[face] == "tahoma") {
+	} elseif ($h1['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($h1[face] == "palatino") {
+	} elseif ($h1['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$h1[color].';';
-		echo 'font-size:'.$h1[size].';';
+		echo 'color:'.$h1['color'].';';
+		echo 'font-size:'.$h1['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$h1[style].';';
-		echo 'font-style:'.$h1[style].';';
+		echo 'font-weight:'.$h1['style'].';';
+		echo 'font-style:'.$h1['style'].';';
 	}
 	echo '}';
 	
@@ -101,24 +101,24 @@ $h2 = of_get_option('h2_typography');
 
 echo 'h2 {';
 if ($h2) {
-	if ($h2[face] == "helvetica") {
+	if ($h2['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($h2[face] == "arial") {
+	} elseif ($h2['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($h2[face] == "georgia") {
+	} elseif ($h2['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($h2[face] == "cambria") {
+	} elseif ($h2['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($h2[face] == "tahoma") {
+	} elseif ($h2['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($h2[face] == "palatino") {
+	} elseif ($h2['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$h2[color].';';
-		echo 'font-size:'.$h2[size].';';
+		echo 'color:'.$h2['color'].';';
+		echo 'font-size:'.$h2['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$h2[style].';';
-		echo 'font-style:'.$h2[style].';';
+		echo 'font-weight:'.$h2['style'].';';
+		echo 'font-style:'.$h2['style'].';';
 	}
 	echo '}';
 
@@ -127,24 +127,24 @@ $h3 = of_get_option('h3_typography');
 
 echo 'h3 {';
 if ($h3) {
-	if ($h3[face] == "helvetica") {
+	if ($h3['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($h3[face] == "arial") {
+	} elseif ($h3['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($h3[face] == "georgia") {
+	} elseif ($h3['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($h3[face] == "cambria") {
+	} elseif ($h3['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($h3[face] == "tahoma") {
+	} elseif ($h3['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($h3[face] == "palatino") {
+	} elseif ($h3['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$h3[color].';';
-		echo 'font-size:'.$h3[size].';';
+		echo 'color:'.$h3['color'].';';
+		echo 'font-size:'.$h3['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$h3[style].';';
-		echo 'font-style:'.$h3[style].';';
+		echo 'font-weight:'.$h3['style'].';';
+		echo 'font-style:'.$h3['style'].';';
 	}
 	echo '}';
 	
@@ -153,24 +153,24 @@ $h4 = of_get_option('h4_typography');
 
 echo 'h4 {';
 if ($h4) {
-	if ($h4[face] == "helvetica") {
+	if ($h4['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($h4[face] == "arial") {
+	} elseif ($h4['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($h4[face] == "georgia") {
+	} elseif ($h4['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($h4[face] == "cambria") {
+	} elseif ($h4['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($h4[face] == "tahoma") {
+	} elseif ($h4['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($h4[face] == "palatino") {
+	} elseif ($h4['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$h4[color].';';
-		echo 'font-size:'.$h4[size].';';
+		echo 'color:'.$h4['color'].';';
+		echo 'font-size:'.$h4['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$h4[style].';';
-		echo 'font-style:'.$h4[style].';';
+		echo 'font-weight:'.$h4['style'].';';
+		echo 'font-style:'.$h4['style'].';';
 	}
 	echo '}';
 
@@ -179,24 +179,24 @@ $h5 = of_get_option('h5_typography');
 
 echo 'h5 {';
 if ($h5) {
-	if ($h5[face] == "helvetica") {
+	if ($h5['face'] == "helvetica") {
 		$fontstack = $helvetica;
-	} elseif ($h5[face] == "arial") {
+	} elseif ($h5['face'] == "arial") {
 		$fontstack = $arial;
-	} elseif ($h5[face] == "georgia") {
+	} elseif ($h5['face'] == "georgia") {
 		$fontstack = $georgia;
-	} elseif ($h5[face] == "cambria") {
+	} elseif ($h5['face'] == "cambria") {
 		$fontstack = $cambria;
-	} elseif ($h5[face] == "tahoma") {
+	} elseif ($h5['face'] == "tahoma") {
 		$fontstack = $tahoma;
-	} elseif ($h5[face] == "palatino") {
+	} elseif ($h5['face'] == "palatino") {
 		$fontstack = $palatino;
 	}
-		echo 'color:'.$h5[color].';';
-		echo 'font-size:'.$h5[size].';';
+		echo 'color:'.$h5['color'].';';
+		echo 'font-size:'.$h5['size'].';';
 		echo 'font-family:'.$fontstack.';';
-		echo 'font-weight:'.$h5[style].';';
-		echo 'font-style:'.$h5[style].';';
+		echo 'font-weight:'.$h5['style'].';';
+		echo 'font-style:'.$h5['style'].';';
 	}
 	echo '}';
 ?>

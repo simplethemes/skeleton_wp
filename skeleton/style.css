@@ -795,6 +795,57 @@ a.more-link {
 	line-height: 14px;
 }
 
+
+
+/* @group Default (Blue)  */
+a.button {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #597db1), color-stop(100%, #3a6198));
+  background-image: -webkit-linear-gradient(#597db1, #3a6198);
+  background-image: -moz-linear-gradient(#597db1, #3a6198);
+  background-image: -o-linear-gradient(#597db1, #3a6198);
+  -pie-background: linear-gradient(#597db1, #3a6198);
+  border: 1px solid #3b639b;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+  -moz-box-shadow: inset 0 1px 0 0 #7d99bf;
+  -webkit-box-shadow: inset 0 1px 0 0 #7d99bf;
+  -o-box-shadow: inset 0 1px 0 0 #7d99bf;
+  box-shadow: inset 0 1px 0 0 #7d99bf;
+  color: white;
+  text-shadow: 0 1px 0 #2a4f83;
+  behavior: url("./wp-content/themes/skeleton/PIE.php");
+  position: relative;
+}
+a.button:hover {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #365a8c), color-stop(100%, #51719e));
+  background-image: -webkit-linear-gradient(#365a8c, #51719e);
+  background-image: -moz-linear-gradient(#365a8c, #51719e);
+  background-image: -o-linear-gradient(#365a8c, #51719e);
+  -pie-background: linear-gradient(#365a8c, #51719e);
+  -moz-box-shadow: inset 0 1px 0 0 #728cb1;
+  -webkit-box-shadow: inset 0 1px 0 0 #728cb1;
+  -o-box-shadow: inset 0 1px 0 0 #728cb1;
+  box-shadow: inset 0 1px 0 0 #728cb1;
+  cursor: pointer;
+}
+a.button:active {
+  -moz-box-shadow: inset 0 0 8px 4px #335380, inset 0 0 8px 4px #335380, 0 1px 1px 0 #eeeeee;
+  -webkit-box-shadow: inset 0 0 8px 4px #335380, inset 0 0 8px 4px #335380, 0 1px 1px 0 #eeeeee;
+  -o-box-shadow: inset 0 0 8px 4px #335380, inset 0 0 8px 4px #335380, 0 1px 1px 0 #eeeeee;
+  box-shadow: inset 0 0 8px 4px #335380, inset 0 0 8px 4px #335380, 0 1px 1px 0 #eeeeee;
+  border: 1px solid #355a8d;
+}
+a.button span.btn_caption {
+  color: #9ab5da;
+  text-shadow: 0 1px 0 #2a4f83;
+}
+
+/* @end */
+
 /* @group White  */
 a.button.white {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));

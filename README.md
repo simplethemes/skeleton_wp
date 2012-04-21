@@ -6,6 +6,14 @@
 
 **bbPress Demo**: [http://demos.simplethemes.com/skeleton/forums](http://demos.simplethemes.com/skeleton/forums "bbPress Theme Demo")
 
+**There are three branches available for this theme.**
+
+* **[standalone](https://github.com/simplethemes/skeleton_wp/tree/standalone):** Just the basic WordPress theme.
+* **[master](https://github.com/simplethemes/skeleton_wp):** Includes Jigoshop and bbPress styles
+* **[buddypress](https://github.com/simplethemes/skeleton_wp/tree/buddypress):** Basic starting point for use with BuddyPress (unsupported).
+
+
+
 Skeleton, created by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
 It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 buttons, and layout columns.
 It also includes a bbPress skin/stylesheet and sample child theme.

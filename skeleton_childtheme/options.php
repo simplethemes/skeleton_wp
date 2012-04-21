@@ -151,14 +151,6 @@ function optionsframework_options() {
 						"std" => "",
 						"type" => "textarea"); 
 
-
-	if ( class_exists( 'jigoshop' ) ) {
-		$options[] = array( "name" => __("Display Cart", "skeleton"),
-							"desc" => __("Jigoshop is installed. Would you like to show a mini cart here instead?", "skeleton"),
-							"id" => "show_mini_cart",
-							"type" => "checkbox");
-	}
-
   
 	$options[] = array( "name" => __("Footer Fine Print", "skeleton"),
 						"desc" => __("HTML or text to be inserted into the very bottom after the widgets.", "skeleton"),

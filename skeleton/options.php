@@ -34,7 +34,7 @@ function optionsframework_options() {
 	
 	$body_background_defaults = array(
 	'color' => '#fcfcfc',
-	'image' => 'wp-content/themes/skeleton/images/border_top.png',
+	'image' => site_url('wp-content/themes/skeleton/images/border_top.png'),
 	'repeat' => 'repeat-x',
 	'position' => 'top center',
 	'attachment'=>'fixed');

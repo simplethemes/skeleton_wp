@@ -334,8 +334,8 @@ function st_limit_words($string, $word_limit) {
 
 
 // Related Posts - [related_posts]
-add_shortcode('related_posts', 'st_related_posts');
-function st_related_posts( $atts ) {
+add_shortcode('related_posts', 'skeleton_related_posts');
+function skeleton_related_posts( $atts ) {
 	extract(shortcode_atts(array(
 	    'limit' => '5',
 	), $atts));

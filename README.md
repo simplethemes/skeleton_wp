@@ -1,4 +1,3 @@
-
 #Skeleton WordPress Theme
 
 ##About
@@ -25,7 +24,7 @@ This repository contains multiple items. To install this theme, download and **e
 
 You can configure its options from Appearance &rarr; Theme Options.
 
-If you want to use as Skeleton as a child theme, a base starting point with a few modifications as an example is included in the 'skeleton_childtheme' folder. To crate your own, you should start with three files:
+If you want to use as Skeleton as a child theme, a base starting point with a few modifications as an example is included in the 'skeleton_childtheme' folder. To create your own, you should start with three files:
 
 * style.css
 * functions.php

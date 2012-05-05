@@ -28,21 +28,18 @@ function optionsframework_option_name() {
  *  
  */
 
-function optionsframework_options() {
-	
-	// Background Defaults
-	
-	$body_background_defaults = array(
-	'color' => '#fcfcfc',
-	'image' => site_url('wp-content/themes/skeleton/images/border_top.png'),
-	'repeat' => 'repeat-x',
-	'position' => 'top center',
-	'attachment'=>'fixed');
-	
-	
+function optionsframework_options() {	
 		
 	// If using image radio buttons, define a directory path
 	$imagepath =  get_bloginfo('template_directory') . '/images/';
+
+	// Background Defaults	
+	$body_background_defaults = array(
+	'color' => '#fcfcfc',
+	'image' => $imagepath.'border_top.png',
+	'repeat' => 'repeat-x',
+	'position' => 'top center',
+	'attachment'=>'fixed');
 		
 	$options = array();
 						

@@ -59,11 +59,11 @@
 /* Set Proper Parent/Child theme paths for inclusion
 /*-----------------------------------------------------------------------------------*/
 
-define( 'PARENT_DIR', get_template_directory() );
-define( 'CHILD_DIR', get_stylesheet_directory() );
+@define( 'PARENT_DIR', get_template_directory() );
+@define( 'CHILD_DIR', get_stylesheet_directory() );
 
-define( 'PARENT_URL', get_template_directory_uri() );
-define( 'CHILD_URL', get_stylesheet_directory_uri() );
+@define( 'PARENT_URL', get_template_directory_uri() );
+@define( 'CHILD_URL', get_stylesheet_directory_uri() );
 
 
 
@@ -74,9 +74,11 @@ define( 'CHILD_URL', get_stylesheet_directory_uri() );
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
-define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
+    define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
+    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_URL . '/admin/');
+
 require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
+
 }
 
 if ( class_exists( 'jigoshop' ) ) {

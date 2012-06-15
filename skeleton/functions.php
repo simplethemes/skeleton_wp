@@ -64,6 +64,7 @@
 @define( 'CHILD_URL', get_stylesheet_directory_uri() );
 
 
+
 /*-----------------------------------------------------------------------------------*/
 /* Initialize the Options Framework
 /* http://wptheming.com/options-framework-theme/
@@ -71,10 +72,10 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-    define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
-    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_URL . '/admin/');
+    define('OPTIONS_FRAMEWORK_URL', PARENT_URL . '/admin/');
+    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_DIR . '/admin/');
 
-require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
+require_once (OPTIONS_FRAMEWORK_DIRECTORY . 'options-framework.php');
 
 }
 

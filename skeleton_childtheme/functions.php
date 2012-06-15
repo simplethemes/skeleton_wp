@@ -74,10 +74,13 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
-define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
-require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
+    define('OPTIONS_FRAMEWORK_URL', PARENT_URL . '/admin/');
+    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_DIR . '/admin/');
+
+require_once (OPTIONS_FRAMEWORK_DIRECTORY . 'options-framework.php');
+
 }
+
 
 
 require_once (PARENT_DIR . '/shortcodes.php');

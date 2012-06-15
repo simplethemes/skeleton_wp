@@ -246,6 +246,7 @@ function skeleton_setup() {
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
 	load_theme_textdomain( 'skeleton', PARENT_DIR . '/languages' );
+	load_theme_textdomain( 'smpl', PARENT_DIR . '/languages' );
 
 	$locale = get_locale();
 	$locale_file = PARENT_DIR . "/languages/$locale.php";

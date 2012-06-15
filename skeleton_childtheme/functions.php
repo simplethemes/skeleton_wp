@@ -59,11 +59,11 @@
 /* Set Proper Parent/Child theme paths for inclusion
 /*-----------------------------------------------------------------------------------*/
 
-define( 'PARENT_DIR', get_template_directory() );
-define( 'CHILD_DIR', get_stylesheet_directory() );
+@define( 'PARENT_DIR', get_template_directory() );
+@define( 'CHILD_DIR', get_stylesheet_directory() );
 
-define( 'PARENT_URL', get_template_directory_uri() );
-define( 'CHILD_URL', get_stylesheet_directory_uri() );
+@define( 'PARENT_URL', get_template_directory_uri() );
+@define( 'CHILD_URL', get_stylesheet_directory_uri() );
 
 
 

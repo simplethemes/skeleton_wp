@@ -71,10 +71,10 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-    define('OPTIONS_FRAMEWORK_URL', PARENT_DIR . '/admin/');
-    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_URL . '/admin/');
+    define('OPTIONS_FRAMEWORK_URL', PARENT_URL . '/admin/');
+    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_DIR . '/admin/');
 
-require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
+require_once (OPTIONS_FRAMEWORK_DIRECTORY . 'options-framework.php');
 
 }
 
@@ -245,7 +245,7 @@ function skeleton_setup() {
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'skeleton', PARENT_DIR . '/languages' );
+	load_theme_textdomain( 'smpl', PARENT_DIR . '/languages' );
 
 	$locale = get_locale();
 	$locale_file = PARENT_DIR . "/languages/$locale.php";

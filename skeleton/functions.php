@@ -117,7 +117,7 @@ if ( !function_exists( 'st_registerstyles' ) ) {
 
 add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
-	$theme  = get_theme( get_current_theme());
+	$theme  = wp_get_theme();
 	$version = $theme['Version'];
   	$stylesheets = wp_enqueue_style('skeleton', get_bloginfo('template_directory').'/skeleton.css', false, $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
@@ -201,11 +201,10 @@ if ( ! function_exists( 'skeleton_setup' ) ):
  * To override skeleton_setup() in a child theme, add your own skeleton_setup to your child theme's
  * functions.php file.
  *
- * @uses add_theme_support() To add support for post thumbnails and automatic feed links.
+ * @uses add_theme_support() To add support for post thumbnails, custom-header and automatic feed links.
  * @uses register_nav_menus() To add support for navigation menus.
  * @uses add_editor_style() To style the visual editor.
  * @uses load_theme_textdomain() For translation/localization support.
- * @uses add_custom_image_header() To add support for a custom header.
  * @uses register_default_headers() To register the default custom header images provided with the theme.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
@@ -253,7 +252,7 @@ function skeleton_setup() {
 
 		// Add a way for the custom header to be styled in the admin panel that controls
 		// custom headers. See skeleton_admin_header_style(), below.
-		add_custom_image_header( '', 'skeleton_admin_header_style' );
+		add_theme_support( 'custom-header', array('admin-head-callback' => 'skeleton_admin_header_style') );
 
 		// ... and thus ends the changeable header business.
 
@@ -314,7 +313,7 @@ function skeleton_setup() {
 	/**
 	 * Styles the header image displayed on the Appearance > Header admin panel.
 	 *
-	 * Referenced via add_custom_image_header() in skeleton_setup().
+	 * Referenced via add_theme_support( 'custom-header', $args )  in skeleton_setup().
 	 *
 	 * @since Skeleton 1.0
 	 */

@@ -128,7 +128,7 @@ if ( !function_exists( 'st_registerstyles' ) ) {
 
 add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
-	$theme  = get_theme( get_current_theme());
+	$theme  = wp_get_theme();
 	$version = $theme['Version'];
   	$stylesheets = wp_enqueue_style('skeleton', get_bloginfo('template_directory').'/skeleton.css', false, $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');

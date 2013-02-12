@@ -768,8 +768,8 @@ if ( !function_exists( 'st_before_content' ) ) {
 	// Example of further conditionals:
 	// (be sure to add the excess of 16 to st_before_sidebar as well)
 	
-	if (is_page_template('onecolumn-page.php')) {
-	$columns = 'sixteen';
+	if(endsWith(get_page_template(),'onecolumn-page.php')){
+			$columns = 'sixteen';
 	}
 	
 	// check to see if bbpress is installed
@@ -894,3 +894,13 @@ if (!function_exists('st_after_footer'))  {
 add_filter('widget_text', 'do_shortcode');
 add_filter( 'the_excerpt', 'do_shortcode');
 add_filter('get_the_excerpt', 'do_shortcode');
+
+// returns true if $str begins with $sub
+function beginsWith( $str, $sub ) {
+    return ( substr( $str, 0, strlen( $sub ) ) == $sub );
+}
+
+// return tru if $str ends with $sub
+function endsWith( $str, $sub ) {
+    return ( substr( $str, strlen( $str ) - strlen( $sub ) ) == $sub );
+}

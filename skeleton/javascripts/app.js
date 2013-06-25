@@ -63,9 +63,9 @@ jQuery(document).ready(function($) {
 	tabs.each(function(i) {
 		//Get all tabs
 		var tab = $(this).find('> li > a');
-		$("ul.tabs li:first").addClass("active").fadeIn('fast'); //Activate first tab
-		$("ul.tabs li:first a").addClass("active").fadeIn('fast'); //Activate first tab
-		$("ul.tabs-content li:first").addClass("active").fadeIn('fast'); //Activate first tab
+		$("ul.tabs li:first-child").addClass("active").fadeIn('fast'); //Activate first tab
+		$("ul.tabs li:first-child a").addClass("active").fadeIn('fast'); //Activate first tab
+		$("ul.tabs-content li:first-child").addClass("active").fadeIn('fast'); //Activate first tab
 		
 		tab.click(function(e) {
 			

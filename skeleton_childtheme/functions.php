@@ -548,7 +548,7 @@ function st_comments($comment, $args, $depth) {
 $GLOBALS['comment'] = $comment; ?>
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
 			<div id="comment-<?php comment_ID(); ?>" class="single-comment clearfix">
-				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64',$default='<path_to_url>' ); ?></div>
+				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64' ); ?></div>
 				<div class="comment-meta commentmetadata">
 						<?php if ($comment->comment_approved == '0') : ?>
 						<em><?php _e('Comment is awaiting moderation','smpl');?></em> <br />

@@ -211,11 +211,10 @@ if ( ! function_exists( 'skeleton_setup' ) ):
  * To override skeleton_setup() in a child theme, add your own skeleton_setup to your child theme's
  * functions.php file.
  *
- * @uses add_theme_support() To add support for post thumbnails and automatic feed links.
+ * @uses add_theme_support() To add support for post thumbnails, automatic feed links, and custom header.
  * @uses register_nav_menus() To add support for navigation menus.
  * @uses add_editor_style() To style the visual editor.
  * @uses load_theme_textdomain() For translation/localization support.
- * @uses add_custom_image_header() To add support for a custom header.
  * @uses register_default_headers() To register the default custom header images provided with the theme.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
@@ -266,7 +265,9 @@ function skeleton_setup() {
 
 		// Add a way for the custom header to be styled in the admin panel that controls
 		// custom headers. See skeleton_admin_header_style(), below.
-		add_custom_image_header( '', 'skeleton_admin_header_style' );
+		// add_custom_image_header( '', 'skeleton_admin_header_style' );
+		// add_custom_image_header() depecrated in WP 3.4
+		add_theme_support( 'custom-header', array( 'admin-head-callback' => 'skeleton_admin_header_style' ) );
 
 		// ... and thus ends the changeable header business.
 

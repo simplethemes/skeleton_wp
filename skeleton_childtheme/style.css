@@ -2,7 +2,7 @@
 Theme Name: Skeleton Child Theme
 Theme URI: http://www.simplethemes.com
 Description: A simple WordPress theme based on the Skeleton RWD framework
-Version: 1.6
+Version: 1.8
 Author: Simple Themes
 Author URI: http://www.simplethemes.com
 Template: skeleton
@@ -56,7 +56,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	table.pad td {
 	padding: 10px;
 	}
-		
+
 	pre,code {
 		white-space: normal;
 		background-color: #ededed;
@@ -89,8 +89,7 @@ body {
 }
 
 #header .inner {
-	padding-top: 15px;
-	padding-bottom: 20px;
+	padding: 20px 0px;
 }
 
 #header .header_extras {
@@ -133,39 +132,42 @@ a.themeauthor {
 
 /* @group Header */
 
-#site-title {
+#site-title,
+#header h1#site-title {
 	margin: 0;
 	padding: 0;
-	font-size: 60px;
-	line-height: 55px;
-	letter-spacing: -1px;
+	line-height: 100%;
 }
 
 #header div#site-title a,
-#header h1#site-title,
 #header h1#site-title a {
 	margin: 0;
 	padding: 0;
-	line-height: 55px;
 	text-decoration: none;
 	font-weight: bold;
 	letter-spacing: -2px;
 	text-shadow: 0px 1px 0px #FFF;
+	line-height: 100%;
+	display: inline;
 }
 
 #header #site-title a:hover {
 	color: #3253ad;
-}	
+}
+
+#header #site-title a:hover {
+	color: #3253ad;
+}
 
 /* Header Tagline */
 
 #header span.site-desc {
 	margin: 0;
 	padding: 0;
-	font-size: 24px;
-	line-height: 28px;
+	line-height: 100%;
 	color: #7d7d7d;
 	letter-spacing: -1px;
+	display: inline-block;
 }
 
 /* Image Header */
@@ -200,7 +202,7 @@ a.themeauthor {
     position: relative;
     behavior: url("./wp-content/themes/skeleton/PIE.php");
 }
-	
+
 
 #navigation ul li {
  	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
@@ -296,26 +298,22 @@ a.themeauthor {
 
 /* @group Typography */
 
-	h1, h2, h3, h4, h5 { 
+	h1, h2, h3, h4, h5 {
 		letter-spacing: -1px;
 	}
-	
+
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 	font-weight: inherit;
 	text-decoration: none;
 	}
-	
-	h2.entry-title a {
-	font-weight: bold;
-	}
-	
-	
+
+
 	h1 {line-height: 140%; margin-bottom: 14px;}
 	h2 {line-height: 130%; margin-bottom: 10px; }
 	h3 {line-height: 130%; margin-bottom: 8px; }
 	h4 {line-height: 125%; margin-bottom: 8px; }
 	h5 {line-height: 120%; margin-bottom: 8px;}
-	
+
 	h6 {
 		font-size: 14px;
 		line-height: 120%;
@@ -328,22 +326,22 @@ a.themeauthor {
 	.subheader { color: #777; }
 	.normal {font-weight: normal;}
 	.bolder {font-weight: bolder;}
-	
+
 	p { margin: 0 0 20px 0; }
 	p img { margin: 0; }
 	p.lead { font-size: 21px; line-height: 27px; color: #777;  }
-	
+
 	em { font-style: italic; }
 	strong { font-weight: bold; color: #333; }
 	small { font-size: 80%; }
-	
+
 /*	Blockquotes  */
 	blockquote, blockquote p { font-size: 17px; line-height: 24px; color: #777; font-style: italic; }
 	blockquote { margin: 0 0 20px; padding: 9px 20px 0 19px; border-left: 1px solid #ddd; }
 	blockquote cite { display: block; font-size: 12px; color: #555; }
 	blockquote cite:before { content: "\2014 \0020"; }
 	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
-	
+
 	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
 
 
@@ -352,7 +350,7 @@ a.themeauthor {
 	a, a:visited {text-decoration: underline; outline: 0; }
 	a:hover, a:focus { color: #000; text-decoration: none;}
 	p a, p a:visited { line-height: inherit; }
-	
+
 
 /* #Lists
 ================================================== */
@@ -370,7 +368,7 @@ a.themeauthor {
 	li { line-height: 18px; margin-bottom: 12px; }
 	ul.large li { line-height: 21px; }
 	li p { line-height: 21px; }
-	
+
 /* # Image Alignment Classes
 ============================================================== */
 
@@ -698,7 +696,7 @@ a.more-link {
 	  margin-bottom: 20px;
 	  line-height: 21px;
 	  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-	  
+
 	button:hover,
 	input[type="submit"]:hover,
 	input[type="reset"]:hover,
@@ -716,7 +714,7 @@ a.more-link {
 	  border-left: 1px solid #ccc;
 	  border-bottom: 1px solid #9d9d9d;
 }
-	  
+
   	button:active,
 	input[type="submit"]:active,
 	input[type="reset"]:active,
@@ -731,11 +729,11 @@ a.more-link {
     border: 1px solid #888;
     border-bottom: 1px solid #aaa;
     border-right: 1px solid #aaa; }
-	
+
 	button.full-width,
 	input[type="submit"].full-width,
 	input[type="reset"].full-width,
-	input[type="button"].full-width { 
+	input[type="button"].full-width {
 		width: 100%;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
@@ -1524,35 +1522,35 @@ a.button.brown span.btn_caption {
 
 /* End Button Styles */
 
-	
+
 /* @group Tabs */
 
-	ul.tabs { 
+	ul.tabs {
 		display: block;
 		margin: 0 0 20px 0;
 		padding: 0;
 		border-bottom: solid 1px #ddd; }
-	ul.tabs li { 
+	ul.tabs li {
 		display: block;
 		width: auto;
 		height: 30px;
 		padding: 0;
 		float: left;
 		margin-bottom: 0; }
-	ul.tabs li a { 
-		display: block; 
+	ul.tabs li a {
+		display: block;
 		text-decoration: none;
-		width: auto; 
-		height: 29px; 
-		padding: 0px 20px; 
-		line-height: 30px; 
+		width: auto;
+		height: 29px;
+		padding: 0px 20px;
+		line-height: 30px;
 		border: solid 1px #ddd;
-		border-width: 1px 0 0 1px; 
-		margin: 0;  
+		border-width: 1px 0 0 1px;
+		margin: 0;
 		background: #f5f5f5;
 		font-size: 13px; }
-	ul.tabs li a.active { 
-		background: #fff; 
+	ul.tabs li a.active {
+		background: #fff;
 		height: 30px;
 		position: relative;
 		top: -4px;
@@ -1575,11 +1573,11 @@ a.button.brown span.btn_caption {
 		-moz-border-radius-topright: 2px;
 		-webkit-border-top-right-radius: 2px;
 		border-top-right-radius: 2px; }
-	
+
 	ul.tabs-content { margin: 0; display: block; }
 	ul.tabs-content > li { display:none; }
 	ul.tabs-content > li.active { display: block; }
-		
+
 	/* Clearfixing tabs for beautiful stacking */
 	ul.tabs:before,
 	ul.tabs:after {
@@ -1607,7 +1605,7 @@ a.button.brown span.btn_caption {
 
 
 p.trigger {
-	display: block;	
+	display: block;
 	padding:  8px 8px 8px 16px;
 	margin: 0;
 	cursor: pointer;
@@ -1805,7 +1803,7 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 
 #nav-below .nav-previous a {
 	float: left;
-	
+
 }
 #nav-below .nav-next a {
 	float: right;
@@ -1831,15 +1829,15 @@ body.logged-in li.guest,
 body.logged-in li.guest {
 	display: none;
 }
-	
+
 /* #Images
 ================================================== */
 
-img.scale-with-grid { 
+img.scale-with-grid {
 	max-width: 100%;
 	height: auto; }
 
-			
+
 /* #Forms (see formalize.css)
 ================================================== */
 
@@ -1850,7 +1848,7 @@ img.scale-with-grid {
 	font-weight: bold;font-size: 13px;
 	display: block;
 	}
-	
+
 	input[type="checkbox"] {display: inline; }
 
 /* # Misc Typography Balancing to Maintain Vertical Rhythm

@@ -47,6 +47,21 @@ $options = array();
 $options[] = array( "name" => "General",
 					"type" => "heading");
 
+
+$options[] = array( "name" => "Customization",
+					"desc" => "In Dynamic Mode customizations are cached to a dynamic stylesheet, however larger sites may notice a decrease in performance. Static Mode simply puts the styles in the document head. Advanced mode does neither and allows you to copy the styles to the stylesheet yourself.",
+					"id" => "dev_mode",
+					"std" => "0",
+					"type" => "radio",
+					"class" => "linear",
+					"options" => array(
+						"1" => "Dynamic Mode",
+						"0" => "Static Mode",
+						"2" => "Advanced Mode"
+						)
+					);
+
+
 $options[] = array( "name" =>  "Body Background",
 					"desc" => "Change the background CSS.",
 					"id" => "body_background",
@@ -109,19 +124,39 @@ $options[] = array( "name" => "Logo Height",
 					"type" => "text");
 
 
+$options[] = array(
+	"name" => "Text Header Settings",
+	"desc" => "If you choose not to upload a logo for your header, the options below allow you to customize the text and tagline. If you have uploaded a logo, the settings below have no effect.",
+	"class" => "none",
+	"type" => "info"
+	);
+
+$options[] = array(
+	"name" => "Header Text Style",
+	"desc" => "Header text style.",
+	"id" => "header_typography",
+	"std" => array(
+		'size' => '40px',
+		'face' => 'helvetica',
+		'style' => 'normal',
+		'color' => '#181818'
+		),
+	"type" => "typography"
+	);
+
+$options[] = array( "name" => "Tagline Text Style",
+					"desc" => "Tagline text style.",
+					"id" => "tagline_typography",
+					"std" => array('size' => '24px','face' => 'helvetica','style' => 'normal','color' => '#CCCCCC'),
+					"type" => "typography");
+
+
 $options[] = array( "name" => "Typography",
 					"type" => "heading");
 
 $options[] = array( "name" => "Customization",
 					"desc" => "The following options allow you to apply basic customizations to the main theme typography. In some cases however, you will need to edit CSS. This can be achieved through the <a href=\"theme-editor.php\">stylesheet editor</a> or by navigating to Appearance &rarr; Editor.",
 					"type" => "info");
-
-
-$options[] = array( "name" => "Header (text) Color",
-					"desc" => "Header Colors.",
-					"id" => "header_color",
-					"std" => "#000000",
-					"type" => "color");
 
 $options[] = array( "name" => "Link Color",
 					"desc" => "Default hyperlink colors.",

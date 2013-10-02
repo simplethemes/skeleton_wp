@@ -88,7 +88,11 @@ html.ie #author-info {behavior: url("<?php echo get_stylesheet_directory_uri();?
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_stylesheet_directory_uri();?>/images/apple-touch-icon-114x114.png" />
 
 <link rel="pingback" href="<?php echo get_option('siteurl') .'/xmlrpc.php';?>" />
+
+<?php if (of_get_option('dev_mode') == '1') { ?>
 <link rel="stylesheet" id="custom" href="<?php echo home_url() .'/?get_styles=css';?>" type="text/css" media="all" />
+<?php } ?>
+
 
 <?php
 	/* 

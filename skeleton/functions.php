@@ -170,40 +170,74 @@ add_action( 'wp_enqueue_scripts', 'st_registerstyles');
 
 }
 
-// Build Query vars for dynamic theme option CSS from Options Framework
+/*-----------------------------------------------------------------------------------*/
+/* Build Query vars for dynamic theme option CSS from Options Framework
+/*-----------------------------------------------------------------------------------*/
+
 
 if ( !function_exists( 'production_stylesheet' )) {
 
-function production_stylesheet($public_query_vars) {
-    $public_query_vars[] = 'get_styles';
-    return $public_query_vars;
-}
-add_filter('query_vars', 'production_stylesheet');
-}
+	if (of_get_option('dev_mode') == '1') {
+
+		function production_stylesheet($public_query_vars) {
+		    $public_query_vars[] = 'get_styles';
+		    return $public_query_vars;
+		}
+		add_filter('query_vars', 'production_stylesheet');
+	}
+
+} // endif function_exists
+
 
 if ( !function_exists( 'theme_css' ) ) {
 
-add_action('template_redirect', 'theme_css');
-function theme_css(){
-    $css = get_query_var('get_styles');
-    if ($css == 'css'){
-        include_once (PARENT_DIR . '/style.php');
-        exit;  //This stops WP from loading any further
-    }
-}
+	if (of_get_option('dev_mode') == '1') {
+		function theme_css(){
+		    $css = get_query_var('get_styles');
+	    	if ($css == 'css'){
+	        	include_once (PARENT_DIR . '/st_loadstyles.php');
+	        	exit;  //This stops WP from loading any further
+	    	}
+		}
+		add_action('template_redirect', 'theme_css');
+	}
 
-}
+} // endif function_exists
+
+
+// Customization Mode - load custom styles in wp_head
+
+if ( !function_exists( 'custom_mode' ) ) {
+
+	if (of_get_option('dev_mode') == '0') {
+
+		function custom_mode() {
+			echo '<style type="text/css">';
+			include_once (TEMPLATEPATH . '/st_styles.php');
+	 		echo '</style>';
+		}
+		add_action( 'wp_head', 'custom_mode' );
+
+	}
+} // endif function_exists
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Register Core Javascript
+/*-----------------------------------------------------------------------------------*/
+
 
 if ( !function_exists( 'st_header_scripts' ) ) {
 
-add_action('init', 'st_header_scripts');
-function st_header_scripts() {
-  $javascripts  = wp_enqueue_script('jquery');
-  $javascripts .= wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
-	$javascripts .= wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
-	$javascripts .= wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
-	echo apply_filters ('child_add_javascripts',$javascripts);
-}
+	add_action('init', 'st_header_scripts');
+	function st_header_scripts() {
+		$javascripts  = wp_enqueue_script('jquery');
+		$javascripts .= wp_enqueue_script('custom',get_bloginfo('template_url') ."/javascripts/app.js",array('jquery'),'1.2.3',true);
+		$javascripts .= wp_enqueue_script('superfish',get_bloginfo('template_url') ."/javascripts/superfish.js",array('jquery'),'1.2.3',true);
+		$javascripts .= wp_enqueue_script('formalize',get_bloginfo('template_url') ."/javascripts/jquery.formalize.min.js",array('jquery'),'1.2.3',true);
+		echo apply_filters ('child_add_javascripts',$javascripts);
+	}
 
 }
 
@@ -568,7 +602,7 @@ function st_comments($comment, $args, $depth) {
 $GLOBALS['comment'] = $comment; ?>
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
 			<div id="comment-<?php comment_ID(); ?>" class="single-comment clearfix">
-				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64',$default='<path_to_url>' ); ?></div>
+				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64',$default); ?></div>
 				<div class="comment-meta commentmetadata">
 						<?php if ($comment->comment_approved == '0') : ?>
 						<em><?php _e('Comment is awaiting moderation','smpl');?></em> <br />

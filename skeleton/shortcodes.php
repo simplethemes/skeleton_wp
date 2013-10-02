@@ -247,10 +247,10 @@ function st_latest($atts, $content = null) {
 	"parent" => '',
 	"cat" => '',
 	"orderby" => 'date',
-	"order" => 'ASC'
+	"order" => 'DESC'
 	), $atts));
 	global $post;
-	
+
 	$do_not_duplicate[] = $post->ID;
 	$args = array(
 	  'post__not_in' => $do_not_duplicate,
@@ -264,7 +264,7 @@ function st_latest($atts, $content = null) {
 		);
 	// query
 	$myposts = new WP_Query($args);
-	
+
 	// container
 	$result='<div id="category-'.$cat.'" class="latestposts">';
 

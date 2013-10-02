@@ -359,16 +359,6 @@ function optionsframework_save_options_notice() {
 	add_settings_error( 'options-framework', 'save_options', __( 'Options saved.', 'options_framework_theme' ), 'updated fade' );
 }
 
-add_action( 'optionsframework_after_validate', 'optionsframework_save_options_notice' );
-
-function optionsframework_child_theme_notice() {
-	if (!is_child_theme()) {
-		add_settings_error( 'options-framework', 'save_options', __( 'Automatic updates are disabled because the child theme is not installed. Please install the companion child theme to remove this message.', 'options_framework_theme' ), 'error' );
-	}
-}
-add_action( 'optionsframework_after_validate', 'optionsframework_child_theme_notice' );
-
-
 
 /**
  * Format Configuration Array.

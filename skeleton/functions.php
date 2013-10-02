@@ -126,17 +126,36 @@ require_once (PARENT_DIR . '/shortcodes.php');
 if ( !function_exists( 'st_registerstyles' ) ) {
 
 function st_registerstyles() {
-	$theme  = wp_get_theme();
-	$version = $theme['Version'];
-  	$stylesheets = wp_enqueue_style('skeleton', get_bloginfo('template_directory').'/skeleton.css', false, $version, 'screen, projection');
-    $stylesheets .= wp_enqueue_style('theme', get_bloginfo('stylesheet_directory').'/style.css', 'skeleton', $version, 'screen, projection');
-  	$stylesheets .= wp_enqueue_style('layout', get_bloginfo('template_directory').'/layout.css', 'theme', $version, 'screen, projection');
-    $stylesheets .= wp_enqueue_style('formalize', get_bloginfo('template_directory').'/formalize.css', 'theme', $version, 'screen, projection');
-    $stylesheets .= wp_enqueue_style('superfish', get_bloginfo('template_directory').'/superfish.css', 'theme', $version, 'screen, projection');
+
+	// Set a dynamic version for cache busting
+	$theme = wp_get_theme();
+	if(is_child_theme()) {
+		$parent = $theme->parent();
+		$version = $parent['Version'];
+		} else {
+		$version = $theme['Version'];
+	}
+
+	$stylesheets = '';
+	// Register all the applicable stylesheets
+    $stylesheets .= wp_register_style('skeleton', get_bloginfo('template_directory').'/skeleton.css', array(), $version, 'screen, projection');
+    $stylesheets .= wp_register_style('layout', get_bloginfo('template_directory').'/layout.css', array(), $version, 'screen, projection');
+    $stylesheets .= wp_register_style('formalize', get_bloginfo('template_directory').'/formalize.css', array(), $version, 'screen, projection');
+    $stylesheets .= wp_register_style('superfish', get_bloginfo('template_directory').'/superfish.css', array(), $version, 'screen, projection');
+    $stylesheets .= wp_register_style('theme', get_bloginfo('stylesheet_directory').'/style.css', array(), $version, 'screen, projection');
+
+	// hook to add additional stylesheets from a child theme
 	echo apply_filters ('child_add_stylesheets',$stylesheets);
+
+	// enqueue registered styles
+	wp_enqueue_style( 'skeleton');
+	wp_enqueue_style( 'theme');
+	wp_enqueue_style( 'layout');
+	wp_enqueue_style( 'formalize');
+	wp_enqueue_style( 'superfish');
 }
 
-add_action('get_header', 'st_registerstyles');
+add_action( 'wp_enqueue_scripts', 'st_registerstyles');
 
 }
 

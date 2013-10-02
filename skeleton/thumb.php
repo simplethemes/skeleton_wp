@@ -20,22 +20,14 @@
  * loaded by timthumb. This will save you having to re-edit these variables
  * everytime you download a new version
 */
-
-
+define ('VERSION', '2.8.13');																		// Version of this script
 //Load a config file if it exists. Otherwise, use the values below
-$config_file = '../synapse-child/timthumb-config.php';
-if (file_exists($config_file)) {
-	require_once($config_file);
-} elseif (isset($_SERVER['ST_CACHE_DIR'])) {
-	define ('FILE_CACHE_DIRECTORY', $_SERVER['DOCUMENT_ROOT'].'/cache');
-}
-
-define ('VERSION', '2.8.11');																		// Version of this script
+if( file_exists(dirname(__FILE__) . '/timthumb-config.php'))	require_once('timthumb-config.php');
 if(! defined('DEBUG_ON') )					define ('DEBUG_ON', false);								// Enable debug logging to web server error log (STDERR)
 if(! defined('DEBUG_LEVEL') )				define ('DEBUG_LEVEL', 1);								// Debug level 1 is less noisy and 3 is the most noisy
 if(! defined('MEMORY_LIMIT') )				define ('MEMORY_LIMIT', '30M');							// Set PHP memory limit
 if(! defined('BLOCK_EXTERNAL_LEECHERS') ) 	define ('BLOCK_EXTERNAL_LEECHERS', false);				// If the image or webshot is being loaded on an external site, display a red "No Hotlinking" gif.
-
+if(! defined('DISPLAY_ERROR_MESSAGES') )	define ('DISPLAY_ERROR_MESSAGES', true);				// Display error messages. Set to false to turn off errors (good for production websites)
 //Image fetching and caching
 if(! defined('ALLOW_EXTERNAL') )			define ('ALLOW_EXTERNAL', TRUE);						// Allow image fetching from external websites. Will check against ALLOWED_SITES if ALLOW_ALL_EXTERNAL_SITES is false
 if(! defined('ALLOW_ALL_EXTERNAL_SITES') ) 	define ('ALLOW_ALL_EXTERNAL_SITES', false);				// Less secure.
@@ -55,17 +47,23 @@ if(! defined('BROWSER_CACHE_MAX_AGE') ) 	define ('BROWSER_CACHE_MAX_AGE', 864000
 if(! defined('BROWSER_CACHE_DISABLE') ) 	define ('BROWSER_CACHE_DISABLE', false);				// Use for testing if you want to disable all browser caching
 
 //Image size and defaults
-if(! defined('MAX_WIDTH') ) 			define ('MAX_WIDTH', 1500);									// Maximum image width
-if(! defined('MAX_HEIGHT') ) 			define ('MAX_HEIGHT', 1500);								// Maximum image height
-if(! defined('NOT_FOUND_IMAGE') )		define ('NOT_FOUND_IMAGE', '');								// Image to serve if any 404 occurs
-if(! defined('ERROR_IMAGE') )			define ('ERROR_IMAGE', '');									// Image to serve if an error occurs instead of showing error message
-if(! defined('PNG_IS_TRANSPARENT') ) 	define ('PNG_IS_TRANSPARENT', FALSE);						// Define if a png image should have a transparent background color. Use False value if you want to display a custom coloured canvas_colour
-if(! defined('DEFAULT_Q') )				define ('DEFAULT_Q', 90);									// Default image quality. Allows overrid in timthumb-config.php
-if(! defined('DEFAULT_ZC') )			define ('DEFAULT_ZC', 1);									// Default zoom/crop setting. Allows overrid in timthumb-config.php
-if(! defined('DEFAULT_F') )				define ('DEFAULT_F', '');									// Default image filters. Allows overrid in timthumb-config.php
-if(! defined('DEFAULT_S') )				define ('DEFAULT_S', 0);									// Default sharpen value. Allows overrid in timthumb-config.php
-if(! defined('DEFAULT_CC') )			define ('DEFAULT_CC', 'ffffff');							// Default canvas colour. Allows overrid in timthumb-config.php
+if(! defined('MAX_WIDTH') )					define ('MAX_WIDTH', 1500);								// Maximum image width
+if(! defined('MAX_HEIGHT') )				define ('MAX_HEIGHT', 1500);							// Maximum image height
+if(! defined('NOT_FOUND_IMAGE') )			define ('NOT_FOUND_IMAGE', '');							// Image to serve if any 404 occurs
+if(! defined('ERROR_IMAGE') )				define ('ERROR_IMAGE', '');								// Image to serve if an error occurs instead of showing error message
+if(! defined('PNG_IS_TRANSPARENT') )		define ('PNG_IS_TRANSPARENT', FALSE);					// Define if a png image should have a transparent background color. Use False value if you want to display a custom coloured canvas_colour
+if(! defined('DEFAULT_Q') )					define ('DEFAULT_Q', 90);								// Default image quality. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_ZC') )				define ('DEFAULT_ZC', 1);								// Default zoom/crop setting. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_F') )					define ('DEFAULT_F', '');								// Default image filters. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_S') )					define ('DEFAULT_S', 0);								// Default sharpen value. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_CC') )				define ('DEFAULT_CC', 'ffffff');						// Default canvas colour. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_WIDTH') )				define ('DEFAULT_WIDTH', 100);							// Default thumbnail width. Allows overrid in timthumb-config.php
+if(! defined('DEFAULT_HEIGHT') )			define ('DEFAULT_HEIGHT', 100);							// Default thumbnail height. Allows overrid in timthumb-config.php
 
+/**
+ * Additional Parameters:
+ * LOCAL_FILE_BASE_DIRECTORY = Override the DOCUMENT_ROOT. This is best used in timthumb-config.php
+ */
 
 //Image compression is enabled if either of these point to valid paths
 
@@ -141,9 +139,6 @@ if(! isset($ALLOWED_SITES)){
 		'imgur.com',
 		'imageshack.us',
 		'tinypic.com',
-		'i0.wp.com',
-		'i1.wp.com',
-		'i2.wp.com'
 	);
 }
 // -------------------------------------------------------------
@@ -231,7 +226,7 @@ class timthumb {
 			// nothing to worry about! :)
 			$imgData = base64_decode("R0lGODlhUAAMAIAAAP8AAP///yH5BAAHAP8ALAAAAABQAAwAAAJpjI+py+0Po5y0OgAMjjv01YUZ\nOGplhWXfNa6JCLnWkXplrcBmW+spbwvaVr/cDyg7IoFC2KbYVC2NQ5MQ4ZNao9Ynzjl9ScNYpneb\nDULB3RP6JuPuaGfuuV4fumf8PuvqFyhYtjdoeFgAADs=");
 			header('Content-Type: image/gif');
-			header('Content-Length: ' . sizeof($imgData));
+			header('Content-Length: ' . strlen($imgData));
 			header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 			header("Pragma: no-cache");
 			header('Expires: ' . gmdate ('D, d M Y H:i:s', time()));
@@ -427,13 +422,16 @@ class timthumb {
 	}
 	protected function serveErrors(){
 		header ($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+		if ( ! DISPLAY_ERROR_MESSAGES ) {
+			return;
+		}
 		$html = '<ul>';
 		foreach($this->errors as $err){
 			$html .= '<li>' . htmlentities($err) . '</li>';
 		}
 		$html .= '</ul>';
 		echo '<h1>A TimThumb error has occured</h1>The following error(s) occured:<br />' . $html . '<br />';
-		echo '<br />Query String : ' . htmlentities ($_SERVER['QUERY_STRING']);
+		echo '<br />Query String : ' . htmlentities( $_SERVER['QUERY_STRING'], ENT_QUOTES );
 		echo '<br />TimThumb version : ' . VERSION . '</pre>';
 	}
 	protected function serveInternalImage(){
@@ -539,8 +537,8 @@ class timthumb {
 
 		// set default width and height if neither are set already
 		if ($new_width == 0 && $new_height == 0) {
-		    $new_width = 100;
-		    $new_height = 100;
+		    $new_width = (int) DEFAULT_WIDTH;
+		    $new_height = (int) DEFAULT_HEIGHT;
 		}
 
 		// ensure size limits can not be abused
@@ -866,7 +864,11 @@ class timthumb {
 				return $this->realpath($file);
 			}
 			return $this->error("Could not find your website document root and the file specified doesn't exist in timthumbs directory. We don't support serving files outside timthumb's directory without a document root for security reasons.");
-		} //Do not go past this point without docRoot set
+		} else if ( ! is_dir( $this->docRoot ) ) {
+			$this->error("Server path does not exist. Ensure variable \$_SERVER['DOCUMENT_ROOT'] is set correctly");
+		}
+
+		//Do not go past this point without docRoot set
 
 		//Try src under docRoot
 		if(file_exists ($this->docRoot . '/' . $src)) {

@@ -2,7 +2,7 @@
 
 ##About
 
-**Live Demo**: [http:themes.simplethemes.com/skeleton](http:themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
+**Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
 
 Skeleton, authored by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.

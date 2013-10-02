@@ -5,18 +5,18 @@
  * @author Simple Themes - www.simplethemes.com
  *
  * Layout Functions:
- * 
+ *
  * st_header  // Opening header tag and logo/header text
  * st_header_extras // Additional content may be added to the header
  * st_navbar // Opening navigation element and WP3 menus
- * st_before_content // Opening content wrapper 
- * st_after_content // Closing content wrapper 
- * st_before_sidebar // Opening sidebar wrapper 
- * st_after_sidebar // Closing sidebar wrapper 
- * st_before_footer // Opening footer wrapper 
+ * st_before_content // Opening content wrapper
+ * st_after_content // Closing content wrapper
+ * st_before_sidebar // Opening sidebar wrapper
+ * st_after_sidebar // Closing sidebar wrapper
+ * st_before_footer // Opening footer wrapper
  * st_footer // The footer (includes sidebar-footer.php)
- * st_after_footer // The closing footer wrapper 
- * 
+ * st_after_footer // The closing footer wrapper
+ *
  * Sets up the theme and provides some helper functions. Some helper functions
  * are used in the theme as custom template tags. Others are attached to action and
  * filter hooks in WordPress to change core functionality.
@@ -64,7 +64,6 @@
 @define( 'CHILD_URL', get_stylesheet_directory_uri() );
 
 
-
 /*-----------------------------------------------------------------------------------*/
 /* Initialize the Options Framework
 /* http://wptheming.com/options-framework-theme/
@@ -72,50 +71,60 @@
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 
-    define('OPTIONS_FRAMEWORK_URL', PARENT_URL . '/admin/');
-    define('OPTIONS_FRAMEWORK_DIRECTORY', PARENT_DIR . '/admin/');
+define('OPTIONS_FRAMEWORK_URL', get_template_directory_uri() . '/admin/');
+define('OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory() . '/admin/');
 
-require_once (OPTIONS_FRAMEWORK_DIRECTORY . 'options-framework.php');
+require_once ( OPTIONS_FRAMEWORK_DIRECTORY.'options-framework.php');
 
+} // endif
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Customizeable Color Palette Preset
+/*-----------------------------------------------------------------------------------*/
+
+if (! function_exists('st_colorpicker_options'))  {
+
+function st_colorpicker_options() {
+	wp_enqueue_script( 'colorpicker-options', get_template_directory_uri() . '/javascripts/colorpicker.js', array( 'jquery','wp-color-picker' ),1,true );
+}
+add_action( 'optionsframework_custom_scripts', 'st_colorpicker_options' );
+
+} // endif function exists
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Define the sidebar and content widths for use in multiple functions
+/* These values can be overridden on a conditional basis later on. See comments.
+/*-----------------------------------------------------------------------------------*/
+
+
+if (!of_get_option('sidebar_width')) {
+	define('SIDEBARWIDTH', 'five');
+} else {
+	define('SIDEBARWIDTH', of_get_option('sidebar_width'));
 }
 
+if (!of_get_option('content_width')) {
+	define('CONTENTWIDTH', 'eleven');
+} else {
+	define('CONTENTWIDTH', of_get_option('content_width'));
+}
+
+
+// Load theme-specific shortcodes and helpers
 require_once (PARENT_DIR . '/shortcodes.php');
 
-/* 
- * This is an example of how to add custom scripts to the options panel.
- * This one shows/hides the an option when a checkbox is clicked.
- */
-add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
-
-if (!function_exists('optionsframework_custom_scripts')) {
-
-function optionsframework_custom_scripts() { ?>
-
-<script type="text/javascript">
-jQuery(document).ready(function() {
-
-	jQuery('#use_logo_image').click(function() {
-		jQuery('#section-header_logo,#section-logo_width,#section-logo_height').fadeToggle(400);
-	});
-	
-	if (jQuery('#use_logo_image:checked').val() !== undefined) {
-		jQuery('#section-header_logo,#section-logo_width,#section-logo_height').show();
-	}
-	
-});
-</script>
-
-<?php
-}
-}
-// Register Core Stylesheets
-// These are necessary for the theme to function as intended
-// Supports the 'Better WordPress Minify' plugin to properly minimize styleshsets into one.
-// http://wordpress.org/extend/plugins/bwp-minify/
+/*-----------------------------------------------------------------------------------*/
+/* Register Core Stylesheets
+/* These are necessary for the theme to function as intended
+/* Supports the 'Better WordPress Minify' plugin to properly minimize styleshsets into one.
+/* http://wordpress.org/extend/plugins/bwp-minify/
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_registerstyles' ) ) {
 
-add_action('get_header', 'st_registerstyles');
 function st_registerstyles() {
 	$theme  = wp_get_theme();
 	$version = $theme['Version'];
@@ -124,9 +133,10 @@ function st_registerstyles() {
   	$stylesheets .= wp_enqueue_style('layout', get_bloginfo('template_directory').'/layout.css', 'theme', $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('formalize', get_bloginfo('template_directory').'/formalize.css', 'theme', $version, 'screen, projection');
     $stylesheets .= wp_enqueue_style('superfish', get_bloginfo('template_directory').'/superfish.css', 'theme', $version, 'screen, projection');
-
 	echo apply_filters ('child_add_stylesheets',$stylesheets);
 }
+
+add_action('get_header', 'st_registerstyles');
 
 }
 
@@ -167,9 +177,12 @@ function st_header_scripts() {
 
 }
 
-// Instead of remove_filter('the_content', 'wpautop');
-// The function below removes wp_autop from specified pages with a custom field:
-// Name: wpautop Value: false
+/*-----------------------------------------------------------------------------------*/
+/* Instead of remove_filter('the_content', 'wpautop');
+/* Removes wpautop from specified pages with a custom field:
+/* Name: wpautop Value: false
+/*-----------------------------------------------------------------------------------*/
+
 
 function st_remove_wpautop($content) {
     global $post;
@@ -188,6 +201,7 @@ add_filter('the_content', 'st_remove_wpautop', 9);
 
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
+
 add_action( 'after_setup_theme', 'skeleton_setup' );
 
 if ( ! function_exists( 'skeleton_setup' ) ):
@@ -211,7 +225,7 @@ if ( ! function_exists( 'skeleton_setup' ) ):
  * @since Skeleton 1.0
  */
 function skeleton_setup() {
-	
+
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
 
@@ -223,7 +237,7 @@ function skeleton_setup() {
 
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
-	
+
 	// Register the available menus
 	register_nav_menus( array(
 		'primary' => __( 'Primary Navigation', 'skeleton' ),
@@ -242,11 +256,11 @@ function skeleton_setup() {
 		// No support for text inside the header image.
 		if ( ! defined( 'NO_HEADER_TEXT' ) )
 			define( 'NO_HEADER_TEXT', true );
-			
+
 		if ( ! defined( 'HEADER_IMAGE_WIDTH') )
 			define( 'HEADER_IMAGE_WIDTH', apply_filters( 'skeleton_header_image_width',960));
-			
-			
+
+
 		if ( ! defined( 'HEADER_IMAGE_HEIGHT') )
 			define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'skeleton_header_image_height',185 ));
 
@@ -426,7 +440,7 @@ add_filter( 'use_default_gallery_style', '__return_false' );
 
 if ( !function_exists( 'remove_more_jump_link' ) ) {
 
-function remove_more_jump_link($link) { 
+function remove_more_jump_link($link) {
 	$offset = strpos($link, '#more-');
 	if ($offset) {
 	$end = strpos($link, '"',$offset);
@@ -508,7 +522,7 @@ function st_widgets_init() {
 		'after_widget' => '</div>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
-	) );	
+	) );
 }
 
 /** Register sidebars by running skeleton_widgets_init() on the widgets_init hook. */
@@ -655,7 +669,7 @@ function st_logo() {
 	if (of_get_option('use_logo_image')) {
 		$class="graphic";
 	} else {
-		$class="text"; 		
+		$class="text";
 	}
 	// echo of_get_option('header_logo')
 	$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
@@ -725,7 +739,7 @@ function st_navbar() {
 if ( !function_exists( 'st_before_content' ) ) {
 
 	function st_before_content($columns) {
-	// 
+	//
 	// Specify the number of columns in conditional statements
 	// See http://codex.wordpress.org/Conditional_Tags for a full list
 	//
@@ -733,21 +747,21 @@ if ( !function_exists( 'st_before_content' ) ) {
 	// st_before_content('six');
 	//
 	// Set the default
-	
+
 	if (empty($columns)) {
 	$columns = 'eleven';
 	} else {
 	// Check the function for a returned variable
 	$columns = $columns;
 	}
-	
+
 	// Example of further conditionals:
 	// (be sure to add the excess of 16 to st_before_sidebar as well)
-	
+
 	if (is_page_template('onecolumn-page.php')) {
 	$columns = 'sixteen';
 	}
-	
+
 	// Apply the markup
 	echo "<a name=\"top\" id=\"top\"></a>";
 	echo "<div id=\"content\" class=\"$columns columns\">";
@@ -768,7 +782,7 @@ if (! function_exists('st_after_content'))  {
 
 // call up the action
 if ( !function_exists( 'before_sidebar' ) ) {
-	
+
 	function before_sidebar($columns) {
 	// You can specify the number of columns in conditional statements
 	// See http://codex.wordpress.org/Conditional_Tags for a full list
@@ -795,7 +809,7 @@ if ( !function_exists( 'before_sidebar' ) ) {
 	}
 } //endif
 // create our hook
-add_action( 'st_before_sidebar', 'before_sidebar');  
+add_action( 'st_before_sidebar', 'before_sidebar');
 
 
 
@@ -806,7 +820,7 @@ if ( !function_exists( 'after_sidebar' ) ) {
 	   echo '</div><!-- #sidebar -->';
 	}
 } //endif
-add_action( 'st_after_sidebar', 'after_sidebar');  
+add_action( 'st_after_sidebar', 'after_sidebar');
 
 
 // Before Footer
@@ -839,7 +853,7 @@ add_action('wp_footer', 'st_footer');
 // After Footer
 
 if (!function_exists('st_after_footer'))  {
-	
+
     function st_after_footer() {
 			echo "</div><!--/#footer-->"."\n";
 			echo "</div><!--/#wrap.container-->"."\n";
@@ -882,9 +896,9 @@ function get_image_path() {
 /*
  * override default filter for 'textarea' sanitization.
  */
- 
+
 add_action('admin_init','optionscheck_change_santiziation', 100);
- 
+
 function optionscheck_change_santiziation() {
     remove_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
     add_filter( 'of_sanitize_textarea', 'st_custom_sanitize_textarea' );

@@ -1,12 +1,10 @@
 <?php
 /*
-Plugin Name: Options Framework
-Plugin URI: http://www.wptheming.com
 Description: A framework for building theme options.
-Version: 0.8
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2
+Version: 1.5
 */
 
 /*
@@ -25,17 +23,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-/* Basic plugin definitions */
-
-define('OPTIONS_FRAMEWORK_VERSION', '0.8');
-
-/* Make sure we don't expose any info if called directly */
-
-if ( !function_exists( 'add_action' ) ) {
-	echo "Hi there!  I'm just a little plugin, don't mind me.";
-	exit;
-}
-
 /* If the user can't edit theme options, no use running this plugin */
 
 add_action('init', 'optionsframework_rolescheck' );
@@ -45,13 +32,13 @@ function optionsframework_rolescheck () {
 		// If the user can edit theme options, let the fun begin!
 		add_action( 'admin_menu', 'optionsframework_add_page');
 		add_action( 'admin_init', 'optionsframework_init' );
-		add_action( 'admin_init', 'optionsframework_mlu_init' );
+		add_action( 'wp_before_admin_bar_render', 'optionsframework_adminbar' );
 	}
 }
 
 /* Loads the file for option sanitization */
 
-add_action('init', 'optionsframework_load_sanitization' );
+add_action( 'init', 'optionsframework_load_sanitization' );
 
 function optionsframework_load_sanitization() {
 	require_once dirname( __FILE__ ) . '/options-sanitize.php';
@@ -71,7 +58,12 @@ function optionsframework_init() {
 
 	// Include the required files
 	require_once dirname( __FILE__ ) . '/options-interface.php';
-	require_once dirname( __FILE__ ) . '/options-medialibrary-uploader.php';
+	require_once dirname( __FILE__ ) . '/options-media-uploader.php';
+
+	// Require Markdown if not loaded
+	if ( !function_exists( 'Markdown' )) {
+		require_once dirname( __FILE__ ) . '/markdown.php';
+	}
 
 	// Loads the options array from the theme
 	if ( $optionsfile = locate_template( array('options.php') ) ) {
@@ -81,17 +73,26 @@ function optionsframework_init() {
 		require_once dirname( __FILE__ ) . '/options.php';
 	}
 
+	// Load settings
 	$optionsframework_settings = get_option('optionsframework' );
+
+	// Update routine
+	// This code can be removed if you're starting a new project
+	// and don't have legacy users to support
+	if ( $optionsframework_settings && !isset($optionsframework_settings['version']) ) {
+		require_once dirname( __FILE__ ) . '/upgrade.php';
+		optionsframework_upgrade_routine();
+	}
 
 	// Updates the unique option id in the database if it has changed
 	optionsframework_option_name();
 
 	// Gets the unique id, returning a default if it isn't defined
-	if ( isset($optionsframework_settings['id']) ) {
+	if ( isset( $optionsframework_settings['id'] ) ) {
 		$option_name = $optionsframework_settings['id'];
 	}
 	else {
-		$option_name = 'optionsframework';
+		$option_name = 'options_framework_theme';
 	}
 
 	// If the option has no saved data, load the defaults
@@ -101,6 +102,21 @@ function optionsframework_init() {
 
 	// Registers the settings fields and callback
 	register_setting( 'optionsframework', $option_name, 'optionsframework_validate' );
+
+	// Change the capability required to save the 'optionsframework' options group.
+	add_filter( 'option_page_capability_optionsframework', 'optionsframework_page_capability' );
+}
+
+/**
+ * Ensures that a user with the 'edit_theme_options' capability can actually set the options
+ * See: http://core.trac.wordpress.org/ticket/14365
+ *
+ * @param string $capability The capability used for the page, which is manage_options by default.
+ * @return string The capability to actually use.
+ */
+
+function optionsframework_page_capability( $capability ) {
+	return 'edit_theme_options';
 }
 
 /*
@@ -115,7 +131,7 @@ function optionsframework_init() {
 
 function optionsframework_setdefaults() {
 
-	$optionsframework_settings = get_option('optionsframework');
+	$optionsframework_settings = get_option( 'optionsframework' );
 
 	// Gets the unique option id
 	$option_name = $optionsframework_settings['id'];
@@ -128,17 +144,17 @@ function optionsframework_setdefaults() {
 	 *
 	 */
 
-	if ( isset($optionsframework_settings['knownoptions']) ) {
+	if ( isset( $optionsframework_settings['knownoptions'] ) ) {
 		$knownoptions =  $optionsframework_settings['knownoptions'];
-		if ( !in_array($option_name, $knownoptions) ) {
+		if ( !in_array( $option_name, $knownoptions ) ) {
 			array_push( $knownoptions, $option_name );
 			$optionsframework_settings['knownoptions'] = $knownoptions;
-			update_option('optionsframework', $optionsframework_settings);
+			update_option( 'optionsframework', $optionsframework_settings );
 		}
 	} else {
-		$newoptionname = array($option_name);
+		$newoptionname = array( $option_name );
 		$optionsframework_settings['knownoptions'] = $newoptionname;
-		update_option('optionsframework', $optionsframework_settings);
+		update_option( 'optionsframework', $optionsframework_settings );
 	}
 
 	// Gets the default options data from the array in options.php
@@ -147,7 +163,7 @@ function optionsframework_setdefaults() {
 	// If the options haven't been added to the database yet, they are added now
 	$values = of_get_default_values();
 
-	if ( isset($values) ) {
+	if ( isset( $values ) ) {
 		add_option( $option_name, $values ); // Add option with default settings
 	}
 }
@@ -155,42 +171,72 @@ function optionsframework_setdefaults() {
 /* Add a subpage called "Theme Options" to the appearance menu. */
 
 if ( !function_exists( 'optionsframework_add_page' ) ) {
-function optionsframework_add_page() {
 
-	$of_page = add_submenu_page('themes.php', 'Theme Options', 'Theme Options', 'edit_theme_options', 'options-framework','optionsframework_page');
+	function optionsframework_add_page() {
+		$of_page = add_theme_page( __('Theme Options', 'options_framework_theme'), __('Theme Options', 'options_framework_theme'), 'edit_theme_options', 'options-framework','optionsframework_page' );
 
-	// Adds actions to hook in the required css and javascript
-	add_action("admin_print_styles-$of_page",'optionsframework_load_styles');
-	add_action("admin_print_scripts-$of_page", 'optionsframework_load_scripts');
+		// Load the required CSS and javscript
+		add_action( 'admin_enqueue_scripts', 'optionsframework_load_scripts' );
+		add_action( 'admin_print_styles', 'optionsframework_load_styles' );
+		// add_action( 'admin_print_styles-' . $of_page, 'optionsframework_load_styles' );
+	}
 
-}
 }
 
 /* Loads the CSS */
 
 function optionsframework_load_styles() {
-	wp_enqueue_style('admin-style', OPTIONS_FRAMEWORK_URL.'css/admin-style.css');
-	wp_enqueue_style('color-picker', OPTIONS_FRAMEWORK_URL.'css/colorpicker.css');
+	wp_enqueue_style( 'optionsframework', OPTIONS_FRAMEWORK_URL.'css/optionsframework.css' );
+	if ( !wp_style_is( 'wp-color-picker','registered' ) ) {
+		wp_register_style( 'wp-color-picker', OPTIONS_FRAMEWORK_URL.'css/color-picker.min.css' );
+	}
+	wp_enqueue_style( 'wp-color-picker' );
 }
 
 /* Loads the javascript */
 
-function optionsframework_load_scripts() {
+function optionsframework_load_scripts( $hook ) {
+
+	if ( 'appearance_page_options-framework' != $hook )
+		return;
+
+	$theme  = wp_get_theme();
+	$themename = $theme['Name'];
+	$themename = preg_replace("/\W/", "_", strtolower($themename) );
+	$preset = of_get_option('layout_style');
+
+	// Enqueue colorpicker scripts for versions below 3.5 for compatibility
+	if ( !wp_script_is( 'wp-color-picker', 'registered' ) ) {
+		wp_register_script( 'iris', OPTIONS_FRAMEWORK_URL . 'js/iris.min.js', array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, 1 );
+		wp_register_script( 'wp-color-picker', OPTIONS_FRAMEWORK_URL . 'js/color-picker.min.js', array( 'jquery', 'iris' ) );
+		$colorpicker_l10n = array(
+			'clear' => __( 'Clear','options_framework_theme' ),
+			'defaultString' => __( 'Default', 'options_framework_theme' ),
+			'pick' => __( 'Select Color', 'options_framework_theme' )
+		);
+		wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n );
+	}
+
+	// Enqueue custom option panel JS
+	wp_enqueue_script( 'options-custom', OPTIONS_FRAMEWORK_URL . 'js/options-custom.js', array( 'jquery','wp-color-picker' ) );
+	$data = array( 'st_siteurl' => home_url() );
+	$themedata = array( 'st_activethemedir' => get_bloginfo('stylesheet_directory') );
+	wp_localize_script( 'options-custom', 'st_getsiteurl', $data );
+	wp_localize_script( 'options-custom', 'st_activethemedir', $themedata );
+	wp_localize_script( 'options-custom', 'st_shortname', $themename );
+	wp_localize_script( 'options-custom', 'st_preset', $preset );
 
 	// Inline scripts from options-interface.php
-	add_action('admin_head', 'of_admin_head');
-
-	// Enqueued scripts
-	wp_enqueue_script('jquery-ui-core');
-	wp_enqueue_script('color-picker', OPTIONS_FRAMEWORK_URL.'js/colorpicker.js', array('jquery'));
-	wp_enqueue_script('options-custom', OPTIONS_FRAMEWORK_URL.'js/options-custom.js', array('jquery'));
+	add_action( 'admin_head', 'of_admin_head' );
 }
 
 function of_admin_head() {
-
 	// Hook to add custom scripts
 	do_action( 'optionsframework_custom_scripts' );
 }
+
+
+
 
 /*
  * Builds out the options panel.
@@ -204,38 +250,38 @@ function of_admin_head() {
  *
  */
 
-if ( !function_exists( 'optionsframework_page' ) ) {
-function optionsframework_page() {
-	$return = optionsframework_fields();
-	settings_errors();
-	?>
-
-	<div class="wrap">
-    <?php screen_icon( 'themes' ); ?>
+if ( !function_exists( 'optionsframework_page' ) ) :
+function optionsframework_page() { ;?>
+	<div id="optionsframework-wrap" class="wrap">
+    <div id="theme-title">
+    	<?php screen_icon( 'themes' ); ?>
+    	<?php $my_theme = wp_get_theme(); ?>
+    	<h2><?php echo $my_theme->Name; ?> Options <span>v.<?php echo $my_theme->Version;?></span></h2>
+    	<?php settings_errors();?>
+    </div>
     <h2 class="nav-tab-wrapper">
-        <?php echo $return[1]; ?>
+        <?php echo optionsframework_tabs(); ?>
     </h2>
 
-    <div class="metabox-holder">
-    <div id="optionsframework" class="postbox">
-		<form action="options.php" method="post">
-		<?php settings_fields('optionsframework'); ?>
-
-		<?php echo $return[0]; /* Settings */ ?>
-
-        <div id="optionsframework-submit">
-			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options','skeleton' ); ?>" />
-            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults','skeleton' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!','skeleton' ) ); ?>' );" />
-            <div class="clear"></div>
-		</div>
-	</form>
-</div> <!-- / #container -->
-</div>
-</div> <!-- / .wrap -->
+    <div id="optionsframework-metabox" class="metabox-holder">
+	    <div id="optionsframework" class="postbox">
+			<form action="options.php" method="post">
+			<?php settings_fields( 'optionsframework' ); ?>
+			<?php optionsframework_fields(); /* Settings */ ?>
+			<div id="optionsframework-submit">
+				<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options', 'options_framework_theme' ); ?>" />
+				<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'options_framework_theme' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'options_framework_theme' ) ); ?>' );" />
+				<div class="clear"></div>
+			</div>
+			</form>
+		</div> <!-- / #container -->
+	</div>
+	<?php do_action( 'optionsframework_after' ); ?>
+	</div> <!-- / .wrap -->
 
 <?php
 }
-}
+endif;
 
 /**
  * Validate Options.
@@ -243,8 +289,7 @@ function optionsframework_page() {
  * This runs after the submit/reset button has been clicked and
  * validates the inputs.
  *
- * @uses $_POST['reset']
- * @uses $_POST['update']
+ * @uses $_POST['reset'] to restore default options
  */
 function optionsframework_validate( $input ) {
 
@@ -257,57 +302,73 @@ function optionsframework_validate( $input ) {
 	 */
 
 	if ( isset( $_POST['reset'] ) ) {
-		add_settings_error( 'options-framework', 'restore_defaults', __( 'Default options restored','skeleton' ), 'updated fade' );
+		add_settings_error( 'options-framework', 'restore_defaults', __( 'Default options restored.', 'options_framework_theme' ), 'updated fade' );
 		return of_get_default_values();
 	}
 
 	/*
-	 * Udpdate Settings.
+	 * Update Settings
+	 *
+	 * This used to check for $_POST['update'], but has been updated
+	 * to be compatible with the theme customizer introduced in WordPress 3.4
 	 */
 
-	if ( isset( $_POST['update'] ) ) {
-		$clean = array();
-		$options = optionsframework_options();
-		foreach ( $options as $option ) {
+	$clean = array();
+	$options = optionsframework_options();
+	foreach ( $options as $option ) {
 
-			if ( ! isset( $option['id'] ) ) {
-				continue;
-			}
+		if ( ! isset( $option['id'] ) ) {
+			continue;
+		}
 
-			if ( ! isset( $option['type'] ) ) {
-				continue;
-			}
+		if ( ! isset( $option['type'] ) ) {
+			continue;
+		}
 
-			$id = preg_replace( '/\W/', '', strtolower( $option['id'] ) );
+		$id = preg_replace( '/[^a-zA-Z0-9._\-]/', '', strtolower( $option['id'] ) );
 
-			// Set checkbox to false if it wasn't sent in the $_POST
-			if ( 'checkbox' == $option['type'] && ! isset( $input[$id] ) ) {
-				$input[$id] = '0';
-			}
+		// Set checkbox to false if it wasn't sent in the $_POST
+		if ( 'checkbox' == $option['type'] && ! isset( $input[$id] ) ) {
+			$input[$id] = false;
+		}
 
-			// Set each item in the multicheck to false if it wasn't sent in the $_POST
-			if ( 'multicheck' == $option['type'] && ! isset( $input[$id] ) ) {
-				foreach ( $option['options'] as $key => $value ) {
-					$input[$id][$key] = '0';
-				}
-			}
-
-			// For a value to be submitted to database it must pass through a sanitization filter
-			if ( has_filter( 'of_sanitize_' . $option['type'] ) ) {
-				$clean[$id] = apply_filters( 'of_sanitize_' . $option['type'], $input[$id], $option );
+		// Set each item in the multicheck to false if it wasn't sent in the $_POST
+		if ( 'multicheck' == $option['type'] && ! isset( $input[$id] ) ) {
+			foreach ( $option['options'] as $key => $value ) {
+				$input[$id][$key] = false;
 			}
 		}
 
-		add_settings_error( 'options-framework', 'save_options', __( 'Options saved.','skeleton' ), 'updated fade' );
-		return $clean;
+		// For a value to be submitted to database it must pass through a sanitization filter
+		if ( has_filter( 'of_sanitize_' . $option['type'] ) ) {
+			$clean[$id] = apply_filters( 'of_sanitize_' . $option['type'], $input[$id], $option );
+		}
 	}
 
-	/*
-	 * Request Not Recognized.
-	 */
+	// Hook to run after validation
+	do_action( 'optionsframework_after_validate', $clean );
 
-	return of_get_default_values();
+	return $clean;
 }
+
+/**
+ * Display message when options have been saved
+ */
+
+function optionsframework_save_options_notice() {
+	add_settings_error( 'options-framework', 'save_options', __( 'Options saved.', 'options_framework_theme' ), 'updated fade' );
+}
+
+add_action( 'optionsframework_after_validate', 'optionsframework_save_options_notice' );
+
+function optionsframework_child_theme_notice() {
+	if (!is_child_theme()) {
+		add_settings_error( 'options-framework', 'save_options', __( 'Automatic updates are disabled because the child theme is not installed. Please install the companion child theme to remove this message.', 'options_framework_theme' ), 'error' );
+	}
+}
+add_action( 'optionsframework_after_validate', 'optionsframework_child_theme_notice' );
+
+
 
 /**
  * Format Configuration Array.
@@ -347,18 +408,16 @@ function of_get_default_values() {
  * Add Theme Options menu item to Admin Bar.
  */
 
-add_action( 'wp_before_admin_bar_render', 'optionsframework_adminbar' );
-
 function optionsframework_adminbar() {
 
 	global $wp_admin_bar;
 
 	$wp_admin_bar->add_menu( array(
-		'parent' => 'appearance',
-		'id' => 'of_theme_options',
-		'title' => __( 'Theme Options','skeleton' ),
-		'href' => admin_url( 'themes.php?page=options-framework' )
-  ));
+			'parent' => 'appearance',
+			'id' => 'of_theme_options',
+			'title' => __( 'Theme Options', 'options_framework_theme' ),
+			'href' => admin_url( 'themes.php?page=options-framework' )
+		));
 }
 
 if ( ! function_exists( 'of_get_option' ) ) {

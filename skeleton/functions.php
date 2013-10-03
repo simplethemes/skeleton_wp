@@ -195,7 +195,7 @@ if ( !function_exists( 'theme_css' ) ) {
 		function theme_css(){
 		    $css = get_query_var('get_styles');
 	    	if ($css == 'css'){
-	        	include_once (PARENT_DIR . '/st_loadstyles.php');
+				get_template_part( 'st_loadstyles' );
 	        	exit;  //This stops WP from loading any further
 	    	}
 		}
@@ -213,7 +213,7 @@ if ( !function_exists( 'custom_mode' ) ) {
 
 		function custom_mode() {
 			echo '<style type="text/css">';
-			include_once (TEMPLATEPATH . '/st_styles.php');
+			get_template_part( 'st_styles' );
 	 		echo '</style>';
 		}
 		add_action( 'wp_head', 'custom_mode' );
@@ -293,14 +293,32 @@ function skeleton_setup() {
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
 
-	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
-	// add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+	// Add default posts and comments RSS feed links to head
+	add_theme_support( 'automatic-feed-links' );
 
 	// This theme uses post thumbnails
 	add_theme_support( 'post-thumbnails' );
 
-	// Add default posts and comments RSS feed links to head
-	add_theme_support( 'automatic-feed-links' );
+ 	// Use Regenerate Thumbnails Plugin to create these images on an existing install..
+	// Set default thumbnail size
+  	set_post_thumbnail_size( 150, 150 );
+	// 75px square
+	add_image_size( $name = 'squared75', $width = 75, $height = 75, $crop = true );
+	// 150px square
+	add_image_size( $name = 'squared150', $width = 150, $height = 150, $crop = true );
+	// 250px square
+	add_image_size( $name = 'squared250', $width = 250, $height = 250, $crop = true );
+	// 4:3 Video
+	add_image_size( $name = 'video43', $width = 320, $height = 240, $crop = true );
+	// 16:9 Video
+	add_image_size( $name = 'video169', $width = 320, $height = 180, $crop = true );
+	// 4:3 Video Banner
+	add_image_size( $name = 'largevideo43', $width = 640, $height = 480, $crop = true );
+	// 16:9 Video Banner
+	add_image_size( $name = 'largevideo169', $width = 640, $height = 360, $crop = true );
+	// Thin Banner
+	add_image_size( $name = 'banner', $width = 640, $height = 150, $crop = true );
+
 
 	// Register the available menus
 	register_nav_menus( array(
@@ -386,15 +404,99 @@ function skeleton_setup() {
 			)
 		) );
 	}
-	endif;
+endif;
 
-	/**
-	 * Styles the header image displayed on the Appearance > Header admin panel.
-	 *
-	 * Referenced via add_theme_support( 'custom-header', $args )  in skeleton_setup().
-	 *
-	 * @since Skeleton 1.0
-	 */
+
+/*-----------------------------------------------------------------------------------*/
+// Builds our thumbnail images
+// See options.php and skeleton_setup() for customization
+/*-----------------------------------------------------------------------------------*/
+
+	function st_thumbnailer($content) {
+
+		global $post;
+		global $id;
+
+		$theimage = get_image_path();
+		$showthumbs = of_get_option('display_featured_thumbnails');
+		$options = of_get_option('featured_thumbnail_places');
+
+		switch ($showthumbs) {
+			//Square Left
+			case 'square_left':
+				$size = 'squared150';
+				$align = 'alignleft scale-with-grid';
+			break;
+			// Square Right
+			case 'square_right':
+				$size = 'squared150';
+				$align = 'alignright scale-with-grid';
+			break;
+			// 4:3 Left
+			case '43_left':
+				$size = 'video43';
+				$align = 'alignleft scale-with-grid';
+			break;
+			// 4:3 Right
+			case '43_right':
+				$size = 'video43';
+				$align = 'alignright scale-with-grid';
+			break;
+			// 16:9 Left
+			case '169_left':
+				$size = 'video169';
+				$align = 'alignleft scale-with-grid';
+			break;
+			// 16:9 Right
+			case '169_right':
+				$size = 'video169';
+				$align = 'alignright scale-with-grid';
+			break;
+			// 16:9 Center Top
+			case '169_top':
+				$size = 'largevideo169';
+				$align = 'aligncenter scale-with-grid';
+			break;
+			// Web Banner Top
+			case 'banner_top':
+				$size = 'banner';
+				$align = 'aligncenter scale-with-grid';
+			break;
+			case 'disabled':
+			break;
+		}
+
+
+		// Archives
+		if ((is_archive() || is_home()) && $showthumbs != 'disabled' && $options['archive'] == 1 && has_post_thumbnail() ) {
+			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
+			$content =  $image . $content;
+		}
+
+		// Single Posts
+		if (is_single() && $showthumbs != 'disabled' && $options['single'] == 1 && has_post_thumbnail() ) {
+			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
+			$content =  $image . $content;
+		}
+
+		// Single Pages
+		if (is_page() && $showthumbs != 'disabled' && $options['page'] == 1 && has_post_thumbnail() ) {
+			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
+			$content =  $image . $content;
+		}
+
+		return $content;
+	}
+	add_filter('the_content','st_thumbnailer');
+
+
+
+/*-----------------------------------------------------------------------------------*/
+// Styles the header image displayed on the Appearance > Header admin panel.
+// Referenced via add_theme_support( 'custom-header', $args )  in skeleton_setup().
+/*-----------------------------------------------------------------------------------*/
+
+
 	if ( !function_exists( 'skeleton_admin_header_style' ) ) :
 
 	function skeleton_admin_header_style() {
@@ -414,109 +516,108 @@ function skeleton_setup() {
 	}
 	endif;
 
-/**
- * Sets the post excerpt length to 40 characters.
- *
- * To override this length in a child theme, remove the filter and add your own
- * function tied to the excerpt_length filter hook.
- *
- * @since Skeleton 1.0
- * @return int
- */
+
+/*-----------------------------------------------------------------------------------*/
+// Sets the post excerpt length to 40 characters.
+// To override this length in a child theme, remove the filter and add your own
+// function tied to the excerpt_length filter hook.
+/*-----------------------------------------------------------------------------------*/
+
 if ( !function_exists( 'skeleton_excerpt_length' ) ) {
 
-function skeleton_excerpt_length( $length ) {
-	return 40;
-}
-add_filter( 'excerpt_length', 'skeleton_excerpt_length' );
+	function skeleton_excerpt_length( $length ) {
+		return 40;
+	}
+	add_filter( 'excerpt_length', 'skeleton_excerpt_length' );
 
 }
-/**
- * Returns a "Continue Reading" link for excerpts
- *
- * @since Skeleton 1.0
- * @return string "Continue Reading" link
- */
+
+
+
+/*-----------------------------------------------------------------------------------*/
+// Returns a "Continue Reading" link for excerpts
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'skeleton_continue_reading_link' ) ) {
 
-function skeleton_continue_reading_link() {
-	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'skeleton' ) . '</a>';
+	function skeleton_continue_reading_link() {
+		return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'skeleton' ) . '</a>';
+	}
 }
-}
-/**
- * Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and skeleton_continue_reading_link().
- *
- * To override this in a child theme, remove the filter and add your own
- * function tied to the excerpt_more filter hook.
- *
- * @since Skeleton 1.0
- * @return string An ellipsis
- */
+
+
+/*-----------------------------------------------------------------------------------*/
+// Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis
+// and skeleton_continue_reading_link().
+//
+// To override this in a child theme, remove the filter and add your own
+// function tied to the excerpt_more filter hook.
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'skeleton_auto_excerpt_more' ) ) {
 
-function skeleton_auto_excerpt_more( $more ) {
-	return ' &hellip;' . skeleton_continue_reading_link();
-}
-add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
+	function skeleton_auto_excerpt_more( $more ) {
+		return ' &hellip;' . skeleton_continue_reading_link();
+	}
+	add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
 
 }
-/**
- * Adds a pretty "Continue Reading" link to custom post excerpts.
- *
- * To override this link in a child theme, remove the filter and add your own
- * function tied to the get_the_excerpt filter hook.
- *
- * @since Skeleton 1.0
- * @return string Excerpt with a pretty "Continue Reading" link
- */
+
+/*-----------------------------------------------------------------------------------*/
+// Adds a pretty "Continue Reading" link to custom post excerpts.
+/*-----------------------------------------------------------------------------------*/
+
+
 if ( !function_exists( 'skeleton_custom_excerpt_more' ) ) {
 
-function skeleton_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= skeleton_continue_reading_link();
+	function skeleton_custom_excerpt_more( $output ) {
+		if ( has_excerpt() && ! is_attachment() ) {
+			$output .= skeleton_continue_reading_link();
+		}
+		return $output;
 	}
-	return $output;
-}
-add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
+	add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
 
 }
-/**
- * Removes inline styles printed when the gallery shortcode is used.
- *
- * Galleries are styled by the theme in Skeleton's style.css. This is just
- * a simple filter call that tells WordPress to not use the default styles.
- *
- * @since Skeleton 1.2
- */
+
+
+/*-----------------------------------------------------------------------------------*/
+// Removes inline styles printed when the gallery shortcode is used.
+// Galleries are styled by the theme in Skeleton's style.css. This is just
+// a simple filter call that tells WordPress to not use the default styles.
+/*-----------------------------------------------------------------------------------*/
+
 add_filter( 'use_default_gallery_style', '__return_false' );
 
-/**
- * Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
- *
- * To override st_widgets_init() in a child theme, remove the action hook and add your own
- * function tied to the init hook.
- *
- * @uses register_sidebar
- */
-//
+
+
+/*-----------------------------------------------------------------------------------*/
+// Removes the page jump when read more is clicked through
+/*-----------------------------------------------------------------------------------*/
+
 
 if ( !function_exists( 'remove_more_jump_link' ) ) {
 
-function remove_more_jump_link($link) {
-	$offset = strpos($link, '#more-');
-	if ($offset) {
-	$end = strpos($link, '"',$offset);
-	}
-	if ($end) {
-	$link = substr_replace($link, '', $offset, $end-$offset);
-	}
-	return $link;
+	function remove_more_jump_link($link) {
+		$offset = strpos($link, '#more-');
+		if ($offset) {
+		$end = strpos($link, '"',$offset);
+		}
+		if ($end) {
+		$link = substr_replace($link, '', $offset, $end-$offset);
+		}
+		return $link;
 	}
 	add_filter('the_content_more_link', 'remove_more_jump_link');
 
 }
+
+
+/*-----------------------------------------------------------------------------------*/
+//	Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
+//	To override st_widgets_init() in a child theme, remove the action hook and add your own
+//	function tied to the init hook.
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_widgets_init' ) ) {
 
@@ -595,14 +696,16 @@ add_action( 'widgets_init', 'st_widgets_init' );
 
 }
 
-/** Comment Styles */
+/*-----------------------------------------------------------------------------------*/
+//	Comment Styles
+/*-----------------------------------------------------------------------------------*/
 
 if ( ! function_exists( 'st_comments' ) ) :
 function st_comments($comment, $args, $depth) {
 $GLOBALS['comment'] = $comment; ?>
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
 			<div id="comment-<?php comment_ID(); ?>" class="single-comment clearfix">
-				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64',$default); ?></div>
+				<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64'); ?></div>
 				<div class="comment-meta commentmetadata">
 						<?php if ($comment->comment_approved == '0') : ?>
 						<em><?php _e('Comment is awaiting moderation','smpl');?></em> <br />
@@ -693,117 +796,148 @@ function st_header() {
 }
 
 
+/*-----------------------------------------------------------------------------------*/
 // Opening #header div with flexible grid
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_header_open' ) ) {
 
-function st_header_open() {
-  echo "<div id=\"header\" class=\"sixteen columns\">\n<div class=\"inner\">\n";
-}
+	function st_header_open() {
+	  echo "<div id=\"header\" class=\"sixteen columns\">\n<div class=\"inner\">\n";
+	}
+
 } // endif
 
 add_action('st_header','st_header_open', 1);
 
 
+/*-----------------------------------------------------------------------------------*/
 // Hookable theme option field to add add'l content to header
 // Child Theme Override: child_header_extras();
+/*-----------------------------------------------------------------------------------*/
+
 
 if ( !function_exists( 'st_header_extras' ) ) {
 
-function st_header_extras() {
-	if (of_get_option('header_extra')) {
-		$extras  = "<div class=\"header_extras\">";
-		$extras .= of_get_option('header_extra');
-		$extras .= "</div>";
-		echo apply_filters ('child_header_extras',$extras);
+	function st_header_extras() {
+		if (of_get_option('header_extra')) {
+			$extras  = "<div class=\"header_extras\">";
+			$extras .= of_get_option('header_extra');
+			$extras .= "</div>";
+			echo apply_filters ('child_header_extras',$extras);
+		}
 	}
-}
+
 } // endif
 
 add_action('st_header','st_header_extras', 2);
 
 
-// Build the logo
-// Child Theme Override: child_logo();
+/*-----------------------------------------------------------------------------------*/
+/* SEO Logo
+/* Displays H1 or DIV based on whether we are on the home page or not (for SEO)
+/*-----------------------------------------------------------------------------------*/
+
 if ( !function_exists( 'st_logo' ) ) {
 
-function st_logo() {
-	// Displays H1 or DIV based on whether we are on the home page or not (SEO)
-	$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
-	if (of_get_option('use_logo_image')) {
-		$class="graphic";
-	} else {
-		$class="text";
+	function st_logo() {
+		$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+		if (of_get_option('use_logo_image')) {
+			$class="graphic";
+		} else {
+			$class="text";
+		}
+		$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
+		$st_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
+		echo apply_filters ( 'st_logo', $st_logo);
 	}
-	// echo of_get_option('header_logo')
-	$st_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
-	$st_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
-	echo apply_filters ( 'child_logo' , $st_logo);
-}
+	add_action('st_header','st_logo', 3);
+
 } // endif
 
-add_action('st_header','st_logo', 3);
+
+/*-----------------------------------------------------------------------------------*/
+// Example of child theme logo replacement override
+/*-----------------------------------------------------------------------------------*/
 
 
+//	function my_custom_logo() {
+//		$st_logo = '<img src="http://placehold.it/320x150/000/FFF" alt="Logo"/>';
+//		return $st_logo;
+//	}
+//
+//	add_filter('st_logo','my_custom_logo');
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Output CSS for Graphic Logo
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'logostyle' ) ) {
 
 function logostyle() {
 	if (of_get_option('use_logo_image')) {
-	echo '<style type="text/css">
-	#header #site-title.graphic a {background-image: url('.of_get_option('header_logo').');width: '.of_get_option('logo_width').'px;height: '.of_get_option('logo_height').'px;}</style>';
+		echo '<style type="text/css">#header #site-title.graphic a {background-image: url('.of_get_option('header_logo').');width: '.of_get_option('logo_width').'px;height: '.of_get_option('logo_height').'px;}</style>';
 	}
 }
+add_action('wp_head', 'logostyle');
 
 } //endif
 
-add_action('wp_head', 'logostyle');
 
-
+/*-----------------------------------------------------------------------------------*/
+/* Closes the #header markup
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_header_close' ) ) {
 
-function st_header_close() {
-	echo "</div></div><!--/#header-->";
-}
+	function st_header_close() {
+		echo "</div>"."\n";
+		echo "</div>"."\n";
+		echo "<!--/#header-->"."\n";
+	}
+	add_action('st_header','st_header_close', 4);
+
 } //endif
 
-add_action('st_header','st_header_close', 4);
 
-
-
-// Hook to add content after header
+/*-----------------------------------------------------------------------------------*/
+/* Hook to add custom content immediately after #header
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_below_header' ) ) {
 
-function st_below_header() {
-    do_action('st_below_header');
-}
+	function st_below_header() {
+		do_action('st_below_header');
+	}
 
 } //endif
-
 
 // End Header Functions
 
+/*-----------------------------------------------------------------------------------*/
+/* Navigation (menu)
+/*-----------------------------------------------------------------------------------*/
 
-// Navigation (menu)
 if ( !function_exists( 'st_navbar' ) ) {
 
-function st_navbar() {
-	echo '<div id="navigation" class="row sixteen columns">';
-	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary'));
-	echo '</div><!--/#navigation-->';
-}
+	function st_navbar() {
+		echo '<div id="navigation" class="row sixteen columns">';
+		wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary'));
+		echo '</div><!--/#navigation-->';
+	}
 
 } //endif
 
-// Before Content - st_before_content($columns);
-// Child Theme Override: child_before_content();
+
+/*-----------------------------------------------------------------------------------*/
+/* Before Content - st_before_content($columns);
+/*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'st_before_content' ) ) {
-
+	global $post;
 	function st_before_content($columns) {
-	//
 	// Specify the number of columns in conditional statements
 	// See http://codex.wordpress.org/Conditional_Tags for a full list
 	//
@@ -811,29 +945,42 @@ if ( !function_exists( 'st_before_content' ) ) {
 	// st_before_content('six');
 	//
 	// Set the default
-
+	if (is_page() && !is_active_sidebar('secondary-widget-area')) {
+		$columns = 'sixteen';
+	} elseif (is_single() && !is_active_sidebar('primary-widget-area')) {
+		$columns = 'sixteen';
+	}
 	if (empty($columns)) {
-	$columns = 'eleven';
+
+		$columns = 'eleven';
+
 	} else {
 	// Check the function for a returned variable
-	$columns = $columns;
+
+		$columns = $columns;
 	}
 
 	// Example of further conditionals:
 	// (be sure to add the excess of 16 to st_before_sidebar as well)
 
 	if (is_page_template('onecolumn-page.php')) {
-	$columns = 'sixteen';
+
+		$columns = 'sixteen';
+
 	}
 
 	// Apply the markup
 	echo "<a name=\"top\" id=\"top\"></a>";
 	echo "<div id=\"content\" class=\"$columns columns\">";
 	}
+
 }
 
 
-// After Content
+/*-----------------------------------------------------------------------------------*/
+/* After Content
+/*-----------------------------------------------------------------------------------*/
+
 
 if (! function_exists('st_after_content'))  {
     function st_after_content() {
@@ -842,9 +989,11 @@ if (! function_exists('st_after_content'))  {
 }
 
 
-// Before Sidebar - do_action('st_before_sidebar')
+/*-----------------------------------------------------------------------------------*/
+/* Before Sidebar - do_action('st_before_sidebar')
+/*-----------------------------------------------------------------------------------*/
 
-// call up the action
+
 if ( !function_exists( 'before_sidebar' ) ) {
 
 	function before_sidebar($columns) {
@@ -876,8 +1025,10 @@ if ( !function_exists( 'before_sidebar' ) ) {
 add_action( 'st_before_sidebar', 'before_sidebar');
 
 
+/*-----------------------------------------------------------------------------------*/
+/* After Sidebar
+/*-----------------------------------------------------------------------------------*/
 
-// After Sidebar
 if ( !function_exists( 'after_sidebar' ) ) {
 	function after_sidebar() {
 	// Additional Content could be added here
@@ -887,7 +1038,10 @@ if ( !function_exists( 'after_sidebar' ) ) {
 add_action( 'st_after_sidebar', 'after_sidebar');
 
 
-// Before Footer
+
+/*-----------------------------------------------------------------------------------*/
+/* Before Footer
+/*-----------------------------------------------------------------------------------*/
 
 if (!function_exists('st_before_footer'))  {
     function st_before_footer() {
@@ -899,7 +1053,11 @@ if (!function_exists('st_before_footer'))  {
 
 if ( !function_exists( 'st_footer' ) ) {
 
-// The Footer
+
+/*-----------------------------------------------------------------------------------*/
+/* Footer
+/*-----------------------------------------------------------------------------------*/
+
 add_action('wp_footer', 'st_footer');
 	do_action('st_footer');
 	function st_footer() {
@@ -910,11 +1068,12 @@ add_action('wp_footer', 'st_footer');
 		echo of_get_option('footer_text');
 		echo '<br /><a class="themeauthor" href="http://www.simplethemes.com" title="Simple WordPress Themes">WordPress Themes</a></div>';
 }
-
 }
 
 
-// After Footer
+/*-----------------------------------------------------------------------------------*/
+/* After Footer
+/*-----------------------------------------------------------------------------------*/
 
 if (!function_exists('st_after_footer'))  {
 
@@ -929,14 +1088,18 @@ if (!function_exists('st_after_footer'))  {
 }
 
 
+/*-----------------------------------------------------------------------------------*/
+/* Enable Shortcodes in excerpts and widgets
+/*-----------------------------------------------------------------------------------*/
 
-// Enable Shortcodes in excerpts and widgets
+
 add_filter('widget_text', 'do_shortcode');
 add_filter( 'the_excerpt', 'do_shortcode');
 add_filter('get_the_excerpt', 'do_shortcode');
 
 
 if (!function_exists('get_image_path'))  {
+
 function get_image_path() {
 	global $post;
 	$id = get_post_thumbnail_id();
@@ -955,11 +1118,14 @@ function get_image_path() {
 	$theimage = $thumbnail[0];
 	return $theimage;
 }
+
 }
 
-/*
- * override default filter for 'textarea' sanitization.
- */
+
+/*-----------------------------------------------------------------------------------*/
+/* Override default filter for 'textarea' sanitization.
+/*-----------------------------------------------------------------------------------*/
+
 
 add_action('admin_init','optionscheck_change_santiziation', 100);
 

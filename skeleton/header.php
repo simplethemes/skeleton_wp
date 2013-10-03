@@ -111,7 +111,7 @@ html.ie #author-info {behavior: url("<?php echo get_stylesheet_directory_uri();?
 	<?php
 	st_above_header();
 	st_header();
-	st_below_header();
+	do_action('st_below_header');
 	?>
 	<?php st_navbar(); ?>
 	<?php

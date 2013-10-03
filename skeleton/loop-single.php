@@ -26,8 +26,12 @@
 					</div><!-- .entry-meta -->
 
 					<div class="entry-content">
-						<?php the_content(); ?>
-						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'skeleton' ), 'after' => '</div>' ) ); ?>
+
+					<?php
+						the_content();
+						wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'skeleton' ), 'after' => '</div>' ) );
+					?>
+
 					</div><!-- .entry-content -->
 
 <?php if ( get_the_author_meta( 'description' ) ) : // If a user has filled out their description, show a bio on their entries  ?>
@@ -57,7 +61,6 @@
 					<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'skeleton' ) . '</span> %title' ); ?></div>
 					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'skeleton' ) . '</span>' ); ?></div>
 				</div><!-- #nav-below -->
-				
 
 				<?php comments_template( '', true ); ?>
 

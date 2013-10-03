@@ -10,9 +10,10 @@
 
 function optionsframework_option_name() {
 
-	// This gets the theme name from the stylesheet
-	$themename = get_option( 'stylesheet' );
-	$themename = preg_replace("/\W/", "", strtolower($themename) );
+
+	$theme  = wp_get_theme();
+	$themename = $theme['Template'];
+	$themename = preg_replace("/\W/", "_", strtolower($themename) );
 
 	$optionsframework_settings = get_option( 'optionsframework' );
 	$optionsframework_settings['id'] = $themename;
@@ -124,25 +125,23 @@ $options[] = array( "name" => "Logo Height",
 					"type" => "text");
 
 
-$options[] = array(
-	"name" => "Text Header Settings",
-	"desc" => "If you choose not to upload a logo for your header, the options below allow you to customize the text and tagline. If you have uploaded a logo, the settings below have no effect.",
-	"class" => "none",
-	"type" => "info"
-	);
+$options[] = array( "name" => "Text Header Settings",
+					"desc" => "If you choose not to upload a logo for your header, the options below allow you to customize the text and tagline. If you have uploaded a logo, the settings below have no effect.",
+					"class" => "none",
+					"type" => "info"
+					);
 
-$options[] = array(
-	"name" => "Header Text Style",
-	"desc" => "Header text style.",
-	"id" => "header_typography",
-	"std" => array(
-		'size' => '40px',
-		'face' => 'helvetica',
-		'style' => 'normal',
-		'color' => '#181818'
-		),
-	"type" => "typography"
-	);
+$options[] = array( "name" => "Header Text Style",
+					"desc" => "Header text style.",
+					"id" => "header_typography",
+					"std" => array(
+						'size' => '40px',
+						'face' => 'helvetica',
+						'style' => 'normal',
+						'color' => '#181818'
+						),
+					"type" => "typography"
+					);
 
 $options[] = array( "name" => "Tagline Text Style",
 					"desc" => "Tagline text style.",
@@ -227,6 +226,39 @@ $options[] = array( "name" => "Sidebar Position",
 						'left' => $imagepath . '2cl.png',
 						'right' => $imagepath . '2cr.png')
 					);
+
+
+$options[] = array( "name" => "Show Featured Thumbnails",
+					"desc" => "Enables display of blog post featured thumbnails. Use the <a href=\"http://wordpress.org/plugins/regenerate-thumbnails/\">Regenate Thumbnails Plugin</a> if you have existing images that need to be regenerated.",
+					"id" => "display_featured_thumbnails",
+					"std" => "none",
+					"type" => "radio",
+					"class" => "linear",
+					"options" => array(
+						"disabled" => "Do not display",
+						"square_left" => "Square Aligned Left",
+						"square_right" => "Square Aligned Right",
+						"43_left" => "4:3 Aligned Left",
+						"43_right" => "4:3 Aligned Right",
+						"169_left" => "16:9 Aligned Left",
+						"169_right" => "16:9 Aligned Right",
+						"169_top" => "16:9 Banner Top Wide",
+						"banner_top" => "Thin Banner Top Wide",
+						)
+					);
+
+$options[] = array( "name" => "Display Featured Thumbnails on the following pages.",
+					"desc" => "",
+					"id" => "featured_thumbnail_places",
+					"type" => "multicheck",
+					"options" => array(
+						'archive' => 'Archive Pages',
+						'single' => 'Single Posts',
+						'page' => 'Single Pages',
+						)
+					);
+
+
 
 	return $options;
 }

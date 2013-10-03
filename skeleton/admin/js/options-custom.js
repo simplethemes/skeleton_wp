@@ -10,14 +10,13 @@ jQuery(document).ready(function($) {
 	var shortName = st_shortname;
 	var PreSet = st_preset;
 
-	//alert(shortName);
-
-
 	// Fade out the save message
 	$('.fade').delay(1000).animate({height: 0, opacity: 0}, 'fast', function() {
         $(this).remove();
     });
+
 	// Switches option sections
+
 	$('.group').hide();
 	var active_tab = '';
 	if (typeof(localStorage) != 'undefined' ) {
@@ -87,7 +86,6 @@ jQuery(document).ready(function($) {
 
 
 
-
 	$('#use_logo_image').click(function() {
 		$('#section-header_logo,#section-logo_width,#section-logo_height').fadeToggle(400);
 	});
@@ -95,23 +93,6 @@ jQuery(document).ready(function($) {
 	if ($('#use_logo_image:checked').val() !== undefined) {
 		$('#section-header_logo,#section-logo_width,#section-logo_height').show();
 	}
-
-	$('#use_custom_titletag').click(function() {
-		$('#section-site_title,#section-site_tagline').fadeToggle(400);
-	});
-
-	if ($('#use_custom_titletag:checked').val() !== undefined) {
-		$('#section-site_title,#section-site_tagline').show();
-	}
-
-	$('#show_post_thumbnails').click(function() {
-		$('#section-thumbnail_action').fadeToggle(400);
-	});
-
-	if ($('#show_post_thumbnails:checked').val() !== undefined) {
-		$('#section-thumbnail_action').show();
-	}
-
 
 	// Initially show/hide content options if responsive enabled/disabled
 	var ContentType = $('input[name='+shortName+'\\[content_type\\]]');
@@ -136,50 +117,23 @@ jQuery(document).ready(function($) {
 	});
 
 
+	// Initially show/hide
+	var ShowFeaturedThumb = $('input[name='+shortName+'\\[display_featured_thumbnails\\]]');
+	var ShowFeaturedThumbSelected = ShowFeaturedThumb.filter(':checked').val();
 
-	// Initially show/hide menu options if responsive enabled/disabled
-	var DesktopMobile = $('input[name='+shortName+'\\[mobile_support\\]]');
-	var DesktopMobileSelected = DesktopMobile.filter(':checked').val();
-
-	if (DesktopMobileSelected == 'desktop') {
-		$('#section-mobile_selectmenu,#section-menu_text,#section-viewport_scale').hide();
+	if (ShowFeaturedThumbSelected == 'disabled') {
+		$('#section-featured_thumbnail_places').hide();
 	} else {
-		$('#section-mobile_selectmenu,#section-menu_text,#section-viewport_scale').show();
+		$('#section-featured_thumbnail_places').show();
 	}
 
-	// show if enabled is clicked
-	$('#'+shortName+'-mobile_support-mobile').click(function() {
-		$('#section-mobile_selectmenu,#section-menu_text,#section-viewport_scale').fadeIn(400);
-		//check mobile_selectmenu by default
-		$('#mobile_selectmenu').attr('checked','checked');
+	$(ShowFeaturedThumb).click(function() {
+		if($(this).val() !== 'disabled') {
+			$('#section-featured_thumbnail_places').fadeIn(400);
+		} else {
+			$('#section-featured_thumbnail_places').fadeOut(400);
+		}
 	});
-	// hide if disabled is clicked
-	$('#'+shortName+'-mobile_support-desktop').click(function() {
-		//uncheck mobile_selectmenu if disabled
-		$('#section-mobile_selectmenu,#section-menu_text,#section-viewport_scale').fadeOut(400);
-		$('#mobile_selectmenu').removeAttr('checked');
-	});
-
-
-	// Mobile Logo
-	$('#use_mobile_logo_image').click(function() {
-		$('#section-mobile_header_logo,#section-mobile_logo_height,#section-mobile_logo_image_is_retina').fadeToggle(400);
-	});
-
-	if ($('#use_mobile_logo_image:checked').val() !== undefined) {
-		$('#section-mobile_header_logo,#section-mobile_logo_height,#section-mobile_logo_image_is_retina').show();
-	}
-
-
-
-	// Theme Credits
-	$('#st_credits').click(function() {
-		$('#section-st_affid').fadeToggle(400);
-	});
-
-	if ($('#st_credits:checked').val() !== undefined) {
-		$('#section-st_affid').show();
-	}
 
 
 	// Image Options

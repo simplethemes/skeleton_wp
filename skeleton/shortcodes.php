@@ -25,7 +25,7 @@ function st_two_thirds_last( $atts, $content = null ) {
 }
 add_shortcode('two_thirds_last', 'st_two_thirds_last');
 
-// 1-4 col 
+// 1-4 col
 
 function st_one_half( $atts, $content = null ) {
    return '<div class="one_half">' . do_shortcode($content) . '</div>';
@@ -104,7 +104,7 @@ function st_four_fifth_last( $atts, $content = null ) {
 }
 add_shortcode('four_fifth_last', 'st_four_fifth_last');
 
-// 1-6 col 
+// 1-6 col
 
 // one_sixth
 function st_one_sixth( $atts, $content = null ) {
@@ -159,7 +159,7 @@ function st_button( $atts, $content = null ) {
 		'target' => '_self',
 		'caption' => '',
 		'align' => 'right'
-    ), $atts));	
+    ), $atts));
 	$button;
 	$button .= '<div class="button '.$size.' '. $align.'">';
 	$button .= '<a target="'.$target.'" class="button '.$color.'" href="'.$link.'">';
@@ -177,12 +177,12 @@ add_shortcode('button', 'st_button');
 add_shortcode( 'tabgroup', 'st_tabgroup' );
 
 function st_tabgroup( $atts, $content ){
-	
+
 $GLOBALS['tab_count'] = 0;
 do_shortcode( $content );
 
 if( is_array( $GLOBALS['tabs'] ) ){
-	
+
 foreach( $GLOBALS['tabs'] as $tab ){
 $tabs[] = '<li><a href="#'.$tab['id'].'">'.$tab['title'].'</a></li>';
 $panes[] = '<li id="'.$tab['id'].'Tab">'.$tab['content'].'</li>';
@@ -216,7 +216,7 @@ function st_toggle( $atts, $content = null ) {
 		 'title' => '',
 		 'style' => 'list'
     ), $atts));
-	output;
+	$output = '';
 	$output .= '<div class="'.$style.'"><p class="trigger"><a href="#">' .$title. '</a></p>';
 	$output .= '<div class="toggle_container"><div class="block">';
 	$output .= do_shortcode($content);
@@ -275,16 +275,16 @@ function st_latest($atts, $content = null) {
 		if ($excerpt == 'true') {
 			$result.='<h4><a href="'.get_permalink().'">'.the_title("","",false).'</a></h4>';
 		} else {
-			$result.='<div class="latest-title"><a href="'.get_permalink().'">'.the_title("","",false).'</a></div>';			
+			$result.='<div class="latest-title"><a href="'.get_permalink().'">'.the_title("","",false).'</a></div>';
 		}
-		
-		
+
+
 		// thumbnail
 		if (has_post_thumbnail() && $thumbs == 'true') {
 			$result.= '<img alt="'.get_the_title().'" class="alignleft latest-img" src="'.get_bloginfo('template_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
 		}
 
-		// excerpt		
+		// excerpt
 		if ($excerpt == 'true') {
 			// allowed tags in excerpts
 			$allowed_tags = '<a>,<i>,<em>,<b>,<strong>,<ul>,<ol>,<li>,<blockquote>,<img>,<span>,<p>';
@@ -296,18 +296,18 @@ function st_latest($atts, $content = null) {
 			$content = preg_replace($pattern,"", $text);
 			$result.= '<div class="latest-excerpt">'.st_limit_words($content,$length).'</div>';
 		}
-		
-		// excerpt		
+
+		// excerpt
 		if ($morelink) {
 			$result.= '<a class="more-link" href="'.get_permalink().'">'.$morelink.'</a>';
 		}
-		
+
 		// item close
 		$result.='</div>';
-  
+
 	endwhile;
 		wp_reset_postdata();
-	
+
 	// container close
 	$result.='</div>';
 	return $result;

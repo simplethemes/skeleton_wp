@@ -7,6 +7,6 @@ $ExpStr = "Expires: " .
 gmdate("D, d M Y H:i:s",
 time() + $offset) . " GMT";
 header($ExpStr);
-include_once (TEMPLATEPATH . '/st_styles.php');
+get_template_part( 'st_styles' );
 if(extension_loaded('zlib')){ob_end_flush();}
 ?>

@@ -37,6 +37,7 @@ function importfonts() {
 		'h4' => 'h4',
 		'h5' => 'h5'
 	);
+	$result = false;
 	foreach ($headings as $key => $selector) {
 		$item = $selector.'_typography';
 		$property = of_get_option($item);

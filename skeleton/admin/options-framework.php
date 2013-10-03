@@ -201,7 +201,7 @@ function optionsframework_load_scripts( $hook ) {
 		return;
 
 	$theme  = wp_get_theme();
-	$themename = $theme['Name'];
+	$themename = $theme['Template'];
 	$themename = preg_replace("/\W/", "_", strtolower($themename) );
 	$preset = of_get_option('layout_style');
 

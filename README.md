@@ -18,16 +18,19 @@ Special thanks to the following people/sites for code and inspiration:
 
 
 ## Installation & Basic Setup
-This repository contains multiple items. To install this theme, download and **extract first**. Upload the folder and contents of the 'skeleton' folder to your wp-content/themes/ directory, then activate from Appearance &rarr; Themes. It's important to keep the parent theme folder named 'skeleton' as the [CSS PIE](http://css3pie.com/) script relies on this path.
+To install Skeleton, you should unzip the package you downloaded from here locally, then upload the folders within to your WP site (via FTP) with the following directory structure:
+
+**wp-content/themes/skeleton**
+and
+**wp-content/themes/skeleton_childtheme**
+
+Next, activate the **child theme** from Appearance > Themes. 
 
 You can configure its options from Appearance &rarr; Theme Options.
 
-If you want to use as Skeleton as a child theme, a base starting point with a few modifications as an example is included in the 'skeleton_childtheme' folder. To create your own, you should start with three files:
-
-* style.css
-* functions.php
-* options.php
-
+If you need to customize any of theme options, copy the parent theme options.php to your child theme directory.
+To override any of the parent theme functions, just copy the function(s) from the parent theme into your child theme's functions.php file.
+Skeleton will always give priority to the child theme.
 
 ##Shortcodes
 
@@ -62,7 +65,7 @@ A callout is (by default) a rounded cornered styled inset box. It has two argume
 
 ###Fluid Columns
 
-You've seen these before. The fractional shortcode combinations allow you to inser scalable columns into your content. The only rule here is, the last column must have a suffix of '_last'. See the example below.
+You've seen these before. The fractional shortcode combinations allow you to insert scalable columns into your content. The only rule here is, the last column must have a suffix of '_last'. See the example below.
 
 	// Three Columns Example
 	[one_third]

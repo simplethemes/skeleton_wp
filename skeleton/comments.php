@@ -17,8 +17,8 @@
 ?>
 
 <!-- You can start editing here. -->
-<div id="comments">
 <?php if ( have_comments() ) : ?>
+<div id="comments">
 
 	<h2><?php printf( _n( 'One Response to %2$s', '%1$s Responses to %2$s', get_comments_number(), 'smpl' ), number_format_i18n( get_comments_number() ), '<span class="normal">&quot;'.get_the_title().'&quot;</span>' );?></h2>
 

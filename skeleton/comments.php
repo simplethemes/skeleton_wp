@@ -15,10 +15,10 @@
 		return;
 	}
 ?>
+<div id="comments">
 
 <!-- You can start editing here. -->
 <?php if ( have_comments() ) : ?>
-<div id="comments">
 
 	<h2><?php printf( _n( 'One Response to %2$s', '%1$s Responses to %2$s', get_comments_number(), 'smpl' ), number_format_i18n( get_comments_number() ), '<span class="normal">&quot;'.get_the_title().'&quot;</span>' );?></h2>
 
@@ -68,10 +68,9 @@ $comment_args = array(
 					'</p>',
 				'comment_notes_after' => ''
 			);
-
-	if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
-		<p> <a href="<?php echo wp_login_url( get_permalink() ); ?>"><?php _e('You must be logged in to post a comment.','smpl');?></a> </p>
-	<?php else : comment_form($comment_args); ?>
-	<?php endif; // If registration required and not logged in ?>
-</div>
+if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
+	<p> <a href="<?php echo wp_login_url( get_permalink() ); ?>"><?php _e('You must be logged in to post a comment.','smpl');?></a> </p>
+<?php else : comment_form($comment_args); ?>
+<?php endif; // If registration required and not logged in ?>
 <?php endif;?>
+</div>

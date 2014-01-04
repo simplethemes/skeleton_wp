@@ -10,7 +10,7 @@
 		die ('Please do not load this page directly. Thanks!');
 
 	if ( post_password_required() ) { ?>
-		<p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.');?></p>
+		<p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.','smpl');?></p>
 	<?php
 		return;
 	}
@@ -49,13 +49,13 @@ $comment_args = array(
 		'fields' => apply_filters( 'comment_form_default_fields', array(
 				'author' => '<p class="comment-form-author">' .
 					( $req ? '<span class="required">*</span>' : '' ) .
-					'<label for="author">' . __( 'Your Name' ) . '</label> <br />' .
+					'<label for="author">' . __( 'Your Name','smpl' ) . '</label> <br />' .
 					'<input id="author" name="author" type="text" value="' .
 					esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' />' .
 					'</p>',
     			'email'  => '<p class="comment-form-email">' .
     				( $req ? '<span class="required">*</span>' : '' ) .
-    				'<label for="email">' . __( 'Your Email' ) . '</label> <br />' .
+    				'<label for="email">' . __( 'Your Email','smpl' ) . '</label> <br />' .
     				'<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' />' .
     				'</p>',
     			'url' =>
@@ -63,7 +63,7 @@ $comment_args = array(
     				__( 'Website', 'domainreference' ) . '</label> <br />' .
     				'<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>' ) ),
 				'comment_field' => '<p class="comment-form-comment">' .
-					'<label for="comment"><span class="required">*</span>' . __( 'Comment:' ) . '</label><br />' .
+					'<label for="comment"><span class="required">*</span>' . __( 'Comment:','smpl' ) . '</label><br />' .
 					'<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>' .
 					'</p>',
 				'comment_notes_after' => ''

@@ -289,7 +289,6 @@ if ( ! function_exists( 'skeleton_setup' ) ):
  * @since Skeleton 1.0
  */
 function skeleton_setup() {
-
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
 
@@ -1119,6 +1118,17 @@ function get_image_path() {
 	return $theimage;
 }
 
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Override default embeddable content width
+/*-----------------------------------------------------------------------------------*/
+
+if (!function_exists('st_content_width'))  {
+	function st_content_width() {
+		$content_width = 580;
+	}
 }
 
 

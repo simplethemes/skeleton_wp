@@ -2,7 +2,7 @@
 Theme Name: Skeleton
 Theme URI: http://www.simplethemes.com
 Description: A simple WordPress theme based on the Skeleton RWD framework
-Version: 1.9.1
+Version: 1.9.5
 Author: Simple Themes
 Author URI: http://www.simplethemes.com
 License: GPL
@@ -115,15 +115,13 @@ body {
 	color: #9f9f9f;
 }
 
-a.themeauthor {
-	display: block;
-	width: 75px;
-	height: 12px;
-	margin: 0px auto;
-	float: right;
+.themeauthor,
+.themeauthor a:link,
+.themeauthor a:hover,
+.themeauthor a:visited {
+	font-size: 11px;
+	color: #AEAEAE;
 	text-decoration: none;
-	text-indent: -9999em;
-	background: url(images/icons/stlogo.png) no-repeat right center;
 }
 
 
@@ -210,7 +208,7 @@ a.themeauthor {
 
 #navigation ul li a {
 	background-image: none;
-	padding: 15px 25px;
+	padding: 15px 20px;
 	text-decoration: none;
 	display: block;
 	font-weight: bold;
@@ -255,7 +253,7 @@ a.themeauthor {
     border-color: #EAEAEA #F5F5F5 #F5F5F5 #F5F5F5;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
-     border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
     border-style: solid;
     border-width: 1px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -354,7 +352,7 @@ a.themeauthor {
 /* #Lists
 ================================================== */
 	ul, ol { margin-bottom: 20px; }
-	ul { list-style: none outside; }
+	ul { list-style: disc inside; }
 	ol { list-style: decimal; }
 	ol, ul.square, ul.circle, ul.disc { margin-left: 30px; }
 	ul.square { list-style: square outside; }
@@ -367,6 +365,19 @@ a.themeauthor {
 	li { line-height: 18px; margin-bottom: 12px; }
 	ul.large li { line-height: 21px; }
 	li p { line-height: 21px; }
+	abbr,acronym {
+		border-bottom: 1px dotted #333;
+		cursor: help;
+		cursor: alias;
+	}
+	cite {
+		font-style: italic;
+		font-family: Georgia, serif;
+	}
+	q {
+		font-style: italic;
+	}
+
 
 /* # Image Alignment Classes
 ============================================================== */
@@ -454,7 +465,7 @@ table td {
 /* @group Widgets */
 
 
-.widget-container ul {
+li.widget-container {
 	list-style: none;
 }
 
@@ -617,6 +628,30 @@ li.menu-item a:hover {
 }
 
 /* @end */
+
+/* @group Pagination */
+
+.page-link {
+	border-bottom: 1px solid #ccc;
+	padding: 4px 0;
+	font-size: .90em;
+}
+.page-link a {
+	border: 1px solid #ccc;
+	background-color: #eee;
+	text-decoration: none;
+	padding: 2px 4px;
+	line-height: 1;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+}
+.page-link a:hover {
+	background-color: #fff;
+}
+
+/* @end */
+
 
 /* @group WP Blog Styles */
 
@@ -1750,18 +1785,18 @@ p.trigger.active a {
 #comments {border: 0;width: 100%;}
 body.dark #comments {background: url(images/dark/divider.png) repeat-x right top;}
 
-#comments h2 {font-size: 1.5em;display: block;border-bottom: 1px solid #d6d6d6;font-weight: bold;}
+#comments h2 {
+	font-size: 1.5em;
+	border-bottom: 1px solid #d6d6d6;
+	font-weight: bold;
+	margin: 2em 0 1em 0;
+}
 #comments h6 {font-family: "Times New Roman", Times, serif;letter-spacing: normal;text-transform: uppercase;margin: 10px 0px;}
 
 #comments .comment-meta { margin:0px 0px 20px 0px; display:block;}
 #comments .commentlist { margin:0px; float:left; list-style:none; width:100%;  }
 #comments .commentlist ul { list-style:none; margin:0; padding:0; clear:both; }
 #comments .commentlist li {margin:0; padding:0;  display:block;}
-
-
-
-body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
-
 #comments .commentlist li li { margin:0 0 20px 25px; }
 #comments .commentlist li li .comment-meta{ width:445px; }
 #comments .commentlist li li li {margin:0 0 20px 25px;}
@@ -1794,6 +1829,30 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 }
 #comments body.dark .vcard {
 	background:url(images/dark/comment_author_bg.png) no-repeat top right;
+}
+
+/* Pingbacks */
+
+
+#comments .commentlist li.pingback,
+#comments .commentlist li.pingback ul,
+#comments .commentlist li.pingback ul li,
+#comments .commentlist li.pingback .vcard {
+	margin: 0;
+	padding: 0;
+}
+
+#comments .commentlist li.pingback .vcard {
+	background:none;
+	width: 0;
+}
+#comments .commentlist li.pingback p {
+	font-size: .80em;
+	line-height: 1.45em;
+	color: #6D6D6D;
+}
+#comments .commentlist li.pingback h6 {
+	text-transform: none;
 }
 
 
@@ -1847,15 +1906,15 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 
 /* Attachment Page */
 
-#nav-below {
+#nav-below,#nav-above {
 	width: 100%;
 }
 
-#nav-below .nav-previous a {
+.nav-previous a {
 	float: left;
 
 }
-#nav-below .nav-next a {
+.nav-next a {
 	float: right;
 }
 .entry-caption {
@@ -1911,14 +1970,7 @@ input[type="checkbox"] {display: inline; }
 .add-top { margin-top: 20px !important; }
 
 
-.resize {
-    background: url(images/resize.png) repeat scroll 0 0 transparent;
-    bottom: 0;
-    height: 80px;
-    position: fixed;
-    right: 0;
-    width: 80px;
-}
+
 .bypostauthor,.gallery-caption {}
 
 /* @end */

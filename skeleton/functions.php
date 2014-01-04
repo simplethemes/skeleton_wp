@@ -301,8 +301,6 @@ function skeleton_setup() {
  	// Use Regenerate Thumbnails Plugin to create these images on an existing install..
 	// Set default thumbnail size
   	set_post_thumbnail_size( 150, 150 );
-	// 75px square
-	add_image_size( $name = 'squared75', $width = 75, $height = 75, $crop = true );
 	// 150px square
 	add_image_size( $name = 'squared150', $width = 150, $height = 150, $crop = true );
 	// 250px square
@@ -311,12 +309,6 @@ function skeleton_setup() {
 	add_image_size( $name = 'video43', $width = 320, $height = 240, $crop = true );
 	// 16:9 Video
 	add_image_size( $name = 'video169', $width = 320, $height = 180, $crop = true );
-	// 4:3 Video Banner
-	add_image_size( $name = 'largevideo43', $width = 640, $height = 480, $crop = true );
-	// 16:9 Video Banner
-	add_image_size( $name = 'largevideo169', $width = 640, $height = 360, $crop = true );
-	// Thin Banner
-	add_image_size( $name = 'banner', $width = 640, $height = 150, $crop = true );
 
 
 	// Register the available menus
@@ -407,88 +399,24 @@ endif;
 
 
 /*-----------------------------------------------------------------------------------*/
-// Builds our thumbnail images
-// See options.php and skeleton_setup() for customization
+// Featured Thumbnails
+// Utility function for defining conditional featured image settings
 /*-----------------------------------------------------------------------------------*/
 
-	function st_thumbnailer($content) {
+if ( !function_exists( 'st_thumbnailer' ) ) {
 
+	function st_thumbnailer($content) {
 		global $post;
 		global $id;
-
-		$theimage = get_image_path();
-		$showthumbs = of_get_option('display_featured_thumbnails');
-		$options = of_get_option('featured_thumbnail_places');
-
-		switch ($showthumbs) {
-			//Square Left
-			case 'square_left':
-				$size = 'squared150';
-				$align = 'alignleft scale-with-grid';
-			break;
-			// Square Right
-			case 'square_right':
-				$size = 'squared150';
-				$align = 'alignright scale-with-grid';
-			break;
-			// 4:3 Left
-			case '43_left':
-				$size = 'video43';
-				$align = 'alignleft scale-with-grid';
-			break;
-			// 4:3 Right
-			case '43_right':
-				$size = 'video43';
-				$align = 'alignright scale-with-grid';
-			break;
-			// 16:9 Left
-			case '169_left':
-				$size = 'video169';
-				$align = 'alignleft scale-with-grid';
-			break;
-			// 16:9 Right
-			case '169_right':
-				$size = 'video169';
-				$align = 'alignright scale-with-grid';
-			break;
-			// 16:9 Center Top
-			case '169_top':
-				$size = 'largevideo169';
-				$align = 'aligncenter scale-with-grid';
-			break;
-			// Web Banner Top
-			case 'banner_top':
-				$size = 'banner';
-				$align = 'aligncenter scale-with-grid';
-			break;
-			case 'disabled':
-			break;
-		}
-
-
-		// Archives
-		if ((is_archive() || is_home()) && $showthumbs != 'disabled' && $options['archive'] == 1 && has_post_thumbnail() ) {
-			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
-			$content =  $image . $content;
-		}
-
-		// Single Posts
-		if (is_single() && $showthumbs != 'disabled' && $options['single'] == 1 && has_post_thumbnail() ) {
-			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
-			$content =  $image . $content;
-		}
-
-		// Single Pages
-		if (is_page() && $showthumbs != 'disabled' && $options['page'] == 1 && has_post_thumbnail() ) {
-			$image = get_the_post_thumbnail($id, $size, array('class' => $align));
-			$content =  $image . $content;
-		}
-
+		$size = 'squared150';
+		$align = 'alignleft scale-with-grid';
+		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
+		$content =  $image . $content;
 		return $content;
 	}
 	add_filter('the_content','st_thumbnailer');
 
-
+}
 
 /*-----------------------------------------------------------------------------------*/
 // Styles the header image displayed on the Appearance > Header admin panel.
@@ -578,15 +506,6 @@ if ( !function_exists( 'skeleton_custom_excerpt_more' ) ) {
 	add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
 
 }
-
-
-/*-----------------------------------------------------------------------------------*/
-// Removes inline styles printed when the gallery shortcode is used.
-// Galleries are styled by the theme in Skeleton's style.css. This is just
-// a simple filter call that tells WordPress to not use the default styles.
-/*-----------------------------------------------------------------------------------*/
-
-add_filter( 'use_default_gallery_style', '__return_false' );
 
 
 
@@ -1065,7 +984,7 @@ add_action('wp_footer', 'st_footer');
 		// prints site credits
 		echo '<div id="credits">';
 		echo of_get_option('footer_text');
-		echo '<br /><a class="themeauthor" href="http://www.simplethemes.com" title="Simple WordPress Themes">WordPress Themes</a></div>';
+		echo '<br /><div class="themeauthor">WordPress Theme by <a href="http://www.simplethemes.com" title="Simple WordPress Theme">Simple Themes</a></div></div>';
 }
 }
 

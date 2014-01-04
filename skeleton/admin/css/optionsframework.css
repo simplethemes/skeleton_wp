@@ -49,6 +49,7 @@
 #optionsframework-wrap .nav-tab-wrapper a {
 	font-size: 14px;
 	outline: 0;
+	font-weight: normal;
 	display: block;
 	position: relative;
 	text-indent: 10px;
@@ -174,7 +175,7 @@
 	max-width:94%;
 }
 #optionsframework .of-input {
-	width:100%;
+	width:auto;
 }
 #optionsframework .controls select, #optionsframework .controls textarea {
 	margin-bottom:10px;

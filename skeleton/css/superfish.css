@@ -1,7 +1,3 @@
-/* @override 
-	http://slate.com/wp-content/themes/skeleton/superfish.css?ver=1.3
-*/
-
 /* @group Main Menu */
 
 /* Main Menu */
@@ -46,6 +42,7 @@
 
 #navigation ul ul {
 	visibility: hidden;
+	display: none;
 	position: absolute;
 	min-width: 200px;
 	z-index: 9998;
@@ -84,6 +81,7 @@
 
 #navigation ul li:hover > ul {
 	visibility: visible;
+	display: block;
 }
 
 /* @end */

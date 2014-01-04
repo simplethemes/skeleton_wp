@@ -36,7 +36,7 @@ $body_background_defaults = array(
 'image' => site_url('wp-content/themes/skeleton/images/border_top.png'),
 'repeat' => 'repeat-x',
 'position' => 'top center',
-'attachment'=>'fixed');
+'attachment'=>'scroll');
 
 
 // If using image radio buttons, define a directory path
@@ -227,36 +227,6 @@ $options[] = array( "name" => "Sidebar Position",
 						'right' => $imagepath . '2cr.png')
 					);
 
-
-$options[] = array( "name" => "Show Featured Thumbnails",
-					"desc" => "Enables display of blog post featured thumbnails. Use the <a href=\"http://wordpress.org/plugins/regenerate-thumbnails/\">Regenate Thumbnails Plugin</a> if you have existing images that need to be regenerated.",
-					"id" => "display_featured_thumbnails",
-					"std" => "none",
-					"type" => "radio",
-					"class" => "linear",
-					"options" => array(
-						"disabled" => "Do not display",
-						"square_left" => "Square Aligned Left",
-						"square_right" => "Square Aligned Right",
-						"43_left" => "4:3 Aligned Left",
-						"43_right" => "4:3 Aligned Right",
-						"169_left" => "16:9 Aligned Left",
-						"169_right" => "16:9 Aligned Right",
-						"169_top" => "16:9 Banner Top Wide",
-						"banner_top" => "Thin Banner Top Wide",
-						)
-					);
-
-$options[] = array( "name" => "Display Featured Thumbnails on the following pages.",
-					"desc" => "",
-					"id" => "featured_thumbnail_places",
-					"type" => "multicheck",
-					"options" => array(
-						'archive' => 'Archive Pages',
-						'single' => 'Single Posts',
-						'page' => 'Single Pages',
-						)
-					);
 
 $options[] = array("name" => "Docs & Info","type" => "heading");
 

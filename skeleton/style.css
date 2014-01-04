@@ -1869,8 +1869,6 @@ body.page-template-onecolumn-page-php #comments .commentlist li .comment-meta {}
 
 
 
-
-
 /* Apply CSS class of "guest" to menu items hidden from logged-in users */
 
 body.logged-in li.guest,
@@ -1881,9 +1879,15 @@ body.logged-in li.guest {
 /* #Images
 ================================================== */
 
-img.scale-with-grid {
+img.scale-with-grid,
+.entry-content img,
+.entry-summary img,
+.comment-content img,
+.widget img,
+.wp-caption {
 	max-width: 100%;
-	height: auto; }
+	height: auto;
+}
 
 
 /* #Forms (see formalize.css)

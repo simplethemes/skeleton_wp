@@ -281,7 +281,7 @@ function st_latest($atts, $content = null) {
 
 		// thumbnail
 		if (has_post_thumbnail() && $thumbs == 'true') {
-			$result.= '<img alt="'.get_the_title().'" class="alignleft latest-img" src="'.get_bloginfo('template_directory').'/thumb.php?src='.get_image_path().'&amp;h='.$height.'&amp;w='.$width.'"/>';
+			$result.= get_the_post_thumbnail( $myposts->post->ID, array($width,$height), array('class'=>"alignleft latest-img") );
 		}
 
 		// excerpt

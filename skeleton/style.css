@@ -61,8 +61,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		background-color: #ededed;
 		border-bottom: 1px solid #d9d9d9;
 		border-top: 1px solid #d9d9d9;
-		display: block;
-		width: 100%;
 		font: 12px/24px Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
 		margin: 5px 0;
 		padding: 5px;
@@ -1894,19 +1892,19 @@ img.scale-with-grid,
 ================================================== */
 
 
-	label,legend {
-	font-weight: bold;font-size: 13px;
-	display: inline-block;
-	}
+label,legend {
+font-weight: bold;font-size: 13px;
+display: inline-block;
+}
 
-	input[type="checkbox"] {display: inline; }
+input[type="checkbox"] {display: inline; }
 
 /* # Misc Typography Balancing to Maintain Vertical Rhythm
 ============================================================== */
-	.remove-bottom { margin-bottom: 0 !important; }
-	.half-bottom { margin-bottom: 10px !important; }
-	.add-bottom { margin-bottom: 20px !important; }
-	.add-top { margin-top: 20px !important; }
+.remove-bottom { margin-bottom: 0 !important; }
+.half-bottom { margin-bottom: 10px !important; }
+.add-bottom { margin-bottom: 20px !important; }
+.add-top { margin-top: 20px !important; }
 
 
 .resize {
@@ -1922,4 +1920,9 @@ img.scale-with-grid,
 /* @end */
 
 .sticky {
+	padding: 1em 0;
+	margin: 1em auto;
+	border: 10px solid #eee;
+	border-left: none;
+	border-right:none;
 }

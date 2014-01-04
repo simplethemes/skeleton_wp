@@ -100,11 +100,15 @@ body {
 
 /* Footer Styles */
 
+
 #footer {
 	border-top: 1px solid #d6d6d6;
 	font-size: .9em;
     margin: 0 auto;
+	clear: both;
+	padding: 10px 0 10px 0;
 }
+
 #footer.noborder {
 	border: none;
 	padding-top: 0;
@@ -113,7 +117,9 @@ body {
 #footer #credits {
 	font-size: 11px;
 	color: #9f9f9f;
+	text-align: center;
 }
+
 
 .themeauthor,
 .themeauthor a:link,
@@ -177,6 +183,18 @@ body {
 /* @end */
 
 /* @group Navigation Bar */
+
+#navigation {
+	margin-bottom: 20px;
+	clear: both;
+}
+
+#navigation ul,
+#navigation ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
 
 #navigation ul {
 	width: 100%;
@@ -395,6 +413,13 @@ body {
 	display:block;
 	margin:0 auto 10px auto;
 }
+
+.full-width {
+	width:100%;
+	height:auto;
+	overflow:hidden;
+}
+
 
 /* WP Captions */
 
@@ -1982,3 +2007,8 @@ input[type="checkbox"] {display: inline; }
 	border-left: none;
 	border-right:none;
 }
+
+
+
+
+

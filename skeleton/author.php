@@ -29,16 +29,16 @@ st_before_content($columns='');
 <?php
 // If a user has filled out their description, show a bio on their entries.
 if ( get_the_author_meta( 'description' ) ) : ?>
-					
-						
+
+
 				<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'skeleton_author_bio_avatar_size', 60 ) ); ?>
-						
-						
+
+
 				<h2><?php printf( __( 'About %s', 'skeleton' ), get_the_author() ); ?></h2>
-				
+
 				<?php the_author_meta( 'description' ); ?>
-						
-					
+
+
 <?php endif; ?>
 
 <?php

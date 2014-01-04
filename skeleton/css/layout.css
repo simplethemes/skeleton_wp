@@ -1,46 +1,4 @@
 
-/* Table of Contents
-==================================================
-	#Site Styles
-	#Page Styles
-	#Media Queries
-	#Font-Face */
-
-/* #Site Styles
-================================================== */
-
-
-/* @group Navigation */
-
-#navigation {
-	margin-bottom: 20px;
-	clear: both;
-}
-
-#navigation ul,
-#navigation ul li {
-	float: left;
-	margin: 0;
-	padding: 0;
-}
-
-/* @end */
-
-#footer {
-	clear: both;
-	padding: 10px 0 10px 0;
-}
-
-#credits {
-	text-align: center;
-}
-
-.full-width {width:100%; height:auto; overflow:hidden}
-
-/* #Page Styles
-================================================== */
-
-
 
 /* #Media Queries
 ================================================== */
@@ -52,7 +10,6 @@
 	#navigation ul li a {font-size: .9em;padding: 10px 15px;}
 	#navigation ul {min-width: 700px;}
 	#sidebar .widget-container {margin-left: 0px;}
-	.resize {display: none;}
 	#respond textarea {width:auto;}
 	#header .site-desc.text {font-size: 1.25em;}
 
@@ -91,11 +48,11 @@
 
 	/* Initial reset and hide sublevels in mobile view */
 
-	#navigation ul.sub-menu,
-	#navigation ul.sub-menu li,
-	#navigation ul.sub-menu li:hover,
-	#navigation ul.sub-menu li a,
-	#navigation ul.sub-menu li a:hover
+	#navigation ul.sub-menu,#navigation ul.children,
+	#navigation ul.sub-menu li,#navigation ul.children li,
+	#navigation ul.sub-menu li:hover,#navigation ul.children li:hover,
+	#navigation ul.sub-menu li a,#navigation ul.children li a,
+	#navigation ul.sub-menu li a:hover,#navigation ul.children li a:hover
 	 {
 		display: none;
 		position: relative;
@@ -113,16 +70,16 @@
 
 	/* Declare new padding for submenu items */
 
-	#navigation ul.sub-menu li a,
-	#navigation ul.sub-menu li a:hover {
+	#navigation ul.sub-menu li a,#navigation ul.children li a,
+	#navigation ul.sub-menu li a:hover,#navigation ul.children li a:hover {
 		padding: 4px 0px 4px 10px;
 	}
 
 	/* Show on hover */
 
-	#navigation li:hover ul.sub-menu,
-	#navigation li:hover ul.sub-menu li,
-	#navigation li:hover ul.sub-menu li a {
+	#navigation li:hover ul.sub-menu,#navigation li:hover ul.children,
+	#navigation li:hover ul.sub-menu li,#navigation li:hover ul.children li,
+	#navigation li:hover ul.sub-menu li a,#navigation li:hover ul.children li a {
 		display: inline-block;
 	}
 	#respond textarea {width:300px;}
@@ -136,7 +93,6 @@
 	#breadcrumb {display: none;}
 
 	#sidebar .widget-container {margin-left: 0px;}
-	.resize {display: none;}
 
 	}
 
@@ -144,7 +100,18 @@
 	@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
 	/* Anything smaller than standard 960 */
-	@media only screen and (max-width: 959px) {}
+	@media only screen and (max-width: 959px) {
+		#header #site-title a {
+			font-size: 1.5em !important;
+		}
+		#header .site-desc {
+			font-size: 1.15em !important;
+			line-height: 1 !important;
+		}
+		#header .inner {
+			padding-bottom: 0;
+		}
+	}
 
 	/* iPad Portrait Only */
 	@media only screen and (min-width: 768px) and (max-width: 991px) and (max-device-width: 1000px) {}

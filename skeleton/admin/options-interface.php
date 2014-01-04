@@ -28,8 +28,9 @@ function optionsframework_tabs() {
  */
 
 function optionsframework_fields() {
-
+	WP_Filesystem();
 	global $allowedtags;
+	global $wp_filesystem;
 	$optionsframework_settings = get_option( 'optionsframework' );
 
 	// Gets the unique option id
@@ -188,7 +189,8 @@ function optionsframework_fields() {
 			}
 			if ( $value['desc'] ) {
 				// $output .= $value['desc'] . "\n";
-			$docfile = file_get_contents(TEMPLATEPATH . '/docs'. '/' .$value['desc'], true);
+			$docfile = $wp_filesystem->get_contents(TEMPLATEPATH . '/docs'. '/' .$value['desc'], true);
+			//$docfile = file_get_contents();
 
 			if (is_child_theme()) {
 					$output .= '<a style="position:absolute;top:20px;right:20px;" class="button-primary" href="'.$_SERVER['PHP_SELF'].'?page=options-framework&update_check">Check for Updates</a>';

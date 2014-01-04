@@ -258,6 +258,13 @@ $options[] = array( "name" => "Display Featured Thumbnails on the following page
 						)
 					);
 
+$options[] = array("name" => "Docs & Info","type" => "heading");
+
+$options[] = array( "name" => "Documentation",
+					"id" => "theme_docs",
+					"desc" => "README.md",
+					"class" => "basic",
+					"type" => "docs");
 
 
 	return $options;

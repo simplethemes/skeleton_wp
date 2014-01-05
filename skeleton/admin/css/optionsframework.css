@@ -202,21 +202,21 @@
 	width:auto;
 }
 #optionsframework .controls .of-typography-size {
-	width:80px;
+	width:100px;
 	float:left
 }
 #optionsframework .controls .of-typography-unit {
-	width:50px;
+	width:75px;
 	margin-left:5px;
 	float:left
 }
 #optionsframework .controls .of-typography-face {
-	width:100px;
+	width:150px;
 	margin-left:5px;
 	float:left
 }
 #optionsframework .controls .of-typography-style {
-	width:80px;
+	width:100px;
 	margin-left:5px;
 	margin-right:5px;
 	float:left

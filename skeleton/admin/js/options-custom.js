@@ -5,10 +5,10 @@
 
 jQuery(document).ready(function($) {
 
-	var siteURL = st_getsiteurl.st_siteurl;
-	var themeDir = st_activethemedir.st_activethemedir;
-	var shortName = st_shortname;
-	var PreSet = st_preset;
+	var siteURL = skeleton_getsiteurl.skeleton_siteurl;
+	var themeDir = skeleton_activethemedir.skeleton_activethemedir;
+	var shortName = skeleton_shortname;
+	var PreSet = skeleton_preset;
 
 	// Fade out the save message
 	$('.fade').delay(1000).animate({height: 0, opacity: 0}, 'fast', function() {

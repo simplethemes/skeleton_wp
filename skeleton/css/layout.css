@@ -102,10 +102,10 @@
 	/* Anything smaller than standard 960 */
 	@media only screen and (max-width: 959px) {
 		#header #site-title a {
-			font-size: 1.5em !important;
+			font-size: 28px !important;
 		}
 		#header .site-desc {
-			font-size: 1.15em !important;
+			font-size: 18px !important;
 			line-height: 1 !important;
 		}
 		#header .inner {

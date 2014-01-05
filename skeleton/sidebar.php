@@ -7,15 +7,16 @@
  * @since skeleton 0.1
  */
 ?>
-<?php do_action('st_before_sidebar');?>
+<?php do_action('skeleton_before_sidebar');?>
 
 <?php // primary widget area
-	if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
-	<ul>
-		<?php dynamic_sidebar( 'primary-widget-area' ); ?>
-	</ul>
-<?php endif; // end primary widget area ?>
+		$post_wide = get_post_meta($post->ID, "sidebars", $single = true) ==  "false";
+		if ( !$post_wide && is_active_sidebar( 'primary-widget-area' ) ) : ?>
+		<ul>
+			<?php dynamic_sidebar( 'primary-widget-area' ); ?>
+		</ul>
+<?php endif;// end primary widget area ?>
 
 
-<?php do_action('st_after_sidebar');?>
+<?php do_action('skeleton_after_sidebar');?>
 

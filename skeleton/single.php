@@ -8,9 +8,9 @@
  */
 
 get_header();
-st_before_content($columns='');
+do_action('skeleton_before_content');
 get_template_part( 'loop', 'single' );
-st_after_content();
+do_action('skeleton_after_content');
 get_sidebar();
 get_footer();
 ?>

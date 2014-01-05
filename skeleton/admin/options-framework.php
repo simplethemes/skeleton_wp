@@ -41,7 +41,7 @@ function optionsframework_rolescheck () {
 add_action( 'init', 'optionsframework_load_sanitization' );
 
 function optionsframework_load_sanitization() {
-	require_once dirname( __FILE__ ) . '/options-sanitize.php';
+	require_once (dirname( __FILE__ ) . '/options-sanitize.php');
 }
 
 /*
@@ -219,12 +219,12 @@ function optionsframework_load_scripts( $hook ) {
 
 	// Enqueue custom option panel JS
 	wp_enqueue_script( 'options-custom', OPTIONS_FRAMEWORK_URL . 'js/options-custom.js', array( 'jquery','wp-color-picker' ) );
-	$data = array( 'st_siteurl' => home_url() );
-	$themedata = array( 'st_activethemedir' => get_bloginfo('stylesheet_directory') );
-	wp_localize_script( 'options-custom', 'st_getsiteurl', $data );
-	wp_localize_script( 'options-custom', 'st_activethemedir', $themedata );
-	wp_localize_script( 'options-custom', 'st_shortname', $themename );
-	wp_localize_script( 'options-custom', 'st_preset', $preset );
+	$data = array( 'skeleton_siteurl' => home_url() );
+	$themedata = array( 'skeleton_activethemedir' => get_bloginfo('stylesheet_directory') );
+	wp_localize_script( 'options-custom', 'skeleton_getsiteurl', $data );
+	wp_localize_script( 'options-custom', 'skeleton_activethemedir', $themedata );
+	wp_localize_script( 'options-custom', 'skeleton_shortname', $themename );
+	wp_localize_script( 'options-custom', 'skeleton_preset', $preset );
 
 	// Inline scripts from options-interface.php
 	add_action( 'admin_head', 'of_admin_head' );

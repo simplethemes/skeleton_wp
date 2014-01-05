@@ -21,18 +21,18 @@
 	 */
 	if ( have_posts() )
 		the_post();
-		st_before_content($columns='');
+		do_action('skeleton_before_content');
 ?>
 
 			<h1>
 <?php if ( is_day() ) : ?>
-				<?php printf( __( 'Daily Archives: %s', 'skeleton' ), get_the_date() ); ?>
+				<?php printf( __( 'Daily Archives: %s', 'smpl' ), get_the_date() ); ?>
 <?php elseif ( is_month() ) : ?>
-				<?php printf( __( 'Monthly Archives: %s', 'skeleton' ), get_the_date('F Y') ); ?>
+				<?php printf( __( 'Monthly Archives: %s', 'smpl' ), get_the_date('F Y') ); ?>
 <?php elseif ( is_year() ) : ?>
-				<?php printf( __( 'Yearly Archives: %s', 'skeleton' ), get_the_date('Y') ); ?>
+				<?php printf( __( 'Yearly Archives: %s', 'smpl' ), get_the_date('Y') ); ?>
 <?php else : ?>
-				<?php _e( 'Blog Archives', 'skeleton' ); ?>
+				<?php _e( 'Blog Archives', 'smpl' ); ?>
 <?php endif; ?>
 			</h1>
 
@@ -48,7 +48,7 @@
 	 * called loop-archives.php and that will be used instead.
 	 */
 	get_template_part( 'loop', 'archive' );
-	st_after_content();
+	do_action('skeleton_after_content');
 	get_sidebar();
 	get_footer();
 ?>

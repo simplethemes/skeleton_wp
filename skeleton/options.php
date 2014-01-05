@@ -48,21 +48,6 @@ $options = array();
 $options[] = array( "name" => "General",
 					"type" => "heading");
 
-
-$options[] = array( "name" => "Customization",
-					"desc" => "In Dynamic Mode customizations are cached to a dynamic stylesheet, however larger sites may notice a decrease in performance. Static Mode simply puts the styles in the document head. Advanced mode does neither and allows you to copy the styles to the stylesheet yourself.",
-					"id" => "dev_mode",
-					"std" => "0",
-					"type" => "radio",
-					"class" => "linear",
-					"options" => array(
-						"1" => "Dynamic Mode",
-						"0" => "Static Mode",
-						"2" => "Advanced Mode"
-						)
-					);
-
-
 $options[] = array( "name" =>  "Body Background",
 					"desc" => "Change the background CSS.",
 					"id" => "body_background",
@@ -216,6 +201,45 @@ $options[] = array( "name" => "Max Layout Width",
 						'1140' => '1140px',
 						'1200' => '1200px')
 					);
+
+
+$options[] = array( "name" => "Sidebar Width",
+					"desc" => "Define the width of your sidebar.",
+					"id" => "sidebar_width",
+					"std" => "five",
+					"type" => "select",
+					"options" => array(
+						'one' =>	'1 Columns',
+						'two' =>	'2 Columns',
+						'three' =>	'3 Columns',
+						'four' =>	'4 Columns',
+						'five' =>	'5 Columns',
+						'six' =>	'6 Columns',
+						'seven' =>	'7 Columns',
+						'eight' =>	'8 Columns')
+					);
+
+$options[] = array( "name" => "Content Width",
+					"desc" => "Define the width of your content area.",
+					"id" => "content_width",
+					"std" => "eleven",
+					"type" => "select",
+					"options" => array(
+						'one' 		=>		' 1 Column',
+						'two' 		=>		' 2 Columns',
+						'three' 	=>		' 3 Columns',
+						'four' 		=>		' 4 Columns',
+						'five' 		=>		' 5 Columns',
+						'six' 		=>		' 6 Columns',
+						'seven' 	=>		' 7 Columns',
+						'eight' 	=>		' 8 Columns',
+						'nine' 		=>		' 9 Columns',
+						'ten' 		=>		'10 Columns',
+						'eleven' 	=>		'11 Columns',
+						'twelve' 	=>		'12 Columns',
+						'thirteen'	=>		'13 Columns')
+					);
+
 
 $options[] = array( "name" => "Sidebar Position",
 					"desc" => "Select a sidebar layout position (left or right). You can also select a wide page layout on a per-page basis.",

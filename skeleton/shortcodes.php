@@ -5,153 +5,160 @@
 * @author Simple Themes - www.simplethemes.com
 **/
 
-function st_one_third( $atts, $content = null ) {
+function skeleton_one_third( $atts, $content = null ) {
    return '<div class="one_third">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('one_third', 'st_one_third');
+add_shortcode('one_third', 'skeleton_one_third');
 
-function st_one_third_last( $atts, $content = null ) {
+function skeleton_one_third_last( $atts, $content = null ) {
    return '<div class="one_third last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('one_third_last', 'st_one_third_last');
+add_shortcode('one_third_last', 'skeleton_one_third_last');
 
-function st_two_thirds( $atts, $content = null ) {
+function skeleton_two_thirds( $atts, $content = null ) {
    return '<div class="two_thirds">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('two_thirds', 'st_two_thirds');
+add_shortcode('two_thirds', 'skeleton_two_thirds');
 
-function st_two_thirds_last( $atts, $content = null ) {
+function skeleton_two_thirds_last( $atts, $content = null ) {
    return '<div class="two_thirds last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('two_thirds_last', 'st_two_thirds_last');
+add_shortcode('two_thirds_last', 'skeleton_two_thirds_last');
 
 // 1-4 col
 
-function st_one_half( $atts, $content = null ) {
+function skeleton_one_half( $atts, $content = null ) {
    return '<div class="one_half">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('one_half', 'st_one_half');
+add_shortcode('one_half', 'skeleton_one_half');
 
 
-function st_one_half_last( $atts, $content = null ) {
+function skeleton_one_half_last( $atts, $content = null ) {
    return '<div class="one_half last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('one_half_last', 'st_one_half_last');
+add_shortcode('one_half_last', 'skeleton_one_half_last');
 
 
-function st_one_fourth( $atts, $content = null ) {
+function skeleton_one_fourth( $atts, $content = null ) {
    return '<div class="one_fourth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('one_fourth', 'st_one_fourth');
+add_shortcode('one_fourth', 'skeleton_one_fourth');
 
 
-function st_one_fourth_last( $atts, $content = null ) {
+function skeleton_one_fourth_last( $atts, $content = null ) {
    return '<div class="one_fourth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('one_fourth_last', 'st_one_fourth_last');
+add_shortcode('one_fourth_last', 'skeleton_one_fourth_last');
 
-function st_three_fourths( $atts, $content = null ) {
+function skeleton_three_fourths( $atts, $content = null ) {
    return '<div class="three_fourths">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('three_fourths', 'st_three_fourths');
+add_shortcode('three_fourths', 'skeleton_three_fourths');
 
 
-function st_three_fourths_last( $atts, $content = null ) {
+function skeleton_three_fourths_last( $atts, $content = null ) {
    return '<div class="three_fourths last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('three_fourths_last', 'st_three_fourths_last');
+add_shortcode('three_fourths_last', 'skeleton_three_fourths_last');
 
 
-function st_one_fifth( $atts, $content = null ) {
+function skeleton_one_fifth( $atts, $content = null ) {
    return '<div class="one_fifth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('one_fifth', 'st_one_fifth');
+add_shortcode('one_fifth', 'skeleton_one_fifth');
 
-function st_two_fifth( $atts, $content = null ) {
+function skeleton_two_fifth( $atts, $content = null ) {
    return '<div class="two_fifth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('two_fifth', 'st_two_fifth');
+add_shortcode('two_fifth', 'skeleton_two_fifth');
 
-function st_three_fifth( $atts, $content = null ) {
+function skeleton_three_fifth( $atts, $content = null ) {
    return '<div class="three_fifth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('three_fifth', 'st_three_fifth');
+add_shortcode('three_fifth', 'skeleton_three_fifth');
 
-function st_four_fifth( $atts, $content = null ) {
+function skeleton_four_fifth( $atts, $content = null ) {
    return '<div class="four_fifth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('four_fifth', 'st_four_fifth');
+add_shortcode('four_fifth', 'skeleton_four_fifth');
 
 //
 
-function st_one_fifth_last( $atts, $content = null ) {
+function skeleton_one_fifth_last( $atts, $content = null ) {
    return '<div class="one_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('one_fifth_last', 'st_one_fifth_last');
+add_shortcode('one_fifth_last', 'skeleton_one_fifth_last');
 
-function st_two_fifth_last( $atts, $content = null ) {
+function skeleton_two_fifth_last( $atts, $content = null ) {
    return '<div class="two_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('two_fifth_last', 'st_two_fifth_last');
+add_shortcode('two_fifth_last', 'skeleton_two_fifth_last');
 
-function st_three_fifth_last( $atts, $content = null ) {
+function skeleton_three_fifth_last( $atts, $content = null ) {
    return '<div class="three_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('three_fifth_last', 'st_three_fifth_last');
+add_shortcode('three_fifth_last', 'skeleton_three_fifth_last');
 
-function st_four_fifth_last( $atts, $content = null ) {
+function skeleton_four_fifth_last( $atts, $content = null ) {
    return '<div class="four_fifth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('four_fifth_last', 'st_four_fifth_last');
+add_shortcode('four_fifth_last', 'skeleton_four_fifth_last');
 
 // 1-6 col
 
 // one_sixth
-function st_one_sixth( $atts, $content = null ) {
+function skeleton_one_sixth( $atts, $content = null ) {
    return '<div class="one_sixth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('one_sixth', 'st_one_sixth');
+add_shortcode('one_sixth', 'skeleton_one_sixth');
 
-function st_one_sixth_last( $atts, $content = null ) {
+function skeleton_one_sixth_last( $atts, $content = null ) {
    return '<div class="one_sixth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('one_sixth_last', 'st_one_sixth_last');
+add_shortcode('one_sixth_last', 'skeleton_one_sixth_last');
 
 // five_sixth
-function st_five_sixth( $atts, $content = null ) {
+function skeleton_five_sixth( $atts, $content = null ) {
    return '<div class="five_sixth">' . do_shortcode($content) . '</div>';
 }
-add_shortcode('five_sixth', 'st_five_sixth');
+add_shortcode('five_sixth', 'skeleton_five_sixth');
 
-function st_five_sixth_last( $atts, $content = null ) {
+function skeleton_five_sixth_last( $atts, $content = null ) {
    return '<div class="five_sixth last">' . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('five_sixth_last', 'st_five_sixth_last');
+add_shortcode('five_sixth_last', 'skeleton_five_sixth_last');
 
 
 // Callouts
 
-function st_callout( $atts, $content = null ) {
+function skeleton_callout( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'width' => '',
-		'align' => ''
+		'align' => '',
+		'title' => ''
     ), $atts));
-	$style;
+
+	$style = '';
+	$callout_title = '';
+
 	if ($width || $align) {
 	 $style .= 'style="';
-	 if ($width) $style .= 'width:'.$width.'px;';
+	 if ($width) $style .= 'width:'.$width.';';
 	 if ($align == 'left' || 'right') $style .= 'float:'.$align.';';
 	 if ($align == 'center') $style .= 'margin:0px auto;';
 	 $style .= '"';
+	 if ($title != '') {
+	 	$callout_title = '<h3>'.$title.'</h3>';
+	 }
 	}
-   return '<div class="cta" '.$style.'>' . do_shortcode($content) . '</div><div class="clear"></div>';
+   return '<div class="cta" '.$style.'>'. $callout_title . do_shortcode($content) . '</div><div class="clear"></div>';
 }
-add_shortcode('callout', 'st_callout');
+add_shortcode('callout', 'skeleton_callout');
 
 
 
 // Buttons
-function st_button( $atts, $content = null ) {
+function skeleton_button( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'link' => '',
 		'size' => 'medium',
@@ -170,13 +177,13 @@ function st_button( $atts, $content = null ) {
 	$button .= '</a></div>';
 	return $button;
 }
-add_shortcode('button', 'st_button');
+add_shortcode('button', 'skeleton_button');
 
 
 // Tabs
-add_shortcode( 'tabgroup', 'st_tabgroup' );
+add_shortcode( 'tabgroup', 'skeleton_tabgroup' );
 
-function st_tabgroup( $atts, $content ){
+function skeleton_tabgroup( $atts, $content ){
 
 $GLOBALS['tab_count'] = 0;
 do_shortcode( $content );
@@ -193,8 +200,8 @@ return $return;
 
 }
 
-add_shortcode( 'tab', 'st_tab' );
-function st_tab( $atts, $content ){
+add_shortcode( 'tab', 'skeleton_tab' );
+function skeleton_tab( $atts, $content ){
 extract(shortcode_atts(array(
 	'title' => '%d',
 	'id' => '%d'
@@ -211,7 +218,7 @@ $GLOBALS['tab_count']++;
 
 
 // Toggle
-function st_toggle( $atts, $content = null ) {
+function skeleton_toggle( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		 'title' => '',
 		 'style' => 'list'
@@ -224,7 +231,7 @@ function st_toggle( $atts, $content = null ) {
 
 	return $output;
 	}
-add_shortcode('toggle', 'st_toggle');
+add_shortcode('toggle', 'skeleton_toggle');
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -233,7 +240,7 @@ add_shortcode('toggle', 'st_toggle');
 /*-----------------------------------------------------------------------------------*/
 
 
-function st_latest($atts, $content = null) {
+function skeleton_latest($atts, $content = null) {
 	extract(shortcode_atts(array(
 	"offset" => '',
 	"num" => '5',
@@ -294,7 +301,7 @@ function st_latest($atts, $content = null) {
 			$pattern = '/(<a.*?class="more-link"[^>]*>)(.*?)(<\/a>)/';
 			// display the new excerpt
 			$content = preg_replace($pattern,"", $text);
-			$result.= '<div class="latest-excerpt">'.st_limit_words($content,$length).'</div>';
+			$result.= '<div class="latest-excerpt">'.skeleton_limit_words($content,$length).'</div>';
 		}
 
 		// excerpt
@@ -312,7 +319,7 @@ function st_latest($atts, $content = null) {
 	$result.='</div>';
 	return $result;
 }
-add_shortcode("latest", "st_latest");
+add_shortcode("latest", "skeleton_latest");
 
 // Example Use: [latest excerpt="true" thumbs="true" width="50" height="50" num="5" cat="8,10,11"]
 
@@ -320,7 +327,7 @@ add_shortcode("latest", "st_latest");
 // Creates an additional hook to limit the excerpt
 /*-----------------------------------------------------------------------------------*/
 
-function st_limit_words($string, $word_limit) {
+function skeleton_limit_words($string, $word_limit) {
 	// creates an array of words from $string (this will be our excerpt)
 	// explode divides the excerpt up by using a space character
 	$words = explode(' ', $string);
@@ -343,7 +350,7 @@ function skeleton_related_posts( $atts ) {
 	global $wpdb, $post, $table_prefix;
 
 	if ($post->ID) {
-		$retval = '<div class="st_relatedposts">';
+		$retval = '<div class="skeleton_relatedposts">';
 		$retval .= '<h4>Related Posts</h4>';
 		$retval .= '<ul>';
  		// Get tags
@@ -380,14 +387,14 @@ function skeleton_related_posts( $atts ) {
 }
 
 // Break
-function st_break( $atts, $content = null ) {
+function skeleton_break( $atts, $content = null ) {
 	return '<div class="clear"></div>';
 }
-add_shortcode('clear', 'st_break');
+add_shortcode('clear', 'skeleton_break');
 
 
 // Line Break
-function st_linebreak( $atts, $content = null ) {
+function skeleton_linebreak( $atts, $content = null ) {
 	return '<hr /><div class="clear"></div>';
 }
-add_shortcode('clearline', 'st_linebreak');
+add_shortcode('clearline', 'skeleton_linebreak');

@@ -220,7 +220,7 @@ function optionsframework_load_scripts( $hook ) {
 	// Enqueue custom option panel JS
 	wp_enqueue_script( 'options-custom', OPTIONS_FRAMEWORK_URL . 'js/options-custom.js', array( 'jquery','wp-color-picker' ) );
 	$data = array( 'skeleton_siteurl' => home_url() );
-	$themedata = array( 'skeleton_activethemedir' => get_bloginfo('stylesheet_directory') );
+	$themedata = array( 'skeleton_activethemedir' => get_stylesheet_directory_uri() );
 	wp_localize_script( 'options-custom', 'skeleton_getsiteurl', $data );
 	wp_localize_script( 'options-custom', 'skeleton_activethemedir', $themedata );
 	wp_localize_script( 'options-custom', 'skeleton_shortname', $themename );

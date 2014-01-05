@@ -4,18 +4,18 @@
  * @subpackage skeleton
  * @author Simple Themes - www.simplethemes.com
  *
- * Layout Functions:
+ * Layout Hooks:
  *
- * skeleton_header  // Opening header tag and logo/header text
+ * skeleton_above_header // Opening header wrapper
+ * skeleton_header // header tag and logo/header text
  * skeleton_header_extras // Additional content may be added to the header
- * skeleton_navbar // Opening navigation element and WP3 menus
+ * skeleton_below_header // Closing header wrapper
+ * skeleton_navbar // main menu wrapper
  * skeleton_before_content // Opening content wrapper
  * skeleton_after_content // Closing content wrapper
  * skeleton_before_sidebar // Opening sidebar wrapper
  * skeleton_after_sidebar // Closing sidebar wrapper
- * skeleton_before_footer // Opening footer wrapper
- * skeleton_footer // The footer (includes sidebar-footer.php)
- * skeleton_after_footer // The closing footer wrapper
+ * skeleton_footer // Footer
  *
  * Sets up the theme and provides some helper functions. Some helper functions
  * are used in the theme as custom template tags. Others are attached to action and
@@ -125,10 +125,10 @@ function skeleton_registerstyles() {
 
 	if ($maxwidth) {
 		// load the appropriate stylesheet
-  		$stylesheets .= wp_register_style('skeleton', get_bloginfo('template_directory').'/css/skeleton-'.$maxwidth.'.css', array(), $version, 'screen, projection');
+  		$stylesheets .= wp_register_style('skeleton', get_template_directory_uri() .'/css/skeleton-'.$maxwidth.'.css', array(), $version, 'screen, projection');
 	} else {
 		//fallback to original for legacy theme compatibility
-  		$stylesheets .= wp_register_style('skeleton', get_bloginfo('template_directory').'/css/skeleton-960.css', array(), $version, 'screen, projection');
+  		$stylesheets .= wp_register_style('skeleton', get_template_directory_uri() .'/css/skeleton-960.css', array(), $version, 'screen, projection');
 	}
 
 	// Register all other applicable stylesheets
@@ -173,30 +173,6 @@ if ( !function_exists( 'skeleton_header_scripts' ) ) {
 	}
 
 }
-
-/*-----------------------------------------------------------------------------------*/
-/* Instead of remove_filter('the_content', 'wpautop');
-/* Removes wpautop from specified pages with a custom field:
-/* Name: wpautop Value: false
-/*-----------------------------------------------------------------------------------*/
-
-
-function skeleton_remove_wpautop($content) {
-    global $post;
-    // Get the keys and values of the custom fields:
-    $rmwpautop = get_post_meta($post->ID, 'wpautop', true);
-    // Remove the filter
-    remove_filter('the_content', 'wpautop');
-    if ('false' === $rmwpautop) {
-    } else {
-    add_filter('the_content', 'wpautop');
-    }
-    return $content;
-}
-// Hook into the Plugin API
-add_filter('the_content', 'skeleton_remove_wpautop', 9);
-
-
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
 
@@ -257,278 +233,6 @@ function skeleton_setup() {
 
 }
 endif; // end skeleton_setup
-
-
-
-/*-----------------------------------------------------------------------------------*/
-// Featured Thumbnails
-// Utility function for defining conditional featured image settings
-/*-----------------------------------------------------------------------------------*/
-
-if ( !function_exists( 'skeleton_thumbnailer' ) ) {
-
-	function skeleton_thumbnailer($content) {
-		global $post;
-		global $id;
-		$size = 'squared150';
-		$align = 'alignleft scale-with-grid';
-		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
-		$content =  $image . $content;
-		return $content;
-	}
-	add_filter('the_content','skeleton_thumbnailer');
-
-}
-
-
-/*-----------------------------------------------------------------------------------*/
-// Sets the post excerpt length to 40 characters.
-// To override this length in a child theme, remove the filter and add your own
-// function tied to the excerpt_length filter hook.
-/*-----------------------------------------------------------------------------------*/
-
-
-if ( !function_exists( 'skeleton_excerpt_length' ) ) {
-
-	function skeleton_excerpt_length( $length ) {
-		return 40;
-	}
-	add_filter( 'excerpt_length', 'skeleton_excerpt_length' );
-
-}
-
-
-
-/*-----------------------------------------------------------------------------------*/
-// Returns a "Continue Reading" link for excerpts
-/*-----------------------------------------------------------------------------------*/
-
-if ( !function_exists( 'skeleton_continue_reading_link' ) ) {
-
-	function skeleton_continue_reading_link() {
-		return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'smpl' ) . '</a>';
-	}
-}
-
-
-/*-----------------------------------------------------------------------------------*/
-// Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis
-// and skeleton_continue_reading_link().
-//
-// To override this in a child theme, remove the filter and add your own
-// function tied to the excerpt_more filter hook.
-/*-----------------------------------------------------------------------------------*/
-
-if ( !function_exists( 'skeleton_auto_excerpt_more' ) ) {
-
-	function skeleton_auto_excerpt_more( $more ) {
-		return ' &hellip;' . skeleton_continue_reading_link();
-	}
-	add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
-
-}
-
-/*-----------------------------------------------------------------------------------*/
-// Adds a pretty "Continue Reading" link to custom post excerpts.
-/*-----------------------------------------------------------------------------------*/
-
-
-if ( !function_exists( 'skeleton_custom_excerpt_more' ) ) {
-
-	function skeleton_custom_excerpt_more( $output ) {
-		if ( has_excerpt() && ! is_attachment() ) {
-			$output .= skeleton_continue_reading_link();
-		}
-		return $output;
-	}
-	add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
-
-}
-
-
-
-/*-----------------------------------------------------------------------------------*/
-// Removes the page jump when read more is clicked through
-/*-----------------------------------------------------------------------------------*/
-
-
-if ( !function_exists( 'remove_more_jump_link' ) ) {
-
-	function remove_more_jump_link($link) {
-		$offset = strpos($link, '#more-');
-		if ($offset) {
-		$end = strpos($link, '"',$offset);
-		}
-		if ($end) {
-		$link = substr_replace($link, '', $offset, $end-$offset);
-		}
-		return $link;
-	}
-	add_filter('the_content_more_link', 'remove_more_jump_link');
-
-}
-
-
-/*-----------------------------------------------------------------------------------*/
-//	Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
-//	To override skeleton_widgets_init() in a child theme, remove the action hook and add your own
-//	function tied to the init hook.
-/*-----------------------------------------------------------------------------------*/
-
-if ( !function_exists( 'skeleton_widgets_init' ) ) {
-
-function skeleton_widgets_init() {
-		// Area 1, located at the top of the sidebar.
-		register_sidebar( array(
-		'name' => __( 'Posts Widget Area', 'smpl' ),
-		'id' => 'primary-widget-area',
-		'description' => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'smpl' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-
-	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'Pages Widget Area', 'smpl' ),
-		'id' => 'secondary-widget-area',
-		'description' => __( 'Shown only in Pages', 'smpl' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	// Area 3, located in the footer. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'First Footer Widget Area', 'smpl' ),
-		'id' => 'first-footer-widget-area',
-		'description' => __( 'The first footer widget area', 'smpl' ),
-		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	// Area 4, located in the footer. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'Second Footer Widget Area', 'smpl' ),
-		'id' => 'second-footer-widget-area',
-		'description' => __( 'The second footer widget area', 'smpl' ),
-		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	// Area 5, located in the footer. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'Third Footer Widget Area', 'smpl' ),
-		'id' => 'third-footer-widget-area',
-		'description' => __( 'The third footer widget area', 'smpl' ),
-		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	// Area 6, located in the footer. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'Fourth Footer Widget Area', 'smpl' ),
-		'id' => 'fourth-footer-widget-area',
-		'description' => __( 'The fourth footer widget area', 'smpl' ),
-		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-}
-
-/** Register sidebars by running skeleton_widgets_init() on the widgets_init hook. */
-
-add_action( 'widgets_init', 'skeleton_widgets_init' );
-
-}
-
-/*-----------------------------------------------------------------------------------*/
-//	Comment Styles
-/*-----------------------------------------------------------------------------------*/
-
-if ( ! function_exists( 'skeleton_comments' ) ) :
-	function skeleton_comments($comment, $args, $depth) {
-	$GLOBALS['comment'] = $comment; ?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
-		<div id="comment-<?php comment_ID(); ?>" class="single-comment clearfix">
-			<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64'); ?></div>
-			<div class="comment-meta commentmetadata">
-				<?php if ($comment->comment_approved == '0') : ?>
-				<em><?php _e('Comment is awaiting moderation','smpl');?></em> <br />
-				<?php endif; ?>
-				<h6><?php echo __('By','smpl').' '.get_comment_author_link(). ' '. get_comment_date(). '  -  ' . get_comment_time(); ?></h6>
-				<?php comment_text() ?>
-				<?php edit_comment_link(__('Edit comment','smpl'),'  ',''); ?>
-				<?php comment_reply_link(array_merge( $args, array('reply_text' => __('Reply','smpl'),'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
-			</div>
-		</div>
-		<!-- </li> -->
-	<?php  }
-endif;
-
-
-if ( ! function_exists( 'skeleton_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- *
- * @since Skeleton 1.0
- */
-function skeleton_posted_on() {
-	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', 'smpl' ),
-		'meta-prep meta-prep-author',
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
-			get_permalink(),
-			esc_attr( get_the_time() ),
-			get_the_date()
-		),
-		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
-			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( esc_attr__( 'View all posts by %s', 'smpl' ), get_the_author() ),
-			get_the_author()
-		)
-	);
-}
-
-endif;
-
-if ( ! function_exists( 'skeleton_posted_in' ) ) :
-/**
- * Prints HTML with meta information for the current post (category, tags and permalink).
- *
- * @since Skeleton 1.0
- */
-function skeleton_posted_in() {
-	// Retrieves tag list of current post, separated by commas.
-	$tag_list = get_the_tag_list( '', ', ' );
-	if ( $tag_list ) {
-		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
-		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	} else {
-		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	}
-	// Prints the string, replacing the placeholders.
-	printf(
-		$posted_in,
-		get_the_category_list( ', ' ),
-		$tag_list,
-		get_permalink(),
-		the_title_attribute( 'echo=0' )
-	);
-}
-
-endif;
-
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -1063,6 +767,276 @@ if (!function_exists('skeleton_after_footer'))  {
     }
 	add_action('skeleton_footer', 'skeleton_after_footer',5);
 }
+
+
+/*-----------------------------------------------------------------------------------*/
+//	Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
+//	To override skeleton_widgets_init() in a child theme, remove the action hook and add your own
+//	function tied to the init hook.
+/*-----------------------------------------------------------------------------------*/
+
+if ( !function_exists( 'skeleton_widgets_init' ) ) {
+
+function skeleton_widgets_init() {
+		// Area 1, located at the top of the sidebar.
+		register_sidebar( array(
+		'name' => __( 'Posts Widget Area', 'smpl' ),
+		'id' => 'primary-widget-area',
+		'description' => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'smpl' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+
+	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Pages Widget Area', 'smpl' ),
+		'id' => 'secondary-widget-area',
+		'description' => __( 'Shown only in Pages', 'smpl' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 3, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'First Footer Widget Area', 'smpl' ),
+		'id' => 'first-footer-widget-area',
+		'description' => __( 'The first footer widget area', 'smpl' ),
+		'before_widget' => '<div class="%1$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 4, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Second Footer Widget Area', 'smpl' ),
+		'id' => 'second-footer-widget-area',
+		'description' => __( 'The second footer widget area', 'smpl' ),
+		'before_widget' => '<div class="%1$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 5, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Third Footer Widget Area', 'smpl' ),
+		'id' => 'third-footer-widget-area',
+		'description' => __( 'The third footer widget area', 'smpl' ),
+		'before_widget' => '<div class="%1$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 6, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Fourth Footer Widget Area', 'smpl' ),
+		'id' => 'fourth-footer-widget-area',
+		'description' => __( 'The fourth footer widget area', 'smpl' ),
+		'before_widget' => '<div class="%1$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+}
+
+/** Register sidebars by running skeleton_widgets_init() on the widgets_init hook. */
+
+add_action( 'widgets_init', 'skeleton_widgets_init' );
+
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+// Featured Thumbnails
+// Utility function for defining conditional featured image settings
+/*-----------------------------------------------------------------------------------*/
+
+if ( !function_exists( 'skeleton_thumbnailer' ) ) {
+
+	function skeleton_thumbnailer($content) {
+		global $post;
+		global $id;
+		$size = 'squared150';
+		$align = 'alignleft scale-with-grid';
+		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
+		$content =  $image . $content;
+		return $content;
+	}
+	add_filter('the_content','skeleton_thumbnailer');
+
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+// Sets the post excerpt length to 40 characters.
+// To override this length in a child theme, remove the filter and add your own
+// function tied to the excerpt_length filter hook.
+/*-----------------------------------------------------------------------------------*/
+
+
+if ( !function_exists( 'skeleton_excerpt_length' ) ) {
+
+	function skeleton_excerpt_length( $length ) {
+		return 40;
+	}
+	add_filter( 'excerpt_length', 'skeleton_excerpt_length' );
+
+}
+
+
+
+/*-----------------------------------------------------------------------------------*/
+// Returns a "Continue Reading" link for excerpts
+/*-----------------------------------------------------------------------------------*/
+
+if ( !function_exists( 'skeleton_continue_reading_link' ) ) {
+
+	function skeleton_continue_reading_link() {
+		return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'smpl' ) . '</a>';
+	}
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+// Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis
+// and skeleton_continue_reading_link().
+//
+// To override this in a child theme, remove the filter and add your own
+// function tied to the excerpt_more filter hook.
+/*-----------------------------------------------------------------------------------*/
+
+if ( !function_exists( 'skeleton_auto_excerpt_more' ) ) {
+
+	function skeleton_auto_excerpt_more( $more ) {
+		return ' &hellip;' . skeleton_continue_reading_link();
+	}
+	add_filter( 'excerpt_more', 'skeleton_auto_excerpt_more' );
+
+}
+
+/*-----------------------------------------------------------------------------------*/
+// Adds a pretty "Continue Reading" link to custom post excerpts.
+/*-----------------------------------------------------------------------------------*/
+
+
+if ( !function_exists( 'skeleton_custom_excerpt_more' ) ) {
+
+	function skeleton_custom_excerpt_more( $output ) {
+		if ( has_excerpt() && ! is_attachment() ) {
+			$output .= skeleton_continue_reading_link();
+		}
+		return $output;
+	}
+	add_filter( 'get_the_excerpt', 'skeleton_custom_excerpt_more' );
+
+}
+
+
+
+/*-----------------------------------------------------------------------------------*/
+// Removes the page jump when read more is clicked through
+/*-----------------------------------------------------------------------------------*/
+
+
+if ( !function_exists( 'remove_more_jump_link' ) ) {
+
+	function remove_more_jump_link($link) {
+		$offset = strpos($link, '#more-');
+		if ($offset) {
+		$end = strpos($link, '"',$offset);
+		}
+		if ($end) {
+		$link = substr_replace($link, '', $offset, $end-$offset);
+		}
+		return $link;
+	}
+	add_filter('the_content_more_link', 'remove_more_jump_link');
+
+}
+
+
+
+/*-----------------------------------------------------------------------------------*/
+//	Comment Styles
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'skeleton_comments' ) ) :
+	function skeleton_comments($comment, $args, $depth) {
+	$GLOBALS['comment'] = $comment; ?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+		<div id="comment-<?php comment_ID(); ?>" class="single-comment clearfix">
+			<div class="comment-author vcard"> <?php echo get_avatar($comment,$size='64'); ?></div>
+			<div class="comment-meta commentmetadata">
+				<?php if ($comment->comment_approved == '0') : ?>
+				<em><?php _e('Comment is awaiting moderation','smpl');?></em> <br />
+				<?php endif; ?>
+				<h6><?php echo __('By','smpl').' '.get_comment_author_link(). ' '. get_comment_date(). '  -  ' . get_comment_time(); ?></h6>
+				<?php comment_text() ?>
+				<?php edit_comment_link(__('Edit comment','smpl'),'  ',''); ?>
+				<?php comment_reply_link(array_merge( $args, array('reply_text' => __('Reply','smpl'),'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+			</div>
+		</div>
+		<!-- </li> -->
+	<?php  }
+endif;
+
+
+if ( ! function_exists( 'skeleton_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ *
+ * @since Skeleton 1.0
+ */
+function skeleton_posted_on() {
+	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', 'smpl' ),
+		'meta-prep meta-prep-author',
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
+			get_permalink(),
+			esc_attr( get_the_time() ),
+			get_the_date()
+		),
+		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+			get_author_posts_url( get_the_author_meta( 'ID' ) ),
+			sprintf( esc_attr__( 'View all posts by %s', 'smpl' ), get_the_author() ),
+			get_the_author()
+		)
+	);
+}
+
+endif;
+
+if ( ! function_exists( 'skeleton_posted_in' ) ) :
+/**
+ * Prints HTML with meta information for the current post (category, tags and permalink).
+ */
+function skeleton_posted_in() {
+	// Retrieves tag list of current post, separated by commas.
+	$tag_list = get_the_tag_list( '', ', ' );
+	if ( $tag_list ) {
+		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+	} else {
+		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+	}
+	// Prints the string, replacing the placeholders.
+	printf(
+		$posted_in,
+		get_the_category_list( ', ' ),
+		$tag_list,
+		get_permalink(),
+		the_title_attribute( 'echo=0' )
+	);
+}
+
+endif;
 
 
 /*-----------------------------------------------------------------------------------*/

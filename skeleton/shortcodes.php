@@ -398,3 +398,25 @@ function skeleton_linebreak( $atts, $content = null ) {
 	return '<hr /><div class="clear"></div>';
 }
 add_shortcode('clearline', 'skeleton_linebreak');
+
+/*-----------------------------------------------------------------------------------*/
+/* Instead of remove_filter('the_content', 'wpautop');
+/* Removes wpautop from specified pages with a custom field:
+/* Name: wpautop Value: false
+/*-----------------------------------------------------------------------------------*/
+
+
+function skeleton_remove_wpautop($content) {
+    global $post;
+    // Get the keys and values of the custom fields:
+    $rmwpautop = get_post_meta($post->ID, 'wpautop', true);
+    // Remove the filter
+    remove_filter('the_content', 'wpautop');
+    if ('false' === $rmwpautop) {
+    } else {
+    add_filter('the_content', 'wpautop');
+    }
+    return $content;
+}
+// Hook into the Plugin API
+add_filter('the_content', 'skeleton_remove_wpautop', 9);

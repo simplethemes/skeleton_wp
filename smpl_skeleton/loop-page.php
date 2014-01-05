@@ -29,7 +29,7 @@
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 
 					<?php } else {
-						echo '<br />';
+						//echo '<br />';
 					} ?>
 				<?php } ?>
 

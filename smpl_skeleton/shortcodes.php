@@ -167,7 +167,7 @@ function skeleton_button( $atts, $content = null ) {
 		'caption' => '',
 		'align' => 'right'
     ), $atts));
-	$button;
+	$button = '';
 	$button .= '<div class="button '.$size.' '. $align.'">';
 	$button .= '<a target="'.$target.'" class="button '.$color.'" href="'.$link.'">';
 	$button .= $content;

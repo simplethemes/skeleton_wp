@@ -1100,14 +1100,14 @@ add_action('admin_init','optionscheck_change_santiziation', 100);
 
 function skeleton_custom_sanitize_textarea($input) {
     global $allowedposttags;
-    $custom_allowedtags["embed"] = array(
-      "src" => array(),
-      "type" => array(),
-      "allowfullscreen" => array(),
-      "allowscriptaccess" => array(),
-      "height" => array(),
-          "width" => array()
-      );
+    	$custom_allowedtags["embed"] = array(
+    		"src" => array(),
+    		"type" => array(),
+    		"allowfullscreen" => array(),
+    		"allowscriptaccess" => array(),
+    		"height" => array(),
+    		"width" => array()
+    	);
     	$custom_allowedtags["script"] = array();
     	$custom_allowedtags["a"] = array('href' => array(),'title' => array());
     	$custom_allowedtags["img"] = array('src' => array(),'title' => array(),'alt' => array());
@@ -1116,10 +1116,9 @@ function skeleton_custom_sanitize_textarea($input) {
     	$custom_allowedtags["strong"] = array();
       	$custom_allowedtags = array_merge($custom_allowedtags, $allowedposttags);
       	$output = wp_kses( $input, $custom_allowedtags);
-        $of_custom_allowedtags = array_merge($of_custom_allowedtags, $allowedtags);
-        $output = wp_kses( $input, $of_custom_allowedtags);
-    	return $output;
+      	return $output;
 }
+
 
 
 /*-----------------------------------------------------------------------------------*/

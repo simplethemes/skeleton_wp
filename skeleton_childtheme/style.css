@@ -1,0 +1,29 @@
+/*
+Theme Name: Skeleton Child
+Theme URI: http://www.simplethemes.com/wordpress-themes/theme/skeleton
+Description: Skeleton Child Theme. Use this child theme to safely make modifications to the existing theme. Using a child theme ensures that you do not lose the modifications with theme updates.
+Version: 2.0.0
+Author: Simple Themes
+Author URI: http://www.simplethemes.com
+Template: smpl_skeleton
+License: GPL
+License URI: http://www.opensource.org/licenses/gpl-license.php
+*/
+
+
+/*
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+This child theme enables you to make customizations while allowing for safe updates to the parent theme.
+The parent theme's style.css is imported below. If you wish to make customizations, do one of the following:
+
+A.) Copy the contents of skeleton/style.css into this file, but leave the (above) child theme head in tact!
+B.) Add specific rules BELOW the import. This is intended for minimal customizations.
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+*/
+
+@import url("../skeleton/style.css");

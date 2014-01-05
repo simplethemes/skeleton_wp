@@ -2,33 +2,38 @@
 
 ##About
 
-**Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
-
-
 Skeleton, authored by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
 It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 buttons, and layout columns.
 
-Special thanks to the following people/sites for code and inspiration:
- 
-* [Skeleton Responsive Boilerplate](http://www.getskeleton.com/) // Responsive Layout Framework by Dave Gamache
-* [Theme Options Framework](http://wptheming.com/options-framework-plugin/) // Powerful Customizeable Theme Options by Devin Price
-* [Thematic Framework](http://themeshaper.com/thematic/) // Code Inspiration and learning - Ian Stewart
-* [Formalize](https://github.com/nathansmith/formalize) // Better forms styling - Nathan Smith
-* TwentyTen Theme // Default WordPress Loops
 
+
+**Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
+
+TODO:
+* Update Demo to 2.0
+* Add WooCommerce Documentation and Overrides
+* Cleanup and add SASS Source to Package
 
 ## Installation & Basic Setup
-To install Skeleton, you should unzip the package you downloaded from here locally, then upload the folders within to your WP site (via FTP) with the following directory structure:
+To install Skeleton, you should unzip the package locally, then upload the **smpl_skeleton** folder to your WP site (via FTP):
 
-**wp-content/themes/skeleton**
-and
+It is highly recommended to use a child theme so you don't lose changes.
+
+An example child theme is included in the package in the **skeleton_childtheme** folder.
+
+Your final directory structure should be:
+
+**wp-content/themes/smpl_skeleton**
+ 
 **wp-content/themes/skeleton_childtheme**
 
-Next, activate the **child theme** from Appearance > Themes. 
 
-You can configure its options from Appearance &rarr; Theme Options.
+Activate **skeleton_childtheme** from Appearance > Themes and enjoy. 
+
+You can configure the options from Appearance &rarr; Theme Options.
 
 If you need to customize any of theme options, copy the parent theme options.php to your child theme directory.
+
 To override any of the parent theme functions, just copy the function(s) from the parent theme into your child theme's functions.php file.
 Skeleton will always give priority to the child theme.
 
@@ -45,20 +50,20 @@ A callout is (by default) a rounded cornered styled inset box. It has two argume
 
 <!---->
 
-	[callout align="center" width="400"]
-	This is a 400px centered callout box
+	[callout align="center" width="75%"]
+	This is a 75% centered callout box
 	[/callout]
 	
-	[callout align="left" width="200"]
-	This is a 200px left aligned callout box
+	[callout align="left" width="300px"]
+	This is a 300px left aligned callout box
 	[/callout]
 	
-	[callout align="right" width="100"]
-	This is a 100px right aligned callout box
+	[callout align="right" width="400px" title="Callout Title"]
+	This is a 400px right aligned callout box with title
 	[/callout]
 	
-	[callout]
-	This is a callout that will expand the entire width of its parent container.
+	[callout title="Callout Title"]
+	This is a callout with title and will expand the entire width of its parent container.
 	[/callout]
 
 ----
@@ -178,15 +183,15 @@ Similar to “clear”, this does the same thing but adds a horizontal line belo
 
 You can find a list of these functions in the top of the functions.php file:
 
-* __st_above_header__ // Hook to add content before header
-* __st_header__ // Opening header tag and logo/header text
-* __st_header_extras__ // Additional content may be added to the header
-* __st_below_header__ // Hook to add content after header
-* __st_navbar__ // Opening navigation element and WP3 menus
-* __st_before_content__ // Opening content wrapper
-* __st_after_content__ // Closing content wrapper
-* __st_before_sidebar__ // Opening sidebar wrapper
-* __st_after_sidebar__ // Closing sidebar wrapper
-* __st_before_footer__ // Opening footer wrapper
-* __st_footer__ // The footer (includes sidebar-footer.php)
-* __st_after_footer__ // The closing footer wrapper
+* __skeleton_above_header__ // Hook to add content before header
+* __skeleton_header__ // Opening header tag and logo/header text
+* __skeleton_header_extras__ // Additional content may be added to the header
+* __skeleton_below_header__ // Hook to add content after header
+* __skeleton_navbar__ // Opening navigation element and WP3 menus
+* __skeleton_before_content__ // Opening content wrapper
+* __skeleton_after_content__ // Closing content wrapper
+* __skeleton_before_sidebar__ // Opening sidebar wrapper
+* __skeleton_after_sidebar__ // Closing sidebar wrapper
+* __skeleton_before_footer__ // Opening footer wrapper
+* __skeleton_footer__ // The footer (includes sidebar-footer.php)
+* __skeleton_after_footer__ // The closing footer wrapper

@@ -1,6 +1,7 @@
 #Skeleton WordPress Theme
 
-__Notice: If you're updating from Skeleton 1.x, do not update from the master branch. Use the 1.0 branch instead.__
+__Notice: If you're updating from Skeleton 1.x, do not update from the master branch. Switch to the the 1.x branch instead.__
+https://github.com/simplethemes/skeleton_wp/tree/1.x
 
 __If you're updating to 2.0, please take note of the changes as there are several.__
 

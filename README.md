@@ -1,10 +1,11 @@
 #Skeleton WordPress Theme
 
+__Notice: If you're updating from Skeleton 1.x, do not update from the master branch. Use the 1.0 branch instead. If you're updating to 2.0, please take note of the changes as there are several. __
+
 ##About
 
 Skeleton, authored by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
 It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 buttons, and layout columns.
-
 
 
 **Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")

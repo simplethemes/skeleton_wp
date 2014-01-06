@@ -1013,27 +1013,26 @@ function skeleton_posted_on() {
 endif;
 
 if ( ! function_exists( 'skeleton_posted_in' ) ) :
-/**
- * Prints HTML with meta information for the current post (category, tags and permalink).
- */
-function skeleton_posted_in() {
-	// Retrieves tag list of current post, separated by commas.
-	$tag_list = get_the_tag_list( '', ', ' );
-	if ( $tag_list ) {
-		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
-		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	} else {
-		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
-	}
-	// Prints the string, replacing the placeholders.
-	printf(
-		$posted_in,
-		get_the_category_list( ', ' ),
-		$tag_list,
-		get_permalink(),
-		the_title_attribute( 'echo=0' )
-	);
+
+	 // Prints HTML with meta information for the current post (category, tags and permalink).
+	function skeleton_posted_in() {
+		// Retrieves tag list of current post, separated by commas.
+		$tag_list = get_the_tag_list( '', ', ' );
+		if ( $tag_list ) {
+			$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+		} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+			$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+		} else {
+			$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'smpl' );
+		}
+		// Prints the string, replacing the placeholders.
+		printf(
+			$posted_in,
+			get_the_category_list( ', ' ),
+			$tag_list,
+			get_permalink(),
+			the_title_attribute( 'echo=0' )
+		);
 }
 
 endif;
@@ -1062,26 +1061,28 @@ if (!function_exists('skeleton_content_width'))  {
 /*-----------------------------------------------------------------------------------*/
 /* Filters wp_title to print a proper <title> tag based on content
 /*-----------------------------------------------------------------------------------*/
+if (!function_exists('skeleton_wp_title'))  {
 
-function skeleton_wp_title( $title, $sep ) {
-	global $page, $paged;
+	function skeleton_wp_title( $title, $sep ) {
+		global $page, $paged;
 
-	if ( is_feed() )
+		if ( is_feed() )
+			return $title;
+
+		// Add the blog name
+		$title .= get_bloginfo( 'name' );
+
+		// Add the blog description for the home/front page.
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( $site_description && ( is_home() || is_front_page() ) )
+			$title .= " $sep $site_description";
+
+		// Add a page number if necessary:
+		if ( $paged >= 2 || $page >= 2 )
+			$title .= " $sep " . sprintf( __( 'Page %s', 'skeleton' ), max( $paged, $page ) );
+
 		return $title;
-
-	// Add the blog name
-	$title .= get_bloginfo( 'name' );
-
-	// Add the blog description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		$title .= " $sep $site_description";
-
-	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 )
-		$title .= " $sep " . sprintf( __( 'Page %s', 'skeleton' ), max( $paged, $page ) );
-
-	return $title;
+	}
 }
 add_filter( 'wp_title', 'skeleton_wp_title', 10, 2 );
 
@@ -1124,69 +1125,68 @@ function skeleton_custom_sanitize_textarea($input) {
 /*-----------------------------------------------------------------------------------*/
 /* Theme Customization Options
 /*-----------------------------------------------------------------------------------*/
+if (!function_exists('skeleton_options_styles'))  {
+
+	function skeleton_options_styles() {
+
+		// build an array of styleable heading tags
+		$headings = array(
+			'body' => 'body',
+			'#site-title a' => 'header',
+			'.site-desc.text' => 'tagline',
+			'h1' => 'h1',
+			'h2' => 'h2',
+			'h3' => 'h3',
+			'h4' => 'h4',
+			'h5' => 'h5'
+		);
+
+		$stackarray = array(
+			'helvetica'  => '"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif',
+			'arial' 	 => 'Arial, Helvetica, sans-serif',
+			'georgia' 	 => 'Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif',
+			'cambria' 	 => 'Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif',
+			'tahoma' 	 => 'Tahoma, Verdana, Segoe, sans-serif',
+			'palatino' 	 => '"Palatino Linotype", Palatino, Baskerville, Georgia, serif',
+			'droidsans'  => '"Droid Sans", sans-serif',
+			'droidserif' => '"Droid Serif", serif',
+		);
 
 
-function skeleton_font_stack($face) {
-	$stackarray = array(
-		'helvetica'  => '"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif',
-		'arial' 	 => 'Arial, Helvetica, sans-serif',
-		'georgia' 	 => 'Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif',
-		'cambria' 	 => 'Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif',
-		'tahoma' 	 => 'Tahoma, Verdana, Segoe, sans-serif',
-		'palatino' 	 => '"Palatino Linotype", Palatino, Baskerville, Georgia, serif',
-		'droidsans'  => '"Droid Sans", sans-serif',
-		'droidserif' => '"Droid Serif", serif',
-	);
-	return apply_filters( 'skeleton_font_stack', $face );
-}
+		echo '<style type="text/css">';
 
-function skeleton_options_styles() {
-
-	// build an array of styleable heading tags
-	$headings = array(
-		'body' => 'body',
-		'#site-title a' => 'header',
-		'.site-desc.text' => 'tagline',
-		'h1' => 'h1',
-		'h2' => 'h2',
-		'h3' => 'h3',
-		'h4' => 'h4',
-		'h5' => 'h5'
-	);
-	echo '<style type="text/css">';
-
-	foreach ($headings as $key => $selector) {
-		$item = $selector.'_typography';
-		$property = of_get_option($item);
-		$face = $property['face'];
-
-		echo $key.' {';
-		echo 'color:'.$property['color'].';';
-		echo 'font-size:'.$property['size'].';';
-		echo 'font-family:'.skeleton_font_stack($face).';';
-		if ($property['style'] == "bold italic") {
-		echo 'font-weight:bold;';
-		echo 'font-style:italic;';
-		} else {
-		echo 'font-weight:'.$property['style'].';';
+		foreach ($headings as $key => $selector) {
+			$item = $selector.'_typography';
+			$property = of_get_option($item);
+			$face = $property['face'];
+			echo $key.' {';
+			echo 'color:'.$property['color'].';';
+			echo 'font-size:'.$property['size'].';';
+			echo 'font-family:'.$stackarray[$property['face']].';';
+			if ($property['style'] == "bold italic") {
+			echo 'font-weight:bold;';
+			echo 'font-style:italic;';
+			} else {
+			echo 'font-weight:'.$property['style'].';';
+			}
+			echo '}'."\n";
 		}
+
+		// Body Background
+		echo 'body {';
+		// Custom Background
+		$body_background = of_get_option('body_background');
+		if ($body_background) {
+			if ($body_background['image']) {
+				echo 'background:'.$body_background['color'].' url('.$body_background['image'].') '.$body_background['repeat'].' '.$body_background['position'].' '.$body_background['attachment'].';';
+			} elseif ($body_background['color']) {
+				echo 'background-color:'.$body_background['color'].';';
+			}
+		}
+		// End Body Styles
 		echo '}'."\n";
+		echo 'a { color: '.of_get_option('link_color', '#000').';}';
+		echo '</style>';
 	}
-
-	// Body Background
-	echo 'body {';
-	// Custom Background
-	$body_background = of_get_option('body_background');
-	if ($body_background) {
-		if ($body_background['image']) {
-			echo 'background:'.$body_background['color'].' url('.$body_background['image'].') '.$body_background['repeat'].' '.$body_background['position'].' '.$body_background['attachment'].';';
-		} elseif ($body_background['color']) {
-			echo 'background-color:'.$body_background['color'].';';
-		}
-	}
-	// End Body Styles
-	echo '}'."\n";
-	echo 'a { color: '.of_get_option('link_color', '#000').';}';
-	echo '</style>';
 }
-add_action('wp_head','skeleton_options_styles');
+add_action('wp_head','skeleton_options_styles',10);

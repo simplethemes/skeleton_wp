@@ -1081,7 +1081,7 @@ if (!function_exists('skeleton_wp_title'))  {
 		if ( $paged >= 2 || $page >= 2 )
 			$title .= " $sep " . sprintf( __( 'Page %s', 'skeleton' ), max( $paged, $page ) );
 
-		return $title;
+		return apply_filters ('skeleton_child_wp_title',$title);
 	}
 }
 add_filter( 'wp_title', 'skeleton_wp_title', 10, 2 );

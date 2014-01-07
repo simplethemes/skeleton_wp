@@ -326,7 +326,7 @@ if ( !function_exists( 'skeleton_logo' ) ) {
 		}
 		$skeleton_logo  = '<'.$heading_tag.' id="site-title" class="'.$class.'"><a href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo('name','display')).'">'.get_bloginfo('name').'</a></'.$heading_tag.'>'. "\n";
 		$skeleton_logo .= '<span class="site-desc '.$class.'">'.get_bloginfo('description').'</span>'. "\n";
-		echo apply_filters ( 'skeleton_logo', $skeleton_logo);
+		echo apply_filters ( 'child_logo', $skeleton_logo);
 	}
 	add_action('skeleton_header','skeleton_logo', 3);
 

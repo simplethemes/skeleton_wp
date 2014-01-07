@@ -141,7 +141,7 @@ function skeleton_callout( $atts, $content = null ) {
 	$style = '';
 	$callout_title = '';
 
-	if ($width || $align) {
+	if ($width || $align || $title) {
 	 $style .= 'style="';
 	 if ($width) $style .= 'width:'.$width.';';
 	 if ($align == 'left' || 'right') $style .= 'float:'.$align.';';

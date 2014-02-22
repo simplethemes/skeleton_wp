@@ -1,0 +1,87 @@
+/* @group Main Menu */
+
+/* Main Menu */
+
+#navigation {position: relative;}
+
+#navigation ul,
+#navigation ul li,
+#navigation ul ul {list-style: none;margin: 0;padding: 0;}
+
+#navigation ul {position: relative;z-index: 1000;}
+
+#navigation ul li {zoom: 1}
+
+#navigation_wrap {position: relative;z-index: 9000;}
+
+#navigation_wrap.right ul.menu {float: right;}
+
+#navigation_wrap.below {padding: 0;}
+
+#navigation ul li.hover, #navigation ul li:hover {position: relative;z-index: 9999;cursor: default;}
+
+#navigation ul, #navigation ul li, #navigation ul ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+#navigation li {
+	margin: 0;
+	float: left;
+	zoom: 1;
+}
+
+
+#navigation ul li.hover, #navigation ul li:hover {
+	position: relative;
+	z-index: 9999;
+	cursor: default;
+}
+
+#navigation ul ul {
+	visibility: hidden;
+	display: none;
+	position: absolute;
+	min-width: 200px;
+	z-index: 9998;
+	width: auto;
+	font-size: 13px;
+	padding: 0px;
+}
+
+#navigation ul li li a {
+	display: block;
+	text-decoration: none;
+	position: relative;
+	border-right: none;
+}
+
+
+
+#navigation ul ul li {
+	float: none;
+	white-space: nowrap;
+	margin: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-khtml-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+#navigation ul ul ul {
+	top: -5px;
+	left: 100%;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#navigation ul li:hover > ul {
+	visibility: visible;
+	display: block;
+}
+
+/* @end */

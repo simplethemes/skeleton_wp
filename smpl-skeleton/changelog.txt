@@ -1,0 +1,16 @@
+Changelog Legend:
+----
+
+[+] = Added
+[*] = Changed
+[^] = Moved
+[=] = No Changes
+[x] = Deleted
+[!] = Bugs
+
+02/23/14 - Improvements - Version 2.0.8
+
+[!] Fixed footer widget bug
+[x] Removed shortcode CSS (moved to plugin)
+
+----

@@ -348,6 +348,16 @@ add_action( 'skeleton_after_sidebar', 'skeleton_sidebar_wrap_close');
 
 
 /*-----------------------------------------------------------------------------------*/
+// Global hook for footer actions
+/*-----------------------------------------------------------------------------------*/
+
+function skeleton_footer() {
+	do_action('skeleton_footer');
+}
+add_action('wp_footer', 'skeleton_footer',1);
+
+
+/*-----------------------------------------------------------------------------------*/
 /* Before Footer
 /*-----------------------------------------------------------------------------------*/
 
@@ -867,11 +877,9 @@ if ( !function_exists( 'st_remove_wpautop' ) ) {
 	    // Get the keys and values of the custom fields:
 	    $rmwpautop = get_post_meta($post->ID, 'wpautop', true);
 	    // Remove the filter
-	    remove_filter('the_content', 'wpautop');
 	    if ('false' === $rmwpautop) {
-	    } else {
-	    add_filter('the_content', 'wpautop');
-			remove_filter('the_content', 'wptexturize');
+	    	remove_filter('the_content', 'wpautop');
+	    	remove_filter('the_content', 'wptexturize');
 	    }
 	    return $content;
 	}

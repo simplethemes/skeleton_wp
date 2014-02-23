@@ -748,11 +748,11 @@ li.page_item a,li.menu-item a {
 	padding: 8px 0px 8px 24px;
 	line-height: 120%;
 	font-weight: bold;
-	background: url(images/light/arrow_bullet.png) no-repeat 10px;
+	background: url(images/arrow_bullet.png) no-repeat 10px;
 }
 
 li.page_item a:hover,li.menu-item a:hover {
-	background: url(images/dark/arrow_bullet.png) no-repeat 10px;
+	background: url(images/arrow_bullet_hover.png) no-repeat 10px;
 }
 
 /* Page Menus/Custom Menus - Sublevels */
@@ -1563,11 +1563,9 @@ body.dark #comments {background: url(images/dark/divider.png) repeat-x right top
 }
 
 #comments .vcard {
-	background:url(images/light/comment_author_bg.png) no-repeat top right;
+	background:url(images/comment_author_bg.png) no-repeat top right;
 }
-#comments body.dark .vcard {
-	background:url(images/dark/comment_author_bg.png) no-repeat top right;
-}
+
 
 /* Pingbacks */
 

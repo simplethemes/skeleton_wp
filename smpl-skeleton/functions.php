@@ -126,6 +126,43 @@ add_action( 'wp_enqueue_scripts', 'skeleton_scripts');
 
 }
 
+/*-----------------------------------------------------------------------------------*/
+/*  TGM plugin activation
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'smpl_recommended_plugins' ) ) {
+
+	function smpl_recommended_plugins() {
+
+		$plugins = array(
+			array(
+				'name' 				=> 'Regenerate Thumbnails',
+				'slug' 				=> 'regenerate-thumbnails',
+				'required'			=> false,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			),
+			array(
+				'name' 				=> 'WP-PageNavi',
+				'slug' 				=> 'wp-pagenavi',
+				'required'			=> false,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			),
+			array(
+				'name' 				=> 'Simple Shortcodes',
+				'slug' 				=> 'smpl-shortcodes',
+				'required'			=> true,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			)
+		);
+		tgmpa( $plugins );
+	}
+}
+add_action( 'tgmpa_register', 'smpl_recommended_plugins' );
+
+
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
 
@@ -166,6 +203,9 @@ function skeleton_setup() {
 		'primary' => __( 'Primary Navigation', 'smpl' ),
 		'footer'	=> __( 'Footer Navigation', 'smpl' )
 	));
+
+	// Load TGM plugin activation
+	load_template( get_template_directory() . '/inc/class-tgm-plugin-activation.php' );
 
 	// Translations can be filed in the /languages/ directory
 	load_theme_textdomain( 'smpl', get_template_directory() . '/languages' );

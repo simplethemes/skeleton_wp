@@ -863,309 +863,20 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
-div.button-alt,
-div.button,
-div.button.small,
-div.button.large,
-div.button.medium {
+.button a  {
   background-image: none;
-  margin: .5em 1em;
-  padding: 0;
+  margin: .5em 0;
+  margin-bottom: 0 !important;
   display: inline-block;
   font-stretch: narrower;
   font-weight: normal;
-  text-align: center;
   white-space: nowrap;
-}
-
-button.full-width,
-input[type="submit"].full-width,
-input[type="reset"].full-width,
-input[type="button"].full-width {
-	width: 100%;
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-	text-align: center;
-}
-
-div.button {
-  font-size: 14px;
-}
-
-div.button.left {
-  float: left;
-}
-
-div.button.right {
-  float: right;
-}
-
-div.button.center,
-div.button.middle {
-  margin: 10px auto;
-  text-align: center;
-  display: inherit;
-  float: none !important;
-}
-
-.button.mini a {
-  padding: 3px 6px !important;
-  font-size: .75em;
-  line-height: 1em;
-}
-
-.button.small a {
-  padding: .5em 1em !important;
-  font-size: .85em !important;
-  line-height: .85em !important;
-}
-
-.button.small {
-  border-bottom: none !important;
-}
-
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"],
-.button a,
-.button.medium a {
   padding: .5em 1em !important;
   font-size: 1em !important;
-  line-height: 1em !important;
-  margin-bottom: 0 !important;
-}
-
-.button.large a {
-  padding: .5em 1.5em !important;
-  font-size: 1.2em !important;
-  line-height: 1.2em !important;
-}
-
-.button.huge a {
-  padding: .5em 1.55em !important;
-  font-size: 1.5em !important;
-  line-height: 1.5em !important;
-  font-weight: bold !important;
-}
-
-.button a:hover {
-  text-decoration: none !important;
-}
-
-a.button.mini span.btn_caption,
-a.button.small span.btn_caption,
-a.button.medium span.btn_caption,
-a.button.large span.btn_caption,
-a.button.huge span.btn_caption,
-a.button span.btn_caption {
-  font-weight: normal !important;
-  font-size: .85em !important;
-  line-height: 1em !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  display: block;
-}
-
-/* @group White  */
-a.button.white {
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear;
-  transition-timing-function: linear;
-  color: #111111 !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px white;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #f2f2f2;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f2f2f2));
-  background: -webkit-linear-gradient(top, white 0%, #f2f2f2 100%);
-  background: -o-linear-gradient(top, white 0%, #f2f2f2 100%);
-  background: -ms-linear-gradient(top, white 0%, #f2f2f2 100%);
-  background: -moz-linear-gradient(top, white 0%, #f2f2f2 100%);
-  background: linear-gradient(top bottom, #ffffff 0%, #f2f2f2 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #ffffff, #f2f2f2);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.white:hover {
-  background: #d9d9d9;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #d9d9d9));
-  background: -webkit-linear-gradient(top, white 0%, #d9d9d9 100%);
-  background: -o-linear-gradient(top, white 0%, #d9d9d9 100%);
-  background: -ms-linear-gradient(top, white 0%, #d9d9d9 100%);
-  background: -moz-linear-gradient(top, white 0%, #d9d9d9 100%);
-  background: linear-gradient(top bottom, #ffffff 0%, #d9d9d9 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #ffffff, #d9d9d9);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.white:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #d4d4d4, inset 0 0 0 0 #d4d4d4, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #d4d4d4, inset 0 0 0 0 #d4d4d4, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #d4d4d4, inset 0 0 0 0 #d4d4d4, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.white span.btn_caption {
-  color: gray !important;
-  text-shadow: 0 1px 0 white;
-}
-
-/* @end */
-/* @group Gray  */
-
-a.button.gray {
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear;
-  transition-timing-function: linear;
-  color: #FFFFFF !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: none;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #696969;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(top, #828282 0%, #696969 100%);
-  background: -o-linear-gradient(top, #828282 0%, #696969 100%);
-  background: -ms-linear-gradient(top, #828282 0%, #696969 100%);
-  background: -moz-linear-gradient(top, #828282 0%, #696969 100%);
-  background: linear-gradient(top bottom, #828282 0%, #696969 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #828282, #696969);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.gray:hover {
-  background: #b3b3b3;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #575757), color-stop(100%, #666666));
-  background: -webkit-linear-gradient(top, #575757 0%, #666666 100%);
-  background: -o-linear-gradient(top, #575757 0%, #666666 100%);
-  background: -ms-linear-gradient(top, #575757 0%, #666666 100%);
-  background: -moz-linear-gradient(top, #575757 0%, #666666 100%);
-  background: linear-gradient(top bottom, #575757 0%, #666666 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #575757, #666666);
-  text-shadow: 0 1px 0 #474747;
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.gray:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #adadad, inset 0 0 0 0 #adadad, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #adadad, inset 0 0 0 0 #adadad, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #adadad, inset 0 0 0 0 #adadad, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.gray span.btn_caption {
-  color: gray !important;
-  text-shadow: 0 1px 0 white;
-}
-
-/* @end */
-/* @group Black  */
-a.button.black {
-  color: #f4f4f4 !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #1e1e1e;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #242424;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #303030), color-stop(100%, #242424));
-  background: -webkit-linear-gradient(top, #303030 0%, #242424 100%);
-  background: -o-linear-gradient(top, #303030 0%, #242424 100%);
-  background: -ms-linear-gradient(top, #303030 0%, #242424 100%);
-  background: -moz-linear-gradient(top, #303030 0%, #242424 100%);
-  background: linear-gradient(top bottom, #303030 0%, #242424 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #303030, #242424);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.black:hover {
-  background: black;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #404040), color-stop(100%, black));
-  background: -webkit-linear-gradient(top, #404040 0%, black 100%);
-  background: -o-linear-gradient(top, #404040 0%, black 100%);
-  background: -ms-linear-gradient(top, #404040 0%, black 100%);
-  background: -moz-linear-gradient(top, #404040 0%, black 100%);
-  background: linear-gradient(top bottom, #404040 0%, #000000 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #404040, #000000);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.black:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 black, inset 0 0 0 0 black, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 black, inset 0 0 0 0 black, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 black, inset 0 0 0 0 black, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.black span.btn_caption {
-  color: gray !important;
-  text-shadow: 0 1px 0 #000;
-}
-
-/* @end */
-/* @group Blue  */
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"],
-a.button.blue {
   color: white !important;
   line-height: 1.5em;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   vertical-align: middle;
   border: none;
   text-shadow: 0 1px 0px #185597;
@@ -1183,15 +894,20 @@ a.button.blue {
   background: linear-gradient(top bottom, #2a72c0 0%, #1d65b3 100%);
   background-clip: border-box;
   -pie-background: linear-gradient(top, #2a72c0, #1d65b3);
-  behavior: url("../css/PIE.htc");
+  behavior: url("PIE.htc");
   position: relative;
   background-repeat: repeat-x;
 }
+
+.button a:hover {
+  text-decoration: none !important;
+}
+
 button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover,
-a.button.blue:hover {
+a.button:hover {
   background: #156bc6;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #156bc6), color-stop(100%, #156bc6));
   background: -webkit-linear-gradient(top, #156bc6 0%, #156bc6 100%);
@@ -1201,318 +917,29 @@ a.button.blue:hover {
   background: linear-gradient(top bottom, #156bc6 0%, #156bc6 100%);
   background-clip: border-box;
   -pie-background: linear-gradient(top, #156bc6, #156bc6);
-  behavior: url("../css/PIE.htc");
+  behavior: url("PIE.htc");
   position: relative;
   cursor: pointer;
 }
+
 button:active,
 input[type="submit"]:active,
 input[type="reset"]:active,
 input[type="button"]:active,
-a.button.blue:active {
+a.button:active {
   -webkit-box-shadow: inset 0 2px 6px 0 #0e4177, inset 0 0 0 0 #0e4177, 0 1px 1px 0 #eeeeee;
   -moz-box-shadow: inset 0 2px 6px 0 #0e4177, inset 0 0 0 0 #0e4177, 0 1px 1px 0 #eeeeee;
   box-shadow: inset 0 2px 6px 0 #0e4177, inset 0 0 0 0 #0e4177, 0 1px 1px 0 #eeeeee;
 }
 
-a.button.blue span.btn_caption {
+a.button span.btn_caption {
   color: #acd3f1 !important;
   text-shadow: 0 1px 0 #3B639B;
 }
 
 /* @end */
-/* @group Green  */
-a.button.green {
-  color: white !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #45731f;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #528825;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5f9531), color-stop(100%, #528825));
-  background: -webkit-linear-gradient(top, #5f9531 0%, #528825 100%);
-  background: -o-linear-gradient(top, #5f9531 0%, #528825 100%);
-  background: -ms-linear-gradient(top, #5f9531 0%, #528825 100%);
-  background: -moz-linear-gradient(top, #5f9531 0%, #528825 100%);
-  background: linear-gradient(top bottom, #5f9531 0%, #528825 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #5f9531, #528825);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.green:hover {
-  background: #559c1c;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #559c1c), color-stop(100%, #559c1c));
-  background: -webkit-linear-gradient(top, #559c1c 0%, #559c1c 100%);
-  background: -o-linear-gradient(top, #559c1c 0%, #559c1c 100%);
-  background: -ms-linear-gradient(top, #559c1c 0%, #559c1c 100%);
-  background: -moz-linear-gradient(top, #559c1c 0%, #559c1c 100%);
-  background: linear-gradient(top bottom, #559c1c 0%, #559c1c 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #559c1c, #559c1c);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.green:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #2d4f11, inset 0 0 0 0 #2d4f11, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #2d4f11, inset 0 0 0 0 #2d4f11, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #2d4f11, inset 0 0 0 0 #2d4f11, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.green span.btn_caption {
-  color: #c9e9af !important;
-  text-shadow: 0 1px 0 #264012;
-}
-
-/* @end */
-/* @group Magenta  */
-a.button.magenta {
-  color: white !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #a5126c;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #c41581;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d1228d), color-stop(100%, #c41581));
-  background: -webkit-linear-gradient(top, #d1228d 0%, #c41581 100%);
-  background: -o-linear-gradient(top, #d1228d 0%, #c41581 100%);
-  background: -ms-linear-gradient(top, #d1228d 0%, #c41581 100%);
-  background: -moz-linear-gradient(top, #d1228d 0%, #c41581 100%);
-  background: linear-gradient(top bottom, #d1228d 0%, #c41581 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #d1228d, #c41581);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.magenta:hover {
-  background: #d5108a;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d5108a), color-stop(100%, #d5108a));
-  background: -webkit-linear-gradient(top, #d5108a 0%, #d5108a 100%);
-  background: -o-linear-gradient(top, #d5108a 0%, #d5108a 100%);
-  background: -ms-linear-gradient(top, #d5108a 0%, #d5108a 100%);
-  background: -moz-linear-gradient(top, #d5108a 0%, #d5108a 100%);
-  background: linear-gradient(top bottom, #d5108a 0%, #d5108a 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #d5108a, #d5108a);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.magenta:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #860956, inset 0 0 0 0 #860956, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #860956, inset 0 0 0 0 #860956, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #860956, inset 0 0 0 0 #860956, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.magenta span.btn_caption {
-  color: #ffb3e2 !important;
-  text-shadow: 0 1px 0 #80004f;
-}
-
-/* @end */
-/* @group Teal  */
-a.button.teal {
-  color: white !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #45a270;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #52c085;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5fcd92), color-stop(100%, #52c085));
-  background: -webkit-linear-gradient(top, #5fcd92 0%, #52c085 100%);
-  background: -o-linear-gradient(top, #5fcd92 0%, #52c085 100%);
-  background: -ms-linear-gradient(top, #5fcd92 0%, #52c085 100%);
-  background: -moz-linear-gradient(top, #5fcd92 0%, #52c085 100%);
-  background: linear-gradient(top bottom, #5fcd92 0%, #52c085 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #5fcd92, #52c085);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.teal:hover {
-  background: #48db8c;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #48db8c), color-stop(100%, #48db8c));
-  background: -webkit-linear-gradient(top, #48db8c 0%, #48db8c 100%);
-  background: -o-linear-gradient(top, #48db8c 0%, #48db8c 100%);
-  background: -ms-linear-gradient(top, #48db8c 0%, #48db8c 100%);
-  background: -moz-linear-gradient(top, #48db8c 0%, #48db8c 100%);
-  background: linear-gradient(top bottom, #48db8c 0%, #48db8c 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #48db8c, #48db8c);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.teal:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #29a362, inset 0 0 0 0 #29a362, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #29a362, inset 0 0 0 0 #29a362, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #29a362, inset 0 0 0 0 #29a362, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.teal span.btn_caption {
-  color: #206942 !important;
-  text-shadow: 0 1px 0 #7ed7a8;
-}
-
-/* @end */
-/* @group Red  */
-a.button.red,
-a.button.lightred,
-a.button.error {
-  color: white !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #a81010;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #c71313;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d41f1f), color-stop(100%, #c71313));
-  background: -webkit-linear-gradient(top, #d41f1f 0%, #c71313 100%);
-  background: -o-linear-gradient(top, #d41f1f 0%, #c71313 100%);
-  background: -ms-linear-gradient(top, #d41f1f 0%, #c71313 100%);
-  background: -moz-linear-gradient(top, #d41f1f 0%, #c71313 100%);
-  background: linear-gradient(top bottom, #d41f1f 0%, #c71313 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #d41f1f, #c71313);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.red:hover,
-a.button.lightred:hover,
-a.button.error:hover {
-  background: #d80e0e;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d80e0e), color-stop(100%, #d80e0e));
-  background: -webkit-linear-gradient(top, #d80e0e 0%, #d80e0e 100%);
-  background: -o-linear-gradient(top, #d80e0e 0%, #d80e0e 100%);
-  background: -ms-linear-gradient(top, #d80e0e 0%, #d80e0e 100%);
-  background: -moz-linear-gradient(top, #d80e0e 0%, #d80e0e 100%);
-  background: linear-gradient(top bottom, #d80e0e 0%, #d80e0e 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #d80e0e, #d80e0e);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.red:active,
-a.button.lightred:active,
-a.button.error:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #880707, inset 0 0 0 0 #880707, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #880707, inset 0 0 0 0 #880707, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #880707, inset 0 0 0 0 #880707, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.red span.btn_caption,
-a.button.lightred span.btn_caption,
-a.button.error span.btn_caption {
-  color: #f2abab !important;
-  text-shadow: 0 1px 0 #a30f0f;
-}
-
-/* @end */
-/* @group Orange  */
-a.button.orange,
-a.button.yellow,
-a.button.warn {
-  color: white !important;
-  line-height: 1.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  border: none;
-  text-shadow: 0 1px 0px #c6780a;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background: #eb8e0c;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f89b19), color-stop(100%, #eb8e0c));
-  background: -webkit-linear-gradient(top, #f89b19 0%, #eb8e0c 100%);
-  background: -o-linear-gradient(top, #f89b19 0%, #eb8e0c 100%);
-  background: -ms-linear-gradient(top, #f89b19 0%, #eb8e0c 100%);
-  background: -moz-linear-gradient(top, #f89b19 0%, #eb8e0c 100%);
-  background: linear-gradient(top bottom, #f89b19 0%, #eb8e0c 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #f89b19, #eb8e0c);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  background-repeat: repeat-x;
-}
-a.button.orange:hover,
-a.button.yellow:hover,
-a.button.warn:hover {
-  background: #fa960a;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fa960a), color-stop(100%, #fa960a));
-  background: -webkit-linear-gradient(top, #fa960a 0%, #fa960a 100%);
-  background: -o-linear-gradient(top, #fa960a 0%, #fa960a 100%);
-  background: -ms-linear-gradient(top, #fa960a 0%, #fa960a 100%);
-  background: -moz-linear-gradient(top, #fa960a 0%, #fa960a 100%);
-  background: linear-gradient(top bottom, #fa960a 0%, #fa960a 100%);
-  background-clip: border-box;
-  -pie-background: linear-gradient(top, #fa960a, #fa960a);
-  behavior: url("../css/PIE.htc");
-  position: relative;
-  cursor: pointer;
-}
-a.button.orange:active,
-a.button.yellow:active,
-a.button.warn:active {
-  -webkit-box-shadow: inset 0 2px 6px 0 #ad6500, inset 0 0 0 0 #ad6500, 0 1px 1px 0 #eeeeee;
-  -moz-box-shadow: inset 0 2px 6px 0 #ad6500, inset 0 0 0 0 #ad6500, 0 1px 1px 0 #eeeeee;
-  box-shadow: inset 0 2px 6px 0 #ad6500, inset 0 0 0 0 #ad6500, 0 1px 1px 0 #eeeeee;
-}
-
-a.button.orange span.btn_caption,
-a.button.yellow span.btn_caption,
-a.button.warn span.btn_caption {
-  color: #f9deb9 !important;
-  text-shadow: 0 1px 0 #995b05;
-}
-
-/* @end */
-
-/* End Button Styles */
-
 
 /* @group Comments */
-
 
 #respond {margin:0px;float:left;border-top: 1px solid #dbdbdb;padding-top: 10px;width: 100%;}
 

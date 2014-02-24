@@ -56,10 +56,9 @@
 
 </div><!-- #post-## -->
 
-	<div id="nav-below" class="navigation">
-		<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'smpl' ) . '</span> %title' ); ?></div>
-		<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'smpl' ) . '</span>' ); ?></div>
-	</div><!-- #nav-below -->
+	<?php if (  $wp_query->max_num_pages > 1 ) {
+		do_action('skeleton_page_navi');
+	}?>
 
 	<?php comments_template( '', true ); ?>
 

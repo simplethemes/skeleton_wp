@@ -126,43 +126,6 @@ add_action( 'wp_enqueue_scripts', 'skeleton_scripts');
 
 }
 
-/*-----------------------------------------------------------------------------------*/
-/*  TGM plugin activation
-/*-----------------------------------------------------------------------------------*/
-
-if ( ! function_exists( 'smpl_recommended_plugins' ) ) {
-
-	function smpl_recommended_plugins() {
-
-		$plugins = array(
-			array(
-				'name' 				=> 'Regenerate Thumbnails',
-				'slug' 				=> 'regenerate-thumbnails',
-				'required'			=> false,
-				'force_activation' 	=> false,
-				'force_deactivation'=> false,
-			),
-			array(
-				'name' 				=> 'WP-PageNavi',
-				'slug' 				=> 'wp-pagenavi',
-				'required'			=> false,
-				'force_activation' 	=> false,
-				'force_deactivation'=> false,
-			),
-			array(
-				'name' 				=> 'Simple Shortcodes',
-				'slug' 				=> 'smpl-shortcodes',
-				'required'			=> true,
-				'force_activation' 	=> false,
-				'force_deactivation'=> false,
-			)
-		);
-		tgmpa( $plugins );
-	}
-}
-add_action( 'tgmpa_register', 'smpl_recommended_plugins' );
-
-
 
 /** Tell WordPress to run skeleton_setup() when the 'after_setup_theme' hook is run. */
 
@@ -749,6 +712,28 @@ endif;
 
 
 /*-----------------------------------------------------------------------------------*/
+/* Custom Page Navigation
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'skeleton_custom_pagenav' ) ) :
+
+function skeleton_custom_pagenav() {
+
+	echo '<div id="nav-below">';
+		if ( function_exists( 'wp_pagenavi' ) ) {
+			wp_pagenavi();
+		} else {
+			echo '<div class="nav-previous">'.next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'smpl' ) ).'</div>';
+			echo '<div class="nav-next">'.previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'smpl' ) ).'</div>';
+		}
+	echo '</div><!-- #nav-below -->';
+	}
+
+add_action('skeleton_page_navi','skeleton_custom_pagenav');
+
+endif;
+
+/*-----------------------------------------------------------------------------------*/
 // Sidebar Positioning Utility (sidebar-left | sidebar-right)
 // Sets a body class for source ordered sidebar positioning
 /*-----------------------------------------------------------------------------------*/
@@ -872,6 +857,56 @@ if (!function_exists('skeleton_content_width'))  {
 		$content_width = 580;
 	}
 }
+
+
+/*-----------------------------------------------------------------------------------*/
+/*  TGM plugin activation
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'smpl_recommended_plugins' ) ) {
+
+	function smpl_recommended_plugins() {
+
+		$plugins = array(
+			array(
+				'name' 				=> 'Regenerate Thumbnails',
+				'slug' 				=> 'regenerate-thumbnails',
+				'required'			=> false,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			),
+			array(
+				'name' 				=> 'WP-PageNavi',
+				'slug' 				=> 'wp-pagenavi',
+				'required'			=> false,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			),
+			array(
+				'name' 				=> 'Simple Shortcodes',
+				'slug' 				=> 'smpl-shortcodes',
+				'required'			=> true,
+				'force_activation' 	=> false,
+				'force_deactivation'=> false,
+			)
+		);
+		tgmpa( $plugins );
+	}
+}
+add_action( 'tgmpa_register', 'smpl_recommended_plugins' );
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Remove WP Pagenavi Styles
+/* Theme Includes Native Support
+/*-----------------------------------------------------------------------------------*/
+
+
+function skeleton_deregister_styles() {
+	wp_deregister_style( 'wp-pagenavi' );
+}
+
+add_action( 'wp_print_styles', 'skeleton_deregister_styles', 100 );
 
 
 /*-----------------------------------------------------------------------------------*/

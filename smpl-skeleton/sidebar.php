@@ -12,9 +12,9 @@ if (is_singular() && get_post_meta($post->ID, "sidebars", $single = true) ==  "f
 	return;
 }
 
-if ( is_active_sidebar( 'primary-widget-area' ) ) {
+if ( is_active_sidebar( 'sidebar-1' ) ) {
 		do_action('skeleton_before_sidebar');
-		dynamic_sidebar( 'primary-widget-area' );
+		dynamic_sidebar( 'sidebar-1' );
 		do_action('skeleton_after_sidebar');
 }
 

@@ -8,7 +8,7 @@
  */
 
 // count the active widgets to determine column sizes
-$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
+$footerwidgets = is_active_sidebar('footer-widget-area-1') + is_active_sidebar('footer-widget-area-2') + is_active_sidebar('footer-widget-area-3') + is_active_sidebar('footer-widget-area-4');
 // default
 $footergrid = "one_fourth";
 // if only one
@@ -29,27 +29,27 @@ $footergrid = "one_fourth";
 
 <?php if ($footerwidgets) : ?>
 
-<?php if (is_active_sidebar('first-footer-widget-area')) : ?>
+<?php if (is_active_sidebar('footer-widget-area-1')) : ?>
 <div class="<?php echo $footergrid;?>">
-	<?php dynamic_sidebar('first-footer-widget-area'); ?>
+	<?php dynamic_sidebar('footer-widget-area-1'); ?>
 </div>
 <?php endif;?>
 
-<?php if (is_active_sidebar('second-footer-widget-area')) : $last = ($footerwidgets == '2' ? ' last' : false);?>
+<?php if (is_active_sidebar('footer-widget-area-2')) : $last = ($footerwidgets == '2' ? ' last' : false);?>
 <div class="<?php echo $footergrid.$last;?>">
-	  <?php dynamic_sidebar('second-footer-widget-area'); ?>
+	  <?php dynamic_sidebar('footer-widget-area-2'); ?>
 </div>
 <?php endif;?>
 
-<?php if (is_active_sidebar('third-footer-widget-area')) : $last = ($footerwidgets == '3' ? ' last' : false);?>
+<?php if (is_active_sidebar('footer-widget-area-3')) : $last = ($footerwidgets == '3' ? ' last' : false);?>
 <div class="<?php echo $footergrid.$last;?>">
-	  <?php dynamic_sidebar('third-footer-widget-area'); ?>
+	  <?php dynamic_sidebar('footer-widget-area-3'); ?>
 </div>
 <?php endif;?>
 
-<?php if (is_active_sidebar('fourth-footer-widget-area')) : $last = ($footerwidgets == '4' ? ' last' : false);?>
+<?php if (is_active_sidebar('footer-widget-area-4')) : $last = ($footerwidgets == '4' ? ' last' : false);?>
 <div class="<?php echo $footergrid.$last;?>">
-		  <?php dynamic_sidebar('fourth-footer-widget-area'); ?>
+		  <?php dynamic_sidebar('footer-widget-area-4'); ?>
 </div>
 <?php endif;?>
 <div class="clear"></div>

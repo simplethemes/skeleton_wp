@@ -29,6 +29,12 @@
 		} );
 	} );
 	//Update background color in real time...
+	wp.customize( 'skeleton_options[body_text_color]', function( value ) {
+		value.bind( function( newval ) {
+			$('body').css('color', newval );
+		} );
+	} );
+	//Update background color in real time...
 	wp.customize( 'skeleton_options[body_bg_color]', function( value ) {
 		value.bind( function( newval ) {
 			$('body').css('background-color', newval );

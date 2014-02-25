@@ -64,8 +64,6 @@ function skeleton_scripts() {
 	$maxwidth = skeleton_options('layout', '960');
   	wp_enqueue_style('skeleton', trailingslashit(get_template_directory_uri()) .'/css/skeleton-'.$maxwidth.'.css', array(), $version, 'screen, projection');
 
-    wp_enqueue_style( 'theme', get_stylesheet_uri(), array(), $version, 'screen, projection');
-
     wp_enqueue_style('formalize', trailingslashit(get_template_directory_uri()).'/css/formalize.css', array(), $version, 'screen, projection');
 
     wp_enqueue_style('superfish', trailingslashit(get_template_directory_uri()).'/css/superfish.css', array(), $version, 'screen, projection');
@@ -92,11 +90,13 @@ function skeleton_scripts() {
 	$secondary_color = skeleton_options('secondary_color', '#BE3243');
 	$primary_color = skeleton_options('primary_color', '#375199');
 	$body_bg_color = skeleton_options('body_bg_color', '#f9f9f9');
+	$body_text_color = skeleton_options('body_text_color', '#333333');
 	$link_color = skeleton_options('link_color', '#3376ea');
 	$link_hover_color = skeleton_options('link_hover_color', '#3376ea');
 
 	$css = "
 		body {
+			color: {$body_text_color};
 			font-family: {$body_font};
 			background-color: {$body_bg_color};
 		}
@@ -366,7 +366,7 @@ add_action('wp_footer', 'skeleton_footer',1);
 
 if (!function_exists('skeleton_before_footer'))  {
     function skeleton_before_footer() {
-			$footerwidgets = is_active_sidebar('first-footer-widget-area') + is_active_sidebar('second-footer-widget-area') + is_active_sidebar('third-footer-widget-area') + is_active_sidebar('fourth-footer-widget-area');
+			$footerwidgets = is_active_sidebar('footer-widget-area-1') + is_active_sidebar('footer-widget-area-2') + is_active_sidebar('footer-widget-area-3') + is_active_sidebar('footer-widget-area-4');
 			$class = ($footerwidgets == '0' ? 'noborder' : 'normal');
 			echo '<div class="clear"></div><div id="footer" class="'.$class.' sixteen columns">';
     }
@@ -454,7 +454,7 @@ function skeleton_widgets_init() {
 		// Area 1, located at the top of the sidebar.
 		register_sidebar( array(
 		'name' => __( 'Posts Widget Area', 'smpl' ),
-		'id' => 'primary-widget-area',
+		'id' => 'sidebar-1',
 		'description' => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'smpl' ),
 		'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</div>',
@@ -466,7 +466,7 @@ function skeleton_widgets_init() {
 	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'Pages Widget Area', 'smpl' ),
-		'id' => 'secondary-widget-area',
+		'id' => 'sidebar-2',
 		'description' => __( 'Shown only in Pages', 'smpl' ),
 		'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</div>',
@@ -477,7 +477,7 @@ function skeleton_widgets_init() {
 	// Area 3, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'First Footer Widget Area', 'smpl' ),
-		'id' => 'first-footer-widget-area',
+		'id' => 'footer-widget-area-1',
 		'description' => __( 'The first footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
 		'after_widget' => '</div>',
@@ -488,7 +488,7 @@ function skeleton_widgets_init() {
 	// Area 4, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'Second Footer Widget Area', 'smpl' ),
-		'id' => 'second-footer-widget-area',
+		'id' => 'footer-widget-area-2',
 		'description' => __( 'The second footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
 		'after_widget' => '</div>',
@@ -499,7 +499,7 @@ function skeleton_widgets_init() {
 	// Area 5, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'Third Footer Widget Area', 'smpl' ),
-		'id' => 'third-footer-widget-area',
+		'id' => 'footer-widget-area-3',
 		'description' => __( 'The third footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
 		'after_widget' => '</div>',
@@ -510,7 +510,7 @@ function skeleton_widgets_init() {
 	// Area 6, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'Fourth Footer Widget Area', 'smpl' ),
-		'id' => 'fourth-footer-widget-area',
+		'id' => 'footer-widget-area-4',
 		'description' => __( 'The fourth footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
 		'after_widget' => '</div>',
@@ -719,12 +719,30 @@ if ( ! function_exists( 'skeleton_custom_pagenav' ) ) :
 
 function skeleton_custom_pagenav() {
 
-	echo '<div id="nav-below">';
+	echo '<div id="nav-below" class="navigation">';
 		if ( function_exists( 'wp_pagenavi' ) ) {
-			wp_pagenavi();
+
+			if (is_page()) {
+				wp_pagenavi( array( 'type' => 'multipart' ) );
+			} elseif (is_single()) {
+				previous_post_link( '<div class="nav-prev">%link</div>', __( 'Previous Post', 'smpl' ) );
+				next_post_link( '<div class="nav-next">%link</div>', __( 'Next Post', 'smpl' ) );
+			} else {
+				wp_pagenavi();
+			}
+
 		} else {
-			echo '<div class="nav-previous">'.next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'smpl' ) ).'</div>';
-			echo '<div class="nav-next">'.previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'smpl' ) ).'</div>';
+
+			if (is_page()) {
+				wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'smpl' ), 'after' => '</div>' ) );
+			} elseif (is_single()) {
+				previous_post_link( '<div class="nav-prev">%link</div>', __( 'Previous Post', 'smpl' ) );
+				next_post_link( '<div class="nav-next">%link</div>', __( 'Next Post', 'smpl' ) );
+			} else {
+				next_posts_link( __( '<div class="nav-prev">Older posts</div>', 'smpl' ) );
+				previous_posts_link( __( '<div class="nav-next">Newer posts</div>', 'smpl' ) );
+			}
+
 		}
 	echo '</div><!-- #nav-below -->';
 	}
@@ -770,7 +788,11 @@ if ( !function_exists( 'skeleton_content_width' ) ) {
 			$post_wide = get_post_meta($post->ID, "sidebars", $single = true) ==  "false";
 
 			// make sure no Post widgets are active
-			if ( !is_active_sidebar('primary-widget-area') || $post_wide ) {
+			if ( !is_active_sidebar('sidebar-1') || $post_wide ) {
+				$columns = 'sixteen';
+			}
+			// wide attachement pages
+			if ( is_attachment() ) {
 				$columns = 'sixteen';
 			}
 
@@ -779,7 +801,7 @@ if ( !function_exists( 'skeleton_content_width' ) ) {
 			$page_wide = is_page_template('onecolumn-page.php');
 
 			// make sure no Page widgets are active
-			if ( !is_active_sidebar('secondary-widget-area') || $page_wide ) {
+			if ( !is_active_sidebar('sidebar-2') || $page_wide ) {
 				$columns = 'sixteen';
 			}
 
@@ -813,7 +835,7 @@ if ( !function_exists( 'skeleton_sidebar_width' ) ) {
 		$post_wide = get_post_meta($post->ID, "sidebars", $single = true) ==  "false";
 
 		// make sure no Post widgets are active
-		if ( !is_active_sidebar('primary-widget-area') || $post_wide ) {
+		if ( !is_active_sidebar('sidebar-1') || $post_wide ) {
 			$columns = false;
 		}
 	// Single Pages
@@ -822,7 +844,7 @@ if ( !function_exists( 'skeleton_sidebar_width' ) ) {
 		$page_wide = is_page_template('onecolumn-page.php');
 
 		// make sure no Page widgets are active
-		if ( !is_active_sidebar('secondary-widget-area') || $page_wide ) {
+		if ( !is_active_sidebar('sidebar-2') || $page_wide ) {
 			$columns = false;
 		}
 	}

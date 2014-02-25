@@ -83,7 +83,7 @@ function skeleton_customize_register( $wp_customize ) {
 	     'priority'       => 30,
 	) );
 	$wp_customize->add_setting('skeleton_options[body_bg_color]', array(
-		'default' => 'f9f9f9',
+		'default' => 'F7F7F7',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'capability' => 'edit_theme_options',
 		'type' => 'option'
@@ -267,6 +267,21 @@ function skeleton_customize_register( $wp_customize ) {
 		'type'    => 'select',
 		'choices'  => $available_fonts
 	));
+
+
+	// Link Color
+	$wp_customize->add_setting('skeleton_options[body_text_color]', array(
+		'default' => '333333',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability' => 'edit_theme_options',
+		'type' => 'option'
+	));
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'body_text_color', array(
+		'label' => __('Body Text Color', 'smpl'),
+		'section' => 'skeleton_fonts',
+		'settings' => 'skeleton_options[body_text_color]',
+	)));
+
 
 	// Link Color
 	$wp_customize->add_setting('skeleton_options[link_color]', array(

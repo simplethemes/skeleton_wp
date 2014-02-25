@@ -36,7 +36,7 @@
 					<div class="entry-content">
 						<?php the_content(); ?>
 						<div class="clear"></div>
-						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'smpl' ), 'after' => '</div>' ) ); ?>
+						<?php do_action('skeleton_page_navi'); ?>
 						<?php edit_post_link( __( 'Edit', 'smpl' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-content -->
 				</div><!-- #post-## -->

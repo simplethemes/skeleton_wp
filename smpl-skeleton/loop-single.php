@@ -56,9 +56,7 @@
 
 </div><!-- #post-## -->
 
-	<?php if (  $wp_query->max_num_pages > 1 ) {
-		do_action('skeleton_page_navi');
-	}?>
+	<?php do_action('skeleton_page_navi'); ?>
 
 	<?php comments_template( '', true ); ?>
 

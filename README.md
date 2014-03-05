@@ -11,9 +11,7 @@ For new installations, Skeleton is [hosted in the wordpress.org theme repository
 * For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
 
 
-Why? As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
-
-If you'd like to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
+Why? As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd prefer to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
 
 
 ##About

@@ -22,7 +22,6 @@ It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 butt
 
 **Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
-**Shortcodes**: Because Skeleton is now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted on the wordpress.org repository</a>, Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please <a href="https://www.simplethemes.com/smpl-shortcodes.1.0.0.zip" rel="external">download and install the smpl-shortcodes plugin</a>.
 
 ## Installation & Basic Setup
 To install Skeleton, you should unzip the package locally, then upload the **smpl_skeleton** folder to your WP site (via FTP):
@@ -49,7 +48,7 @@ Skeleton will always give priority to the child theme.
 
 ##Shortcodes
 
-Skeleton has several built in shortcodes. You can see them in action on the [shortcodes demo page](http://demos.simplethemes.com/skeleton/documentation).
+Because Skeleton is now [hosted in the wordpress.org theme repository](http://wordpress.org/themes/smpl-skeleton), Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please [download and install the smpl-shortcodes plugin](http://wordpress.org/plugins/smpl-shortcodes/). You can the shortcodes in action on the [shortcodes demo page](http://demos.simplethemes.com/skeleton/documentation).
 
 ###Callouts
 

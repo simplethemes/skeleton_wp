@@ -1,12 +1,9 @@
 #Skeleton WordPress Theme
 
-__Notice: If you're updating from Skeleton 1.x, do not update from the master branch. Switch to the the 1.x branch instead.__
+__Notice: If you're updating from Skeleton 1.x, please do not update from the master branch. Switch to the the 1.x branch instead. If you're updating to 2.0, please take note of the changes as there are several.__
 https://github.com/simplethemes/skeleton_wp/tree/1.x
 
-__If you're updating to 2.0, please take note of the changes as there are several.__
-
-As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) were moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
-
+As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd like to continue using the Options framework, please upgrade from the 2.x-options-framework branch.
 
 ##About
 

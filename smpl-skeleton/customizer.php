@@ -269,7 +269,7 @@ function skeleton_customize_register( $wp_customize ) {
 	));
 
 
-	// Link Color
+	// Body Text Color
 	$wp_customize->add_setting('skeleton_options[body_text_color]', array(
 		'default' => '333333',
 		'sanitize_callback' => 'sanitize_hex_color',

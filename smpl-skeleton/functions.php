@@ -536,7 +536,7 @@ if ( !function_exists( 'skeleton_thumbnailer' ) ) {
 	function skeleton_thumbnailer($content) {
 		global $post;
 		global $id;
-		$size = 'squared150';
+		$size = 'video169';
 		$align = 'alignleft scale-with-grid';
 		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
 		$content =  $image . $content;

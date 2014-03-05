@@ -1,9 +1,20 @@
 #Skeleton WordPress Theme
 
-__Notice: If you're updating from Skeleton 1.x, please do not update from the master branch. Switch to the the 1.x branch instead. If you're updating to 2.0, please take note of the changes as there are several.__
-https://github.com/simplethemes/skeleton_wp/tree/1.x
+__Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__
 
-As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd like to continue using the Options framework, please upgrade from the 2.x-options-framework branch.
+For new installations and for those who wish to receive remote updates, Skeleton is now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted in the wordpress.org theme repository</a>.
+
+* If you're updating from Skeleton 1.x, please update from the [1.x branch](https://github.com/simplethemes/skeleton_wp/tree/1.x).
+
+* If you're updating from Skeleton 2.0.x, please update from the [2.x-options-framework ](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
+
+* For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
+
+
+As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
+
+If you'd like to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
+
 
 ##About
 
@@ -13,7 +24,7 @@ It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 butt
 
 **Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
-**Shortcodes**: Because Skeleton now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted on the wordpress.org repository</a>, Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please <a href="https://www.simplethemes.com/smpl-shortcodes.1.0.0.zip" rel="external">download and install the smpl-shortcodes plugin</a>.
+**Shortcodes**: Because Skeleton is now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted on the wordpress.org repository</a>, Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please <a href="https://www.simplethemes.com/smpl-shortcodes.1.0.0.zip" rel="external">download and install the smpl-shortcodes plugin</a>.
 
 ## Installation & Basic Setup
 To install Skeleton, you should unzip the package locally, then upload the **smpl_skeleton** folder to your WP site (via FTP):

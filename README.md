@@ -1,17 +1,17 @@
 #Skeleton WordPress Theme
 
+For new installations, you may wish to install the [latest stable version from wordpress.org](http://wordpress.org/themes/smpl-skeleton).
+
 __Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__
 
-For new installations, you may wish to install the latest stable version [from wordpress.org](http://wordpress.org/themes/smpl-skeleton).
+* For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
 
 * If you're updating from Skeleton 1.x, please update from the [1.x branch](https://github.com/simplethemes/skeleton_wp/tree/1.x).
 
 * If you're updating from Skeleton 2.0.x, please update from the [2.x-options-framework ](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
 
-* For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
 
-
-Why? As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd prefer to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
+Why? As of version 2.1.x, the options formerly located within the Options Framework (under Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd prefer to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch. See additional notes regarding shortcodes below.
 
 
 ##About

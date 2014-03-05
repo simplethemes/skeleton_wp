@@ -2,7 +2,7 @@
 
 __Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__
 
-For new installations and for those who wish to receive remote updates, Skeleton is now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted in the wordpress.org theme repository</a>.
+For new installations, Skeleton is [hosted in the wordpress.org theme repository](http://wordpress.org/themes/smpl-skeleton).
 
 * If you're updating from Skeleton 1.x, please update from the [1.x branch](https://github.com/simplethemes/skeleton_wp/tree/1.x).
 
@@ -11,7 +11,7 @@ For new installations and for those who wish to receive remote updates, Skeleton
 * For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
 
 
-As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
+Why? As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
 
 If you'd like to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch.
 

@@ -5,6 +5,9 @@ https://github.com/simplethemes/skeleton_wp/tree/1.x
 
 __If you're updating to 2.0, please take note of the changes as there are several.__
 
+As of version 2.1.x, the options located in the Options Framework (Appearance &rarr; Theme Options) were moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository.
+
+
 ##About
 
 Skeleton, authored by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
@@ -13,7 +16,7 @@ It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 butt
 
 **Live Demo**: [themes.simplethemes.com/skeleton](http://themes.simplethemes.com/skeleton "Skeleton WordPress Theme Demo")
 
-**Shortcodes**: Because Skeleton is a free theme <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted on the wordpress.org repository</a>, Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please <a href="https://www.simplethemes.com/smpl-shortcodes.1.0.0.zip" rel="external">download and install the smpl-shortcodes plugin</a>.
+**Shortcodes**: Because Skeleton now <a href="http://wordpress.org/themes/smpl-skeleton" rel="external">hosted on the wordpress.org repository</a>, Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please <a href="https://www.simplethemes.com/smpl-shortcodes.1.0.0.zip" rel="external">download and install the smpl-shortcodes plugin</a>.
 
 ## Installation & Basic Setup
 To install Skeleton, you should unzip the package locally, then upload the **smpl_skeleton** folder to your WP site (via FTP):

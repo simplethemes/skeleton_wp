@@ -2,7 +2,7 @@
 
 __Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__
 
-For new installations, Skeleton is [hosted in the wordpress.org theme repository](http://wordpress.org/themes/smpl-skeleton).
+For new installations, you may wish to install the latest stable version [from wordpress.org](http://wordpress.org/themes/smpl-skeleton).
 
 * If you're updating from Skeleton 1.x, please update from the [1.x branch](https://github.com/simplethemes/skeleton_wp/tree/1.x).
 

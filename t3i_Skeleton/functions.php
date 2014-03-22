@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package Skeleton WordPress Theme Framework
+ * @subpackage skeleton
+ * @author Simple Themes - www.simplethemes.com
 
 /**
  * Proper way to enqueue scripts and styles

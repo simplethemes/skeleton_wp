@@ -1,5 +1,5 @@
-#Skeleton WordPress Theme
-
+﻿#Skeleton WordPress Theme
+test#####################################################################
 For new installations, you may wish to install the [latest stable version from wordpress.org](http://wordpress.org/themes/smpl-skeleton).
 
 __Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__

@@ -15,7 +15,7 @@ do_action('skeleton_before_content');
 	<?php
 	$category_description = category_description();
 	if ( ! empty( $category_description ) ) {
-		echo '<div class="category-description>' . $category_description . '</div>';
+		echo '<div class="category-description">' . $category_description . '</div>';
 	}
 	get_template_part( 'loop', 'category' );
 	do_action('skeleton_after_content');

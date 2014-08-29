@@ -11,19 +11,19 @@ get_header();
 do_action('skeleton_before_content');
 
 ?>
-	<h1><?php printf( __( 'Category Archives: %s', 'smpl' ), single_cat_title( '', false ) ); ?></h1>
+
+<h1><?php
+		printf( __( 'Category Archives: %s', 'smpl' ), single_cat_title( '', false ) );
+	?></h1>
 	<?php
 	$category_description = category_description();
 	if ( ! empty( $category_description ) ) {
 		echo '<div class="category-description">' . $category_description . '</div>';
 	}
-<<<<<<< HEAD
 	/* Run the loop for the category page to output the posts.
 	 * If you want to overload this in a child theme then include a file
 	 * called loop-category.php and that will be used instead.
 	 */
-=======
->>>>>>> FETCH_HEAD
 	get_template_part( 'loop', 'category' );
 	do_action('skeleton_after_content');
 	get_sidebar();

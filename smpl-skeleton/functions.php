@@ -546,7 +546,7 @@ if ( !function_exists( 'skeleton_thumbnailer' ) ) {
 		$image = get_the_post_thumbnail($id, $size, array('class' => $classes));
 		echo $image;
 	}
-	add_filter('the_content','skeleton_thumbnailer');
+	add_action('skeleton_post_thumbnail','skeleton_thumbnailer');
 
 }
 

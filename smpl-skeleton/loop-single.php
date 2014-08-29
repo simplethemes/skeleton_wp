@@ -24,6 +24,7 @@
 	</div><!-- .entry-meta -->
 
 	<div class="entry-content">
+	<?php do_action('skeleton_post_thumbnail');?>
 	<?php the_content(); ?>
 	<div class="clear"></div>
 	<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'smpl' ), 'after' => '</div>' ) ); ?>

@@ -4,7 +4,7 @@ For new installations, you may wish to install the [latest stable version from w
 
 __Notice: Before updating Skeleton, please see the notes below as there are three branches to consider.__
 
-* For the latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
+* For latest development version, please use the [master ](https://github.com/simplethemes/skeleton_wp/tree/master) branch. 
 
 * If you're updating from Skeleton 1.x, please update from the [1.x branch](https://github.com/simplethemes/skeleton_wp/tree/1.x).
 

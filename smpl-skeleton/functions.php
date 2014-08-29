@@ -28,7 +28,6 @@
 /* Theme Customizer
 /*-----------------------------------------------------------------------------------*/
 
-require_once get_template_directory() . '/customizer.php';
 load_template( locate_template( 'customizer.php' ) );
 
 /*-----------------------------------------------------------------------------------*/
@@ -534,14 +533,18 @@ add_action( 'widgets_init', 'skeleton_widgets_init' );
 
 if ( !function_exists( 'skeleton_thumbnailer' ) ) {
 
-	function skeleton_thumbnailer($content) {
+	function skeleton_thumbnailer() {
 		global $post;
 		global $id;
-		$size = 'video169';
-		$align = 'alignleft scale-with-grid';
-		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
-		$content =  $image . $content;
-		return $content;
+		if (is_single()) {
+			$size = 'large';
+			$classes = 'alignleft scale-with-grid';
+		} else {
+			$size = 'squared150';
+			$classes = 'alignleft scale-with-grid';
+		}
+		$image = get_the_post_thumbnail($id, $size, array('class' => $classes));
+		echo $image;
 	}
 	add_filter('the_content','skeleton_thumbnailer');
 

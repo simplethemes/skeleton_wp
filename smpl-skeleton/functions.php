@@ -29,6 +29,7 @@
 /*-----------------------------------------------------------------------------------*/
 
 require_once get_template_directory() . '/customizer.php';
+load_template( locate_template( 'customizer.php' ) );
 
 /*-----------------------------------------------------------------------------------*/
 /* Register Core Stylesheets

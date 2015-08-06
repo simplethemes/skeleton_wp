@@ -70,6 +70,14 @@ if ( !function_exists( 'skeleton_customizer_styles' ) ) {
 
 	function skeleton_customizer_styles() {
 
+		$theme = wp_get_theme();
+		if(is_child_theme()) {
+			$parent  = $theme->parent();
+			$version = $parent['Version'];
+			} else {
+			$version = $theme['Version'];
+		}
+
 		// Custom stylesheet overrides
 		wp_enqueue_style('skeleton-custom', get_stylesheet_directory_uri().'/custom.css', array(), $version, 'screen, projection');
 
@@ -1057,8 +1065,9 @@ function skeleton_customize_register( $wp_customize ) {
 		'description' => 'Upload a logo to replace the default site name in the header',
 	) );
 	$wp_customize->add_setting( 'skeleton_options[logotype]', array(
+		'type'       => 'option',
 		'capability' => 'edit_theme_options',
-		'type'       => 'option'
+		'sanitize_callback' => 'esc_url_raw'
 	) );
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'logotype', array(
 		'label'    => __( 'Logo', 'smpl' ),
@@ -1096,6 +1105,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'skeleton_options[layout]', array(
 		'capability' => 'edit_theme_options',
 		'default'    => '960',
+		'sanitize_callback' => 'skeleton_sanitize_integer',
 		'type'       => 'option'
 	) );
 
@@ -1114,7 +1124,7 @@ function skeleton_customize_register( $wp_customize ) {
 
 	// Sidebar Column Select
 
-	$wp_customize->add_setting('skeleton_options[layout_info]');
+	$wp_customize->add_setting('skeleton_options[layout_info]',array('sanitize_callback' => 'skeleton_sanitize_integer'));
 	$wp_customize->add_control( new Skeleton_Customize_Infotext_Control($wp_customize, 'layout_info', array(
 		'label'    => __('Adjust the sidebar and content width.<br />The total number of columns should be 16.', 'smpl'),
 		'section'  => 'skeleton_layout',
@@ -1124,6 +1134,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('skeleton_options[sidebar_width]', array(
 		'default'    => 'five',
 		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'sanitize_html_class',
 		'type'       => 'option',
 
     ));
@@ -1149,6 +1160,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('skeleton_options[content_width]', array(
 		'default'    => 'eleven',
 		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'sanitize_html_class',
 		'type'       => 'option',
 
     ));
@@ -1179,6 +1191,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('skeleton_options[sidebar_position]', array(
 		'default'    => 'right',
 		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'sanitize_html_class',
 		'type'       => 'option',
 
     ));
@@ -1239,12 +1252,14 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'skeleton_options[heading_font]', array(
 		'capability' => 'edit_theme_options',
 		'default'    => 'Sans-Serif',
+		'sanitize_callback' => 'sanitize_text_field',
 		'type'       => 'option'
 	));
 
 	$wp_customize->add_setting( 'skeleton_options[body_font]', array(
 		'capability' => 'edit_theme_options',
 		'default'    => 'Sans-Serif',
+		'sanitize_callback' => 'sanitize_text_field',
 		'type'       => 'option'
 	));
 
@@ -1349,6 +1364,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('skeleton_options[header_extras]', array(
 		'default'    => '',
 		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'wp_filter_post_kses',
 		'type'       => 'option'
 	));
 	$wp_customize->add_control( new Skeleton_Customize_Textarea_Control($wp_customize, 'header_extras', array(
@@ -1361,6 +1377,7 @@ function skeleton_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('skeleton_options[footer_extras]', array(
 		'default'    => '',
 		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'wp_filter_post_kses',
 		'type'       => 'option'
 	));
 
@@ -1370,6 +1387,16 @@ function skeleton_customize_register( $wp_customize ) {
 		'settings' => 'skeleton_options[footer_extras]',
 	)));
 
+	// Custom Sanitization Filters
+
+	// esnure the value is numeric only
+	function skeleton_sanitize_integer( $input ) {
+	    if ( is_numeric($input) ) {
+	        return $input;
+	    }
+	}
+
+
 }
 
 add_action( 'customize_register', 'skeleton_customize_register' );
@@ -1378,7 +1405,7 @@ add_action( 'customize_register', 'skeleton_customize_register' );
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function skeleton_customize_preview_js() {
-	wp_enqueue_script( 'skeleton_customizer', get_template_directory_uri() . '/javascripts/customizer.js', array( 'jquery','customize-preview' ), '20130508', true );
+	wp_enqueue_script( 'skeleton_customizer', get_template_directory_uri() . '/javascripts/customizer.js', array( 'jquery','customize-preview' ), '20150805', true );
 }
 add_action( 'customize_preview_init', 'skeleton_customize_preview_js' );
 add_action( 'admin_menu', 'skeleton_remove_menu_pages', 999 );

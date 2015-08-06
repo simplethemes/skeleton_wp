@@ -9,7 +9,7 @@
  *
  * This can be overridden in child themes with loop-single.php.
  *
- * @package Skeleton WordPress Theme Framework
+ * @package Skeleton WordPress Theme
  * @subpackage skeleton
  * @author Simple Themes - www.simplethemes.com
  */
@@ -19,12 +19,13 @@
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('single'); ?>>
 	<h1 class="entry-title"><?php the_title(); ?></h1>
+
 	<div class="entry-meta">
 		<?php skeleton_posted_on(); ?>
 	</div><!-- .entry-meta -->
 
 	<div class="entry-content">
-	<?php do_action('skeleton_post_thumbnail');?>
+	<?php do_action('skeleton_post_thumbnail'); ?>
 	<?php the_content(); ?>
 	<div class="clear"></div>
 	<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'smpl' ), 'after' => '</div>' ) ); ?>

@@ -33,3 +33,18 @@ Changelog Legend:
 [*] Cleaned up post loops
 
 ----
+
+05/27/15 - Improvements - Version 2.1.1
+
+[*] Added better control for post thumbnails
+[^] Moved form styles to primary stylesheet
+[^] Moved media queries to primary stylesheet
+[^] Moved customiser to functions file
+[x] Removed Formalize JS
+[x] Removed unused post format loops
+[x] Removed layout.css
+[x] Removed PIE.htc and PIE.php
+[+] Added more helper functions to child theme
+[*] Updated plugin activation
+
+----

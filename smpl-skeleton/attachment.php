@@ -2,7 +2,7 @@
 /**
  * The template for displaying attachments.
  *
- * @package Skeleton WordPress Theme Framework
+ * @package Skeleton WordPress Theme
  * @subpackage skeleton
  * @author Simple Themes - www.simplethemes.com
  */

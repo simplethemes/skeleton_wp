@@ -7,7 +7,7 @@
  * and that other 'pages' on your wordpress site will use a
  * different template.
  *
- * @package Skeleton WordPress Theme Framework
+ * @package Skeleton WordPress Theme
  * @subpackage skeleton
  * @author Simple Themes - www.simplethemes.com
  */

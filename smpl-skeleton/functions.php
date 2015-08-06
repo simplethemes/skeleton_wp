@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Skeleton WordPress Theme Framework
+ * @package Skeleton WordPress Theme
  * @subpackage skeleton
  * @author Simple Themes - www.simplethemes.com
  *
@@ -25,16 +25,8 @@
 
 
 /*-----------------------------------------------------------------------------------*/
-/* Theme Customizer
-/*-----------------------------------------------------------------------------------*/
-
-load_template( locate_template( 'customizer.php' ) );
-
-/*-----------------------------------------------------------------------------------*/
 /* Register Core Stylesheets
 /* These are necessary for the theme to function as intended
-/* Supports the 'Better WordPress Minify' plugin to properly minimize styleshsets into one.
-/* http://wordpress.org/extend/plugins/bwp-minify/
 /*-----------------------------------------------------------------------------------*/
 
 if ( !function_exists( 'skeleton_scripts' ) ) {
@@ -44,85 +36,93 @@ function skeleton_scripts() {
 	// Set a dynamic version for cache busting
 	$theme = wp_get_theme();
 	if(is_child_theme()) {
-		$parent = $theme->parent();
+		$parent  = $theme->parent();
 		$version = $parent['Version'];
 		} else {
 		$version = $theme['Version'];
 	}
 
 	wp_enqueue_script('superfish',get_template_directory_uri()."/javascripts/superfish.js",array('jquery'),$version,true);
-
-	wp_enqueue_script('formalize',get_template_directory_uri()."/javascripts/jquery.formalize.min.js",array('jquery'),$version,true);
-
 	wp_enqueue_script('custom',get_template_directory_uri()."/javascripts/custom.js",array('jquery'),$version,true);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	// register the various widths based on max_layout_width option
+	// Register the various widths based on max_layout_width option
+
 	$maxwidth = skeleton_options('layout', '960');
-  	wp_enqueue_style('skeleton', trailingslashit(get_template_directory_uri()) .'/css/skeleton-'.$maxwidth.'.css', array(), $version, 'screen, projection');
+  	wp_enqueue_style('skeleton', get_template_directory_uri() .'/css/skeleton-'.$maxwidth.'.css', array(), $version, 'screen, projection');
+    wp_enqueue_style('superfish', get_template_directory_uri().'/css/superfish.css', array(), $version, 'screen, projection');
 
-    wp_enqueue_style('formalize', trailingslashit(get_template_directory_uri()).'/css/formalize.css', array(), $version, 'screen, projection');
-
-    wp_enqueue_style('superfish', trailingslashit(get_template_directory_uri()).'/css/superfish.css', array(), $version, 'screen, projection');
-
-	// Get Typography Options
-
-	$body_font = str_replace("+"," ", skeleton_options('body_font', 'Sans-Serif'));
-	$heading_font = str_replace("+"," ", skeleton_options('heading_font', 'Sans-Serif'));
-	$protocol = is_ssl() ? 'https' : 'http';
-
-	$body_query_args = array('family' => skeleton_options('body_font').':400,700');
-	$heading_query_args = array('family' =>	skeleton_options('heading_font').':400,700');
-
-	if ($body_font != 'Sans-Serif' && $body_font != 'Serif') {
-		wp_enqueue_style('skeleton-body-fonts',add_query_arg($body_query_args, "$protocol://fonts.googleapis.com/css" ),array(), null);
-	}
-	if ($heading_font != 'Sans-Serif' && $body_font != 'Serif') {
-		wp_enqueue_style('skeleton-heading-fonts',add_query_arg($heading_query_args, "$protocol://fonts.googleapis.com/css" ),array(), null);
-	}
-
+	// Primary theme stylesheet
 	wp_enqueue_style( 'skeleton-style', get_stylesheet_uri() );
-
-	wp_enqueue_style( 'skeleton-theme-settings-css', trailingslashit(get_template_directory_uri()) . 'css/layout.css', array(), null );
-	$secondary_color = skeleton_options('secondary_color', '#BE3243');
-	$primary_color = skeleton_options('primary_color', '#375199');
-	$body_bg_color = skeleton_options('body_bg_color', '#f9f9f9');
-	$body_text_color = skeleton_options('body_text_color', '#333333');
-	$link_color = skeleton_options('link_color', '#3376ea');
-	$link_hover_color = skeleton_options('link_hover_color', '#3376ea');
-
-	$css = "
-		body {
-			color: {$body_text_color};
-			font-family: {$body_font};
-			background-color: {$body_bg_color};
-		}
-		h1,h2,h3,h4,h5 {
-			font-family: {$heading_font};
-		}
-		a,a:visited {
-			color: {$link_color};
-		}
-		a:hover, a:focus, a:active {
-			color: {$link_hover_color};
-		}
-		#header h1#site-title a {
-			color:{$primary_color};
-		}
-		h3.widget-title,
-		#header span.site-desc {
-			color:{$secondary_color};
-		}
-
-	";
-	wp_add_inline_style( 'skeleton-theme-settings-css', $css );
 
 }
 
 add_action( 'wp_enqueue_scripts', 'skeleton_scripts');
+
+}
+
+
+
+if ( !function_exists( 'skeleton_customizer_styles' ) ) {
+
+	function skeleton_customizer_styles() {
+
+		// Custom stylesheet overrides
+		wp_enqueue_style('skeleton-custom', get_stylesheet_directory_uri().'/custom.css', array(), $version, 'screen, projection');
+
+		// Get Typography Options
+
+		$body_font = str_replace("+"," ", skeleton_options('body_font', 'Sans-Serif'));
+		$heading_font = str_replace("+"," ", skeleton_options('heading_font', 'Sans-Serif'));
+		$protocol = is_ssl() ? 'https' : 'http';
+
+		$body_query_args    = array('family' => skeleton_options('body_font').':400,700');
+		$heading_query_args = array('family' =>	skeleton_options('heading_font').':400,700');
+
+		if ($body_font != 'Sans-Serif' && $body_font != 'Serif') {
+			wp_enqueue_style('skeleton-body-fonts',add_query_arg($body_query_args, "$protocol://fonts.googleapis.com/css" ),array(), null);
+		}
+		if ($heading_font != 'Sans-Serif' && $body_font != 'Serif') {
+			wp_enqueue_style('skeleton-heading-fonts',add_query_arg($heading_query_args, "$protocol://fonts.googleapis.com/css" ),array(), null);
+		}
+
+		$secondary_color  = skeleton_options('secondary_color', '#BE3243');
+		$primary_color    = skeleton_options('primary_color', '#375199');
+		$body_bg_color    = skeleton_options('body_bg_color', '#f9f9f9');
+		$body_text_color  = skeleton_options('body_text_color', '#333333');
+		$link_color       = skeleton_options('link_color', '#3376ea');
+		$link_hover_color = skeleton_options('link_hover_color', '#3376ea');
+
+		$css = "
+			body {
+				color: {$body_text_color};
+				font-family: {$body_font};
+				background-color: {$body_bg_color};
+			}
+			h1,h2,h3,h4,h5 {
+				font-family: {$heading_font};
+			}
+			a,a:visited {
+				color: {$link_color};
+			}
+			a:hover, a:focus, a:active {
+				color: {$link_hover_color};
+			}
+			#header h1#site-title a {
+				color:{$primary_color};
+			}
+			h3.widget-title,
+			#header span.site-desc {
+				color:{$secondary_color};
+			}
+		";
+		wp_add_inline_style( 'skeleton-custom', $css );
+
+	}
+	add_action( 'wp_enqueue_scripts', 'skeleton_customizer_styles');
 
 }
 
@@ -164,7 +164,7 @@ function skeleton_setup() {
 
 	register_nav_menus( array(
 		'primary' => __( 'Primary Navigation', 'smpl' ),
-		'footer'	=> __( 'Footer Navigation', 'smpl' )
+		'footer'  => __( 'Footer Navigation', 'smpl' )
 	));
 
 	// Load TGM plugin activation
@@ -204,7 +204,7 @@ if ( !function_exists( 'skeleton_header_extras' ) ) {
 	function skeleton_header_extras() {
 		$header_extras = skeleton_options('header_extras');
 		if ($header_extras) {
-			$extras  = "<div class=\"header_extras\">";
+			$extras = "<div class=\"header_extras\">";
 			$extras .= $header_extras;
 			$extras .= "</div>";
 			echo apply_filters ('skeleton_child_header_extras',$extras);
@@ -225,13 +225,13 @@ if ( !function_exists( 'skeleton_logo' ) ) {
 	function skeleton_logo() {
 			// image
 			if ( skeleton_options( 'logotype' ) ) :
-				$skeleton_logo = '<h1 id="site-title">';
+				$skeleton_logo  = '<h1 id="site-title">';
 				$skeleton_logo .= '<a class="logotype-img" href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'" rel="home">';
 				$skeleton_logo .= '<img src="'.skeleton_options( 'logotype' ).'" alt="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"></a>';
 				$skeleton_logo .= '</h1>';
 			// text
 			else :
-				$skeleton_logo = '<h1 id="site-title">';
+				$skeleton_logo  = '<h1 id="site-title">';
 				$skeleton_logo .= '<a class="text" href="'.esc_url( home_url( '/' ) ).'" title="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'" rel="home">'.esc_attr( get_bloginfo( 'name', 'display' ) ).'</a>';
 				$skeleton_logo .= '</h1>';
 				$skeleton_logo .= '<span class="site-desc">'.get_bloginfo('description').'</span>'. "\n";
@@ -395,14 +395,14 @@ if ( !function_exists( 'skeleton_footer_nav' ) ) {
 	function skeleton_footer_nav() {
 
 		$defaults = array(
-			'theme_location'  => 'footer',
-			'container'       => 'div',
-			'container_id' 	=> 'footermenu',
-			'menu_class'      => 'menu',
-			'echo'            => true,
-			'fallback_cb'     => false,
-			'after'           => '<span> | </span>',
-			'depth'           => 1);
+			'theme_location' => 'footer',
+			'container'      => 'div',
+			'container_id'   => 'footermenu',
+			'menu_class'     => 'menu',
+			'echo'           => true,
+			'fallback_cb'    => false,
+			'after'          => '<span> | </span>',
+			'depth'          => 1);
 		wp_nav_menu($defaults);
 		echo '<div class="clear"></div>';
 
@@ -453,69 +453,69 @@ if ( !function_exists( 'skeleton_widgets_init' ) ) {
 function skeleton_widgets_init() {
 		// Area 1, located at the top of the sidebar.
 		register_sidebar( array(
-		'name' => __( 'Posts Widget Area', 'smpl' ),
-		'id' => 'sidebar-1',
-		'description' => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'smpl' ),
+		'name'          => __( 'Posts Widget Area', 'smpl' ),
+		'id'            => 'sidebar-1',
+		'description'   => __( 'Shown only in Blog Posts, Archives, Categories, etc.', 'smpl' ),
 		'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 
 	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Pages Widget Area', 'smpl' ),
-		'id' => 'sidebar-2',
-		'description' => __( 'Shown only in Pages', 'smpl' ),
+		'name'          => __( 'Pages Widget Area', 'smpl' ),
+		'id'            => 'sidebar-2',
+		'description'   => __( 'Shown only in Pages', 'smpl' ),
 		'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	// Area 3, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'First Footer Widget Area', 'smpl' ),
-		'id' => 'footer-widget-area-1',
-		'description' => __( 'The first footer widget area', 'smpl' ),
+		'name'          => __( 'First Footer Widget Area', 'smpl' ),
+		'id'            => 'footer-widget-area-1',
+		'description'   => __( 'The first footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	// Area 4, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Second Footer Widget Area', 'smpl' ),
-		'id' => 'footer-widget-area-2',
-		'description' => __( 'The second footer widget area', 'smpl' ),
+		'name'          => __( 'Second Footer Widget Area', 'smpl' ),
+		'id'            => 'footer-widget-area-2',
+		'description'   => __( 'The second footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	// Area 5, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Third Footer Widget Area', 'smpl' ),
-		'id' => 'footer-widget-area-3',
-		'description' => __( 'The third footer widget area', 'smpl' ),
+		'name'          => __( 'Third Footer Widget Area', 'smpl' ),
+		'id'            => 'footer-widget-area-3',
+		'description'   => __( 'The third footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	// Area 6, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Fourth Footer Widget Area', 'smpl' ),
-		'id' => 'footer-widget-area-4',
-		'description' => __( 'The fourth footer widget area', 'smpl' ),
+		'name'          => __( 'Fourth Footer Widget Area', 'smpl' ),
+		'id'            => 'footer-widget-area-4',
+		'description'   => __( 'The fourth footer widget area', 'smpl' ),
 		'before_widget' => '<div class="%1$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 }
 
@@ -531,22 +531,18 @@ add_action( 'widgets_init', 'skeleton_widgets_init' );
 // Utility function for defining conditional featured image settings
 /*-----------------------------------------------------------------------------------*/
 
-if ( !function_exists( 'skeleton_thumbnailer' ) ) {
+if ( !function_exists( 'skeleton_display_thumbnail' ) ) {
 
-	function skeleton_thumbnailer() {
+	function skeleton_display_thumbnail() {
 		global $post;
 		global $id;
-		if (is_single()) {
-			$size = 'large';
-			$classes = 'alignleft scale-with-grid';
-		} else {
-			$size = 'squared150';
-			$classes = 'alignleft scale-with-grid';
-		}
-		$image = get_the_post_thumbnail($id, $size, array('class' => $classes));
+		$size  = 'squared150';
+		$align = 'alignleft scale-with-grid';
+		$image = get_the_post_thumbnail($id, $size, array('class' => $align));
 		echo $image;
 	}
-	add_action('skeleton_post_thumbnail','skeleton_thumbnailer');
+
+	add_action('skeleton_post_thumbnail','skeleton_display_thumbnail');
 
 }
 
@@ -989,3 +985,407 @@ if ( !function_exists( 'st_remove_wpautop' ) ) {
 
 }
 
+
+/*-----------------------------------------------------------------------------------*/
+/* Theme Customizer
+/*-----------------------------------------------------------------------------------*/
+
+
+/**
+ * skeleton_options
+ * default option getter/setter
+ * @param $name
+ * @param $default
+ */
+
+function skeleton_options($name, $default = false) {
+	$options = ( get_option( 'skeleton_options' ) ) ? get_option( 'skeleton_options' ) : null;
+	// return the option if it exists
+	if ( isset( $options[ $name ] ) ) {
+		return apply_filters( 'skeleton_options_$name', $options[ $name ] );
+	}
+	// return default if nothing else
+	return apply_filters( 'skeleton_options_$name', $default );
+}
+
+/**
+ * skeleton_customize_register
+ * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+*/
+
+
+function skeleton_customize_register( $wp_customize ) {
+	// custom textarea control
+	class Skeleton_Customize_Textarea_Control extends WP_Customize_Control {
+	    public $type = 'textarea';
+	    public function render_content() {
+	    ?>
+	        <label>
+	        <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+	        <textarea rows="5" style="width:100%;" <?php $this->link(); ?>><?php echo esc_textarea( $this->value() ); ?></textarea>
+	        </label>
+	    <?php
+	    }
+	}
+
+	// custom info text
+	class Skeleton_Customize_Infotext_Control extends WP_Customize_Control {
+	    public $type = 'infotext';
+	    public function render_content() {
+	    ?>
+	    	<p class="description"><?php echo( $this->label ); ?></p>
+	    <?php
+	    }
+	}
+
+	// Begin options
+
+	$wp_customize->get_setting( 'blogname' )->transport = 'refresh';
+	$wp_customize->get_setting( 'blogdescription' )->transport  = 'refresh';
+	$wp_customize->remove_section( 'title_tagline');
+	$wp_customize->remove_section( 'colors');
+
+	$wp_customize->add_section( 'title_tagline' , array(
+		'title'    => __( 'Site Title &amp; Tagline', 'smpl' ),
+		'priority' => 10
+	) );
+
+	// Header
+	$wp_customize->add_section( 'skeleton_logotype' , array(
+		'title'       => __( 'Header', 'smpl' ),
+		'priority'    => 20,
+		'description' => 'Upload a logo to replace the default site name in the header',
+	) );
+	$wp_customize->add_setting( 'skeleton_options[logotype]', array(
+		'capability' => 'edit_theme_options',
+		'type'       => 'option'
+	) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'logotype', array(
+		'label'    => __( 'Logo', 'smpl' ),
+		'section'  => 'skeleton_logotype',
+		'settings' => 'skeleton_options[logotype]',
+	) ) );
+
+
+	// Custom Background
+	$wp_customize->add_section( 'background_image', array(
+		'title'          => __( 'Background', 'smpl' ),
+		'theme_supports' => 'custom-background',
+		'priority'       => 30,
+	) );
+	$wp_customize->add_setting('skeleton_options[body_bg_color]', array(
+		'default'           => 'F7F7F7',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'body_bg_color', array(
+		'label'    => __('Background Color', 'smpl'),
+		'section'  => 'background_image',
+		'settings' => 'skeleton_options[body_bg_color]',
+	)));
+
+
+	// Layout Preferences
+	$wp_customize->add_section( 'skeleton_layout' , array(
+		'title'       => __( 'Layout Preferences', 'smpl' ),
+		'priority'    => 40,
+		'description' => 'Select preferred container maximum layout width.',
+	) );
+
+	$wp_customize->add_setting( 'skeleton_options[layout]', array(
+		'capability' => 'edit_theme_options',
+		'default'    => '960',
+		'type'       => 'option'
+	) );
+
+	$wp_customize->add_control( 'layout', array(
+		'settings' => 'skeleton_options[layout]',
+		'label'    => __( 'Layout', 'smpl' ),
+		'section'  => 'skeleton_layout',
+		'type'     => 'radio',
+		'choices'  => array(
+			'960'  => '960px',
+			'1140' => '1140px',
+			'1200' => '1200px'
+		)
+	));
+
+
+	// Sidebar Column Select
+
+	$wp_customize->add_setting('skeleton_options[layout_info]');
+	$wp_customize->add_control( new Skeleton_Customize_Infotext_Control($wp_customize, 'layout_info', array(
+		'label'    => __('Adjust the sidebar and content width.<br />The total number of columns should be 16.', 'smpl'),
+		'section'  => 'skeleton_layout',
+		'settings' => 'skeleton_options[layout_info]',
+	)));
+
+	$wp_customize->add_setting('skeleton_options[sidebar_width]', array(
+		'default'    => 'five',
+		'capability' => 'edit_theme_options',
+		'type'       => 'option',
+
+    ));
+    $wp_customize->add_control( 'sidebar_width', array(
+		'settings' => 'skeleton_options[sidebar_width]',
+		'label'    => 'Sidebar Width:',
+		'section'  => 'skeleton_layout',
+		'type'     => 'select',
+		'choices'  => array(
+			'one'   => '1 Column',
+			'two'   => '2 Columns',
+			'three' => '3 Columns',
+			'four'  => '4 Columns',
+			'five'  => '5 Columns',
+			'six'   => '6 Columns',
+			'seven' => '7 Columns',
+			'eight' => '8 Columns'
+        ),
+    ));
+
+
+	// Main Column Select
+	$wp_customize->add_setting('skeleton_options[content_width]', array(
+		'default'    => 'eleven',
+		'capability' => 'edit_theme_options',
+		'type'       => 'option',
+
+    ));
+    $wp_customize->add_control( 'content_width', array(
+		'settings' => 'skeleton_options[content_width]',
+		'label'    => 'Content Width:',
+		'section'  => 'skeleton_layout',
+		'type'     => 'select',
+		'choices'  => array(
+			'one'      => '1 Column',
+			'two'      => '2 Columns',
+			'three'    => '3 Columns',
+			'four'     => '4 Columns',
+			'five'     => '5 Columns',
+			'six'      => '6 Columns',
+			'seven'    => '7 Columns',
+			'eight'    => '8 Columns',
+			'nine'     => '9 Columns',
+			'ten'      => '10 Columns',
+			'eleven'   => '11 Columns',
+			'twelve'   => '12 Columns',
+			'thirteen' => '13 Columns'
+        ),
+    ));
+
+
+	// Sidebar Position
+	$wp_customize->add_setting('skeleton_options[sidebar_position]', array(
+		'default'    => 'right',
+		'capability' => 'edit_theme_options',
+		'type'       => 'option',
+
+    ));
+    $wp_customize->add_control( 'sidebar_position', array(
+		'settings' => 'skeleton_options[sidebar_position]',
+		'label'    => 'Sidebar Position:',
+		'section'  => 'skeleton_layout',
+		'type'     => 'select',
+		'choices'  => array(
+			'left'  => 'Left',
+			'right' => 'Right'
+        ),
+    ));
+
+	// Fonts
+	$available_fonts = array(
+		'Sans-Serif'        => 'Sans-Serif',
+		'Serif'             => 'Serif',
+		'Rokkitt'           => 'Rokkitt',
+		'Kameron'           => 'Kameron',
+		'Abel'              => 'Abel',
+		'Alice'             => 'Alice',
+		'Aller'             => 'Aller',
+		'Andada'            => 'Andada',
+		'Arbutus+Slab'      => 'Arbutus Slab',
+		'Arvo'              => 'Arvo',
+		'Brawler'           => 'Brawler',
+		'Cambo'             => 'Cambo',
+		'Cookie'            => 'Cookie',
+		'Droid+Sans'        => 'Droid Sans',
+		'Droid+Serif'       => 'Droid Serif',
+		'Fenix'             => 'Fenix',
+		'Judson'            => 'Judson',
+		'Josefin+Slab'      => 'Josefin Slab',
+		'Ledger'            => 'Ledger',
+		'Libre+Baskerville' => 'Libre Baskerville',
+		'Lora'              => 'Lora',
+		'Lato'              => 'Lato',
+		'Mako'              => 'Mako',
+		'Marck+Script'      => 'Marck Script',
+		'Maven+Pro'         => 'Maven Pro',
+		'Neuton'            => 'Neuton',
+		'Ovo'               => 'Ovo',
+		'Open+Sans'         => 'Open Sans',
+		'PT+Sans'           => 'PT Sans',
+		'PT+Serif+Caption'  => 'PT Serif',
+		'Roboto'            => 'Roboto',
+		'Ubuntu'            => 'Ubuntu',
+		'Vollkorn'          => 'Vollkorn'
+	);
+
+	$wp_customize->add_section( 'skeleton_fonts' , array(
+		'title'       => __( 'Typography', 'smpl' ),
+		'priority'    => 50,
+		'description' => 'Set main website font',
+	));
+
+	$wp_customize->add_setting( 'skeleton_options[heading_font]', array(
+		'capability' => 'edit_theme_options',
+		'default'    => 'Sans-Serif',
+		'type'       => 'option'
+	));
+
+	$wp_customize->add_setting( 'skeleton_options[body_font]', array(
+		'capability' => 'edit_theme_options',
+		'default'    => 'Sans-Serif',
+		'type'       => 'option'
+	));
+
+	$wp_customize->add_control( 'heading_font', array(
+		'settings' => 'skeleton_options[heading_font]',
+		'label'    => __( 'Heading Font:', 'smpl' ),
+		'section'  => 'skeleton_fonts',
+		'type'     => 'select',
+		'choices'  => $available_fonts
+	));
+
+	$wp_customize->add_control( 'body_font', array(
+		'settings' => 'skeleton_options[body_font]',
+		'label'    => __( 'Body Font:', 'smpl' ),
+		'section'  => 'skeleton_fonts',
+		'type'     => 'select',
+		'choices'  => $available_fonts
+	));
+
+	// Body Text Color
+	$wp_customize->add_setting('skeleton_options[body_text_color]', array(
+		'default'           => '333333',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'body_text_color', array(
+		'label'    => __('Body Text Color', 'smpl'),
+		'section'  => 'skeleton_fonts',
+		'settings' => 'skeleton_options[body_text_color]',
+	)));
+
+	// Link Color
+	$wp_customize->add_setting('skeleton_options[link_color]', array(
+		'default'           => '3376ea',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link_color', array(
+		'label'    => __('Link Color', 'smpl'),
+		'section'  => 'skeleton_fonts',
+		'settings' => 'skeleton_options[link_color]',
+	)));
+
+
+	// Link Hover Color
+	$wp_customize->add_setting('skeleton_options[link_hover_color]', array(
+		'default'           => '3376ea',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link_hover_color', array(
+		'label'    => __('Link Hover Color', 'smpl'),
+		'section'  => 'skeleton_fonts',
+		'settings' => 'skeleton_options[link_hover_color]',
+	)));
+
+	// Colors
+	$wp_customize->add_section( 'skeleton_colors', array(
+		'title'    => __( 'Colors', 'smpl' ),
+		'priority' => 60,
+	));
+
+	// Primary Color
+	$wp_customize->add_setting('skeleton_options[primary_color]', array(
+		'default'           => '375199',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'primary_color', array(
+		'label'    => __('Primary Brand Color', 'smpl'),
+		'section'  => 'skeleton_colors',
+		'settings' => 'skeleton_options[primary_color]',
+	)));
+
+	// Secondary Color
+	$wp_customize->add_setting('skeleton_options[secondary_color]', array(
+		'default'           => 'be3243',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option'
+	));
+	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'secondary_color', array(
+		'label'    => __('Secondary Brand Color', 'smpl'),
+		'section'  => 'skeleton_colors',
+		'settings' => 'skeleton_options[secondary_color]',
+	)));
+
+	// Header & Footer Extras
+	$wp_customize->add_section( 'skeleton_extras', array(
+		'title'       => __( 'Extras', 'smpl' ),
+		'priority'    => 70,
+		'description' => 'Use the fields below to add some simple text (such as a phone number or copyright) to the header and footer areas.',
+	) );
+
+	// Header Extras
+	$wp_customize->add_setting('skeleton_options[header_extras]', array(
+		'default'    => '',
+		'capability' => 'edit_theme_options',
+		'type'       => 'option'
+	));
+	$wp_customize->add_control( new Skeleton_Customize_Textarea_Control($wp_customize, 'header_extras', array(
+		'label'    => __('Header Extras Text', 'smpl'),
+		'section'  => 'skeleton_extras',
+		'settings' => 'skeleton_options[header_extras]',
+	)));
+
+	// Footer Extras
+	$wp_customize->add_setting('skeleton_options[footer_extras]', array(
+		'default'    => '',
+		'capability' => 'edit_theme_options',
+		'type'       => 'option'
+	));
+
+	$wp_customize->add_control( new Skeleton_Customize_Textarea_Control($wp_customize, 'footer_extras', array(
+		'label'    => __('Footer Extras Text', 'smpl'),
+		'section'  => 'skeleton_extras',
+		'settings' => 'skeleton_options[footer_extras]',
+	)));
+
+}
+
+add_action( 'customize_register', 'skeleton_customize_register' );
+
+/**
+ * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+ */
+function skeleton_customize_preview_js() {
+	wp_enqueue_script( 'skeleton_customizer', get_template_directory_uri() . '/javascripts/customizer.js', array( 'jquery','customize-preview' ), '20130508', true );
+}
+add_action( 'customize_preview_init', 'skeleton_customize_preview_js' );
+add_action( 'admin_menu', 'skeleton_remove_menu_pages', 999 );
+function skeleton_remove_menu_pages() {
+		remove_submenu_page( 'themes.php', 'custom-background');
+}
+add_action( 'admin_bar_menu', 'skeleton_remove_admin_bar_pages', 999 );
+function skeleton_remove_admin_bar_pages($wp_admin_bar) {
+		$wp_admin_bar->remove_node( 'background' );
+}

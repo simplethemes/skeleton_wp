@@ -45,6 +45,8 @@ Changelog Legend:
 [x] Removed layout.css
 [x] Removed PIE.htc and PIE.php
 [+] Added more helper functions to child theme
-[*] Updated plugin activation
+[+] Updated plugin activation
+[^] Moved customizer options into functions.php for better child themability
+[^] Moved customizer styles into singular functionf or easier disabling/redeclaration
 
 ----

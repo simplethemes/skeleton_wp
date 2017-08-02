@@ -1,4 +1,4 @@
-#Skeleton WordPress Theme
+# Skeleton WordPress Theme
 
 For new installations, you may wish to install the [latest stable version from wordpress.org](http://wordpress.org/themes/smpl-skeleton).
 
@@ -14,7 +14,7 @@ __Notice: Before updating Skeleton, please see the notes below as there are thre
 Why? As of version 2.1.x, the options formerly located within the Options Framework (under Appearance &rarr; Theme Options) have been moved to the native WP theme customizer to allow for acceptance into the WP.org theme repository. If you'd prefer to continue using the Options framework, please switch to the the [2.x-options-framework](https://github.com/simplethemes/skeleton_wp/tree/2.x-options-framework) branch. See additional notes regarding shortcodes below.
 
 
-##About
+## About
 
 Skeleton, authored by Casey Lee at [Simple Themes](http://www.simplethemes.com "WordPress Themes") is a simple, responsive WordPress theme based on the Skeleton Boilerplate.
 It has several useful shortcodes, such as tabs, toggles, cross-browser CSS3 buttons, and layout columns.
@@ -46,11 +46,11 @@ If you need to customize any of theme options, copy the parent theme options.php
 To override any of the parent theme functions, just copy the function(s) from the parent theme into your child theme's functions.php file.
 Skeleton will always give priority to the child theme.
 
-##Shortcodes
+## Shortcodes
 
 Because Skeleton is now [hosted in the wordpress.org theme repository](http://wordpress.org/themes/smpl-skeleton), Skeleton's shortcodes and additional styles are considered "plugin territory" and therefore must be installed separately in order to work properly. If you're using Skeleton and would like to take advantage of these shortcodes within the theme, please [download and install the smpl-shortcodes plugin](http://wordpress.org/plugins/smpl-shortcodes/). You can the shortcodes in action on the [shortcodes demo page](http://demos.simplethemes.com/skeleton/documentation).
 
-###Callouts
+### Callouts
 
 A callout is (by default) a rounded cornered styled inset box. It has two arguments:
 
@@ -77,7 +77,7 @@ A callout is (by default) a rounded cornered styled inset box. It has two argume
 
 ----
 
-###Fluid Columns
+### Fluid Columns
 
 You've seen these before. The fractional shortcode combinations allow you to insert scalable columns into your content. The only rule here is, the last column must have a suffix of '_last'. See the example below.
 
@@ -110,7 +110,7 @@ Available Options – Up to 6 columns
 
 ----
 
-###Cross-Browser CSS3 Buttons
+### Cross-Browser CSS3 Buttons
 Tested in IE7,IE8,IE9,Webkit, and Mozilla browsers.
 [Preview all colors and sizes](http://demos.simplethemes.com/skeleton/button-styles)
 
@@ -118,7 +118,7 @@ Tested in IE7,IE8,IE9,Webkit, and Mozilla browsers.
 
 ----
 
-###Tabs
+### Tabs
 You can create tabs content within your content as well. Each tab needs a unique id (identifier) in order to work.
 
 [See a preview of the tabs in action here](http://demos.simplethemes.com/skeleton/documentation#t1Tab)
@@ -131,7 +131,7 @@ You can create tabs content within your content as well. Each tab needs a unique
 
 ----
 
-###Accordion Toggles
+### Accordion Toggles
 [See them in action here.](http://demos.simplethemes.com/skeleton/documentation#gist-1142632)
 
 	[toggle title="Button text One"]
@@ -148,7 +148,7 @@ You can create tabs content within your content as well. Each tab needs a unique
 
 ----
 
-###Latest Posts
+### Latest Posts
 
 Insert a list of your latest posts from specified category(s) into any page with optional thumbnail and excerpt.
 
@@ -156,7 +156,7 @@ Insert a list of your latest posts from specified category(s) into any page with
 	
 ----
 
-###Related Posts
+### Related Posts
 
 Insert a list of related (tagged) posts.
 
@@ -164,7 +164,7 @@ Insert a list of related (tagged) posts.
 
 ----
 
-###Raw HTML
+### Raw HTML
 
 Sometimes the WordPress editor will strip out your more advanced markup. This can be a real drag. By wrapping your code in [raw] tags, you can eliminate this issue.
 
@@ -172,7 +172,7 @@ Sometimes the WordPress editor will strip out your more advanced markup. This ca
 
 ----
 
-###Clearing
+### Clearing
 
 If you ever need to clear an element, you can use the “clear” shortcode below.
 
@@ -180,7 +180,7 @@ If you ever need to clear an element, you can use the “clear” shortcode belo
 
 ----
 
-###Clear with Horizontal line:
+### Clear with Horizontal line:
 
 Similar to “clear”, this does the same thing but adds a horizontal line below.
 
@@ -188,7 +188,7 @@ Similar to “clear”, this does the same thing but adds a horizontal line belo
 
 ----
 
-##Layout Customization Hooks
+## Layout Customization Hooks
 
 You can find a list of these functions in the top of the functions.php file:
 
